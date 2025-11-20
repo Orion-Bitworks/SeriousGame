@@ -7,7 +7,7 @@ public class OptionMenuController : MonoBehaviour
 {
     [SerializeField] GameObject[] panel;
     GameObject currentPanel;
-    Button button;
+    //Button button;
 
     private void Start()
     {
@@ -18,11 +18,14 @@ public class OptionMenuController : MonoBehaviour
 
     public void ChangeMenu(GameObject activePanel)
     {
+        if (currentPanel == activePanel) return;
+
         activePanel.SetActive(true);
         currentPanel.SetActive(false);
         currentPanel = activePanel;
-        button.interactable = false;
+        
     }
+
 
 
 }
