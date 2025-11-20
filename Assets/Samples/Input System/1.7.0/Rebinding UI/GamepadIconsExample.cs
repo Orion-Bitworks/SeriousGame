@@ -76,15 +76,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             public Sprite dpadLeft;
             public Sprite dpadRight;
             public Sprite leftStick;
-            public Sprite leftStickUp;
-            public Sprite leftStickDown;
-            public Sprite leftStickRight;
-            public Sprite leftStickLeft;
             public Sprite rightStick;
-            public Sprite rightStickUp;
-            public Sprite rightStickDown;
-            public Sprite rightStickRight;
-            public Sprite rightStickLeft;
             public Sprite leftStickPress;
             public Sprite rightStickPress;
 
@@ -110,15 +102,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                     case "dpad/left": return dpadLeft;
                     case "dpad/right": return dpadRight;
                     case "leftStick": return leftStick;
-                    case "leftStick/right": return leftStickRight;
-                    case "leftStick/left": return leftStickLeft;
-                    case "leftStick/up": return leftStickUp;
-                    case "leftStick/down": return leftStickDown;
                     case "rightStick": return rightStick;
-                    case "rightStick/right": return rightStickRight;
-                    case "rightStick/left": return rightStickLeft;
-                    case "rightStick/up": return rightStickUp;
-                    case "rightStick/down": return rightStickDown;
                     case "leftStickPress": return leftStickPress;
                     case "rightStickPress": return rightStickPress;
                 }

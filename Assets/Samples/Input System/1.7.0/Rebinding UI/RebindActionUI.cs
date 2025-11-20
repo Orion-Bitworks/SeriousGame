@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine.UI;
-using TMPro;
+
 ////TODO: localization support
 
 ////TODO: deal with composites that have parts bound in different control schemes
@@ -227,7 +227,6 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             {
                 action.RemoveBindingOverride(bindingIndex);
             }
-            m_RebindOverlay?.SetActive(false);
             UpdateBindingDisplay();
         }
 
@@ -262,13 +261,17 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 m_RebindOperation?.Dispose();
                 m_RebindOperation = null;
             }
-            //disable the action before use to prevent errors
+
+            //Deshabilitar la action antes de usarla para prevenir errores
             action.Disable();
+
             // Configure the rebind.
             m_RebindOperation = action.PerformInteractiveRebinding(bindingIndex)
+                .WithCancelingThrough("<Keyboard>/escape")
                 .OnCancel(
                     operation =>
                     {
+                        action.Enable();
                         m_RebindStopEvent?.Invoke(this, operation);
                         m_RebindOverlay?.SetActive(false);
                         UpdateBindingDisplay();
@@ -281,13 +284,13 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                         m_RebindOverlay?.SetActive(false);
                         m_RebindStopEvent?.Invoke(this, operation);
 
-                        if (CheckDuplicateBindings(action, bindingIndex, allCompositeParts)) {
+                        if (CheckDuplicateBindings(action, bindingIndex, allCompositeParts))
+                        {
                             action.RemoveBindingOverride(bindingIndex);
                             CleanUp();
                             PerformInteractiveRebind(action, bindingIndex, allCompositeParts);
                             return;
                         }
-
 
                         UpdateBindingDisplay();
                         CleanUp();
@@ -327,30 +330,37 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             m_RebindOperation.Start();
         }
-        private bool CheckDuplicateBindings(InputAction action, int bindingIndex, bool allCompositeParts = false) {
+
+        private bool CheckDuplicateBindings(InputAction action, int bindingIndex, bool allCompositeParts = false)
+        {
             InputBinding newBinding = action.bindings[bindingIndex];
+
             foreach (InputBinding binding in action.actionMap.bindings)
             {
-
                 if (binding.action == newBinding.action)
                 {
                     continue;
                 }
-                //If the binding it's the same as the old binding
+
                 if (binding.effectivePath == newBinding.effectivePath)
                 {
                     Debug.Log("Duplicate binding found: " + newBinding.effectivePath);
                     return true;
                 }
             }
-            if (allCompositeParts) { 
-                for (int i = 1; i < bindingIndex; i++){
-                    if (action.bindings[i].effectivePath == newBinding.overridePath) { 
+
+            if (allCompositeParts)
+            {
+                for (int i = 1; i < bindingIndex; i++)
+                {
+                    if (action.bindings[i].effectivePath == newBinding.overridePath)
+                    {
                         Debug.Log("Duplicate binding found: " + newBinding.effectivePath);
                         return true;
                     }
                 }
             }
+
             return false;
         }
 
