@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88496debd9d0be544aeeb57e0e2c066d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 10
+  rotationSpeed: 100
   invertedControl: 0
 --- !u!65 &743150061
 BoxCollider:

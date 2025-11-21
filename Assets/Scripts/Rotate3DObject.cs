@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,19 +13,31 @@ public class Rotate3DObject : MonoBehaviour
 
     private void Awake()
     {
-        inputManager = InputManager.instance;
-
-        if (inputManager.leftClick_ia != null)
+        if (InputManager.instance == null)
         {
-            inputManager.leftClick_ia.started += OnLeftClickPressed;
-            inputManager.leftClick_ia.performed += OnLeftClickPressed;
-            inputManager.leftClick_ia.canceled += OnLeftClickPressed;
+            StartCoroutine(WaitForManagerToInitialize());
+        }
+        else
+        {
+            InitializeLeftClickInput();
         }
     }
 
+    private IEnumerator WaitForManagerToInitialize()
+    {
+        Debug.Log("Waiting for Input Manager...");
+
+        yield return new WaitUntil(() => InputManager.instance != null);
+
+        Debug.Log("Input Manager created!");
+
+        InitializeLeftClickInput();
+    }
+
+
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         currentCamera = Camera.main;
     }
 
@@ -41,6 +54,18 @@ public class Rotate3DObject : MonoBehaviour
 
         transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
         transform.Rotate(Vector3.right * (invertedControl ? 1 : -1), mouseDelta.y, Space.World);
+    }
+
+    private void InitializeLeftClickInput()
+    {
+        inputManager = InputManager.instance;
+
+        if (inputManager.leftClick_ia != null)
+        {
+            inputManager.leftClick_ia.started += OnLeftClickPressed;
+            inputManager.leftClick_ia.performed += OnLeftClickPressed;
+            inputManager.leftClick_ia.canceled += OnLeftClickPressed;
+        }
     }
 
     protected virtual void OnLeftClickPressed(InputAction.CallbackContext context)
