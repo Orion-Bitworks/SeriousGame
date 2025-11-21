@@ -53,7 +53,7 @@ public class Rotate3DObject : MonoBehaviour
         mouseDelta *= rotationSpeed * Time.deltaTime;
 
         transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
-        transform.Rotate(Vector3.right * (invertedControl ? 1 : -1), mouseDelta.y, Space.World);
+        transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
     }
 
     private void InitializeLeftClickInput()
