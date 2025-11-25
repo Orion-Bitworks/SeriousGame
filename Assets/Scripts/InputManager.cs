@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     public InputActionAsset map;
 
     public InputAction leftClick_ia;
+    public InputAction rightClick_ia;
     public InputAction mouseLook_ia;
 
     private void Awake()
@@ -26,6 +27,7 @@ public class InputManager : MonoBehaviour
         EnableInput();
 
         leftClick_ia = map.FindActionMap("MouseControl").FindAction("Left Click");
+        rightClick_ia = map.FindActionMap("MouseControl").FindAction("Right Click");
         mouseLook_ia = map.FindActionMap("MouseControl").FindAction("Mouse Look");
     }
 

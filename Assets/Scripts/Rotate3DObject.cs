@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,10 +7,20 @@ public class Rotate3DObject : MonoBehaviour
 {
     private InputManager inputManager;
 
-    private bool rotationAllowed;
+    private bool rotationXYAllowed;
+    private bool rotationZAllowed;
     private Camera currentCamera;
+    [SerializeField] private float currentFov;
+    [SerializeField] private float originalFov;
+
+    [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private bool invertedControl = false;
+
+    [Header("Zoom")]
+    [SerializeField] private float zoomSpeed = 10f;
+    [SerializeField] private float maxZoomIn = 10f;
+    [SerializeField] private float maxZoomOut = 20f;
 
     private void Awake()
     {
@@ -19,7 +30,7 @@ public class Rotate3DObject : MonoBehaviour
         }
         else
         {
-            InitializeLeftClickInput();
+            InitializeClickInput();
         }
     }
 
@@ -31,7 +42,7 @@ public class Rotate3DObject : MonoBehaviour
 
         Debug.Log("Input Manager created!");
 
-        InitializeLeftClickInput();
+        InitializeClickInput();
     }
 
 
@@ -39,11 +50,16 @@ public class Rotate3DObject : MonoBehaviour
     {
         //Cursor.lockState = CursorLockMode.Locked;
         currentCamera = Camera.main;
+
+        originalFov = currentCamera.fieldOfView;
+        currentFov = originalFov;
+        maxZoomOut += originalFov;
+        maxZoomIn = originalFov - maxZoomIn;
     }
 
     private void Update()
     {
-        if (!rotationAllowed)
+        if (!rotationXYAllowed && !rotationZAllowed)
         {
             return;
         }
@@ -52,11 +68,37 @@ public class Rotate3DObject : MonoBehaviour
 
         mouseDelta *= rotationSpeed * Time.deltaTime;
 
-        transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
-        transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
+        switch (rotationXYAllowed, rotationZAllowed)
+        {
+            case (true, false):
+                transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
+                transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
+                break;
+            case (false, true):
+                transform.Rotate(Vector3.forward * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
+                transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
+                break;
+            case (true, true):
+
+                currentFov += mouseDelta.y;
+
+                if (currentFov > maxZoomOut)
+                {
+                    currentFov = maxZoomOut;
+                }
+                
+                if (currentFov < maxZoomIn)
+                {
+                    currentFov = maxZoomIn;
+                }
+
+                currentCamera.fieldOfView = currentFov;
+
+                break;
+        }
     }
 
-    private void InitializeLeftClickInput()
+    private void InitializeClickInput()
     {
         inputManager = InputManager.instance;
 
@@ -66,17 +108,36 @@ public class Rotate3DObject : MonoBehaviour
             inputManager.leftClick_ia.performed += OnLeftClickPressed;
             inputManager.leftClick_ia.canceled += OnLeftClickPressed;
         }
+
+        if (inputManager.rightClick_ia != null)
+        {
+            inputManager.rightClick_ia.started += OnRightClickPressed;
+            inputManager.rightClick_ia.performed += OnRightClickPressed;
+            inputManager.rightClick_ia.canceled += OnRightClickPressed;
+        }
     }
 
     protected virtual void OnLeftClickPressed(InputAction.CallbackContext context)
     {
         if (context.started || context.performed)
         {
-            rotationAllowed = true;
+            rotationXYAllowed = true;
         }
         else if (context.canceled)
         {
-            rotationAllowed = false;
+            rotationXYAllowed = false;
+        }
+    }
+
+    protected virtual void OnRightClickPressed(InputAction.CallbackContext context)
+    {
+        if (context.started || context.performed)
+        {
+            rotationZAllowed = true;
+        }
+        else if (context.canceled)
+        {
+            rotationZAllowed = false;
         }
     }
 
