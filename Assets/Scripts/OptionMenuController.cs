@@ -15,7 +15,6 @@ public class OptionMenuController : MonoBehaviour
         panel[0].SetActive(true);
     }
 
-
     public void ChangeMenu(GameObject activePanel)
     {
         if (currentPanel == activePanel) return;
@@ -23,9 +22,6 @@ public class OptionMenuController : MonoBehaviour
         activePanel.SetActive(true);
         currentPanel.SetActive(false);
         currentPanel = activePanel;
-        
     }
-
-
 
 }

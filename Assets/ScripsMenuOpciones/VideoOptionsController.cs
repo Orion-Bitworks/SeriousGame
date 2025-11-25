@@ -32,20 +32,27 @@ public class VideoOptionsController : MonoBehaviour
         foreach (Resolution resolution in allResolutions)
         {
 
-            string key = resolution.width + "x" +resolution.height;
-            if(!seen.Contains(key))
+            string key = resolution.width + "x" + resolution.height;
+            if (!seen.Contains(key))
             {
                 seen.Add(key);
                 filteredResolutions.Add(resolution);
                 options.Add(key);
 
             }
+        }
             //limpiamos el dropdown y luego guardamos las resoluciones
             resolutionDropdown.ClearOptions();
             resolutionDropdown.AddOptions(options);
 
             //cargamos la resolucion guardada uy actualizamos el dropdown
             int savedIndex = PlayerPrefs.GetInt(ResolutionKey, filteredResolutions.Count - 1);
+            if (savedIndex < 0 || savedIndex >= filteredResolutions.Count)
+        {
+            savedIndex = filteredResolutions.Count-1;
+        }
+        
+        
             resolutionDropdown.value = savedIndex;
             resolutionDropdown.RefreshShownValue();
             //con esto nos aseguramos que siempre tengamos la lista actualizada
@@ -61,7 +68,7 @@ public class VideoOptionsController : MonoBehaviour
             fullscreenToggle.onValueChanged.AddListener(OnFullscreenChanged);
 
 
-        }
+        
 
     }
     /// <summary>
