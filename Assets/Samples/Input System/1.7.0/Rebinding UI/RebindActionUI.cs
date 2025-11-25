@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -217,7 +218,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             if (!ResolveActionAndBinding(out var action, out var bindingIndex))
                 return;
 
-            if (action.bindings[bindingIndex].isComposite)
+            ResetBinding(action, bindingIndex);
+
+            /*if (action.bindings[bindingIndex].isComposite)
             {
                 // It's a composite. Remove overrides from part bindings.
                 for (var i = bindingIndex + 1; i < action.bindings.Count && action.bindings[i].isPartOfComposite; ++i)
@@ -226,8 +229,33 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             else
             {
                 action.RemoveBindingOverride(bindingIndex);
-            }
+            }*/
             UpdateBindingDisplay();
+        }
+
+        private void ResetBinding(InputAction action, int bindingIndex)
+        {
+            InputBinding newBinding = action.bindings[bindingIndex];
+            string oldOverridePath = newBinding.overridePath;
+
+            action.RemoveBindingOverride(bindingIndex);
+
+            foreach (InputAction otherAction in action.actionMap.actions)
+            {
+                if (otherAction == action)
+                {
+                    continue;
+                }
+
+                for (int i = 0; i < otherAction.bindings.Count; i++)
+                {
+                    InputBinding binding = otherAction.bindings[i];
+                    if (binding.overridePath == newBinding.path)
+                    {
+                        otherAction.ApplyBindingOverride(i, oldOverridePath);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -440,6 +468,13 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         [SerializeField]
         private TMPro.TextMeshProUGUI m_RebindText;
 
+        [Tooltip("Optional bool field which allows you to override the action label with your own text")]
+        public bool m_OverrideActionLabel;
+
+        [Tooltip("What text should be displayed for the action label?")]
+        [SerializeField]
+        private string m_ActionLabelString;
+
         [Tooltip("Event that is triggered when the way the binding is display should be updated. This allows displaying "
             + "bindings in custom ways, e.g. using images instead of text.")]
         [SerializeField]
@@ -475,7 +510,16 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             if (m_ActionLabel != null)
             {
                 var action = m_Action?.action;
-                m_ActionLabel.text = action != null ? action.name : string.Empty;
+
+                if (m_OverrideActionLabel)
+                {
+                    m_ActionLabel.text = m_ActionLabelString;
+                }
+                else
+                {
+                    m_ActionLabel.text = action != null ? action.name : string.Empty;
+                    m_ActionLabelString = string.Empty;
+                }
             }
         }
 
