@@ -40,6 +40,7 @@ public class ConnectObjects : MonoBehaviour
         else
         {
             followPos = ray.GetPoint(5); //- transform.position;
+            pieceCopy.transform.rotation = Quaternion.identity;
         }
 
         
