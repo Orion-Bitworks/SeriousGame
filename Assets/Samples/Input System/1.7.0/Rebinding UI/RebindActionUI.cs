@@ -220,7 +220,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             ResetBinding(action, bindingIndex);
 
-            /*if (action.bindings[bindingIndex].isComposite)
+            if (action.bindings[bindingIndex].isComposite)
             {
                 // It's a composite. Remove overrides from part bindings.
                 for (var i = bindingIndex + 1; i < action.bindings.Count && action.bindings[i].isPartOfComposite; ++i)
@@ -229,7 +229,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             else
             {
                 action.RemoveBindingOverride(bindingIndex);
-            }*/
+            }
             UpdateBindingDisplay();
         }
 
@@ -240,11 +240,26 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             action.RemoveBindingOverride(bindingIndex);
 
+            int currentIndex = -1;
+
             foreach (InputAction otherAction in action.actionMap.actions)
             {
+                currentIndex++;
+                InputBinding currentBinding = action.actionMap.bindings[currentIndex];
+
                 if (otherAction == action)
                 {
+                    if (newBinding.isPartOfComposite)
+                    {
+                        if (currentBinding.overridePath == newBinding.path)
+                        {
+                            otherAction.ApplyBindingOverride(currentIndex, oldOverridePath);
+                        }
+                    }
+                else
+                    {
                     continue;
+                    }
                 }
 
                 for (int i = 0; i < otherAction.bindings.Count; i++)
@@ -363,11 +378,26 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             InputBinding newBinding = action.bindings[bindingIndex];
 
+            int currentIndex = -1;
+
             foreach (InputBinding binding in action.actionMap.bindings)
             {
+                currentIndex++;
+
                 if (binding.action == newBinding.action)
                 {
-                    continue;
+                    if (binding.isPartOfComposite && currentIndex != bindingIndex)
+                    {
+                        if (binding.effectivePath == newBinding.effectivePath)
+                        {
+                            Debug.Log("Duplicate binding found in composite: " + newBinding.effectivePath);
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
 
                 if (binding.effectivePath == newBinding.effectivePath)

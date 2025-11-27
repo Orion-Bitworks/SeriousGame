@@ -456,18 +456,6 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 720b7bae-1825-4895-ba30-57cc377d69fa
-    m_ActionName: InUI/Back[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 98fbc659-8759-46e3-9007-8fbec557a288
-    m_ActionName: InUI/Select[/Mouse/leftButton]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 369073a8-cf70-438f-ae1e-288981c56822
-    m_ActionName: InUI/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow]
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: 53760232-3450-4706-b955-d570710b39b2
     m_ActionName: InGame/Back[/Keyboard/escape]
   - m_PersistentCalls:
@@ -488,7 +476,7 @@ MonoBehaviour:
     m_ActionName: InGame/ToggleMouse Camera[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: InUI
+  m_DefaultActionMap: InGame
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!4 &500526264
@@ -1158,6 +1146,7 @@ GameObject:
   - component: {fileID: 575564222}
   - component: {fileID: 575564226}
   - component: {fileID: 575564227}
+  - component: {fileID: 575564228}
   m_Layer: 5
   m_Name: GamepadCanvas
   m_TagString: Untagged
@@ -1329,6 +1318,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputActions: {fileID: -944628639613478452, guid: c4369f547b202db458cc531176a6d45e, type: 3}
   _targetControlScheme: GamepadControls
+--- !u!114 &575564228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575564221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6c2da2db9374dada6761b5e35121c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions: {fileID: -944628639613478452, guid: c4369f547b202db458cc531176a6d45e, type: 3}
 --- !u!1 &638075605
 GameObject:
   m_ObjectHideFlags: 0
@@ -1342,6 +1344,7 @@ GameObject:
   - component: {fileID: 638075607}
   - component: {fileID: 638075606}
   - component: {fileID: 638075610}
+  - component: {fileID: 638075611}
   m_Layer: 5
   m_Name: KeyboardCanvas
   m_TagString: Untagged
@@ -1449,6 +1452,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputActions: {fileID: -944628639613478452, guid: c4369f547b202db458cc531176a6d45e, type: 3}
   _targetControlScheme: KeyboardMouseControls
+--- !u!114 &638075611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 638075605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b6c2da2db9374dada6761b5e35121c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actions: {fileID: -944628639613478452, guid: c4369f547b202db458cc531176a6d45e, type: 3}
 --- !u!224 &664518401 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6680292650503350825, guid: f25dcd618d3acd64795bf8bb32edb6c9, type: 3}
