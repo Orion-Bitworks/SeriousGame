@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 5417659525674458442}
   - component: {fileID: 914587497705674109}
   - component: {fileID: 8392725308985560315}
+  - component: {fileID: 1025352768826579571}
   m_Layer: 0
   m_Name: ConexionPoint3
-  m_TagString: Untagged
+  m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445881834412718058}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
   m_LocalPosition: {x: -0.5, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3362792395619306399}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!33 &5417659525674458442
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -99,12 +100,28 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1025352768826579571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 445881834412718058}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb780dcf2755de34a98a75b028eeff91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerToDetect:
+    serializedVersion: 2
+    m_Bits: 128
+  parent: {fileID: 0}
 --- !u!1 &1328742661250863791
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,9 +134,10 @@ GameObject:
   - component: {fileID: 3088957234580281187}
   - component: {fileID: 530028530589298189}
   - component: {fileID: 3885650063003447092}
+  - component: {fileID: 8586537157457775515}
   m_Layer: 0
   m_Name: ConexionPoint1
-  m_TagString: Untagged
+  m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,13 +150,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328742661250863791}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3362792395619306399}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!33 &3088957234580281187
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -204,12 +222,28 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8586537157457775515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328742661250863791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb780dcf2755de34a98a75b028eeff91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerToDetect:
+    serializedVersion: 2
+    m_Bits: 128
+  parent: {fileID: 0}
 --- !u!1 &3825759970502039246
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,9 +256,10 @@ GameObject:
   - component: {fileID: 8073465107029493204}
   - component: {fileID: 6289343810279010567}
   - component: {fileID: 2628303213039519014}
+  - component: {fileID: 534292628375126228}
   m_Layer: 0
   m_Name: ConexionPoint4
-  m_TagString: Untagged
+  m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -237,13 +272,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3825759970502039246}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: -0.5}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3362792395619306399}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &8073465107029493204
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -309,12 +344,28 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &534292628375126228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3825759970502039246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb780dcf2755de34a98a75b028eeff91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerToDetect:
+    serializedVersion: 2
+    m_Bits: 128
+  parent: {fileID: 0}
 --- !u!1 &8151078668444041844
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,9 +378,10 @@ GameObject:
   - component: {fileID: 9151032924321255164}
   - component: {fileID: 5405383401496455575}
   - component: {fileID: 1870521250952672646}
+  - component: {fileID: 1355855179531355781}
   m_Layer: 0
   m_Name: ConexionPoint2
-  m_TagString: Untagged
+  m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -414,12 +466,28 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1355855179531355781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8151078668444041844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb780dcf2755de34a98a75b028eeff91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerToDetect:
+    serializedVersion: 2
+    m_Bits: 128
+  parent: {fileID: 0}
 --- !u!1 &8381425447518838917
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +501,7 @@ GameObject:
   - component: {fileID: 7302567018120551365}
   - component: {fileID: 154356173436794076}
   - component: {fileID: 7848476706181811344}
+  - component: {fileID: 5398934776806733117}
   m_Layer: 6
   m_Name: CubePiece
   m_TagString: Untagged
@@ -549,3 +618,17 @@ MonoBehaviour:
   zoomSpeed: 10
   maxZoomIn: 20
   maxZoomOut: 30
+--- !u!114 &5398934776806733117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8381425447518838917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30d550fe7d81124c8665bce16adb179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: []
+  snapped: 0
