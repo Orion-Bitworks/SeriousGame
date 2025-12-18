@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
-using UnityEngine.UI;
-using static Unity.VisualScripting.Member;
 
 public class PieceController : MonoBehaviour
 {
@@ -87,7 +82,16 @@ public class PieceController : MonoBehaviour
         Vector3 snapAxis = axis.normalized;
 
         // 1. Crear un sistema ortonormal alrededor del eje de snap
-        Vector3 refRight = Vector3.Cross(snapAxis, Mathf.Abs(Vector3.Dot(snapAxis, Vector3.up)) > 0.99f ? Vector3.forward : Vector3.up).normalized;
+        Vector3 refRight;
+
+        if (Mathf.Abs(Vector3.Dot(snapAxis, Vector3.up)) > 0.99f)
+        {
+            refRight = Vector3.Cross(snapAxis, Vector3.forward).normalized;
+        }
+        else
+        {
+            refRight = Vector3.Cross(snapAxis, Vector3.up).normalized;
+        }
 
         Vector3 refForward = Vector3.Cross(refRight, snapAxis).normalized;
 
