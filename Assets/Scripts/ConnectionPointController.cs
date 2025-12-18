@@ -16,6 +16,7 @@ public class ConnectionPointController : MonoBehaviour
     {
         if (other.gameObject.tag == "ConnectionPoint")
         {
+            //Debug.Break();
             PieceController piece = GetComponentInParent<PieceController>();
 
             if (piece.HasSnapped)
@@ -27,7 +28,6 @@ public class ConnectionPointController : MonoBehaviour
 
             Debug.Log(gameObject.name + " ha chocado con: " + other.gameObject.name);
             piece.TrySnapToPoint(this, other.transform, other.transform.parent);
-            Debug.Log(other.transform.parent.gameObject);
         }
     }
 

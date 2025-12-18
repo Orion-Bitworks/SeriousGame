@@ -1,45 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class ConnectObjects : MonoBehaviour
 {
+    InputManager inputManager;
     Camera cam;
     [SerializeField] LayerMask mask;
-    [SerializeField] PieceController piece;
+    [SerializeField] PieceController cubePiece;
     PieceController pieceCopy;
 
-    bool canMove = true;
-    bool snapped = false;
-    Rigidbody rb;
-
-    ConnectionPointController[] points;
+    private float pointDistance = 10f;
+    [SerializeField] private float minPointDistance = 2f;
+    [SerializeField] private float maxPointDistance = 15f;
 
     void Start()
     {
+        inputManager = InputManager.instance;
         cam = Camera.main;
-        CreateNewPiece();
     }
 
-    public void CreateNewPiece()
+    public void CreateNewPiece(PieceController piece)
     {
         Vector3 mousePos = Input.mousePosition;
         pieceCopy = Instantiate(piece, mousePos, Quaternion.identity);
         pieceCopy.gameObject.layer = 0;
         pieceCopy.GetComponent<Rotate3DObject>().enabled = false;
-
-        //rb = pieceCopy.AddComponent<Rigidbody>();
-        //rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-        //rb.useGravity = false;
-
-        //points = pieceCopy.GetComponentsInChildren<ConnectionPointController>();
-
-        //canMove = true;
     }
 
     void Update()
     {
+        AdjustPointDistance();
+
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 10f;
         mousePos = cam.ScreenToWorldPoint(mousePos);
@@ -49,60 +44,29 @@ public class ConnectObjects : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        /*for (int i = 0; i < points.Length; i++)
-        {
-            if (points[i].GetTargetPos() != Vector3.zero && canMove)
-            {
-                canMove = false;
-                
-                pieceCopy.transform.position = points[i].GetTargetPos();
-                pieceCopy.transform.parent = points[i].GetParent();
-                pieceCopy.transform.localPosition = (pieceCopy.transform.position - pieceCopy.transform.parent.transform.localPosition).normalized;
-
-                Debug.Log("Detectado");
-
-                rb.isKinematic = true;
-                pieceCopy.transform.rotation = Quaternion.identity;
-                pieceCopy = null;
-            }
-        }*/
-
-        /*if (canMove)
-        {
-            Vector3 followPos;
-
-            if (Physics.Raycast(ray, out hit, 100f, mask))
-            {
-
-                followPos = hit.point;
-                pieceCopy.transform.rotation = hit.transform.rotation;
-            }
-            else
-            {
-                followPos = ray.GetPoint(10);
-                pieceCopy.transform.rotation = Quaternion.identity;
-            }
-
-            rb.velocity = (followPos - pieceCopy.transform.position) * 50f;
-        }*/
-
-        //pieceCopy.CheckIfCollided();
-
         if (pieceCopy != null && !pieceCopy.snapped)
         {
-            if (Physics.Raycast(ray, out hit, 100f, mask))
+            if (Physics.Raycast(ray, out hit, pointDistance, mask))
             {
                 pieceCopy.MovePiece(hit.point);
-                //followPos = hit.point;
-                pieceCopy.transform.rotation = hit.transform.rotation;
             }
             else
             {
-                pieceCopy.MovePiece(ray.GetPoint(10));
-                //followPos = ray.GetPoint(10);
-                //pieceCopy.transform.rotation = Quaternion.identity;
+                pieceCopy.MovePiece(ray.GetPoint(pointDistance));
             }
         }
+    }
+
+    public void AdjustPointDistance()
+    {
+        float scroll = inputManager.mouseWheel_ia.ReadValue<Vector2>().y;
+
+        if (scroll != 0)
+        {
+            pointDistance += scroll * Time.deltaTime;
+        }
+
+        pointDistance = Mathf.Clamp(pointDistance, minPointDistance, maxPointDistance);
     }
 
     public void StopControl()
