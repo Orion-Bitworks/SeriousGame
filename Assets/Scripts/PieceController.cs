@@ -28,34 +28,34 @@ public class PieceController : MonoBehaviour
         controller.StopControl();
 
         hasSnapped = true;
-        this.gameObject.layer = 6;
+
+        // Permite a los raycast colisionar con la pieza
+        gameObject.layer = 6; // Layer 6 -> Raycast
 
         DisableRigidBody();
 
+        // Guarda la rotacion original de la pieza
         Quaternion previousRotation = transform.rotation;
 
         transform.SetParent(targetParent, true);
 
-        // 1. Rotación base: conexión perfectamente alineada
+        // Conecta los ejes forward del punto de conexión de target y de la pieza
         Quaternion baseRotation = Quaternion.LookRotation(-target.forward, target.up) * Quaternion.Inverse(point.transform.localRotation);
 
-        // 2. Eje REAL de snap (normal del target)
-        //Vector3 snapAxis = -target.forward;
-
-        // 3. Elegimos el cuadrante más cercano AL TARGET
+        // Define la rotacion final de la pieza teniendo en cuenta la anterior a la colision
         Quaternion finalRotation = GetBestAxialSnap(baseRotation, -target.forward, previousRotation);
-
         transform.rotation = finalRotation;
 
+        // Coloca la pieza para que coincidan los dos puntos de conexion
         Vector3 delta = point.transform.position - transform.position;
         transform.position = target.position - delta;
     }
 
-    Quaternion GetBestAxialSnap(Quaternion baseRotation, Vector3 axis, Quaternion referenceRotation)
+    Quaternion GetBestAxialSnap(Quaternion baseRotation, Vector3 snapAxis, Quaternion referenceRotation)
     {
         float[] angles = { 0f, 90f, 180f, 270f };
 
-        Vector3 snapAxis = axis.normalized;
+        snapAxis = snapAxis.normalized;
 
         // 1. Crear un sistema ortonormal alrededor del eje de snap
         Vector3 refRight;
@@ -74,16 +74,16 @@ public class PieceController : MonoBehaviour
         // 2. Dirección de referencia proyectada en el plano del snap
         Vector3 refDir = Vector3.ProjectOnPlane(referenceRotation * refForward, snapAxis).normalized;
 
-        Quaternion best = baseRotation;
+        Quaternion newRotation = baseRotation;
         float bestScore = -Mathf.Infinity;
 
         foreach (float angle in angles)
         {
             Quaternion candidate = Quaternion.AngleAxis(angle, snapAxis) * baseRotation;
 
-            Vector3 candDir = Vector3.ProjectOnPlane(candidate * refForward, snapAxis).normalized;
+            Vector3 candidateDirection = Vector3.ProjectOnPlane(candidate * refForward, snapAxis).normalized;
 
-            float dot = Vector3.Dot(candDir, refDir);
+            float dot = Vector3.Dot(candidateDirection, refDir);
 
             // Bias mínimo para preferir no rotar
             if (angle == 0f)
@@ -94,11 +94,11 @@ public class PieceController : MonoBehaviour
             if (dot > bestScore)
             {
                 bestScore = dot;
-                best = candidate;
+                newRotation = candidate;
             }
         }
 
-        return best;
+        return newRotation;
     }
 
     public void DisableRigidBody()
