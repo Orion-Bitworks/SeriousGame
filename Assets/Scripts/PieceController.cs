@@ -2,60 +2,56 @@ using UnityEngine;
 
 public class PieceController : MonoBehaviour
 {
-    [SerializeField] ConnectionPointController[] points;
     ConnectObjects controller;
-    bool canMove = true;
-    bool canAtach = true;
     Rigidbody rb;
-    float blockSize = 1;
+    [SerializeField] bool hasSnapped = false;
 
-    [SerializeField] public bool snapped = false;
+    //[SerializeField] ConnectionPointController[] points;
+    //bool canMove = true;
+    //bool canAtach = true;
+    //float blockSize = 1;
+    //[SerializeField] public bool snapped = false;
 
     private void Start()
     {
         controller = FindObjectOfType<ConnectObjects>();
 
-        points = GetComponentsInChildren<ConnectionPointController>();
+        //points = GetComponentsInChildren<ConnectionPointController>();
 
-        if (snapped)
+        if (hasSnapped)
         {
             return;
         }
 
-        rb = gameObject.AddComponent<Rigidbody>();
-        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-        rb.useGravity = false;
+        EnableRigidBody();
     }
 
     public void SnapToPoint(ConnectionPointController c, Transform target, Transform targetParent)
     {
-        snapped = true;
+        //snapped = true;
 
-        if (!canAtach)
+        if (hasSnapped)
         {
             return;
         }
+
         controller.StopControl();
 
+        hasSnapped = true;
         this.gameObject.layer = 6;
 
-        canAtach = false;
-        canMove = false;
-        rb.isKinematic = true;
+        //canAtach = false;
+        //canMove = false;
 
-        Destroy(GetComponent<Rigidbody>());
+        DisableRigidBody();
 
-        for (int i = 0; i < points.Length; i++)
+        // Desactiva todos los ConnectionPoints del objeto
+        /*for (int i = 0; i < points.Length; i++)
         {
             points[i].DisablePoint();
-        }
+        }*/
 
         Quaternion previousRotation = transform.rotation;
-
-        Vector3 offset = Vector3.forward * 0.5f;
-
-        Vector3 worldOffset = target.TransformDirection(offset);
-        Vector3 targetLocalOffset = targetParent.InverseTransformDirection(worldOffset);
 
         transform.SetParent(targetParent, true);
 
@@ -63,16 +59,15 @@ public class PieceController : MonoBehaviour
         Quaternion baseRotation = Quaternion.LookRotation(-target.forward, target.up) * Quaternion.Inverse(c.transform.localRotation);
 
         // 2. Eje REAL de snap (normal del target)
-        Vector3 snapAxis = -target.forward;
+        //Vector3 snapAxis = -target.forward;
 
         // 3. Elegimos el cuadrante más cercano AL TARGET
-        Quaternion finalRotation = GetBestAxialSnap(baseRotation, snapAxis, previousRotation);
+        Quaternion finalRotation = GetBestAxialSnap(baseRotation, -target.forward, previousRotation);
 
         transform.rotation = finalRotation;
 
         Vector3 delta = c.transform.position - transform.position;
         transform.position = target.position - delta;
-
     }
 
     Quaternion GetBestAxialSnap(Quaternion baseRotation, Vector3 axis, Quaternion referenceRotation)
@@ -125,38 +120,52 @@ public class PieceController : MonoBehaviour
         return best;
     }
 
-    float SnapAngle90(float angle)
+    public void DisableRigidBody()
     {
-        angle = (angle + 360f) % 360f;
-        return Mathf.Round(angle / 90f) * 90f;
+        if (GetComponent<Rigidbody>() != null)
+        {
+            rb.isKinematic = true;
+            Destroy(GetComponent<Rigidbody>());
+        }
     }
 
-    public bool TrySnapToPoint(ConnectionPointController c, Transform target, Transform targetParent)
+    public void EnableRigidBody()
     {
-        if (HasSnapped) return false; 
-
-        HasSnapped = true;  
-
-        SnapToPoint(c, target, targetParent);
-        return true;
+        rb = gameObject.AddComponent<Rigidbody>();
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+        rb.useGravity = false;
     }
+
 
     public void MovePiece(Vector3 moveTarget)
     {
-        if (canMove)
+        if (!hasSnapped && rb != null)
         {
             Vector3 followPos = moveTarget;
             rb.velocity = (followPos - transform.position) * 50f;
-            //transform.rotation = Quaternion.identity; <==========================================================
-            //transform.rotation = Quaternion.identity;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
     }
 
-    public bool HasSnapped { get; private set; } = false;
+    public bool HasSnapped()
+    {
+        return hasSnapped;
+    }
 
-    public void NotifySnapped()
+    /*public bool TrySnapToPoint(ConnectionPointController c, Transform target, Transform targetParent)
+    {
+        if (hasSnapped) return false; 
+
+        hasSnapped = true;  
+
+        SnapToPoint(c, target, targetParent);
+        return true;
+    }*/
+
+    //public bool HasSnapped { get; private set; } = false;
+
+    /*public void NotifySnapped()
     {
         HasSnapped = true;
-    }
+    }*/
 }

@@ -44,7 +44,7 @@ public class ConnectObjects : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (pieceCopy != null && !pieceCopy.snapped)
+        if (pieceCopy != null && !pieceCopy.HasSnapped())
         {
             if (Physics.Raycast(ray, out hit, pointDistance, mask))
             {

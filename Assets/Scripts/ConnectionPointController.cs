@@ -19,15 +19,15 @@ public class ConnectionPointController : MonoBehaviour
             //Debug.Break();
             PieceController piece = GetComponentInParent<PieceController>();
 
-            if (piece.HasSnapped)
+            /*if (piece.HasSnapped)
             {
                 return;
-            }
+            }*/
 
             //DisablePoint();
 
             Debug.Log(gameObject.name + " ha chocado con: " + other.gameObject.name);
-            piece.TrySnapToPoint(this, other.transform, other.transform.parent);
+            piece.SnapToPoint(this, other.transform, other.transform.parent);
         }
     }
 

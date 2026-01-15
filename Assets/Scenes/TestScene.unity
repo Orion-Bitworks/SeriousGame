@@ -1838,6 +1838,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5398934776806733117, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
+      propertyPath: hasSnapped
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5572809824080536427, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
       propertyPath: m_LocalRotation.w
       value: -0.7071068
@@ -1868,7 +1872,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7848476706181811344, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
       propertyPath: rotationSpeed
-      value: 70
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 8151078668444041844, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
       propertyPath: m_Layer
