@@ -6,17 +6,9 @@ public class PieceController : MonoBehaviour
     Rigidbody rb;
     [SerializeField] bool hasSnapped = false;
 
-    //[SerializeField] ConnectionPointController[] points;
-    //bool canMove = true;
-    //bool canAtach = true;
-    //float blockSize = 1;
-    //[SerializeField] public bool snapped = false;
-
     private void Start()
     {
         controller = FindObjectOfType<ConnectObjects>();
-
-        //points = GetComponentsInChildren<ConnectionPointController>();
 
         if (hasSnapped)
         {
@@ -26,10 +18,8 @@ public class PieceController : MonoBehaviour
         EnableRigidBody();
     }
 
-    public void SnapToPoint(ConnectionPointController c, Transform target, Transform targetParent)
+    public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
     {
-        //snapped = true;
-
         if (hasSnapped)
         {
             return;
@@ -40,23 +30,14 @@ public class PieceController : MonoBehaviour
         hasSnapped = true;
         this.gameObject.layer = 6;
 
-        //canAtach = false;
-        //canMove = false;
-
         DisableRigidBody();
-
-        // Desactiva todos los ConnectionPoints del objeto
-        /*for (int i = 0; i < points.Length; i++)
-        {
-            points[i].DisablePoint();
-        }*/
 
         Quaternion previousRotation = transform.rotation;
 
         transform.SetParent(targetParent, true);
 
         // 1. Rotación base: conexión perfectamente alineada
-        Quaternion baseRotation = Quaternion.LookRotation(-target.forward, target.up) * Quaternion.Inverse(c.transform.localRotation);
+        Quaternion baseRotation = Quaternion.LookRotation(-target.forward, target.up) * Quaternion.Inverse(point.transform.localRotation);
 
         // 2. Eje REAL de snap (normal del target)
         //Vector3 snapAxis = -target.forward;
@@ -66,7 +47,7 @@ public class PieceController : MonoBehaviour
 
         transform.rotation = finalRotation;
 
-        Vector3 delta = c.transform.position - transform.position;
+        Vector3 delta = point.transform.position - transform.position;
         transform.position = target.position - delta;
     }
 
@@ -136,7 +117,6 @@ public class PieceController : MonoBehaviour
         rb.useGravity = false;
     }
 
-
     public void MovePiece(Vector3 moveTarget)
     {
         if (!hasSnapped && rb != null)
@@ -151,21 +131,4 @@ public class PieceController : MonoBehaviour
     {
         return hasSnapped;
     }
-
-    /*public bool TrySnapToPoint(ConnectionPointController c, Transform target, Transform targetParent)
-    {
-        if (hasSnapped) return false; 
-
-        hasSnapped = true;  
-
-        SnapToPoint(c, target, targetParent);
-        return true;
-    }*/
-
-    //public bool HasSnapped { get; private set; } = false;
-
-    /*public void NotifySnapped()
-    {
-        HasSnapped = true;
-    }*/
 }
