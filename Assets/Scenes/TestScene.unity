@@ -1882,11 +1882,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: CubePiece
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8586537157457775515, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
-    - {fileID: 1355855179531355781, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
-    - {fileID: 1025352768826579571, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
-    - {fileID: 534292628375126228, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

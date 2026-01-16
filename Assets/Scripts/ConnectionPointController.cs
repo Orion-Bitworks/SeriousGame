@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class ConnectionPointController : MonoBehaviour
 {
-    [SerializeField] LayerMask layerToDetect;
-    [SerializeField] Transform parent;
+    [SerializeField] private string id = "";
+    [SerializeField] private string partnerId = "Undefined";
+    [SerializeField] private LayerMask layerToDetect;
+    [SerializeField] private Transform parent;
+
+    private bool pairedWithPartner = false;
 
     private void Start()
     {
@@ -16,24 +20,28 @@ public class ConnectionPointController : MonoBehaviour
     {
         if (other.gameObject.tag == "ConnectionPoint")
         {
-            //Debug.Break();
             PieceController piece = GetComponentInParent<PieceController>();
 
-            /*if (piece.HasSnapped)
-            {
-                return;
-            }*/
-
-            //DisablePoint();
-
-            Debug.Log(gameObject.name + " ha chocado con: " + other.gameObject.name);
             piece.SnapToPoint(this, other.transform, other.transform.parent);
+            CheckPairing(other.GetComponent<ConnectionPointController>());
         }
     }
 
-    public void DisablePoint()
+    public void CheckPairing(ConnectionPointController partnerPoint)
     {
-        //this.enabled = false;
-        Destroy(GetComponent<ConnectionPointController>());
+        if (partnerPoint.GetId() == partnerId)
+        {
+            Debug.Log(id + " ha chocado con " + partnerPoint.GetId() + ": Emparejadas!");
+            pairedWithPartner = true;
+        }
+        else
+        {
+            Debug.Log(id + " ha chocado con " + partnerPoint.GetId() + ": No emparejadas...");
+        }
+    }
+
+    public string GetId()
+    {
+        return id;
     }
 }

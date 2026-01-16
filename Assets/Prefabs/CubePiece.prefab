@@ -118,6 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb780dcf2755de34a98a75b028eeff91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: CubePiece-X
+  pairId: CubePieceX
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
@@ -240,6 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb780dcf2755de34a98a75b028eeff91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: CubePieceX
+  pairId: CubePiece-X
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
@@ -362,6 +366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb780dcf2755de34a98a75b028eeff91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
+  pairId: Undefined
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
@@ -484,6 +490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb780dcf2755de34a98a75b028eeff91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
+  pairId: Undefined
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
@@ -630,5 +638,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a30d550fe7d81124c8665bce16adb179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: []
-  snapped: 0
+  hasSnapped: 0
