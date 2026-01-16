@@ -53,39 +53,39 @@ public class PieceController : MonoBehaviour
 
     Quaternion GetBestAxialSnap(Quaternion baseRotation, Vector3 snapAxis, Quaternion referenceRotation)
     {
-        float[] angles = { 0f, 90f, 180f, 270f };
+        float[] angles = { 0f, 90f, 180f, 270f }; // Angulos en que se puede rotar
 
-        snapAxis = snapAxis.normalized;
+        snapAxis = snapAxis.normalized; 
 
-        // 1. Crear un sistema ortonormal alrededor del eje de snap
-        Vector3 refRight;
+        Vector3 refRight; // Vector Right temporal
 
+        // Da direccion a vector Right dependiendo de si snapAxis es perpendicular a Up o no, completando las tres direcciones Right, Up y Forward
         if (Mathf.Abs(Vector3.Dot(snapAxis, Vector3.up)) > 0.99f)
         {
-            refRight = Vector3.Cross(snapAxis, Vector3.forward).normalized;
+            refRight = Vector3.Cross(snapAxis, Vector3.forward).normalized; // Perpendicular a snapAxis (en este caso es paralelo a Up) y Forward
         }
         else
         {
-            refRight = Vector3.Cross(snapAxis, Vector3.up).normalized;
+            refRight = Vector3.Cross(snapAxis, Vector3.up).normalized; // Perpendicular a snapAxis (en este caso es paralelo a Forward) y Up
         }
 
-        Vector3 refForward = Vector3.Cross(refRight, snapAxis).normalized;
+        Vector3 refForward = Vector3.Cross(refRight, snapAxis).normalized; // Vector Forward temporal
 
-        // 2. Dirección de referencia proyectada en el plano del snap
-        Vector3 refDir = Vector3.ProjectOnPlane(referenceRotation * refForward, snapAxis).normalized;
+        Vector3 refDir = Vector3.ProjectOnPlane(referenceRotation * refForward, snapAxis).normalized; // Direccion de referencia para la rotación
 
         Quaternion newRotation = baseRotation;
         float bestScore = -Mathf.Infinity;
 
+        // Rota los ejes y decide la rotación que mas se parezca a su rotacion original
         foreach (float angle in angles)
         {
             Quaternion candidate = Quaternion.AngleAxis(angle, snapAxis) * baseRotation;
 
             Vector3 candidateDirection = Vector3.ProjectOnPlane(candidate * refForward, snapAxis).normalized;
 
-            float dot = Vector3.Dot(candidateDirection, refDir);
+            float dot = Vector3.Dot(candidateDirection, refDir); // Valor que, cuando mas grande es, mas parecidas son las rotaciones
 
-            // Bias mínimo para preferir no rotar
+            // Evita que se confunda entre rotación 0 y 360
             if (angle == 0f)
             {
                 dot += 0.001f;
