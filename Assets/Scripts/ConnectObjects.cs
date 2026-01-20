@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
+using UnityEngine.InputSystem;
 
 public class ConnectObjects : MonoBehaviour
 {
@@ -28,7 +25,7 @@ public class ConnectObjects : MonoBehaviour
         Vector3 mousePos = Input.mousePosition;
         pieceCopy = Instantiate(piece, mousePos, Quaternion.identity);
         pieceCopy.gameObject.layer = 0;
-        pieceCopy.GetComponent<Rotate3DObject>().enabled = false;
+        //pieceCopy.GetComponent<Rotate3DObject>().enabled = false;
     }
 
     void Update()

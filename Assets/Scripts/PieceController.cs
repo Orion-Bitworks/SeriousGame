@@ -15,7 +15,7 @@ public class PieceController : MonoBehaviour
             return;
         }
 
-        EnableRigidBody();
+        //EnableRigidBody();
     }
 
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
@@ -32,7 +32,8 @@ public class PieceController : MonoBehaviour
         // Permite a los raycast colisionar con la pieza
         gameObject.layer = 6; // Layer 6 -> Raycast
 
-        DisableRigidBody();
+        //DisableRigidBody();
+        GetComponent<Rotate3DObject>().enabled = false;
 
         // Guarda la rotacion original de la pieza
         Quaternion previousRotation = transform.rotation;

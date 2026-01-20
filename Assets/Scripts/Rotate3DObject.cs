@@ -10,6 +10,8 @@ public class Rotate3DObject : MonoBehaviour
     private bool rotationXYAllowed;
     private bool rotationZAllowed;
     private Camera currentCamera;
+    private Vector3 previousPosition;
+
     [SerializeField] private float currentFov;
     [SerializeField] private float originalFov;
 
@@ -73,10 +75,12 @@ public class Rotate3DObject : MonoBehaviour
             case (true, false):
                 transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
                 transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
+                transform.position = previousPosition;
                 break;
             case (false, true):
                 transform.Rotate(Vector3.forward * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
                 transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
+                transform.position = previousPosition;
                 break;
             case (true, true):
 
@@ -119,6 +123,8 @@ public class Rotate3DObject : MonoBehaviour
 
     protected virtual void OnLeftClickPressed(InputAction.CallbackContext context)
     {
+        previousPosition = transform.position;
+
         if (context.started || context.performed)
         {
             rotationXYAllowed = true;
@@ -131,6 +137,8 @@ public class Rotate3DObject : MonoBehaviour
 
     protected virtual void OnRightClickPressed(InputAction.CallbackContext context)
     {
+        previousPosition = transform.position;
+
         if (context.started || context.performed)
         {
             rotationZAllowed = true;
