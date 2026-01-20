@@ -11,6 +11,8 @@ public class Move3DObject : MonoBehaviour
     PieceController piece;
 
     private float pointDistance = 10f;
+    private float breakSnapDistance = 2f;
+
     [SerializeField] private float minPointDistance = 2f;
     [SerializeField] private float maxPointDistance = 15f;
 
@@ -20,6 +22,7 @@ public class Move3DObject : MonoBehaviour
     void Start()
     {
         inputManager = InputManager.instance;
+        piece = GetComponent<PieceController>();
         cam = Camera.main;
 
         if (GetComponent<Rigidbody>())
@@ -32,6 +35,12 @@ public class Move3DObject : MonoBehaviour
     {
         if (!selected)
         {
+            return;
+        }
+
+        if (piece.HasSnapped())
+        {
+            TryMove();
             return;
         }
 
@@ -63,6 +72,16 @@ public class Move3DObject : MonoBehaviour
         }
 
         return raycastCollision;
+    }
+
+    public void TryMove()
+    {
+        float distance = Vector3.Distance(transform.position, RaycastPoint());
+
+        if (distance > breakSnapDistance)
+        {
+            MovePiece(RaycastPoint());
+        }
     }
 
     public void MovePiece(Vector3 moveTarget)

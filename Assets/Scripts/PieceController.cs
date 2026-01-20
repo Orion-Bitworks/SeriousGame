@@ -5,6 +5,7 @@ public class PieceController : MonoBehaviour
     ConnectObjects controller;
     Rigidbody rb;
     [SerializeField] bool hasSnapped = false;
+    bool canSnap = false;
 
     private void Start()
     {
@@ -25,12 +26,17 @@ public class PieceController : MonoBehaviour
             return;
         }
 
+        if (!canSnap)
+        {
+            return;
+        }
+
         controller.StopControl();
 
         hasSnapped = true;
 
         // Permite a los raycast colisionar con la pieza
-        gameObject.layer = 6; // Layer 6 -> Raycast
+        //gameObject.layer = 6; // Layer 6 -> Raycast
 
         //DisableRigidBody();
         GetComponent<Rotate3DObject>().enabled = false;
@@ -131,6 +137,12 @@ public class PieceController : MonoBehaviour
     public void UnParent()
     {
         transform.parent = null;
+        hasSnapped = false;
+    }
+
+    public void CanSnap(bool snap)
+    {
+        canSnap = snap;
     }
 
     public bool HasSnapped()
