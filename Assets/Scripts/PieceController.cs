@@ -128,6 +128,11 @@ public class PieceController : MonoBehaviour
         }
     }
 
+    public void UnParent()
+    {
+        transform.parent = null;
+    }
+
     public bool HasSnapped()
     {
         return hasSnapped;

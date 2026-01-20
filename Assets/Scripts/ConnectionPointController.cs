@@ -10,9 +10,11 @@ public class ConnectionPointController : MonoBehaviour
     [SerializeField] private Transform parent;
 
     private bool pairedWithPartner = false;
+    PieceController piece;
 
     private void Start()
     {
+        piece = GetComponentInParent<PieceController>();
         parent = transform.parent;
     }
 
@@ -20,11 +22,14 @@ public class ConnectionPointController : MonoBehaviour
     {
         if (other.gameObject.tag == "ConnectionPoint")
         {
-            PieceController piece = GetComponentInParent<PieceController>();
-
             piece.SnapToPoint(this, other.transform, other.transform.parent);
             CheckPairing(other.GetComponent<ConnectionPointController>());
         }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        piece.UnParent();
     }
 
     public void CheckPairing(ConnectionPointController partnerPoint)
