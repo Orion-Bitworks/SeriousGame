@@ -88,6 +88,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "KeyControl",
+            "id": "35fa2171-c243-440d-a475-06e816027be0",
+            "actions": [
+                {
+                    "name": "Rotate Mode",
+                    "type": "Button",
+                    "id": "876ef9fc-89cc-4f3b-bc0e-68c3d9df6837",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "90340d80-5a62-478d-991a-785e70bb4a61",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate Mode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

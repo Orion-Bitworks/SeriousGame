@@ -11,17 +11,21 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     private Move3DObject moveControl;
     private PieceController controller;
+    private Vector3 hoverScale = new Vector3(1.1f, 1.1f, 1.1f);
+    private Vector3 originalScale;
 
     private void Start()
     {
         controller = GetComponent<PieceController>();
         originalMaterial = GetComponent<MeshRenderer>().material;
         moveControl = GetComponent<Move3DObject>();
+        originalScale = transform.localScale;
     }
 
     // Cuando se pulsa el boton
     public void OnPointerDown(PointerEventData eventData)
     {
+        //transform.localScale = originalScale;
         GetComponent<MeshRenderer>().material = clickMaterial;
         controller.CanSnap(true);
         moveControl.EnableRigidBody();
@@ -46,12 +50,12 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     // Cuando se hace hover
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
+        //transform.localScale = hoverScale;
     }
 
     // Cuando se deja de hacer hover
     public void OnPointerExit(PointerEventData eventData)
     {
-        
+        //transform.localScale = originalScale;
     }
 }

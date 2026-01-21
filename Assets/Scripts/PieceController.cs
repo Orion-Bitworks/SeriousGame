@@ -7,8 +7,11 @@ public class PieceController : MonoBehaviour
     [SerializeField] bool hasSnapped = false;
     bool canSnap = false;
 
+    Move3DObject movement;
+
     private void Start()
     {
+        movement = GetComponent<Move3DObject>();
         controller = FindObjectOfType<ConnectObjects>();
 
         if (hasSnapped)
@@ -31,7 +34,8 @@ public class PieceController : MonoBehaviour
             return;
         }
 
-        controller.StopControl();
+        movement.DisableMovement();
+        //controller.StopControl();
 
         hasSnapped = true;
 
@@ -39,6 +43,8 @@ public class PieceController : MonoBehaviour
         //gameObject.layer = 6; // Layer 6 -> Raycast
 
         //DisableRigidBody();
+        movement.DisableMovement();
+        movement.DisableRigidBody();
         GetComponent<Rotate3DObject>().enabled = false;
 
         // Guarda la rotacion original de la pieza
@@ -110,10 +116,11 @@ public class PieceController : MonoBehaviour
 
     public void DisableRigidBody()
     {
-        if (GetComponent<Rigidbody>() != null)
+        if (rb != null)
         {
             rb.isKinematic = true;
-            Destroy(GetComponent<Rigidbody>());
+            Destroy(rb);
+            rb = null;
         }
     }
 
