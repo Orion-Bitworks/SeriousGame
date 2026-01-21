@@ -34,6 +34,7 @@ public class Move3DObject : MonoBehaviour
     void Update()
     {
         AdjustPointDistance();
+
         if (!selected)
         {
             return;
@@ -44,7 +45,6 @@ public class Move3DObject : MonoBehaviour
             TryMove();
             return;
         }
-
 
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 10f;

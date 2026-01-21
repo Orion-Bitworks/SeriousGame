@@ -12,6 +12,8 @@ public class Rotate3DObject : MonoBehaviour
     private Camera currentCamera;
     private Vector3 previousPosition;
 
+    bool selected = false;
+
     [SerializeField] private float currentFov;
     [SerializeField] private float originalFov;
 
@@ -61,16 +63,25 @@ public class Rotate3DObject : MonoBehaviour
 
     private void Update()
     {
-        if (!rotationXYAllowed && !rotationZAllowed)
+        if (!selected)
         {
             return;
         }
+
+        /*if (!rotationXYAllowed && !rotationZAllowed)
+        {
+            return;
+        }*/
 
         Vector2 mouseDelta = GetMouseLookInput();
 
         mouseDelta *= rotationSpeed * Time.deltaTime;
 
-        switch (rotationXYAllowed, rotationZAllowed)
+        transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
+        transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
+        transform.position = previousPosition;
+
+        /*switch (rotationXYAllowed, rotationZAllowed)
         {
             case (true, false):
                 transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
@@ -99,7 +110,7 @@ public class Rotate3DObject : MonoBehaviour
                 currentCamera.fieldOfView = currentFov;
 
                 break;
-        }
+        }*/
     }
 
     private void InitializeClickInput()
@@ -147,6 +158,16 @@ public class Rotate3DObject : MonoBehaviour
         {
             rotationZAllowed = false;
         }
+    }
+
+    public void EnableRotation()
+    {
+        selected = true;
+    }
+
+    public void DisableRotation()
+    {
+        selected = false;
     }
 
     protected virtual Vector2 GetMouseLookInput()

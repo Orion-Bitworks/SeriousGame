@@ -6,9 +6,11 @@ using UnityEngine.EventSystems;
 
 public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    InputManager inputManager;
     [SerializeField] Material clickMaterial;
     Material originalMaterial;
 
+    private Rotate3DObject rotateControl;
     private Move3DObject moveControl;
     private PieceController controller;
     private Vector3 hoverScale = new Vector3(1.1f, 1.1f, 1.1f);
@@ -16,8 +18,10 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     private void Start()
     {
+        inputManager = InputManager.instance;
         controller = GetComponent<PieceController>();
         originalMaterial = GetComponent<MeshRenderer>().material;
+        rotateControl = GetComponent<Rotate3DObject>();
         moveControl = GetComponent<Move3DObject>();
         originalScale = transform.localScale;
     }
@@ -25,6 +29,11 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     // Cuando se pulsa el boton
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (inputManager.rotateMode_ia.inProgress)
+        {
+            rotateControl.EnableRotation();
+        }
+
         //transform.localScale = originalScale;
         GetComponent<MeshRenderer>().material = clickMaterial;
         controller.CanSnap(true);
@@ -39,6 +48,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         controller.CanSnap(false);
         moveControl.DisableRigidBody();
         moveControl.DisableMovement();
+        rotateControl.DisableRotation();
     }
 
     // Cuando se hace click
