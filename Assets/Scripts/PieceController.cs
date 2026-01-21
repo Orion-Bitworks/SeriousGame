@@ -18,8 +18,6 @@ public class PieceController : MonoBehaviour
         {
             return;
         }
-
-        //EnableRigidBody();
     }
 
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
@@ -35,14 +33,12 @@ public class PieceController : MonoBehaviour
         }
 
         movement.DisableMovement();
-        //controller.StopControl();
 
         hasSnapped = true;
 
         // Permite a los raycast colisionar con la pieza
         //gameObject.layer = 6; // Layer 6 -> Raycast
 
-        //DisableRigidBody();
         movement.DisableMovement();
         movement.DisableRigidBody();
         GetComponent<Rotate3DObject>().enabled = false;
@@ -112,23 +108,6 @@ public class PieceController : MonoBehaviour
         }
 
         return newRotation;
-    }
-
-    public void DisableRigidBody()
-    {
-        if (rb != null)
-        {
-            rb.isKinematic = true;
-            Destroy(rb);
-            rb = null;
-        }
-    }
-
-    public void EnableRigidBody()
-    {
-        rb = gameObject.AddComponent<Rigidbody>();
-        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-        rb.useGravity = false;
     }
 
     public void MovePiece(Vector3 moveTarget)

@@ -33,6 +33,7 @@ public class Move3DObject : MonoBehaviour
 
     void Update()
     {
+        AdjustPointDistance();
         if (!selected)
         {
             return;
@@ -44,7 +45,6 @@ public class Move3DObject : MonoBehaviour
             return;
         }
 
-        AdjustPointDistance();
 
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 10f;
@@ -63,7 +63,6 @@ public class Move3DObject : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, pointDistance, mask))
         {
-            pointDistance = Mathf.Clamp(hit.distance, minPointDistance, maxPointDistance);
             raycastCollision = hit.point;
         }
         else
@@ -93,6 +92,14 @@ public class Move3DObject : MonoBehaviour
 
     public void AdjustPointDistance()
     {
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, pointDistance, mask))
+        {
+            pointDistance = Mathf.Clamp(hit.distance + (transform.position - hit.point).magnitude, minPointDistance, maxPointDistance);
+        }
+
         float scroll = inputManager.mouseWheel_ia.ReadValue<Vector2>().y;
 
         if (scroll != 0)
