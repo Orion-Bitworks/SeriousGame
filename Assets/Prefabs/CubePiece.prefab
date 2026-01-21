@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 914587497705674109}
   - component: {fileID: 8392725308985560315}
   - component: {fileID: 1025352768826579571}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ConexionPoint3
   m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 530028530589298189}
   - component: {fileID: 3885650063003447092}
   - component: {fileID: 8586537157457775515}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ConexionPoint1
   m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 6289343810279010567}
   - component: {fileID: 2628303213039519014}
   - component: {fileID: 534292628375126228}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ConexionPoint4
   m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}
@@ -385,7 +385,7 @@ GameObject:
   - component: {fileID: 5405383401496455575}
   - component: {fileID: 1870521250952672646}
   - component: {fileID: 1355855179531355781}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ConexionPoint2
   m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}

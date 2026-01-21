@@ -32,8 +32,6 @@ public class PieceController : MonoBehaviour
             return;
         }
 
-        movement.DisableMovement();
-
         hasSnapped = true;
 
         // Permite a los raycast colisionar con la pieza

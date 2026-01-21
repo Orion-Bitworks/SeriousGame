@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2395650168309662703}
   - component: {fileID: 2967194982782579288}
   - component: {fileID: 7605732491149076226}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ConexionPoint5
   m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}
@@ -118,6 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb780dcf2755de34a98a75b028eeff91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
+  partnerId: Undefined
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
@@ -135,7 +137,7 @@ GameObject:
   - component: {fileID: 745527942364313313}
   - component: {fileID: 7383970128733630611}
   - component: {fileID: 358327921852924056}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ConexionPoint6
   m_TagString: ConnectionPoint
   m_Icon: {fileID: 0}
@@ -240,6 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb780dcf2755de34a98a75b028eeff91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  id: 
+  partnerId: Undefined
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
@@ -252,6 +256,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 445881834412718058, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1328742661250863791, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3362792395619306399, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -291,6 +303,14 @@ PrefabInstance:
     - target: {fileID: 3362792395619306399, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3825759970502039246, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8151078668444041844, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8381425447518838917, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
       propertyPath: m_Name
