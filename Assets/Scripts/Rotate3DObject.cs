@@ -13,6 +13,7 @@ public class Rotate3DObject : MonoBehaviour
     private Vector3 previousPosition;
 
     bool selected = false;
+    PieceController piece;
 
     [SerializeField] private float currentFov;
     [SerializeField] private float originalFov;
@@ -54,6 +55,7 @@ public class Rotate3DObject : MonoBehaviour
     {
         //Cursor.lockState = CursorLockMode.Locked;
         currentCamera = Camera.main;
+        piece = GetComponent<PieceController>();
 
         originalFov = currentCamera.fieldOfView;
         currentFov = originalFov;
@@ -63,7 +65,7 @@ public class Rotate3DObject : MonoBehaviour
 
     private void Update()
     {
-        if (!selected)
+        if (!selected || piece.HasSnapped())
         {
             return;
         }
@@ -73,14 +75,18 @@ public class Rotate3DObject : MonoBehaviour
             return;
         }*/
 
-        Vector2 mouseDelta = GetMouseLookInput();
 
-        mouseDelta *= rotationSpeed * Time.deltaTime;
+        if (inputManager.rotateMode_ia.inProgress)
+        {
+            Vector2 mouseDelta = GetMouseLookInput();
 
-        transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
-        transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
-        transform.position = previousPosition;
+            mouseDelta *= rotationSpeed * Time.deltaTime;
 
+            transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
+            transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
+            transform.position = previousPosition;
+        }
+        
         /*switch (rotationXYAllowed, rotationZAllowed)
         {
             case (true, false):

@@ -17,18 +17,12 @@ public class Move3DObject : MonoBehaviour
     [SerializeField] private float maxPointDistance = 15f;
 
     private bool selected = false;
-    Rigidbody rb;
 
     void Start()
     {
         inputManager = InputManager.instance;
         piece = GetComponent<PieceController>();
         cam = Camera.main;
-
-        if (GetComponent<Rigidbody>())
-        {
-            rb = GetComponent<Rigidbody>();
-        }
     }
 
     void Update()
@@ -86,8 +80,8 @@ public class Move3DObject : MonoBehaviour
     public void MovePiece(Vector3 moveTarget)
     {
         Vector3 followPos = moveTarget;
-        rb.velocity = (followPos - transform.position) * 50f;
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
+        GetComponent<Rigidbody>().velocity = (followPos - transform.position) * 50f;
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     public void AdjustPointDistance()
@@ -118,26 +112,5 @@ public class Move3DObject : MonoBehaviour
     public void DisableMovement()
     {
         selected = false;
-    }
-
-    public void EnableRigidBody()
-    {
-        if (!GetComponent<Rigidbody>())
-        {
-            gameObject.layer = 0; // Layer 6 -> Raycast
-            rb = gameObject.AddComponent<Rigidbody>();
-            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-            rb.useGravity = false;
-        }
-    }
-
-    public void DisableRigidBody()
-    {
-        if (GetComponent<Rigidbody>() != null)
-        {
-            gameObject.layer = 6; // Layer 6 -> Raycast
-            rb.isKinematic = true;
-            Destroy(GetComponent<Rigidbody>());
-        }
     }
 }

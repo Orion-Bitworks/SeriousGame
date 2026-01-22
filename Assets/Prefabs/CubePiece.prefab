@@ -510,6 +510,8 @@ GameObject:
   - component: {fileID: 154356173436794076}
   - component: {fileID: 7848476706181811344}
   - component: {fileID: 5398934776806733117}
+  - component: {fileID: 572405747524340124}
+  - component: {fileID: 2511499065773841472}
   m_Layer: 6
   m_Name: CubePiece
   m_TagString: Untagged
@@ -621,7 +623,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentFov: 0
   originalFov: 0
-  rotationSpeed: 100
+  rotationSpeed: 50
   invertedControl: 0
   zoomSpeed: 10
   maxZoomIn: 20
@@ -639,3 +641,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasSnapped: 0
+--- !u!114 &572405747524340124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8381425447518838917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050a8ebfab395f149b07bb92ee9d0874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 64
+  minPointDistance: 2
+  maxPointDistance: 15
+--- !u!114 &2511499065773841472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8381425447518838917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2fa54694a43ce419e986f68d44f0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickMaterial: {fileID: 2100000, guid: 2c0e035efe40ee141bba0d00ec9567ee, type: 2}

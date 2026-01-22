@@ -1,23 +1,20 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Move3DObject))]
+[RequireComponent(typeof(Rotate3DObject))]
 public class PieceController : MonoBehaviour
 {
-    ConnectObjects controller;
     Rigidbody rb;
     [SerializeField] bool hasSnapped = false;
     bool canSnap = false;
 
-    Move3DObject movement;
+    private Move3DObject movement;
+    private Rotate3DObject rotation;
 
     private void Start()
     {
         movement = GetComponent<Move3DObject>();
-        controller = FindObjectOfType<ConnectObjects>();
-
-        if (hasSnapped)
-        {
-            return;
-        }
+        rotation = GetComponent<Rotate3DObject>();
     }
 
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
@@ -34,12 +31,7 @@ public class PieceController : MonoBehaviour
 
         hasSnapped = true;
 
-        // Permite a los raycast colisionar con la pieza
-        //gameObject.layer = 6; // Layer 6 -> Raycast
-
-        movement.DisableMovement();
-        movement.DisableRigidBody();
-        GetComponent<Rotate3DObject>().enabled = false;
+        DisableControls();
 
         // Guarda la rotacion original de la pieza
         Quaternion previousRotation = transform.rotation;
@@ -116,6 +108,41 @@ public class PieceController : MonoBehaviour
             rb.velocity = (followPos - transform.position) * 50f;
             rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
+    }
+
+    public void EnableRigidBody()
+    {
+        if (!GetComponent<Rigidbody>())
+        {
+            gameObject.layer = 0; // Layer 6 -> Raycast
+            rb = gameObject.AddComponent<Rigidbody>();
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+            rb.useGravity = false;
+        }
+    }
+
+    public void DisableRigidBody()
+    {
+        if (GetComponent<Rigidbody>() != null)
+        {
+            gameObject.layer = 6; // Layer 6 -> Raycast
+            rb.isKinematic = true;
+            Destroy(GetComponent<Rigidbody>());
+        }
+    }
+
+    public void EnableControls()
+    {
+        EnableRigidBody();
+        movement.EnableMovement();
+        rotation.EnableRotation();
+    }
+
+    public void DisableControls()
+    {
+        DisableRigidBody();
+        movement.DisableMovement();
+        rotation.DisableRotation();
     }
 
     public void UnParent()
