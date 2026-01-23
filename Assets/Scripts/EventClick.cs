@@ -25,7 +25,6 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     {
         //transform.localScale = originalScale;
         GetComponent<MeshRenderer>().material = clickMaterial;
-        piece.CanSnap(true);
         piece.EnableControls();
     }
 
@@ -33,7 +32,6 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     public void OnPointerUp(PointerEventData eventData)
     {
         GetComponent<MeshRenderer>().material = originalMaterial;
-        piece.CanSnap(false);
         piece.DisableControls();
     }
 

@@ -114,6 +114,7 @@ public class PieceController : MonoBehaviour
     {
         if (!GetComponent<Rigidbody>())
         {
+            canSnap = true;
             gameObject.layer = 0; // Layer 6 -> Raycast
             rb = gameObject.AddComponent<Rigidbody>();
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
@@ -125,6 +126,7 @@ public class PieceController : MonoBehaviour
     {
         if (GetComponent<Rigidbody>() != null)
         {
+            canSnap = false;
             gameObject.layer = 6; // Layer 6 -> Raycast
             rb.isKinematic = true;
             Destroy(GetComponent<Rigidbody>());
@@ -149,11 +151,6 @@ public class PieceController : MonoBehaviour
     {
         transform.parent = null;
         hasSnapped = false;
-    }
-
-    public void CanSnap(bool snap)
-    {
-        canSnap = snap;
     }
 
     public bool HasSnapped()

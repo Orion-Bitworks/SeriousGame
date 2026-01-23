@@ -53,6 +53,8 @@ public class Rotate3DObject : MonoBehaviour
 
     private void Start()
     {
+
+
         //Cursor.lockState = CursorLockMode.Locked;
         currentCamera = Camera.main;
         piece = GetComponent<PieceController>();
@@ -78,15 +80,9 @@ public class Rotate3DObject : MonoBehaviour
 
         if (inputManager.rotateMode_ia.inProgress)
         {
-            Vector2 mouseDelta = GetMouseLookInput();
-
-            mouseDelta *= rotationSpeed * Time.deltaTime;
-
-            transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
-            transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
-            transform.position = previousPosition;
+            RotateObject();
         }
-        
+
         /*switch (rotationXYAllowed, rotationZAllowed)
         {
             case (true, false):
@@ -119,6 +115,30 @@ public class Rotate3DObject : MonoBehaviour
         }*/
     }
 
+    protected virtual void RotateObject()
+    {
+        Vector2 mouseDelta = GetMouseLookInput();
+
+        mouseDelta *= rotationSpeed * Time.deltaTime;
+
+        if (GetComponent<Rigidbody>())
+        {
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+        }
+
+        if (inputManager.leftClick_ia.inProgress)
+        {
+            transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
+            transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
+        }
+
+        if (inputManager.rightClick_ia.inProgress)
+        {
+            transform.Rotate(Vector3.forward * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
+            transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
+        }
+    }
+
     private void InitializeClickInput()
     {
         inputManager = InputManager.instance;
@@ -136,6 +156,16 @@ public class Rotate3DObject : MonoBehaviour
             inputManager.rightClick_ia.performed += OnRightClickPressed;
             inputManager.rightClick_ia.canceled += OnRightClickPressed;
         }
+
+        if (inputManager.rotateMode_ia != null)
+        {
+            inputManager.rotateMode_ia.canceled += OnRotationCancelled;
+        }
+    }
+
+    protected virtual void OnRotationCancelled(InputAction.CallbackContext context)
+    {
+        piece.DisableControls();
     }
 
     protected virtual void OnLeftClickPressed(InputAction.CallbackContext context)
