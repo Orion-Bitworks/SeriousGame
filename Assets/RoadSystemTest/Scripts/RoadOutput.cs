@@ -9,7 +9,7 @@ public class RoadOutput : MonoBehaviour
 
     private void Start()
     {
-        GridSystem grid = FindObjectOfType<GridSystem>();
+        GridManager grid = GridManager.Instance;
         // Convierte la posición del punto de salida a coordenadas de celda
         Vector3Int cell = Vector3Int.RoundToInt(transform.position);
 

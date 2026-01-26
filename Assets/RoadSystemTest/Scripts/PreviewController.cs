@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class PreviewController : MonoBehaviour
 {
+    public static PreviewController Instance { get; private set; }    // Lo hacemos Singleton
+
     public GameObject[] previews;   // Vector de previews de las distintas piezas que se pueden colocar
     public GameObject parent;       // Objeto padre de las previews, utilizado para rotarlas todas al mismo tiempo
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     /// <summary>
     /// Cambia la preview para mostrar la seleccionada por el usuario

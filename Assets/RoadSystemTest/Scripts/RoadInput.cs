@@ -10,11 +10,11 @@ public class RoadInput : MonoBehaviour
     public float spawnRate = 1f;            // Tiempo entre cada bolita generada
     public RoadDirection outputDirection;   // Dirección en la cual se envian las bolitas
 
-    private GridSystem grid;                // Referencia al sistema de la grid
+    private GridManager grid;                // Referencia al sistema de la grid
 
     private void Start()
     {
-        grid = FindObjectOfType<GridSystem>();
+        grid = GridManager.Instance;
         // Inicia una corutina que genera bolitas periódicamente
         StartCoroutine(SpawnRoutine());
     }
@@ -29,7 +29,8 @@ public class RoadInput : MonoBehaviour
             // Espera un tiempo definido
             yield return new WaitForSeconds(spawnRate);
             // Intenta generar dicha bolita
-            TrySpawnBall();
+            if (GameManager.Instance.isPlaying)
+                TrySpawnBall();
         }
     }
 
@@ -39,49 +40,13 @@ public class RoadInput : MonoBehaviour
     void TrySpawnBall()
     {
         // Calcula la celda hacia la que saldrá la bolita
-        Vector3Int nextCell = GetNextCell();
-
-        // Si no hay una carretera en la siguiente celda, no genera bolita
-        if (!grid.placedObjects.ContainsKey(nextCell))
-            return;
-
-        // Obtiene la pieza de la carretera colocada en la siguiente celda
-        RoadPiece piece = grid.placedObjects[nextCell].GetComponent<RoadPiece>();
-
-        // Si no tiene "RoadPiece", aborta
-        if (piece == null)
-            return;
-
-        // Si la carretera no acepta entrada desde la dirección en la que se va a generar, no genera bolita
-        if (!IsConnectionValid(piece))
-            return;
+        Vector3Int nextCell = Vector3Int.RoundToInt(transform.position) + DirectionUtils.ToVector(outputDirection);
 
         // Instancia la bolita
         GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
 
         // Inicializa el movimiento de la bolita, indicando tanto a que celda debe ir como la dirección que debe seguir
         ball.GetComponent<MovingBall>().Initialize(nextCell, outputDirection);
-    }
-
-    /// <summary>
-    /// Calcula cual será la celda hacia la que tiene que salir la bolita
-    /// </summary>
-    /// <returns>La posición de la siguiente celda en la grid</returns>
-    Vector3Int GetNextCell()
-    {
-        // Convierte la posición del input a coordenadas de celda
-        Vector3Int pos = Vector3Int.RoundToInt(transform.position);
-
-        // Calcula la celda adyacente en la dirección de salida i la devuelve
-        switch (outputDirection)
-        {
-            case RoadDirection.Up: return pos + new Vector3Int(0, 0, 1);
-            case RoadDirection.Down: return pos + new Vector3Int(0, 0, -1);
-            case RoadDirection.Left: return pos + new Vector3Int(-1, 0, 0);
-            case RoadDirection.Right: return pos + new Vector3Int(1, 0, 0);
-        }
-
-        return pos;
     }
 
     /// <summary>
@@ -92,7 +57,7 @@ public class RoadInput : MonoBehaviour
     bool IsConnectionValid(RoadPiece piece)
     {
         // Calcula la dirección desde la que la carretera debería aceptar entrada
-        RoadDirection opposite = Opposite(outputDirection);
+        RoadDirection opposite = DirectionUtils.Opposite(outputDirection);
 
         // Recorre las conexiones de la carretera, si alguna coincide con la dirección opuesta calculada, la entrada es válida
         foreach (var c in piece.connections)
@@ -102,16 +67,5 @@ public class RoadInput : MonoBehaviour
         }
 
         return false;
-    }
-
-    /// <summary>
-    /// Calcula la dirección opuesta usando aritmética
-    /// </summary>
-    /// <param name="dir">Dirección para la cual tenemos que calcular su opuesto</param>
-    /// <returns>El opuesto de la dirección proporcionada</returns>
-    RoadDirection Opposite(RoadDirection dir)
-    {
-        // Si le damos dirección "Up" (0), devuelve "Down" (2)
-        return (RoadDirection)(((int)dir + 2) % 4);
     }
 }
