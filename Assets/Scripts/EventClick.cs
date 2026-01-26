@@ -6,9 +6,6 @@ using UnityEngine.EventSystems;
 
 public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] Material clickMaterial;
-    Material originalMaterial;
-
     private PieceController piece;
     private Vector3 hoverScale = new Vector3(1.1f, 1.1f, 1.1f);
     private Vector3 originalScale;
@@ -16,7 +13,6 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     private void Start()
     {
         piece = GetComponent<PieceController>();
-        originalMaterial = GetComponent<MeshRenderer>().material;
         originalScale = transform.localScale;
     }
 
@@ -24,15 +20,18 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     public void OnPointerDown(PointerEventData eventData)
     {
         //transform.localScale = originalScale;
-        GetComponent<MeshRenderer>().material = clickMaterial;
+        //GetComponent<MeshRenderer>().material = clickMaterial;
         piece.EnableControls();
     }
 
     // Cuando se suelta el boton
     public void OnPointerUp(PointerEventData eventData)
     {
-        GetComponent<MeshRenderer>().material = originalMaterial;
-        piece.DisableControls();
+        if (!InputManager.instance.rotateMode_ia.inProgress)
+        {
+            //GetComponent<MeshRenderer>().material = originalMaterial;
+            piece.DisableControls();
+        }
     }
 
     // Cuando se hace click

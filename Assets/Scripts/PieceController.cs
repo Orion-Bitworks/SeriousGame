@@ -4,6 +4,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rotate3DObject))]
 public class PieceController : MonoBehaviour
 {
+    [SerializeField] Material clickMaterial;
+    Material originalMaterial;
+
     Rigidbody rb;
     [SerializeField] bool hasSnapped = false;
     bool canSnap = false;
@@ -13,6 +16,7 @@ public class PieceController : MonoBehaviour
 
     private void Start()
     {
+        originalMaterial = GetComponent<MeshRenderer>().material;
         movement = GetComponent<Move3DObject>();
         rotation = GetComponent<Rotate3DObject>();
     }
@@ -54,21 +58,19 @@ public class PieceController : MonoBehaviour
     {
         float[] angles = { 0f, 90f, 180f, 270f }; // Angulos en que se puede rotar
 
-        snapAxis = snapAxis.normalized; 
+        snapAxis = snapAxis.normalized;
 
-        Vector3 refRight; // Vector Right temporal
+        // Usamos la rotacion previa como base
+        Vector3 refForward = (referenceRotation * Vector3.forward).normalized;
 
-        // Da direccion a vector Right dependiendo de si snapAxis es perpendicular a Up o no, completando las tres direcciones Right, Up y Forward
-        if (Mathf.Abs(Vector3.Dot(snapAxis, Vector3.up)) > 0.99f)
+        // Si el forward esta alineado con el eje de snap, usamos right
+        if (Mathf.Abs(Vector3.Dot(refForward, snapAxis)) > 0.99f)
         {
-            refRight = Vector3.Cross(snapAxis, Vector3.forward).normalized; // Perpendicular a snapAxis (en este caso es paralelo a Up) y Forward
-        }
-        else
-        {
-            refRight = Vector3.Cross(snapAxis, Vector3.up).normalized; // Perpendicular a snapAxis (en este caso es paralelo a Forward) y Up
+            refForward = (referenceRotation * Vector3.right).normalized;
         }
 
-        Vector3 refForward = Vector3.Cross(refRight, snapAxis).normalized; // Vector Forward temporal
+        // Proyectamos al plano perpendicular al eje de snap
+        refForward = Vector3.ProjectOnPlane(refForward, snapAxis).normalized;
 
         Vector3 refDir = Vector3.ProjectOnPlane(referenceRotation * refForward, snapAxis).normalized; // Direccion de referencia para la rotación
 
@@ -115,7 +117,8 @@ public class PieceController : MonoBehaviour
         if (!GetComponent<Rigidbody>())
         {
             canSnap = true;
-            gameObject.layer = 0; // Layer 6 -> Raycast
+            GetComponent<MeshRenderer>().material = clickMaterial;
+            gameObject.layer = 0;
             rb = gameObject.AddComponent<Rigidbody>();
             rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
             rb.useGravity = false;
@@ -127,6 +130,7 @@ public class PieceController : MonoBehaviour
         if (GetComponent<Rigidbody>() != null)
         {
             canSnap = false;
+            GetComponent<MeshRenderer>().material = originalMaterial;
             gameObject.layer = 6; // Layer 6 -> Raycast
             rb.isKinematic = true;
             Destroy(GetComponent<Rigidbody>());
