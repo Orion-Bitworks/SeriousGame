@@ -101,8 +101,5 @@ public class DragAndDrop : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mouseScreenPos);  //Convierte la pos del mouse a mundo
     }
 
-    void RotatePiece()
-    {
-
-    }
+    
 }
