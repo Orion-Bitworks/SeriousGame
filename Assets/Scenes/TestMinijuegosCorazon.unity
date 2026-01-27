@@ -243,6 +243,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valveType: 4
   occupied: 0
+  requiredEulerAngles: {x: 0, y: 0, z: -180}
+  rotationTolerance: 5
+  requiredRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &58368219
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,10 +294,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -738,19 +741,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 566670764}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1126825660}
-        m_TargetAssemblyTypeName: ProgressManager, Assembly-CSharp
-        m_MethodName: checkPlacementButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &566670764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,6 +1084,7 @@ MonoBehaviour:
   - {fileID: 1511327790}
   - {fileID: 724304348}
   objetsToDragInfoDone: {fileID: 743688661}
+  CheckButton: {fileID: 566670763}
 --- !u!4 &1126825661
 Transform:
   m_ObjectHideFlags: 0
@@ -1229,6 +1221,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valveType: 2
   occupied: 0
+  requiredEulerAngles: {x: 0, y: 0, z: 0}
+  rotationTolerance: 5
+  requiredRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1153614747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,6 +1345,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valveType: 1
   occupied: 0
+  requiredEulerAngles: {x: 0, y: 0, z: -180}
+  rotationTolerance: 5
+  requiredRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1480291846
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,6 +1791,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valveType: 3
   occupied: 0
+  requiredEulerAngles: {x: 0, y: 0, z: 0}
+  rotationTolerance: 5
+  requiredRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &1809595984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2186,6 +2187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5d1cb6e17757a5468a788731b8d58ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotateButton: {fileID: 1695115251}
 --- !u!4 &2115314797
 Transform:
   m_ObjectHideFlags: 0
@@ -2334,7 +2336,6 @@ SceneRoots:
   - {fileID: 1148137608}
   - {fileID: 1744220040}
   - {fileID: 31281546}
-  - {fileID: 1126825661}
   - {fileID: 58368223}
   - {fileID: 1532496435}
   - {fileID: 1384063919958665635}
@@ -2343,3 +2344,4 @@ SceneRoots:
   - {fileID: 1809595984}
   - {fileID: 1558736814}
   - {fileID: 2115314797}
+  - {fileID: 1126825661}
