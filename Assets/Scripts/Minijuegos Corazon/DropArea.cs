@@ -9,10 +9,10 @@ public class DropArea : MonoBehaviour
     public bool occupied;
 
     [Header("Validación")]
-    public Vector3 requiredEulerAngles;
-    public float rotationTolerance = 5f;
+    public Vector3 requiredEulerAngles; // Rotación que debe tener la pieza
+    public float rotationTolerance = 5f; // Margen de grados (si la rotacion tiene que ser 180 y la pieza esta 5 grados mas o menos de la pedida, lo aceptara igual)
 
-    public Quaternion requiredRotation;
+    public Quaternion requiredRotation; //Rotacion que tiene que tener la pieza para estar correcta
 
     void Awake()
     {

@@ -24,7 +24,6 @@ public class ProgressManager : MonoBehaviour
         showInfo();
     }
 
-
     public void objectsRemaining()
     {
         placedObjects = 0;
@@ -38,14 +37,15 @@ public class ProgressManager : MonoBehaviour
             }
             
         }
-        showInfo();
 
+        showInfo();
     }
 
     void showInfo()
     {
         objetsToDragInfoDone.text = placedObjects + " / " + totalObjects;
     }
+
     public void checkPlacementButton()
     {
         int correct = 0;
@@ -57,17 +57,17 @@ public class ProgressManager : MonoBehaviour
             {
                 DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
 
-                // 2. La DropArea debe existir
+                // La dropArea exista
                 if (drop != null)
                 {
-                    // 3. Tipo correcto
+                    // Comprueba que sea la pieza correcta
                     if (drop.valveType == obj.valveType)
                     {
-                        // 4. Rotación correcta usando quaternions
+                        // Comrobar rotación correcta usando quaternions
                         Quaternion currentRot = obj.transform.rotation;
                         float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
 
-                        if (angleDiff <= drop.rotationTolerance)
+                        if (angleDiff <= drop.rotationTolerance) //la rotationTolerance esta explicada en dropArea
                         {
                             correct++;
                         }
