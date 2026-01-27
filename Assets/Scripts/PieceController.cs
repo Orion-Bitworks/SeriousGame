@@ -14,11 +14,16 @@ public class PieceController : MonoBehaviour
     private Move3DObject movement;
     private Rotate3DObject rotation;
 
-    private void Start()
+    private void Awake()
     {
         originalMaterial = GetComponent<MeshRenderer>().material;
         movement = GetComponent<Move3DObject>();
         rotation = GetComponent<Rotate3DObject>();
+    }
+
+    private void Start()
+    {
+        
     }
 
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
