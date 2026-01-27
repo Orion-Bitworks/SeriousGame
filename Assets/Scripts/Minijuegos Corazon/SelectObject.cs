@@ -36,6 +36,6 @@ public class SelectObject : MonoBehaviour
 
     public void RotateObject()
     {
-        transform.Rotate(180f, 0, 0);
+        transform.Rotate(0, 0, 180f);
     }
 }

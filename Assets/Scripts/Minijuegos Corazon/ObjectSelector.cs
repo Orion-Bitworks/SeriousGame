@@ -1,8 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class ObjectSelector : MonoBehaviour
 {
     private static SelectObject currentlySelected = null;
+    [SerializeField]private Button rotateButton;
+
+    private void Awake()
+    {
+        rotateButton.onClick.AddListener(rotatePiece);
+    }
+
+    private void rotatePiece()
+    {
+        if(currentlySelected != null)
+        {
+            currentlySelected.RotateObject();
+            Debug.Log(" Rotando: " + currentlySelected.name);
+        }
+        
+    }
 
     private void Update()
     {
@@ -35,11 +53,12 @@ public class ObjectSelector : MonoBehaviour
                  }
              }
         }
-        if (Input.GetKeyDown(KeyCode.R) && currentlySelected != null)
+        
+        /*if (Input.GetKeyDown(KeyCode.R) && currentlySelected != null)
         {
             currentlySelected.RotateObject();
-            Debug.Log("🔄 Rotando: " + currentlySelected.name);
-        }
+            Debug.Log(" Rotando: " + currentlySelected.name);
+        }*/
 
     }
 }
