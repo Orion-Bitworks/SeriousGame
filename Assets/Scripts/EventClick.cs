@@ -20,7 +20,6 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     public void OnPointerDown(PointerEventData eventData)
     {
         //transform.localScale = originalScale;
-        //GetComponent<MeshRenderer>().material = clickMaterial;
         piece.EnableControls();
     }
 
@@ -29,7 +28,6 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     {
         if (!InputManager.instance.rotateMode_ia.inProgress)
         {
-            //GetComponent<MeshRenderer>().material = originalMaterial;
             piece.DisableControls();
         }
     }

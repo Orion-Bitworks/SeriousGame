@@ -11,7 +11,7 @@ public class Move3DObject : MonoBehaviour
     PieceController piece;
 
     private float pointDistance = 10f;
-    private float breakSnapDistance = 2f;
+    private float breakSnapDistance = 1f;
 
     [SerializeField] private float minPointDistance = 2f;
     [SerializeField] private float maxPointDistance = 15f;

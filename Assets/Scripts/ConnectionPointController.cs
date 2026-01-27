@@ -36,12 +36,12 @@ public class ConnectionPointController : MonoBehaviour
     {
         if (partnerPoint.GetId() == partnerId)
         {
-            //Debug.Log(id + " ha chocado con " + partnerPoint.GetId() + ": Emparejadas!");
+            Debug.Log(id + " ha chocado con " + partnerPoint.GetId() + ": Bien emparejadas!");
             pairedWithPartner = true;
         }
         else
         {
-            //Debug.Log(id + " ha chocado con " + partnerPoint.GetId() + ": No emparejadas...");
+            Debug.Log(id + " ha chocado con " + partnerPoint.GetId() + ": Mal emparejadas...");
         }
     }
 
