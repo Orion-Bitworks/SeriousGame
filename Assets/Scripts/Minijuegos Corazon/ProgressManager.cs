@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ProgressManager : MonoBehaviour
 {
@@ -11,7 +12,12 @@ public class ProgressManager : MonoBehaviour
 
     public TextMeshProUGUI objetsToDragInfoDone;
 
+    [SerializeField] Button CheckButton;
 
+    private void Awake()
+    {
+        CheckButton.onClick.AddListener(checkPlacementButton);
+    }
     void Start()
     {
         totalObjects = draggagleObjects.Length; //el total de objetos son la cantidad de objetos que haya en el array
@@ -40,22 +46,38 @@ public class ProgressManager : MonoBehaviour
     {
         objetsToDragInfoDone.text = placedObjects + " / " + totalObjects;
     }
-
     public void checkPlacementButton()
     {
         int correct = 0;
-        foreach(DragAndDrop obj in draggagleObjects)
+
+        foreach (DragAndDrop obj in draggagleObjects)
         {
-            if(obj.CurrentDropArea != null)
+            // 1. Tiene que estar en una DropArea
+            if (obj.CurrentDropArea != null)
             {
                 DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
-                if (drop != null && drop.valveType == obj.valveType)
+
+                // 2. La DropArea debe existir
+                if (drop != null)
                 {
-                    correct++;
+                    // 3. Tipo correcto
+                    if (drop.valveType == obj.valveType)
+                    {
+                        // 4. Rotación correcta usando quaternions
+                        Quaternion currentRot = obj.transform.rotation;
+                        float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
+
+                        if (angleDiff <= drop.rotationTolerance)
+                        {
+                            correct++;
+                        }
+                    }
                 }
             }
         }
+
         Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleObjects.Length);
     }
+
 
 }

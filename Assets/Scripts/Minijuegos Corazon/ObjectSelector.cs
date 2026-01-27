@@ -17,7 +17,9 @@ public class ObjectSelector : MonoBehaviour
         if(currentlySelected != null)
         {
             currentlySelected.RotateObject();
-            Debug.Log(" Rotando: " + currentlySelected.name);
+            Debug.Log(" Rotando: " + currentlySelected.name + "Rotacion echa: " + currentlySelected);
+
+            
         }
         
     }
@@ -54,11 +56,7 @@ public class ObjectSelector : MonoBehaviour
              }
         }
         
-        /*if (Input.GetKeyDown(KeyCode.R) && currentlySelected != null)
-        {
-            currentlySelected.RotateObject();
-            Debug.Log(" Rotando: " + currentlySelected.name);
-        }*/
+        
 
     }
 }
