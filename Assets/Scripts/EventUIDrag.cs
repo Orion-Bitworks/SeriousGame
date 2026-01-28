@@ -39,6 +39,7 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         dragging = true;
         newPiece = Instantiate(prefabPiece, transform.position, Quaternion.identity);
         newPiece.GetComponent<PieceController>().EnableControls();
+        Destroy(newPiece.GetComponent<InfiniteRotation>());
         originalScale = newPiece.transform.localScale;
         newPiece.transform.localScale = shrinkScale;
     }
