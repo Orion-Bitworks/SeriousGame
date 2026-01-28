@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,6 +21,8 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private float timer = 0.2f;
     private float timePassed;
 
+    float canvasAlpha = 1;
+
     private void Update()
     {
         if (timePassed < timer && canGrow)
@@ -31,6 +34,20 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         if (timePassed < timer && canShrink)
         {
             newPiece.transform.localScale = Vector3.Lerp(originalScale, shrinkScale, timePassed / timer);
+            timePassed += Time.deltaTime;
+        }
+
+        if (timePassed < timer && hovering && dragging)
+        {
+            prefabPiece.transform.localScale = Vector3.Lerp(originalScale, shrinkScale, timePassed / timer);
+            GetComponent<CanvasGroup>().alpha = Mathf.Lerp(canvasAlpha, 0, timePassed / timer);
+            timePassed += Time.deltaTime;
+        }
+
+        if (timePassed < timer && !hovering && dragging)
+        {
+            prefabPiece.transform.localScale = Vector3.Lerp(shrinkScale, originalScale, timePassed / timer);
+            GetComponent<CanvasGroup>().alpha = Mathf.Lerp(canvasAlpha, 1, timePassed / timer);
             timePassed += Time.deltaTime;
         }
     }

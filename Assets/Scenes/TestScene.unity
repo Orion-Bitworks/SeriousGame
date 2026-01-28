@@ -856,7 +856,6 @@ GameObject:
   - component: {fileID: 584136777}
   - component: {fileID: 584136776}
   - component: {fileID: 584136775}
-  - component: {fileID: 584136778}
   m_Layer: 5
   m_Name: CheckButton
   m_TagString: Untagged
@@ -966,19 +965,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 584136773}
   m_CullTransparentMesh: 1
---- !u!114 &584136778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 584136773}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fceb98146abb00748be7b1cb4d0f9a3b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabPiece: {fileID: 1806480760}
 --- !u!1 &597258517
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +977,7 @@ GameObject:
   - component: {fileID: 597258521}
   - component: {fileID: 597258520}
   - component: {fileID: 597258519}
+  - component: {fileID: 597258522}
   m_Layer: 5
   m_Name: CompleteCubeDragger
   m_TagString: Untagged
@@ -1065,6 +1052,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 597258517}
   m_CullTransparentMesh: 1
+--- !u!225 &597258522
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 597258517}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1048411073
 GameObject:
   m_ObjectHideFlags: 0
@@ -2064,11 +2063,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685669058}
   m_CullTransparentMesh: 1
---- !u!1 &1806480760 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8381425447518838917, guid: 01b8a900cb1f2584892cc3a3e0e41126, type: 3}
-  m_PrefabInstance: {fileID: 6227019030822403745}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1857185399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2275,6 +2269,7 @@ GameObject:
   - component: {fileID: 1926763663}
   - component: {fileID: 1926763662}
   - component: {fileID: 1926763664}
+  - component: {fileID: 1926763665}
   m_Layer: 5
   m_Name: CubeDragger
   m_TagString: Untagged
@@ -2349,6 +2344,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPiece: {fileID: 1857185401}
+--- !u!225 &1926763665
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926763660}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1984651685
 GameObject:
   m_ObjectHideFlags: 0
