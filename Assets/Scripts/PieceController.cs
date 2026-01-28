@@ -21,11 +21,6 @@ public class PieceController : MonoBehaviour
         rotation = GetComponent<Rotate3DObject>();
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
     {
         if (hasSnapped)

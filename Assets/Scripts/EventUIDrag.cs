@@ -12,6 +12,7 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     private bool dragging = false;
     bool canGrow = false;
     bool canShrink = false;
+    bool hovering = false;
 
     private Vector3 originalScale;
     private Vector3 shrinkScale = new Vector3(0.2f, 0.2f, 0.2f);
@@ -51,8 +52,16 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (hovering)
+        {
+            Destroy(newPiece);
+        }
+        else
+        {
+            newPiece.GetComponent<PieceController>().DisableControls();
+        }
+
         dragging = false;
-        newPiece.GetComponent<PieceController>().DisableControls();
         newPiece = null;
         canShrink = false;
         canGrow = false;
@@ -61,6 +70,8 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        hovering = true;
+
         if (dragging)
         {
             timePassed = 0;
@@ -71,6 +82,8 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        hovering = false;
+
         if (dragging)
         {
             timePassed = 0;

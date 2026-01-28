@@ -53,11 +53,11 @@ public class Rotate3DObject : MonoBehaviour
 
     private void Start()
     {
-
+        piece = GetComponent<PieceController>();
 
         //Cursor.lockState = CursorLockMode.Locked;
         currentCamera = Camera.main;
-        piece = GetComponent<PieceController>();
+        
 
         originalFov = currentCamera.fieldOfView;
         currentFov = originalFov;
@@ -143,24 +143,15 @@ public class Rotate3DObject : MonoBehaviour
     {
         inputManager = InputManager.instance;
 
-        if (inputManager.leftClick_ia != null)
-        {
-            inputManager.leftClick_ia.started += OnLeftClickPressed;
-            inputManager.leftClick_ia.performed += OnLeftClickPressed;
-            inputManager.leftClick_ia.canceled += OnLeftClickPressed;
-        }
-
-        if (inputManager.rightClick_ia != null)
-        {
-            inputManager.rightClick_ia.started += OnRightClickPressed;
-            inputManager.rightClick_ia.performed += OnRightClickPressed;
-            inputManager.rightClick_ia.canceled += OnRightClickPressed;
-        }
-
         if (inputManager.rotateMode_ia != null)
         {
             inputManager.rotateMode_ia.canceled += OnRotationCancelled;
         }
+    }
+
+    private void OnDestroy()
+    {
+        inputManager.rotateMode_ia.canceled -= OnRotationCancelled;
     }
 
     protected virtual void OnRotationCancelled(InputAction.CallbackContext context)
