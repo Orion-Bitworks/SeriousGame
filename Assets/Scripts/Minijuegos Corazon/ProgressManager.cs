@@ -10,6 +10,8 @@ public class ProgressManager : MonoBehaviour
     int totalObjects;
     int placedObjects;
 
+    public int correct = 0;
+
     public TextMeshProUGUI objetsToDragInfoDone;
 
     [SerializeField] Button CheckButton;
@@ -48,7 +50,7 @@ public class ProgressManager : MonoBehaviour
 
     public void checkPlacementButton()
     {
-        int correct = 0;
+        
 
         foreach (DragAndDrop obj in draggagleObjects)
         {
@@ -77,6 +79,7 @@ public class ProgressManager : MonoBehaviour
         }
 
         Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleObjects.Length);
+        
     }
 
 
