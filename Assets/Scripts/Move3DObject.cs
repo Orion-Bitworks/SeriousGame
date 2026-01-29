@@ -45,7 +45,6 @@ public class Move3DObject : MonoBehaviour
         mousePos = cam.ScreenToWorldPoint(mousePos);
 
         MovePiece(RaycastPoint());
-
     }
 
     private Vector3 RaycastPoint()
@@ -69,12 +68,15 @@ public class Move3DObject : MonoBehaviour
 
     public void TryMove()
     {
-        float distance = Vector3.Distance(transform.position, RaycastPoint());
+        /*float distance = Vector3.Distance(transform.position, RaycastPoint());
 
         if (distance > breakSnapDistance)
         {
             MovePiece(RaycastPoint());
-        }
+        }*/
+
+        piece.UnParent();
+        piece.SwitchParent();
     }
 
     public void MovePiece(Vector3 moveTarget)

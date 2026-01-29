@@ -16,7 +16,7 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     bool hovering = false;
 
     private Vector3 originalScale;
-    private Vector3 shrinkScale = new Vector3(0.2f, 0.2f, 0.2f);
+    private Vector3 shrinkScale = new Vector3(0.5f, 0.5f, 0.5f);
 
     private float timer = 0.2f;
     private float timePassed;
@@ -37,7 +37,7 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             timePassed += Time.deltaTime;
         }
 
-        if (timePassed < timer && hovering && dragging)
+        /*if (timePassed < timer && hovering && dragging)
         {
             prefabPiece.transform.localScale = Vector3.Lerp(originalScale, shrinkScale, timePassed / timer);
             GetComponent<CanvasGroup>().alpha = Mathf.Lerp(canvasAlpha, 0, timePassed / timer);
@@ -49,7 +49,7 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             prefabPiece.transform.localScale = Vector3.Lerp(shrinkScale, originalScale, timePassed / timer);
             GetComponent<CanvasGroup>().alpha = Mathf.Lerp(canvasAlpha, 1, timePassed / timer);
             timePassed += Time.deltaTime;
-        }
+        }*/
     }
 
     public void OnBeginDrag(PointerEventData eventData)

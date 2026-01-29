@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Move3DObject))]
@@ -10,6 +11,9 @@ public class PieceController : MonoBehaviour
     Rigidbody rb;
     [SerializeField] bool hasSnapped = false;
     bool canSnap = false;
+    [SerializeField] List<GameObject> childrenPieces = new List<GameObject>();
+
+    public Transform parentPiece;
 
     private Move3DObject movement;
     private Rotate3DObject rotation;
@@ -41,6 +45,7 @@ public class PieceController : MonoBehaviour
         Quaternion previousRotation = transform.rotation;
 
         transform.SetParent(targetParent, true);
+        parentPiece = targetParent;
 
         // Conecta los ejes forward del punto de conexión de target y de la pieza
         Quaternion baseRotation = Quaternion.LookRotation(-target.forward, target.up) * Quaternion.Inverse(point.transform.localRotation);
@@ -160,5 +165,13 @@ public class PieceController : MonoBehaviour
     public bool HasSnapped()
     {
         return hasSnapped;
+    }
+
+    public void SwitchParent()
+    {
+        hasSnapped = false;
+        parentPiece.GetComponent<PieceController>().hasSnapped = true;
+        parentPiece.SetParent(transform, true);
+        parentPiece.GetComponent<PieceController>().parentPiece = transform;
     }
 }
