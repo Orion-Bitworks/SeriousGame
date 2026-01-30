@@ -504,6 +504,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VenaPulmonar
       objectReference: {fileID: 0}
+    - target: {fileID: 5023132683084221825, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c442e94b79c5e1a46a11525618ad0ee8, type: 2}
     - target: {fileID: 5134485757426418471, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
       propertyPath: valveType
       value: 1
@@ -628,6 +632,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VenaAorta
       objectReference: {fileID: 0}
+    - target: {fileID: 5023132683084221825, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c442e94b79c5e1a46a11525618ad0ee8, type: 2}
     - target: {fileID: 5134485757426418471, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
       propertyPath: valveType
       value: 9
@@ -873,6 +881,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VenaAorta2
       objectReference: {fileID: 0}
+    - target: {fileID: 5023132683084221825, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c442e94b79c5e1a46a11525618ad0ee8, type: 2}
     - target: {fileID: 5134485757426418471, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
       propertyPath: valveType
       value: 10
@@ -1356,6 +1368,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArteriaPulmonar
       objectReference: {fileID: 0}
+    - target: {fileID: 5023132683084221825, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a569df13ed29de0408ff9c9ecf6727f3, type: 2}
     - target: {fileID: 5134485757426418471, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
       propertyPath: valveType
       value: 7
@@ -2188,6 +2204,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VenaPulmonar2
       objectReference: {fileID: 0}
+    - target: {fileID: 5023132683084221825, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c442e94b79c5e1a46a11525618ad0ee8, type: 2}
     - target: {fileID: 5134485757426418471, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
       propertyPath: valveType
       value: 2
@@ -2281,6 +2301,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VenaPulmonar3
       objectReference: {fileID: 0}
+    - target: {fileID: 5023132683084221825, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c442e94b79c5e1a46a11525618ad0ee8, type: 2}
     - target: {fileID: 5134485757426418471, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
       propertyPath: valveType
       value: 3
@@ -2738,7 +2762,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1262071296
 Transform:
   m_ObjectHideFlags: 0
@@ -3106,6 +3130,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VenaInferior
       objectReference: {fileID: 0}
+    - target: {fileID: 5023132683084221825, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a569df13ed29de0408ff9c9ecf6727f3, type: 2}
     - target: {fileID: 5134485757426418471, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
       propertyPath: valveType
       value: 6
@@ -3281,6 +3309,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VenaSuperior
       objectReference: {fileID: 0}
+    - target: {fileID: 5023132683084221825, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a569df13ed29de0408ff9c9ecf6727f3, type: 2}
     - target: {fileID: 5134485757426418471, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
       propertyPath: valveType
       value: 5
@@ -3973,6 +4005,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VenaAorta3
       objectReference: {fileID: 0}
+    - target: {fileID: 5023132683084221825, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c442e94b79c5e1a46a11525618ad0ee8, type: 2}
     - target: {fileID: 5134485757426418471, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
       propertyPath: placed
       value: 0
@@ -4436,6 +4472,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VenaPulmonar4
       objectReference: {fileID: 0}
+    - target: {fileID: 5023132683084221825, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c442e94b79c5e1a46a11525618ad0ee8, type: 2}
     - target: {fileID: 5134485757426418471, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
       propertyPath: valveType
       value: 4
@@ -4575,6 +4615,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ArteriaPulmonar2
       objectReference: {fileID: 0}
+    - target: {fileID: 5023132683084221825, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a569df13ed29de0408ff9c9ecf6727f3, type: 2}
     - target: {fileID: 5134485757426418471, guid: 7d6d16301f399004f89f1aba0c907068, type: 3}
       propertyPath: valveType
       value: 8
