@@ -5,7 +5,13 @@ using UnityEngine.UI;
 public class ObjectSelector : MonoBehaviour
 {
     private static SelectObject currentlySelected = null;
+
     [SerializeField]private Button rotateButton;
+
+    static RotateObjects rotateObjectsInstance;
+
+    public FasesMinigames minigamesPhasesInstance;
+
 
     private void Awake()
     {
@@ -14,14 +20,25 @@ public class ObjectSelector : MonoBehaviour
 
     private void rotatePiece()
     {
-        if(currentlySelected != null)
-        {
-            currentlySelected.RotateObject();
-            Debug.Log(" Rotando: " + currentlySelected.name + "Rotacion echa: " + currentlySelected);
+        if (rotateObjectsInstance == null || currentlySelected == null)  // Añade esta comprobación
+            return;
 
-            
+        // Comprueba si Fase1 está ACTIVA (no solo si existe)
+        if (minigamesPhasesInstance != null &&
+            minigamesPhasesInstance.fase1Root != null &&
+            minigamesPhasesInstance.fase1Root.activeSelf)
+        {
+            rotateObjectsInstance.rotateObjectsMinigame1(currentlySelected);
+            Debug.Log("Fase 1 - 180°");
         }
-        
+        // Comprueba si Fase2 está ACTIVA
+        else if (minigamesPhasesInstance != null &&
+                 minigamesPhasesInstance.fase2Root != null &&
+                 minigamesPhasesInstance.fase2Root.activeSelf)
+        {
+            rotateObjectsInstance.rotateObjectsMinigame2(currentlySelected);
+            Debug.Log("Fase 2 - 90°");
+        }
     }
 
     private void Update()
@@ -36,6 +53,8 @@ public class ObjectSelector : MonoBehaviour
         if (hasContact)
         {
              SelectObject parentSelect = hit.transform.GetComponentInParent<SelectObject>();
+
+             RotateObjects rotateObjects = hit.transform.GetComponentInParent<RotateObjects>();
 
              if (parentSelect != null)
              {
@@ -53,7 +72,12 @@ public class ObjectSelector : MonoBehaviour
                      currentlySelected = parentSelect;
                      Debug.Log("Seleccionado: " + parentSelect.name);
                  }
-             }
+
+                if (rotateObjects != null)
+                {
+                    rotateObjectsInstance = rotateObjects;
+                }
+            }
         }
         
         

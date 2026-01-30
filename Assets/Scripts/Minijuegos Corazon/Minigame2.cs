@@ -4,18 +4,18 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProgressManager : MonoBehaviour
+public class Minigame2 : MonoBehaviour
 {
-    public DragAndDrop[] draggagleObjects; //array de objetos que son arrastables
-    int totalObjects;
-    int placedObjects;
+    public DragAndDrop[] draggagleVeins; //array de objetos que son arrastables
+    int totalVeins;
+    int placedVeins;
 
     public int correct = 0;
 
-    public TextMeshProUGUI objetsToDragInfoDone;
-    public FasesMinigames fasesManager;
+    public TextMeshProUGUI remainVeinstoDrag;
 
     [SerializeField] Button CheckButton;
+
 
     private void Awake()
     {
@@ -23,22 +23,22 @@ public class ProgressManager : MonoBehaviour
     }
     void Start()
     {
-        totalObjects = draggagleObjects.Length; //el total de objetos son la cantidad de objetos que haya en el array
+        totalVeins = draggagleVeins.Length; //el total de objetos son la cantidad de objetos que haya en el array
         showInfo();
     }
 
     public void objectsRemaining()
     {
-        placedObjects = 0;
+        placedVeins = 0;
 
-        foreach(DragAndDrop obj in draggagleObjects) //para cada objeto dragAndDrop que este dentro del array
+        foreach (DragAndDrop obj in draggagleVeins) //para cada objeto dragAndDrop que este dentro del array
         {
             if (obj.placed)
             {
-                placedObjects++; //suma 1 si el objeto esta puesto
+                placedVeins++; //suma 1 si el objeto esta puesto
 
             }
-            
+
         }
 
         showInfo();
@@ -46,7 +46,7 @@ public class ProgressManager : MonoBehaviour
 
     void showInfo()
     {
-        objetsToDragInfoDone.text = placedObjects + " / " + totalObjects;
+        remainVeinstoDrag.text = placedVeins + " / " + totalVeins;
     }
 
     public void checkPlacementButton()
@@ -54,9 +54,9 @@ public class ProgressManager : MonoBehaviour
 
         correct = 0;
 
-        foreach (DragAndDrop obj in draggagleObjects)
+        foreach (DragAndDrop obj in draggagleVeins)
         {
-            // 1. Tiene que estar en una DropArea
+            // Tiene que estar en una DropArea
             if (obj.CurrentDropArea != null)
             {
                 DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
@@ -67,7 +67,7 @@ public class ProgressManager : MonoBehaviour
                     // Comprueba que sea la pieza correcta
                     if (drop.valveType == obj.valveType)
                     {
-                        // Comrobar rotación correcta usando quaternions
+                        // Comprobar rotación correcta usando quaternions
                         Quaternion currentRot = obj.transform.rotation;
                         float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
 
@@ -80,14 +80,7 @@ public class ProgressManager : MonoBehaviour
             }
         }
 
-        Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleObjects.Length);
-
-        if (correct == draggagleObjects.Length)
-        {
-            fasesManager.PasarAFase2();
-        }
+        Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleVeins.Length);
 
     }
-
-
 }

@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class FasesMinigames : MonoBehaviour
 {
-    private bool stageEnded;
-    public string nextStage;
+    public GameObject fase1Root;
+    public GameObject fase2Root;
 
-    public void WinLevel()
+    private void Start()
     {
-        Debug.Log("You win the stage!");
+        fase1Root.SetActive(true);
+    }
 
-        if(nextStage != "")
-        {
-
-        }
-
-        stageEnded = true;
+    // Llamar cuando el minijuego 1 termine correctamente
+    public void PasarAFase2()
+    {
+        fase1Root.SetActive(false);   // Oculta todo el minijuego 1
+        fase2Root.SetActive(true);    // Muestra todo el minijuego 2
     }
 
 }

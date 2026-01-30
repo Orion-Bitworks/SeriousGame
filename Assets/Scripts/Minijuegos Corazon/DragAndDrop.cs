@@ -11,7 +11,10 @@ public class DragAndDrop : MonoBehaviour
     public bool placed = false; //Comprobar si las piezas estan colocadas
     public Transform CurrentDropArea;
     private Vector3 initialPosition;
-    public ProgressManager progressManager;
+
+    public Minigame1 minigame1Instance;
+    public Minigame2 minigame2Instance;
+    //public ProgressManager progressManager;
 
     [Header("Informacion Minijuego")]
     public string valveType;
@@ -36,7 +39,8 @@ public class DragAndDrop : MonoBehaviour
             }
             placed = false; //Marca que el objeto no esta colocado
             CurrentDropArea = null; //El objeto ya no tiene dropArea
-            progressManager.objectsRemaining();
+            minigame1Instance.objectsRemaining();
+            minigame2Instance.objectsRemaining();
         }
         offset = transform.position - MouseWorldPosition(); //Calcula la distancia del objeto y del mouse
         transform.GetComponent<Collider>().enabled = false; //Desactiva el collider del objeto
@@ -75,7 +79,8 @@ public class DragAndDrop : MonoBehaviour
                     if (!placed)
                     {
                         placed = true;
-                        progressManager.objectsRemaining();
+                        minigame1Instance.objectsRemaining();
+                        minigame2Instance.objectsRemaining();
                     }
                 }
                 else

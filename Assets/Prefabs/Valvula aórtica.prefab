@@ -221,6 +221,7 @@ GameObject:
   - component: {fileID: 2242412680969669378}
   - component: {fileID: 7485169937886313545}
   - component: {fileID: 1787573531816564594}
+  - component: {fileID: 5816235019958610477}
   - component: {fileID: 3016372001015416139}
   - component: {fileID: 8353737276462564474}
   m_Layer: 0
@@ -240,7 +241,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.152, y: -0, z: 7}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.51386, y: 0.51386, z: 0.51386}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1445463283830927566}
@@ -262,7 +263,8 @@ MonoBehaviour:
   destinationTag: DropArea
   placed: 0
   CurrentDropArea: {fileID: 0}
-  progressManager: {fileID: 0}
+  minigame1Instance: {fileID: 0}
+  minigame2Instance: {fileID: 0}
   valveType: 1
 --- !u!114 &1787573531816564594
 MonoBehaviour:
@@ -278,6 +280,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectedColor: {r: 1, g: 0, b: 0, a: 1}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &5816235019958610477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3315242407677114180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7486601991a0cb438819881262f4733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &3016372001015416139
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -297,8 +311,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.2381465, y: 1, z: 0.5896034}
-  m_Center: {x: 0.21108305, y: 0, z: -0.004872322}
+  m_Size: {x: 1.1714926, y: 0.71642375, z: 0.5896034}
+  m_Center: {x: 0.044607162, y: 0.027882218, z: -0.004872322}
 --- !u!23 &8353737276462564474
 MeshRenderer:
   m_ObjectHideFlags: 0
