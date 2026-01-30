@@ -11,7 +11,7 @@ public class PieceController : MonoBehaviour
     Rigidbody rb;
     [SerializeField] bool hasSnapped = false;
     bool canSnap = false;
-    [SerializeField] List<GameObject> childrenPieces = new List<GameObject>();
+    [SerializeField] List<Transform> childrenPieces = new List<Transform>();
 
     public Transform parentPiece;
 
@@ -169,9 +169,17 @@ public class PieceController : MonoBehaviour
 
     public void SwitchParent()
     {
-        hasSnapped = false;
-        parentPiece.GetComponent<PieceController>().hasSnapped = true;
+        PieceController controller = parentPiece.GetComponent<PieceController>();
+
+        UnParent();
+
+        if (parentPiece.parent)
+        {
+            controller.SwitchParent();
+        }
+
+        controller.hasSnapped = true;
         parentPiece.SetParent(transform, true);
-        parentPiece.GetComponent<PieceController>().parentPiece = transform;
+        controller.parentPiece = transform;
     }
 }

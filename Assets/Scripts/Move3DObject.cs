@@ -75,7 +75,7 @@ public class Move3DObject : MonoBehaviour
             MovePiece(RaycastPoint());
         }*/
 
-        piece.UnParent();
+        //piece.UnParent();
         piece.SwitchParent();
     }
 
