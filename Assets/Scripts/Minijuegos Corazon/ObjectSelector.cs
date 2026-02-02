@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ObjectSelector : MonoBehaviour
 {
-    private static SelectObject currentlySelected = null;
+    public static SelectObject currentlySelected = null;
 
     [SerializeField]private Button rotateButton;
 
@@ -41,7 +41,7 @@ public class ObjectSelector : MonoBehaviour
         }
     }
 
-    private void Update()
+    /*private void Update()
     {
         
         Vector3 posicionMouse = Input.mousePosition;
@@ -82,5 +82,5 @@ public class ObjectSelector : MonoBehaviour
         
         
 
-    }
+    }*/
 }
