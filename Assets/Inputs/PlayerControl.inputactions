@@ -101,6 +101,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Separate Mode",
+                    "type": "Button",
+                    "id": "8d6144de-cec7-4dcb-bb98-0c142b42cc2b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -112,6 +121,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Rotate Mode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3882e095-7b63-468a-b9d3-945791719dcf",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Separate Mode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -34,9 +34,20 @@ public class Move3DObject : MonoBehaviour
             return;
         }
 
-        if (piece.HasSnapped())
+        /*if (!piece.HasSnapped() && inputManager.separateMode_ia.inProgress && !piece.parentPiece)
+        {
+            piece.SwitchWithChildren();
+        }*/
+
+        if (piece.HasSnapped() && inputManager.separateMode_ia.inProgress)
         {
             TryMove();
+            return;
+        }
+        
+        if (piece.HasSnapped())
+        {
+            piece.SwitchWithParent();
             return;
         }
 
@@ -68,15 +79,15 @@ public class Move3DObject : MonoBehaviour
 
     public void TryMove()
     {
-        /*float distance = Vector3.Distance(transform.position, RaycastPoint());
+        float distance = Vector3.Distance(transform.position, RaycastPoint());
 
         if (distance > breakSnapDistance)
         {
             MovePiece(RaycastPoint());
-        }*/
+        }
 
         //piece.UnParent();
-        piece.SwitchParent();
+        //piece.SwitchParent();
     }
 
     public void MovePiece(Vector3 moveTarget)
@@ -114,5 +125,10 @@ public class Move3DObject : MonoBehaviour
     public void DisableMovement()
     {
         selected = false;
+    }
+
+    public void GetChildrenCount()
+    {
+        
     }
 }

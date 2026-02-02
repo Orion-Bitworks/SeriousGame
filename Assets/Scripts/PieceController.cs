@@ -11,7 +11,8 @@ public class PieceController : MonoBehaviour
     Rigidbody rb;
     [SerializeField] bool hasSnapped = false;
     bool canSnap = false;
-    [SerializeField] List<Transform> childrenPieces = new List<Transform>();
+
+    PieceController pieceToSnap;
 
     public Transform parentPiece;
 
@@ -46,6 +47,8 @@ public class PieceController : MonoBehaviour
 
         transform.SetParent(targetParent, true);
         parentPiece = targetParent;
+
+        //parentPiece.GetComponent<PieceController>().GetChildrenPieces().Add(transform);
 
         // Conecta los ejes forward del punto de conexión de target y de la pieza
         Quaternion baseRotation = Quaternion.LookRotation(-target.forward, target.up) * Quaternion.Inverse(point.transform.localRotation);
@@ -167,19 +170,42 @@ public class PieceController : MonoBehaviour
         return hasSnapped;
     }
 
-    public void SwitchParent()
+    public void HasSnapped(bool b)
     {
+        hasSnapped = b;
+    }
+
+    public void SwitchWithParent()
+    {
+        if (!transform.parent)
+        {
+            return;
+        }
+
         PieceController controller = parentPiece.GetComponent<PieceController>();
 
         UnParent();
 
         if (parentPiece.parent)
         {
-            controller.SwitchParent();
+            controller.SwitchWithParent();
         }
 
         controller.hasSnapped = true;
         parentPiece.SetParent(transform, true);
         controller.parentPiece = transform;
+        parentPiece = null;
+    }
+
+    public PieceController GetPieceToSnap()
+    {
+        if (transform.parent)
+        {
+            return transform.parent.GetComponent<PieceController>().GetPieceToSnap();
+        }
+        else
+        {
+            return this;
+        }
     }
 }

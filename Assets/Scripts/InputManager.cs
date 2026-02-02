@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     public InputAction mouseLook_ia;
     public InputAction mouseWheel_ia;
     public InputAction rotateMode_ia;
+    public InputAction separateMode_ia;
 
     private void Awake()
     {
@@ -33,6 +34,7 @@ public class InputManager : MonoBehaviour
         mouseLook_ia = map.FindActionMap("MouseControl").FindAction("Mouse Look");
         mouseWheel_ia = map.FindActionMap("MouseControl").FindAction("Mouse Wheel");
         rotateMode_ia = map.FindActionMap("KeyControl").FindAction("Rotate Mode");
+        separateMode_ia = map.FindActionMap("KeyControl").FindAction("Separate Mode");
     }
 
     public void EnableInput()

@@ -15,7 +15,7 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     bool canShrink = false;
     bool hovering = false;
 
-    private Vector3 originalScale;
+    private Vector3 originalScale = new Vector3(1,1,1);
     private Vector3 shrinkScale = new Vector3(0.5f, 0.5f, 0.5f);
 
     private float timer = 0.2f;
@@ -25,7 +25,7 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     private void Update()
     {
-        if (timePassed < timer && canGrow)
+        /*if (timePassed < timer && canGrow)
         {
             newPiece.transform.localScale = Vector3.Lerp(shrinkScale, originalScale, timePassed / timer);
             timePassed += Time.deltaTime;
@@ -35,7 +35,7 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         {
             newPiece.transform.localScale = Vector3.Lerp(originalScale, shrinkScale, timePassed / timer);
             timePassed += Time.deltaTime;
-        }
+        }*/
 
         /*if (timePassed < timer && hovering && dragging)
         {
@@ -58,8 +58,8 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         newPiece = Instantiate(prefabPiece, transform.position, Quaternion.identity);
         newPiece.GetComponent<PieceController>().EnableControls();
         Destroy(newPiece.GetComponent<InfiniteRotation>());
-        originalScale = newPiece.transform.localScale;
-        newPiece.transform.localScale = shrinkScale;
+        //originalScale = newPiece.transform.localScale;
+        newPiece.transform.localScale = originalScale;
     }
 
     public void OnDrag(PointerEventData eventData)
