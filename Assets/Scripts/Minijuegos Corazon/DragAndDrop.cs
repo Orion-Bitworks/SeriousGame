@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class DragAndDrop : MonoBehaviour
 {
+<<<<<<< Updated upstream
     // ← STATIC para solo UN objeto seleccionado
+=======
+>>>>>>> Stashed changes
     private static DragAndDrop currentlySelected = null;
 
     Vector3 offset;
@@ -13,7 +16,10 @@ public class DragAndDrop : MonoBehaviour
     public Transform CurrentDropArea;
     private Vector3 initialPosition;
 
+<<<<<<< Updated upstream
     // ← SOLO referencia a TU SelectObject
+=======
+>>>>>>> Stashed changes
     private SelectObject selectObj;
 
     public Minigame1 minigame1Instance;
@@ -28,13 +34,18 @@ public class DragAndDrop : MonoBehaviour
 
     void OnMouseDown()
     {
+<<<<<<< Updated upstream
         // ← Desocupa DropArea (SI está colocado)
+=======
+        
+>>>>>>> Stashed changes
         if (placed && CurrentDropArea != null)
         {
             DropArea drop = CurrentDropArea.GetComponent<DropArea>();
             if (drop != null) drop.occupied = false;
         }
 
+<<<<<<< Updated upstream
         // ← GESTIÓN EXCLUSIVA: Deselecciona anterior
         if (currentlySelected != null && currentlySelected != this)
         {
@@ -46,10 +57,27 @@ public class DragAndDrop : MonoBehaviour
         currentlySelected = this;
 
         // Drag
+=======
+        
+        if (ObjectSelector.currentlySelected != null &&
+            ObjectSelector.currentlySelected.gameObject != gameObject)
+        {
+            ObjectSelector.currentlySelected.Deselect();
+        }
+
+        ObjectSelector.currentlySelected = selectObj;
+        selectObj?.Select();
+
+
+>>>>>>> Stashed changes
         offset = transform.position - MouseWorldPosition();
         GetComponent<Collider>().enabled = false;
     }
 
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     void OnMouseDrag()
     {
         transform.position = MouseWorldPosition() + offset;
@@ -77,7 +105,13 @@ public class DragAndDrop : MonoBehaviour
                         placed = true;
                         minigame1Instance?.objectsRemaining();
                         minigame2Instance?.objectsRemaining();
+<<<<<<< Updated upstream
                         selectObj?.Deselect(); // ← TU Deselect()
+=======
+
+                        ObjectSelector.currentlySelected = null;
+                        selectObj?.Deselect();
+>>>>>>> Stashed changes
                     }
                 }
                 else

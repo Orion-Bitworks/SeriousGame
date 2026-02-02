@@ -15,6 +15,7 @@ public class SelectObject : MonoBehaviour
     public void Select()
     {
         SetColor(selectedColor);
+
     }
 
     public void Deselect()

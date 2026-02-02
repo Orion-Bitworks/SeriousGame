@@ -1,17 +1,21 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ObjectSelector : MonoBehaviour
 {
     public static SelectObject currentlySelected = null;
+<<<<<<< Updated upstream
 
     [SerializeField]private Button rotateButton;
 
     static RotateObjects rotateObjectsInstance;
+=======
+    [SerializeField] private Button rotateButton;
+ 
+    static RotateObjects rotateObjectsInstance;//Referencia al objeto que rota
+>>>>>>> Stashed changes
 
     public FasesMinigames minigamesPhasesInstance;
-
 
     private void Awake()
     {
@@ -20,26 +24,37 @@ public class ObjectSelector : MonoBehaviour
 
     private void rotatePiece()
     {
-        if (rotateObjectsInstance == null || currentlySelected == null)  // Añade esta comprobación
-            return;
 
-        // Comprueba si Fase1 está ACTIVA (no solo si existe)
-        if (minigamesPhasesInstance != null &&
-            minigamesPhasesInstance.fase1Root != null &&
+        if (currentlySelected == null)
+        {
+            Debug.Log("No se ha seleccionado ningun objeto");
+            return;
+        }
+
+        rotateObjectsInstance = currentlySelected.GetComponentInParent<RotateObjects>(); //script rotateObjects
+
+        if (rotateObjectsInstance == null)
+        {
+            Debug.LogError("RotateObjects NO encontrado en: " + currentlySelected.name);
+            return;
+        }
+
+        Debug.Log("✅ Rotando: " + currentlySelected.name);
+
+        if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase1Root != null &&
             minigamesPhasesInstance.fase1Root.activeSelf)
         {
             rotateObjectsInstance.rotateObjectsMinigame1(currentlySelected);
             Debug.Log("Fase 1 - 180°");
         }
-        // Comprueba si Fase2 está ACTIVA
-        else if (minigamesPhasesInstance != null &&
-                 minigamesPhasesInstance.fase2Root != null &&
+        else if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase2Root != null &&
                  minigamesPhasesInstance.fase2Root.activeSelf)
         {
             rotateObjectsInstance.rotateObjectsMinigame2(currentlySelected);
             Debug.Log("Fase 2 - 90°");
         }
     }
+<<<<<<< Updated upstream
 
     /*private void Update()
     {
@@ -83,4 +98,6 @@ public class ObjectSelector : MonoBehaviour
         
 
     }*/
+=======
+>>>>>>> Stashed changes
 }
