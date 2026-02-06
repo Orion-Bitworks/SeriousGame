@@ -3,8 +3,8 @@
 public class SelectObject : MonoBehaviour
 {
     private Renderer[] renderers;
-    public Color selectedColor = Color.red;
-    public Color defaultColor = Color.white;
+    public Color selectedColor = Color.red; //color seleccionado el rojo
+    public Color defaultColor = Color.white; //el color default es el blanco
 
     private void Start()
     {
@@ -12,10 +12,9 @@ public class SelectObject : MonoBehaviour
         SetColor(defaultColor);
     }
 
-    public void Select()
+    public void Select() 
     {
         SetColor(selectedColor);
-
     }
 
     public void Deselect()
@@ -23,7 +22,7 @@ public class SelectObject : MonoBehaviour
         SetColor(defaultColor);
     }
 
-    private void SetColor(Color color)
+    private void SetColor(Color color) //para setear un color al objeto seleccionado
     {
         if (renderers == null) return;
         foreach (Renderer r in renderers)

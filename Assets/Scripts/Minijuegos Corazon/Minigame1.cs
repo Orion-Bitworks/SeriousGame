@@ -7,20 +7,20 @@ using UnityEngine.UI;
 public class Minigame1 : MonoBehaviour
 {
     public DragAndDrop[] draggagleValves; //array de objetos que son arrastables
-    int totalValves;
-    int placedValves;
+    int totalValves; //valvulas totales
+    int placedValves; //valvulas colocadas
 
-    public int correct = 0;
+    public int correct = 0; //Aciertos
 
-    public TextMeshProUGUI remainObjectsToDrag;
+    public TextMeshProUGUI remainObjectsToDrag; //Texto de objetos que hay que arrastrar
 
-    public FasesMinigames phasesManager;
+    public FasesMinigames phasesManager; //Instancia del script fasesMinigames
 
     [SerializeField] Button CheckButton;
 
     private void Awake()
     {
-        CheckButton.onClick.AddListener(checkPlacementButton);
+        CheckButton.onClick.AddListener(checkPlacementButton); //Listener
     }
     void Start()
     {
@@ -45,9 +45,11 @@ public class Minigame1 : MonoBehaviour
         showInfo();
     }
 
-    void showInfo()
+
+    //Metodo para mostrar la informacion de las valvulas
+    void showInfo() 
     {
-        remainObjectsToDrag.text = placedValves + " / " + totalValves;
+        remainObjectsToDrag.text = placedValves + " / " + totalValves; 
     }
 
     public void checkPlacementButton()
@@ -57,24 +59,24 @@ public class Minigame1 : MonoBehaviour
 
         foreach (DragAndDrop obj in draggagleValves)
         {
-            // 1. Tiene que estar en una DropArea
+            // Tiene que estar en una DropArea
             if (obj.CurrentDropArea != null)
             {
                 DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
 
-                // La dropArea exista
+                // La dropArea existe
                 if (drop != null)
                 {
                     // Comprueba que sea la pieza correcta
                     if (drop.valveType == obj.valveType)
                     {
-                        // Comrobar rotación correcta usando quaternions
+                        // Comprobar rotación correcta usando quaternions
                         Quaternion currentRot = obj.transform.rotation;
                         float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
 
                         if (angleDiff <= drop.rotationTolerance) //la rotationTolerance esta explicada en dropArea
                         {
-                            correct++;
+                            correct++; //suma 1 a los aciertos
                         }
                     }
                 }
@@ -83,9 +85,10 @@ public class Minigame1 : MonoBehaviour
 
         Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleValves.Length);
 
-        if (correct == draggagleValves.Length)
+        if (correct == draggagleValves.Length) // Si el numero de aciertos es igual al numero de valvulas que hay en el array
         {
-            phasesManager.PasarAFase2();
+            phasesManager.PasarAFase2(); //pasa a la siguiente fase
+
         }
 
     }

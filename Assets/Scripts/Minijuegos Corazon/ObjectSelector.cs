@@ -5,15 +5,15 @@ public class ObjectSelector : MonoBehaviour
 {
     public static SelectObject currentlySelected = null;
 
-    [SerializeField]private Button rotateButton;
+    [SerializeField]private Button rotateButton; //Boton de rotar
 
-    static RotateObjects rotateObjectsInstance;
+    static RotateObjects rotateObjectsInstance; //Instancia del script RotateObjects
 
-    public FasesMinigames minigamesPhasesInstance;
+    public FasesMinigames minigamesPhasesInstance; //Instancia del script FasesMinigames
 
     private void Awake()
     {
-        rotateButton.onClick.AddListener(rotatePiece);
+        rotateButton.onClick.AddListener(rotatePiece); //Listener
     }
 
     private void rotatePiece()
@@ -33,16 +33,14 @@ public class ObjectSelector : MonoBehaviour
             return;
         }
 
-        Debug.Log("✅ Rotando: " + currentlySelected.name);
+        Debug.Log(" Rotando: " + currentlySelected.name);
 
-        if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase1Root != null &&
-            minigamesPhasesInstance.fase1Root.activeSelf)
+        if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase1Root != null && minigamesPhasesInstance.fase1Root.activeSelf)
         {
             rotateObjectsInstance.rotateObjectsMinigame1(currentlySelected);
             Debug.Log("Fase 1 - 180°");
         }
-        else if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase2Root != null &&
-                 minigamesPhasesInstance.fase2Root.activeSelf)
+        else if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase2Root != null && minigamesPhasesInstance.fase2Root.activeSelf)
         {
             rotateObjectsInstance.rotateObjectsMinigame2(currentlySelected);
             Debug.Log("Fase 2 - 90°");
