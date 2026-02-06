@@ -8,9 +8,6 @@ public class ObjectSelector : MonoBehaviour
     [SerializeField]private Button rotateButton;
 
     static RotateObjects rotateObjectsInstance;
-    //[SerializeField] private Button rotateButton;
- 
-    //static RotateObjects rotateObjectsInstance;//Referencia al objeto que rota
 
     public FasesMinigames minigamesPhasesInstance;
 
@@ -52,46 +49,4 @@ public class ObjectSelector : MonoBehaviour
         }
     }
 
-    /*private void Update()
-    {
-        
-        Vector3 posicionMouse = Input.mousePosition;
-        Ray rayo = Camera.main.ScreenPointToRay(posicionMouse);
-        RaycastHit hit;
-
-        bool hasContact = Physics.Raycast(rayo, out hit);
-
-        if (hasContact)
-        {
-             SelectObject parentSelect = hit.transform.GetComponentInParent<SelectObject>();
-
-             RotateObjects rotateObjects = hit.transform.GetComponentInParent<RotateObjects>();
-
-             if (parentSelect != null)
-             {
-                 // Solo selecciona si no está ya seleccionado
-                 if (parentSelect != currentlySelected)
-                 {
-                     // Deseleccionar anterior
-                     if (currentlySelected != null)
-                     {
-                         currentlySelected.Deselect();
-                     }
-
-                     // Seleccionar nuevo
-                     parentSelect.Select();
-                     currentlySelected = parentSelect;
-                     Debug.Log("Seleccionado: " + parentSelect.name);
-                 }
-
-                if (rotateObjects != null)
-                {
-                    rotateObjectsInstance = rotateObjects;
-                }
-            }
-        }
-        
-        
-
-    }*/
 }
