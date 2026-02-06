@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Minigame1 : MonoBehaviour
 {
-    public DragAndDrop[] draggagleValves; //array de objetos que son arrastables
+    public DragAndDrop[] draggableValves; //array de objetos que son arrastables
     int totalValves; //valvulas totales
     int placedValves; //valvulas colocadas
 
@@ -24,7 +24,7 @@ public class Minigame1 : MonoBehaviour
     }
     void Start()
     {
-        totalValves = draggagleValves.Length; //el total de objetos son la cantidad de objetos que haya en el array
+        totalValves = draggableValves.Length; //el total de objetos son la cantidad de objetos que haya en el array
         showInfo();
     }
 
@@ -32,7 +32,7 @@ public class Minigame1 : MonoBehaviour
     {
         placedValves = 0;
 
-        foreach (DragAndDrop obj in draggagleValves) //para cada objeto dragAndDrop que este dentro del array
+        foreach (DragAndDrop obj in draggableValves) //para cada objeto dragAndDrop que este dentro del array
         {
             if (obj.placed)
             {
@@ -57,7 +57,7 @@ public class Minigame1 : MonoBehaviour
 
         correct = 0;
 
-        foreach (DragAndDrop obj in draggagleValves)
+        foreach (DragAndDrop obj in draggableValves)
         {
             // Tiene que estar en una DropArea
             if (obj.CurrentDropArea != null)
@@ -83,11 +83,11 @@ public class Minigame1 : MonoBehaviour
             }
         }
 
-        Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleValves.Length);
+        Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggableValves.Length);
 
-        if (correct == draggagleValves.Length) // Si el numero de aciertos es igual al numero de valvulas que hay en el array
+        if (correct == draggableValves.Length) // Si el numero de aciertos es igual al numero de valvulas que hay en el array
         {
-            foreach (DragAndDrop obj in draggagleValves)
+            foreach (DragAndDrop obj in draggableValves)
             {
                 if (obj.CurrentDropArea != null)
                 {
