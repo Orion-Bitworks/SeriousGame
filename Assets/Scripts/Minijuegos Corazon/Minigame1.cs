@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -70,7 +70,7 @@ public class Minigame1 : MonoBehaviour
                     // Comprueba que sea la pieza correcta
                     if (drop.valveType == obj.valveType)
                     {
-                        // Comprobar rotaci�n correcta usando quaternions
+                        // Comprobar rotación correcta usando quaternions
                         Quaternion currentRot = obj.transform.rotation;
                         float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
 
@@ -87,6 +87,25 @@ public class Minigame1 : MonoBehaviour
 
         if (correct == draggagleValves.Length) // Si el numero de aciertos es igual al numero de valvulas que hay en el array
         {
+            foreach (DragAndDrop obj in draggagleValves)
+            {
+                if (obj.CurrentDropArea != null)
+                {
+                    DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
+                    if (drop != null && drop.valveType == obj.valveType)
+                    {
+                        Quaternion currentRot = obj.transform.rotation;
+                        float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
+                        if (angleDiff <= drop.rotationTolerance)
+                        {
+                            obj.locked = true;
+                            obj.GetComponent<Collider>().enabled = false;
+
+                        }
+                    }
+                }
+            }
+
             phasesManager.PasarAFase2(); //pasa a la siguiente fase
 
         }

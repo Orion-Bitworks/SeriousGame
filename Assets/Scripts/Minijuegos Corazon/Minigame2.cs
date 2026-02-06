@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,10 @@ public class Minigame2 : MonoBehaviour
     public TextMeshProUGUI remainVeinstoDrag;
 
     [SerializeField] Button CheckButton;
+
+    public FasesMinigames phasesManager; //Instancia del script fasesMinigames
+
+
 
 
     private void Awake()
@@ -81,6 +86,32 @@ public class Minigame2 : MonoBehaviour
         }
 
         Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleVeins.Length);
+
+        if (correct == draggagleVeins.Length) // Si el numero de aciertos es igual al numero de valvulas que hay en el array
+        {
+            foreach (DragAndDrop obj in draggagleVeins)
+            {
+                if (obj.CurrentDropArea != null)
+                {
+                    DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
+                    if (drop != null && drop.valveType == obj.valveType)
+                    {
+                        Quaternion currentRot = obj.transform.rotation;
+                        float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
+                        if (angleDiff <= drop.rotationTolerance)
+                        {
+                            obj.locked = true;
+                            obj.GetComponent<Collider>().enabled = false;
+
+                        }
+                    }
+                }
+            }
+
+            phasesManager.PasarAFase3(); //pasa a la siguiente fase
+            
+
+        }
 
     }
 }

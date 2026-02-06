@@ -24,6 +24,9 @@ public class DragAndDrop : MonoBehaviour
     public Minigame2 minigame2Instance;
     public string valveType; //Indicativo de las valvulas
 
+
+    public bool locked = false;
+
     private void Start()
     {
         initialPosition = transform.position; //Al iniciar, guarda la posición inicial del objeto.
@@ -33,6 +36,7 @@ public class DragAndDrop : MonoBehaviour
     //inicio del drag
     void OnMouseDown() 
     {
+        if (GetComponent<DragAndDrop>().locked) return; // Si está bloqueado, ignorar clic
 
         //Liberar la DropArea actual si estaba colocado
         if (placed && CurrentDropArea != null)
