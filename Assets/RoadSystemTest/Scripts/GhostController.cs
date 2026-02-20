@@ -1,15 +1,18 @@
 using UnityEngine;
 
+/// <summary>
+/// Gestiona el funcionamiento del "fantasma" que indica la pieza que vas a colocar
+/// </summary>
 public class GhostController : MonoBehaviour
 {
-    public static GhostController Instance { get; private set; }    // Lo hacemos Singleton
+    public static GhostController Instance { get; private set; }    // Referencia Singleton
 
-    public GameObject ghostObject;                                  // Objeto fantasma que sigue al ratón, ghost
-    public Quaternion currentRotation = Quaternion.identity;        // Rotación actual del ghost
+    [HideInInspector] public GameObject ghostObject;                                  // Objeto fantasma que sigue al ratón, ghost
+    [HideInInspector] public Quaternion currentRotation = Quaternion.identity;        // Rotación actual del ghost
 
     private void Awake()
     {
-        Instance = this;
+        Instance = this;    // Inicializamos el Singleton
     }
 
     /// <summary>

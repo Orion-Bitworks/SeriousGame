@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Gestiona la preview de las tuberías
+/// </summary>
 public class PreviewController : MonoBehaviour
 {
-    public static PreviewController Instance { get; private set; }    // Lo hacemos Singleton
+    public static PreviewController Instance { get; private set; }    // Referencia Singleton
 
-    public GameObject[] previews;   // Vector de previews de las distintas piezas que se pueden colocar
-    public GameObject parent;       // Objeto padre de las previews, utilizado para rotarlas todas al mismo tiempo
+    [SerializeField] GameObject[] previews;   // Vector de previews de las distintas piezas que se pueden colocar
+    [SerializeField] GameObject parent;       // Objeto padre de las previews, utilizado para rotarlas todas al mismo tiempo
 
     private void Awake()
     {
-        Instance = this;
+        Instance = this;    // Inicializamos el Singleton
     }
 
     /// <summary>

@@ -5,25 +5,33 @@ using UnityEngine;
 /// </summary>
 public class RoadOutput : MonoBehaviour
 {
-    public RoadDirection inputDirection; // Dirección desde la cual pueden llegar las bolitas
+    [SerializeField] RoadDirection inputDirection;                  // Dirección desde la cual pueden llegar las bolitas
+    [SerializeField] BallType acceptedBallType;                     // Tipo de bolita que acepta esta salida
+    [SerializeField] GameObject enterParticle, destroyParticle;     // Prefabs de particulas de destrucción de la bolita
 
-    private void Start()
-    {
-        GridManager grid = GridManager.Instance;
-        // Convierte la posición del punto de salida a coordenadas de celda
-        Vector3Int cell = Vector3Int.RoundToInt(transform.position);
-
-        // Registra el punto de salida en su diccionario correspondiente
-        if (!grid.outputs.ContainsKey(cell))
-            grid.outputs.Add(cell, this);
-    }
+    [HideInInspector] public bool ballReceived = false;             // Indica si el output ya ha recibido bolitas
 
     /// <summary>
     /// Lo que ocurre cuando una bolita llega al punto de salida
     /// </summary>
-    public void ReceiveBall()
+    public void ReceiveBall(MovingBall ball)
     {
-        Debug.Log("Bolita recibida en el output!");
         // Añadir suma de puntos?
+        if (ball.ballType == acceptedBallType)
+        {
+            Debug.Log("Bolita recibida en el output!");
+            // Aceptada, instanciamos un efecto visual en su posición
+            Instantiate(enterParticle, transform.position, Quaternion.identity);
+            ballReceived = true;
+
+            // Notificamos a la lógica del corazón que hemos recibido una bolita si somos parte de él
+            var heart = GetComponentInParent<HeartLogic>();
+            if (heart != null)
+                heart.NotifyOutputReceivedBall();
+        }
+        else {
+            // Rechazada, instanciamos un efecto visual en su posición
+            Instantiate(destroyParticle, transform.position, Quaternion.identity);
+        }
     }
 }

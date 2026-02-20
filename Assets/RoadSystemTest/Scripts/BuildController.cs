@@ -1,17 +1,43 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Se encarga de gestionar la colocación y eliminación de todas las tuberías en la grid, así como del sistema de undo/redo
+/// </summary>
 public class BuildController : MonoBehaviour
 {
-    public GameObject[] objectsToPlace;             // Vector de prefabs disponibles
-    public int selectedIndex = 0;                   // Índice del prefab seleccionado
+    public static BuildController Instance { get; private set; }    // Referencia Singleton
 
-    private GridManager grid;                       // Referencia al sistema de la grid
-    private GhostController ghost;                  // Referencia al sistema del ghost
-    private PreviewController previewController;    // Referencia al controlador de previews
+    [SerializeField] GameObject[] objectsToPlace;                   // Vector de prefabs disponibles
+    
+    [HideInInspector] public bool isUndoing;                        // Controla si el usuario está deshaciendo acciones
+    [HideInInspector] public bool isRedoing;                        // Controla si el usuario está rehaciendo acciones
+    [HideInInspector] public float undoHoldTimer = 0f;              // Temporizador para mantener el "deshacer"
+    [HideInInspector] public float redoHoldTimer = 0f;              // Temporizador para mantener el "rehacer"
+    
+    int selectedIndex = 0;                  // Índice del prefab seleccionado
 
-    private Stack<BuildAction> undoStack = new Stack<BuildAction>();    // Pila con las posibles acciones a deshacer
-    private Stack<BuildAction> redoStack = new Stack<BuildAction>();    // Pila con las posibles acciones a rehacer
+    GridManager grid;                       // Referencia al sistema de la grid
+    GhostController ghost;                  // Referencia al sistema del ghost
+    PreviewController previewController;    // Referencia al controlador de previews
+    Controls controls;                      // Referencia al InputAction de juego
+
+    bool isPlacing;                         // Controla si el usuario está colocando piezas
+    bool isErasing;                         // Controla si el usuario está eliminando piezas
+
+    bool isMouseInsideGrid = false;         // Controla si el ratón se encuentra dentro de la grid
+
+    const float initialDelay = 0.3f;        // Delay antes de repetir
+    const float repeatRate = 0.08f;         // Tiempo entre repeticiones
+
+    Stack<BuildAction> undoStack = new Stack<BuildAction>();    // Pila con las posibles acciones a deshacer
+    Stack<BuildAction> redoStack = new Stack<BuildAction>();    // Pila con las posibles acciones a rehacer
+
+    private void Awake()
+    {
+        Instance = this;    // Inicializamos el Singleton
+    }
 
     private void Start()
     {
@@ -24,13 +50,94 @@ public class BuildController : MonoBehaviour
 
         // Mostramos la preview adecuada
         previewController.ChangePreview(selectedIndex);
+
+        // Activamos el inputAction
+        controls = new Controls();
+        controls.Enable();
+
+        // Suscribimos todos los inputActions a funciones o booleanos que gestionan funciones
+        controls.InRoadGame.Place.started += _ => isPlacing = true;
+        controls.InRoadGame.Place.canceled += _ => isPlacing = false;
+        controls.InRoadGame.Erase.started += _ => isErasing = true;
+        controls.InRoadGame.Erase.canceled += _ => isErasing = false;
+        controls.InRoadGame.Rotate.performed += _ => RotateGhostAndPreview();
+        controls.InRoadGame.PrevPiece.performed += _ => ChangeObject(false);
+        controls.InRoadGame.NextPiece.performed += _ => ChangeObject(true);
+        controls.InRoadGame.Undo.started += _ => { isUndoing = true; undoHoldTimer = 0f; };
+        controls.InRoadGame.Undo.canceled += _ => isUndoing = false;
+        controls.InRoadGame.Redo.started += _ => { isRedoing = true; redoHoldTimer = 0f; };
+        controls.InRoadGame.Redo.canceled += _ => isRedoing = false;
+    }
+
+    /// <summary>
+    /// Rota tanto el ghost como la preview
+    /// </summary>
+    private void RotateGhostAndPreview()
+    {
+        // Si el sistema está en marcha, abortamos
+        if (GameManager.Instance.isPlaying) return;
+
+        ghost.RotateGhost();
+        previewController.RotatePreview(ghost.currentRotation);
     }
 
     private void Update()
     {
         // Actualizamos la posición del ghost y hacemos acciones según el input del usuario
         UpdateGhostMovement();
-        HandleInput();
+
+        // Mientras se mantiene el click derecho, colocamos objeto
+        if (isPlacing)
+            PlaceObject();
+
+        // Mientras se mantiene el click izquierdo, borramos objeto
+        if (isErasing)
+            EraseObject();
+
+        // Gestión del deshacer y rehacer
+        HandleContinuousUndoRedo();
+    }
+
+    /// <summary>
+    /// Gestiona el deshacer y rehacer cuando se mantienen las teclas, haciéndolo fluido
+    /// </summary>
+    void HandleContinuousUndoRedo()
+    {
+        // Si el sistema está en marcha, abortamos
+        if (GameManager.Instance.isPlaying) return;
+
+        if (isUndoing)
+        {
+            // Primer undo instantáneo, después del delay, repetir cada "repeatRate"
+            if (undoHoldTimer == 0f)
+                Undo();
+            else if (undoHoldTimer > initialDelay)
+            {
+                if ((undoHoldTimer - initialDelay) % repeatRate < Time.deltaTime)
+                    Undo();
+            }
+            undoHoldTimer += Time.deltaTime;
+        }
+
+        if (isRedoing)
+        {
+            // Primer redo instantáneo, después del delay, repetir cada "repeatRate"
+            if (redoHoldTimer == 0f)
+                Redo();
+            else if (redoHoldTimer > initialDelay)
+            {
+                if ((redoHoldTimer - initialDelay) % repeatRate < Time.deltaTime)
+                    Redo();
+            }
+            redoHoldTimer += Time.deltaTime;
+        }
+
+        // Reseteamos los temporizadores al soltar la tecla
+        if (!isUndoing)
+            undoHoldTimer = 0f;
+
+        if (!isRedoing)
+            redoHoldTimer = 0f;
     }
 
     /// <summary>
@@ -38,6 +145,13 @@ public class BuildController : MonoBehaviour
     /// </summary>
     void UpdateGhostMovement()
     {
+        // Si el sistema está en marcha, abortamos y dejamos de mostrar el fantasma
+        if (GameManager.Instance.isPlaying || HeartPlacementController.Instance.isPlacingHeart)
+        {
+            ghost.ghostObject.SetActive(false);
+            return;
+        }
+
         // Crea un rayo desde la cámara hacia el ratón
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -51,42 +165,21 @@ public class BuildController : MonoBehaviour
             bool inside = grid.IsInsideBounds(snapped);
             bool occupied = grid.placedObjects.ContainsKey(snapped);
 
+            if (hit.collider.GetComponentInParent<MultiCellPiece>() != null)
+                occupied = true;
+
+            // Guardamos si el ratón está dentro de la grid
+            isMouseInsideGrid = inside;
+
             ghost.UpdateGhostPosition(snapped, occupied, inside);
         }
-    }
-
-    /// <summary>
-    /// Gestiona los inputs de usuario (TEMPORAL)
-    /// </summary>
-    void HandleInput()
-    {
-        // Click izquierdo -> Colocar pieza
-        if (Input.GetMouseButton(0))
-            PlaceObject();
-
-        // Click derecho -> Borrar pieza
-        if (Input.GetMouseButton(1))
-            EraseObject();
-
-        // Pulsar R -> Rotar pieza y rotar preview
-        if (Input.GetKeyDown(KeyCode.R))
+        else
         {
-            ghost.RotateGhost();
-            previewController.RotatePreview(ghost.currentRotation);
+            // Si no golpea nada, el ratón está fuera de la grid
+            isMouseInsideGrid = false;
         }
-
-        // Pulsar Q -> Cambiar pieza (hacia atrás)
-        // Pulsar E -> Cambiar pieza (hacia delante)
-        if (Input.GetKeyDown(KeyCode.Q))
-            ChangeObject(false);
-        else if (Input.GetKeyDown(KeyCode.E))
-            ChangeObject(true);
-
-        if (Input.GetKeyDown(KeyCode.Z) && Input.GetKey(KeyCode.LeftControl))
-            Undo();
-
-        if (Input.GetKeyDown(KeyCode.Y) && Input.GetKey(KeyCode.LeftControl))
-            Redo();
+        // Mostramos o no el ghost dependiendo de si estamos con el ratón dentro de la grid o no
+        ghost.ghostObject.SetActive(isMouseInsideGrid);
     }
 
     /// <summary>
@@ -94,6 +187,12 @@ public class BuildController : MonoBehaviour
     /// </summary>
     void PlaceObject()
     {
+        // Si el sistema está en marcha, abortamos
+        if (GameManager.Instance.isPlaying) return;
+
+        // Si el ratón está fuera de la grid, no colocamos pieza
+        if (!isMouseInsideGrid) return;
+
         // Obtiene la posición ajustada al grid
         Vector3Int cell = Vector3Int.RoundToInt(ghost.ghostObject.transform.position);
 
@@ -101,8 +200,17 @@ public class BuildController : MonoBehaviour
         if (!grid.IsInsideBounds(cell)) return;
         if (grid.placedObjects.ContainsKey(cell)) return;
 
+        // Bloquea colocación encima de órganos
+        if (Physics.Raycast(cell + Vector3.up * 5f, Vector3.down, out RaycastHit h, 10f))
+        {
+            if (h.collider.GetComponentInParent<MultiCellPiece>() != null)
+                return;
+        }
+
         // Instancia la pieza
         GameObject obj = Instantiate(objectsToPlace[selectedIndex], cell, ghost.currentRotation);
+
+        obj.AddComponent<PlacedPiece>().originalPrefab = objectsToPlace[selectedIndex];
 
         // Copia las conexiones rotadas del ghost a la pieza real
         RoadPiece ghostRoad = ghost.ghostObject.GetComponent<RoadPiece>();
@@ -116,6 +224,7 @@ public class BuildController : MonoBehaviour
 
         // Registramos acción para rehacer
         undoStack.Push(new BuildAction(
+            BuildActionType.Place,
             cell,
             objectsToPlace[selectedIndex],
             ghost.currentRotation,
@@ -131,13 +240,43 @@ public class BuildController : MonoBehaviour
     /// </summary>
     void EraseObject()
     {
+        // Si el sistema está en marcha, abortamos
+        if (GameManager.Instance.isPlaying) return;
+
+        // Si el ratón está fuera de la grid, no borramos pieza
+        if (!isMouseInsideGrid) return;
+
         Vector3Int cell = Vector3Int.RoundToInt(ghost.ghostObject.transform.position);
-        // Si hay una pieza, la borra, y la elimina del diccionario
-        if (grid.placedObjects.ContainsKey(cell))
+        // Si no hay pieza bajo el ghost, aborta
+        if (!grid.placedObjects.ContainsKey(cell))
+            return;
+
+        // Bloquea borrar piezas de órganos
+        if (Physics.Raycast(cell + Vector3.up * 5f, Vector3.down, out RaycastHit h, 10f))
         {
-            Destroy(grid.placedObjects[cell]);
-            grid.placedObjects.Remove(cell);
+            if (h.collider.GetComponentInParent<MultiCellPiece>() != null)
+                return;
         }
+
+        // Obtenemos el objeto y su RoadPiece
+        GameObject obj = grid.placedObjects[cell];
+        PlacedPiece placed = obj.GetComponent<PlacedPiece>();
+        RoadPiece piece = obj.GetComponent<RoadPiece>();
+
+        // Registramos acción para rehacer
+        undoStack.Push(new BuildAction(
+            BuildActionType.Erase,
+            cell,
+            placed.originalPrefab,
+            obj.transform.rotation,
+            piece != null ? piece.connections : null
+        ));
+
+        redoStack.Clear();
+
+        // La borramos, y eliminamos del diccionario
+        Destroy(obj);
+        grid.placedObjects.Remove(cell);
     }
 
     /// <summary>
@@ -146,6 +285,9 @@ public class BuildController : MonoBehaviour
     /// <param name="next">Si es true, lo hace en positivo, si es false, en negativo</param>
     void ChangeObject(bool next)
     {
+        // Si el sistema está en marcha, abortamos
+        if (GameManager.Instance.isPlaying) return;
+
         // Cambia el índice de la selección según la tecla utilizada
         selectedIndex += next ? 1 : -1;
         if (selectedIndex >= objectsToPlace.Length) selectedIndex = 0;
@@ -184,11 +326,30 @@ public class BuildController : MonoBehaviour
         // Cogemos la última acción
         BuildAction action = undoStack.Pop();
 
-        // Borramos la pieza actual y la borramos del diccionario
-        if (grid.placedObjects.ContainsKey(action.cell))
+        switch (action.type)
         {
-            Destroy(grid.placedObjects[action.cell]);
-            grid.placedObjects.Remove(action.cell);
+            case BuildActionType.Place:
+                // Borramos la pieza actual y la borramos del diccionario
+                if (grid.placedObjects.ContainsKey(action.cell))
+                {
+                    Destroy(grid.placedObjects[action.cell]);
+                    grid.placedObjects.Remove(action.cell);
+                }
+
+                break;
+            case BuildActionType.Erase:
+                // Volvemos a colocar la pieza borrada
+                GameObject obj = Instantiate(action.prefab, action.cell, action.rotation);
+
+                obj.AddComponent<PlacedPiece>().originalPrefab = objectsToPlace[selectedIndex];
+
+                RoadPiece piece = GetComponent<RoadPiece>();
+                if (piece != null && action.connections != null)
+                    piece.connections = (RoadDirection[])action.connections.Clone();
+
+                grid.placedObjects.Add(action.cell, obj);
+
+                break;
         }
 
         // Guardamos en la pila de rehacer
@@ -206,17 +367,33 @@ public class BuildController : MonoBehaviour
         // Cogemos la última acción
         BuildAction action = redoStack.Pop();
 
-        // Volvemos a colocar la pieza
-        GameObject obj = Instantiate(action.prefab, action.cell, action.rotation);
+        switch (action.type)
+        {
+            case BuildActionType.Place:
+                // Volvemos a colocar la pieza
+                GameObject obj = Instantiate(action.prefab, action.cell, action.rotation);
 
-        RoadPiece piece = obj.GetComponent<RoadPiece>();
-        if (piece != null && action.connections != null)
-            piece.connections = (RoadDirection[])action.connections.Clone();
+                obj.AddComponent<PlacedPiece>().originalPrefab = objectsToPlace[selectedIndex];
 
-        grid.placedObjects.Add(action.cell, obj);
+                RoadPiece piece = obj.GetComponent<RoadPiece>();
+                if (piece != null && action.connections != null)
+                    piece.connections = (RoadDirection[])action.connections.Clone();
+
+                grid.placedObjects.Add(action.cell, obj);
+
+                break;
+            case BuildActionType.Erase:
+                // Recolocamos la pieza borrada
+                if (grid.placedObjects.ContainsKey(action.cell))
+                {
+                    Destroy(grid.placedObjects[action.cell]);
+                    grid.placedObjects.Remove(action.cell);
+                }
+
+                break;
+        }
 
         // Guardamos en la pila de deshacer
         undoStack.Push(action);
     }
-
 }

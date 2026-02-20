@@ -2,27 +2,62 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+/// Enum con los tipos de bolitas
+/// </summary>
+public enum BallType
+{
+    Red,
+    Blue,
+    Green,
+    Yellow
+}
+
+public static class BallTypeColors
+{
+    /// <summary>
+    /// Diccionario de colores de bolitas (relación tipo -> color)
+    /// </summary>
+    private static readonly Dictionary<BallType, Color> colors = new()
+    {
+        { BallType.Red, Color.red },
+        { BallType.Blue, Color.blue },
+        { BallType.Green, Color.green },
+        { BallType.Yellow, Color.yellow }
+    };
+
+    /// <summary>
+    /// Getter para el color de la bolita
+    /// </summary>
+    /// <param name="type">Tipo de la bolita de la cual queremos saber el color</param>
+    /// <returns>Color que tiene que tener la bolita</returns>
+    public static Color GetColor(BallType type) => colors[type];
+}
+
+/// <summary>
 /// Representa una bolita que se mueve a través del sistema de carreteras
 /// </summary>
 public class MovingBall : MonoBehaviour
 {
-    public float speed = 3f;            // Velocidad de movimiento de la bolita
-    public GameObject deathParticle;    // Prefab de particulas de destrucción de la bolita
+    [SerializeField] float speed = 3f;              // Velocidad de movimiento de la bolita
+    [SerializeField] GameObject deathParticle;      // Prefab de particulas de destrucción de la bolita
+    [SerializeField] public BallType ballType;      // Tipo inicial de la bolita
 
-    private Vector3Int currentCell;     // Celda en la cual se encuentra la bolita actualmente
-    private RoadDirection direction;    // Dirección en la que la bolita se está moviendo
-    private GridManager grid;           // Referencia al sistema de la grid
+    Vector3Int currentCell;     // Celda en la cual se encuentra la bolita actualmente
+    RoadDirection direction;    // Dirección en la que la bolita se está moviendo
+    GridManager grid;           // Referencia al sistema de la grid
 
     /// <summary>
     /// Inicializa la bolita cuando se crea
     /// </summary>
     /// <param name="startCell">Celda inicial de la bolita</param>
     /// <param name="startDirection">Dirección inicial de la bolita</param>
-    public void Initialize(Vector3Int startCell, RoadDirection startDirection)
+    /// <param name="type">Tipo inicial de la bolita</param>
+    public void Initialize(Vector3Int startCell, RoadDirection startDirection, BallType type)
     {
-        // Guardamos los parámetros de celda y dirección iniciales
+        // Guardamos los parámetros de celda, dirección y tipo iniciales
         currentCell = startCell;
         direction = startDirection;
+        ballType = type;
         grid = GridManager.Instance;
     }
 
@@ -42,10 +77,11 @@ public class MovingBall : MonoBehaviour
         {
             // Si no puede, destruye la bolita
             DestroyBall();
+            Debug.Log("Bolita destruida porque no puede entrar hacia la siguiente carretera.");
             return;
         }
 
-        // Si puede, se mueve hacia
+        // Si puede, se mueve hacia la misma
         MoveTowardsCurrentCell();
 
         // Cuando llega al centro de la celda, decide hacia dónde tiene que ir
@@ -58,16 +94,21 @@ public class MovingBall : MonoBehaviour
     /// </summary>
     void AdvanceToNextCell()
     {
-        // Si no hay carretera en esta celda, puede ser output o vacío
+        // Si es un output, intenta que la bolita acabe su recorrido
+        if (IsOutputCell(currentCell))
+        {
+            TryDeliverToOutput(currentCell);
+            Destroy(gameObject);
+            return;
+        }
+
+        // Si no hay carretera en esta celda, destruyela
         if (!grid.placedObjects.ContainsKey(currentCell))
         {
-            // Si es un output, intenta que la bolita acabe su recorrido
-            if (IsOutputCell(currentCell))
-                TryDeliverToOutput(currentCell);
-
-            // Destruye la bolita si o si
-            DestroyBall();
-            return;
+            {
+                DestroyBall();
+                return;
+            }
         }
 
         // Obtiene la pieza de la carretera actual y determina la dirección de salida
@@ -98,6 +139,20 @@ public class MovingBall : MonoBehaviour
 
         // Obtiene la pieza de la carretera actual 
         RoadPiece piece = grid.placedObjects[currentCell].GetComponent<RoadPiece>();
+
+        // Abortamos si la pieza no existe o si no tiene conexiones
+        if (piece == null)
+        {
+            Debug.Log("La pieza no existe");
+            return false;
+        }
+        
+        if (piece.connections == null || piece.connections.Length == 0)
+        {
+            Debug.Log("La pieza no tiene conexiones");
+            return false;
+        }
+
         // Calcula la dirección desde la que la bolita está entrando
         RoadDirection incoming = DirectionUtils.Opposite(direction);
 
@@ -125,7 +180,7 @@ public class MovingBall : MonoBehaviour
     /// <param name="cell">Celda a comprobar si es un punto de salida</param>
     void TryDeliverToOutput(Vector3Int cell)
     {
-        grid.outputs[currentCell].ReceiveBall();
+        grid.outputs[currentCell].ReceiveBall(this);
     }
 
     /// <summary>
@@ -171,8 +226,10 @@ public class MovingBall : MonoBehaviour
     /// <summary>
     /// Destruye la bolita
     /// </summary>
-    void DestroyBall()
+    public void DestroyBall()
     {
+        // Cuando la bolita se destruye, instancia un efecto visual en su posición
+        Instantiate(deathParticle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
@@ -194,11 +251,5 @@ public class MovingBall : MonoBehaviour
     bool ReachedCurrentCell()
     {
         return Vector3.Distance(transform.position, currentCell) < 0.01f;
-    }
-
-    private void OnDestroy()
-    {
-        // Cuando la bolita se destruye, instancia un efecto visual en su posición
-        Instantiate(deathParticle, transform.position, Quaternion.identity);
     }
 }

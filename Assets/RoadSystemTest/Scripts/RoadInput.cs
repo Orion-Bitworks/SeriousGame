@@ -6,17 +6,26 @@ using UnityEngine;
 /// </summary>
 public class RoadInput : MonoBehaviour
 {
-    public GameObject ballPrefab;           // Apunta al prefab de la bolita que se va a instanciar
-    public float spawnRate = 1f;            // Tiempo entre cada bolita generada
-    public RoadDirection outputDirection;   // Dirección en la cual se envian las bolitas
-
-    private GridManager grid;                // Referencia al sistema de la grid
+    [SerializeField] GameObject ballPrefab;             // Apunta al prefab de la bolita que se va a instanciar
+    [SerializeField] float spawnRate = 1f;              // Tiempo entre cada bolita generada
+    [SerializeField] RoadDirection outputDirection;     // Dirección en la cual se envian las bolitas
+    [SerializeField] BallType ballTypeToSpawn;          // Tipo de bolita que queremos que aparezca
 
     private void Start()
     {
-        grid = GridManager.Instance;
         // Inicia una corutina que genera bolitas periódicamente
         StartCoroutine(SpawnRoutine());
+    }
+
+    public void StartGenerating()
+    {
+        StartCoroutine(SpawnRoutine());
+    }
+
+    public void StopGenerating()
+    {
+        StopAllCoroutines();
+        CancelInvoke();
     }
 
     /// <summary>
@@ -42,30 +51,11 @@ public class RoadInput : MonoBehaviour
         // Calcula la celda hacia la que saldrá la bolita
         Vector3Int nextCell = Vector3Int.RoundToInt(transform.position) + DirectionUtils.ToVector(outputDirection);
 
-        // Instancia la bolita
+        // Instancia la bolita y le cambia el color al correcto
         GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
+        ball.GetComponent<Renderer>().material.color = BallTypeColors.GetColor(ballTypeToSpawn);
 
         // Inicializa el movimiento de la bolita, indicando tanto a que celda debe ir como la dirección que debe seguir
-        ball.GetComponent<MovingBall>().Initialize(nextCell, outputDirection);
-    }
-
-    /// <summary>
-    /// Calcula si la siguiente celda tiene una entrada válida para poder generar la bolita
-    /// </summary>
-    /// <param name="piece">La pieza sobre la cual se va a generar la bolita</param>
-    /// <returns>True si se puede generar, false si no</returns>
-    bool IsConnectionValid(RoadPiece piece)
-    {
-        // Calcula la dirección desde la que la carretera debería aceptar entrada
-        RoadDirection opposite = DirectionUtils.Opposite(outputDirection);
-
-        // Recorre las conexiones de la carretera, si alguna coincide con la dirección opuesta calculada, la entrada es válida
-        foreach (var c in piece.connections)
-        {
-            if (c == opposite)
-                return true;
-        }
-
-        return false;
+        ball.GetComponent<MovingBall>().Initialize(nextCell, outputDirection, ballTypeToSpawn);
     }
 }
