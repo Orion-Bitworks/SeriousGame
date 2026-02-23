@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public class DragAndDrop : MonoBehaviour
 {
     
-    private static DragAndDrop currentlySelected = null;
+    public static DragAndDrop currentlySelected = null;
 
     Vector3 offset; //Diferencia entre la posición del objeto y la del ratón
     public string destinationTag = "DropArea"; //Tag que tienen que tener los objetos donde dropearan los objetos
@@ -17,7 +17,7 @@ public class DragAndDrop : MonoBehaviour
     private Vector3 initialPosition;
 
     
-    private SelectObject selectObj;
+    public SelectObject selectObj;
 
     //Referencias a los scripts de minijuegos
     public Minigame1 minigame1Instance;
@@ -36,6 +36,8 @@ public class DragAndDrop : MonoBehaviour
     //inicio del drag
     void OnMouseDown() 
     {
+        if (locked) return; // Bloqueja TOT el clic
+
         if (GetComponent<DragAndDrop>().locked) return; // Si está bloqueado, ignorar clic
 
         //Liberar la DropArea actual si estaba colocado
@@ -74,6 +76,8 @@ public class DragAndDrop : MonoBehaviour
     //Mover el objeto
     void OnMouseDrag()
     {
+        if (locked) return; // ❌ No permet moure
+
         transform.position = MouseWorldPosition() + offset; //El objeto sigue la posición del ratón en el mundo respetando el offset inicial
     }
 
@@ -81,33 +85,34 @@ public class DragAndDrop : MonoBehaviour
     //Soltar el objeto
     void OnMouseUp()
     {
-        //Calcula el ray para detectar la zona de drop
+        if (locked) return;
+
         var rayOrigin = Camera.main.transform.position;
         var rayDirection = MouseWorldPosition() - Camera.main.transform.position;
         RaycastHit hitInfo;
 
-        //Si el raycast choca con algo
         if (Physics.Raycast(rayOrigin, rayDirection, out hitInfo))
         {
-            if (hitInfo.transform.CompareTag(destinationTag)) //Lo compara con el tag y comprueba que sea o no
+            if (hitInfo.transform.CompareTag(destinationTag))
             {
-                //Comprueba que el objeto golpeado tenga un componente DropArea y que no esté ocupado
                 DropArea drop = hitInfo.transform.GetComponent<DropArea>();
+
                 if (drop != null && !drop.occupied)
                 {
                     transform.position = hitInfo.transform.position;
                     CurrentDropArea = hitInfo.transform;
                     drop.occupied = true;
 
-                    if (!placed) //si esta colocado
+                    if (!placed)
                     {
-                        placed = true; //lo marca como true
-                        minigame1Instance.objectsRemaining();
-                        minigame2Instance.objectsRemaining();
-                        selectObj.Deselect(); 
+                        placed = true;
 
-                        ObjectSelector.currentlySelected = null;
-                        selectObj.Deselect();
+                        // Només notificar al minijoc ACTIU
+                        if (minigame1Instance != null && minigame1Instance.gameObject.activeSelf)
+                            minigame1Instance.objectsRemaining();
+
+                        if (minigame2Instance != null && minigame2Instance.gameObject.activeSelf)
+                            minigame2Instance.objectsRemaining();
                     }
                 }
                 else
@@ -124,9 +129,10 @@ public class DragAndDrop : MonoBehaviour
         {
             transform.position = initialPosition;
         }
-        //Una vez termina el drag and drop, vuelve a habilitar el Collider
+
         GetComponent<Collider>().enabled = true;
     }
+
 
     Vector3 MouseWorldPosition()
     {

@@ -11,9 +11,12 @@ public class ObjectSelector : MonoBehaviour
 
     public FasesMinigames minigamesPhasesInstance; //Instancia del script FasesMinigames
 
+    private DragAndDrop dragAndDropInstance;
+
     private void Awake()
     {
         rotateButton.onClick.AddListener(rotatePiece); //Listener
+        dragAndDropInstance = GetComponent<DragAndDrop>();
     }
 
     private void rotatePiece()
@@ -23,6 +26,12 @@ public class ObjectSelector : MonoBehaviour
         {
             Debug.Log("No se ha seleccionado ningun objeto");
             return;
+        }
+
+        if (dragAndDropInstance != null && dragAndDropInstance.locked) 
+        { 
+            Debug.Log("Este objeto está bloqueado y no se puede rotar."); 
+            return; 
         }
 
         rotateObjectsInstance = currentlySelected.GetComponentInParent<RotateObjects>(); //script rotateObjects

@@ -87,7 +87,7 @@ public class Minigame2 : MonoBehaviour
 
         Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleVeins.Length);
 
-        if (correct == draggagleVeins.Length) // Si el numero de aciertos es igual al numero de valvulas que hay en el array
+        if (correct == draggagleVeins.Length) // Si el numero de aciertos es igual al numero de venas que hay en el array
         {
             foreach (DragAndDrop obj in draggagleVeins)
             {
