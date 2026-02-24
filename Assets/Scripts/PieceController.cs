@@ -12,8 +12,6 @@ public class PieceController : MonoBehaviour
     [SerializeField] bool hasSnapped = false;
     bool canSnap = false;
 
-    PieceController pieceToSnap;
-
     public Transform parentPiece;
 
     private Move3DObject movement;
