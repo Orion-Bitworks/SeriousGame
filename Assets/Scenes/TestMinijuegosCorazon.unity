@@ -829,7 +829,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &336536533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1987,6 +1987,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 654195405}
+  - component: {fileID: 654195406}
   m_Layer: 0
   m_Name: Minijuego2
   m_TagString: Untagged
@@ -2011,6 +2012,34 @@ Transform:
   - {fileID: 1510116339}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &654195406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654195404}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84263a3d6ba47fd4c8fdf2f1e6c08c8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  draggagleVeins:
+  - {fileID: 1579597190}
+  - {fileID: 936972032}
+  - {fileID: 946476414}
+  - {fileID: 2070953767}
+  - {fileID: 1644903007}
+  - {fileID: 1618868270}
+  - {fileID: 469439568}
+  - {fileID: 2126310341}
+  - {fileID: 1936527623}
+  - {fileID: 355326494}
+  - {fileID: 1974600205}
+  correct: 0
+  remainVeinstoDrag: {fileID: 743688661}
+  CheckButton: {fileID: 566670763}
+  phasesManager: {fileID: 727456739}
 --- !u!1 &718098549 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3315242407677114180, guid: 7b321b0ca6498154abed52e360ec051d, type: 3}
@@ -3081,6 +3110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1262071296}
+  - component: {fileID: 1262071297}
   m_Layer: 0
   m_Name: Minijuego1
   m_TagString: Untagged
@@ -3107,6 +3137,27 @@ Transform:
   - {fileID: 31281546}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1262071297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262071295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab6dab78cf361ba4b8da1c5e91f86a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  draggableValves:
+  - {fileID: 534603864}
+  - {fileID: 1968112870}
+  - {fileID: 1511327790}
+  - {fileID: 724304348}
+  correct: 0
+  remainObjectsToDrag: {fileID: 743688661}
+  phasesManager: {fileID: 727456739}
+  CheckButton: {fileID: 566670763}
 --- !u!1 &1480291846
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,8 +18,8 @@ public class Minigame3 : MonoBehaviour
 
     [Header("Zona de spawn aleatori")] 
     
-    public Vector2 minSpawn; // mínim X i Y
-    public Vector2 maxSpawn; // màxim X i Y
+    public Vector3 minSpawn; // mínim X i Y
+    public Vector3 maxSpawn; // màxim X i Y
 
     private void Update()
     {
@@ -64,11 +64,22 @@ public class Minigame3 : MonoBehaviour
 
     void SpawnNote(NoteData data)
     {
+
+        Debug.Log("Spawneando nota en tiempo: " + timer);
+
         float x = Random.Range(minSpawn.x, maxSpawn.x);
         float y = Random.Range(minSpawn.y, maxSpawn.y);
         Vector3 randomPos = new Vector3(x, y, 0);
 
         GameObject obj = Instantiate(notePrefab, randomPos, Quaternion.identity);
+
+        Debug.Log(
+            "Instanciado: " + obj.name +
+            " | Pos: " + obj.transform.position +
+            " | Escala: " + obj.transform.localScale +
+            " | Tiene MeshRenderer: " + (obj.GetComponent<MeshRenderer>() != null)
+        );
+
 
         activateNote = obj.GetComponent<RythmNote>();
         activateNote.Init(data.key, timer);

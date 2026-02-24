@@ -8,6 +8,8 @@ public class FasesMinigames : MonoBehaviour
     public GameObject fase2Root;
     public GameObject fase3Root;
 
+    public GameObject venas;
+
     private void Start()
     {
         fase1Root.SetActive(true);
@@ -39,6 +41,8 @@ public class FasesMinigames : MonoBehaviour
         fase1Root.SetActive(false);   // Oculta todo el minijuego 1
         fase2Root.SetActive(true);    // Muestra todo el minijuego 2
         fase3Root.SetActive(false);   // Oculta todo el minijuego 3
+
+        venas.SetActive(true);
     }
 
     public void PasarAFase3()
