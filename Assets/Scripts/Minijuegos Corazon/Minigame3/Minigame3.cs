@@ -17,6 +17,9 @@ public class Minigame3 : MonoBehaviour
     private Queue<RythmNote> noteQueue = new Queue<RythmNote>();
     private RythmNote currentNote;
 
+    private int completedNotes = 0;
+
+
     private void Start()
     {
         spawnInterval = 60f / bpm;
@@ -66,6 +69,14 @@ public class Minigame3 : MonoBehaviour
 
         Destroy(note.gameObject);
         currentNote = null;
+
+        completedNotes++;
+
+        if (completedNotes >= maxNotes)
+        {
+            Debug.Log("HAS ACABAT! 🎉 Has completat totes les notes correctament!");
+            return;
+        }
 
         TryActivateNext();
     }
