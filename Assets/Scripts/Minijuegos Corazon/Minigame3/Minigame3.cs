@@ -76,7 +76,7 @@ public class Minigame3 : MonoBehaviour
 
         if (completedNotes >= maxNotes)
         {
-            Debug.Log("HAS ACABAT! 🎉 Has completat totes les notes correctament!");
+            Debug.Log("HAS ACABAT!  Has completat totes les notes correctament!");
             popUpManager.ShowPopUp("Has acabat el tercer minijoc!");
             return;
         }
