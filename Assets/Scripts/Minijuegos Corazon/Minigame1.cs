@@ -18,6 +18,8 @@ public class Minigame1 : MonoBehaviour
 
     [SerializeField] Button CheckButton;
 
+    [SerializeField]private PopUp popUpManager;
+
     private void Awake()
     {
         CheckButton.onClick.AddListener(checkPlacementButton); //Listener
@@ -107,6 +109,7 @@ public class Minigame1 : MonoBehaviour
             }
 
             phasesManager.PasarAFase2(); //pasa a la siguiente fase
+            popUpManager.ShowPopUp("Has acabat el primer minijoc!");
 
         }
 

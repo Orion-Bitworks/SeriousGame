@@ -19,6 +19,9 @@ public class Minigame2 : MonoBehaviour
 
     public FasesMinigames phasesManager; //Instancia del script fasesMinigames
 
+    [SerializeField]
+    private PopUp popUpManager;
+
 
 
 
@@ -109,7 +112,7 @@ public class Minigame2 : MonoBehaviour
             }
 
             phasesManager.PasarAFase3(); //pasa a la siguiente fase
-            
+            popUpManager.ShowPopUp("Has acabat el segon minijoc!");
 
         }
 

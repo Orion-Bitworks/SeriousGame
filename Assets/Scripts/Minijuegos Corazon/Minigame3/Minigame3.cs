@@ -19,6 +19,8 @@ public class Minigame3 : MonoBehaviour
 
     private int completedNotes = 0;
 
+    [SerializeField] PopUp popUpManager;
+
 
     private void Start()
     {
@@ -75,6 +77,7 @@ public class Minigame3 : MonoBehaviour
         if (completedNotes >= maxNotes)
         {
             Debug.Log("HAS ACABAT! 🎉 Has completat totes les notes correctament!");
+            popUpManager.ShowPopUp("Has acabat el tercer minijoc!");
             return;
         }
 
