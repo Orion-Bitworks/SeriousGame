@@ -17,17 +17,27 @@ public class MainMenuScene : MonoBehaviour
         canva.SetActive(false);
     }
 
-    public void changeToFreeScene()
+    public void StartCarreterasMiniGame()
     {
-        SceneManager.LoadScene("FreeGame");
+        SceneManager.LoadScene("RoadSystemTest");
     }
 
-    public void changeToLearnScene()
+    public void Start3DCorazonMiniGame()
     {
         SceneManager.LoadScene("LearnGame");
     }
 
-    public void quitGame()
+	public void StartActivarCorazonMiniGame()
+	{
+		SceneManager.LoadScene("LearnGame");
+	}
+
+    public void StartIntercambioDeGasesMiniGame()
+    {
+        SceneManager.LoadScene("LearnGame");
+    }
+
+	public void quitGame()
     {
         Application.Quit();
     }
