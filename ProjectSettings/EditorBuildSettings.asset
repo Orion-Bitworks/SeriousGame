@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FreeGame.unity
     guid: 3db2b651c733fb343a590d1b95e95dec
+  - enabled: 1
+    path: Assets/Scenes/RoadSystemTest.unity
+    guid: f665859fb1afb3e43a960de24da6d788
   m_configObjects: {}
