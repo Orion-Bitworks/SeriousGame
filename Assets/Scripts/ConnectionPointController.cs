@@ -22,8 +22,8 @@ public class ConnectionPointController : MonoBehaviour
     {
         if (other.gameObject.tag == "ConnectionPoint")
         {
-            piece.GetPieceToSnap().SnapToPoint(this, other.transform, other.transform.parent);
-            CheckPairing(other.GetComponent<ConnectionPointController>());
+            piece.SnapToPoint(this, other.transform, other.transform.parent);
+            //CheckPairing(other.GetComponent<ConnectionPointController>());
         }
     }
 

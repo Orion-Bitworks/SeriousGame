@@ -21,6 +21,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     {
         //transform.localScale = originalScale;
         piece.EnableControls();
+        //piece.GetGroup().MovePiece();
     }
 
     // Cuando se suelta el boton

@@ -7,8 +7,8 @@ public class Rotate3DObject : MonoBehaviour
 {
     private InputManager inputManager;
 
-    private bool rotationXYAllowed;
-    private bool rotationZAllowed;
+    //private bool rotationXYAllowed;
+    //private bool rotationZAllowed;
     private Camera currentCamera;
     private Vector3 previousPosition;
 
@@ -50,15 +50,12 @@ public class Rotate3DObject : MonoBehaviour
         InitializeClickInput();
     }
 
-
     private void Start()
     {
         piece = GetComponent<PieceController>();
 
-        //Cursor.lockState = CursorLockMode.Locked;
         currentCamera = Camera.main;
         
-
         originalFov = currentCamera.fieldOfView;
         currentFov = originalFov;
         maxZoomOut += originalFov;
@@ -67,76 +64,50 @@ public class Rotate3DObject : MonoBehaviour
 
     private void Update()
     {
-        if (!selected || piece.HasSnapped())
+        if (!selected)
         {
             return;
         }
-
-        /*if (!rotationXYAllowed && !rotationZAllowed)
-        {
-            return;
-        }*/
-
 
         if (inputManager.rotateMode_ia.inProgress)
         {
             RotateObject();
         }
-
-        /*switch (rotationXYAllowed, rotationZAllowed)
+        else if (!inputManager.rotateMode_ia.inProgress && !piece.GetGroup().CanMove())
         {
-            case (true, false):
-                transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
-                transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
-                transform.position = previousPosition;
-                break;
-            case (false, true):
-                transform.Rotate(Vector3.forward * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
-                transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
-                transform.position = previousPosition;
-                break;
-            case (true, true):
-
-                currentFov += mouseDelta.y;
-
-                if (currentFov > maxZoomOut)
-                {
-                    currentFov = maxZoomOut;
-                }
-                
-                if (currentFov < maxZoomIn)
-                {
-                    currentFov = maxZoomIn;
-                }
-
-                currentCamera.fieldOfView = currentFov;
-
-                break;
-        }*/
+            piece.GetGroup().CanMove(true);
+        }
     }
 
-    protected virtual void RotateObject()
+    public void RotateObject()
     {
         Vector2 mouseDelta = GetMouseLookInput();
 
         mouseDelta *= rotationSpeed * Time.deltaTime;
 
-        if (GetComponent<Rigidbody>())
-        {
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
-        }
+        Vector3 rotationX = Vector3.right;
+        Vector3 rotationY = Vector3.up;
+
+        piece.GetGroup().CanMove(false);
 
         if (inputManager.leftClick_ia.inProgress)
         {
-            transform.Rotate(Vector3.up * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
-            transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
+            rotationX = Vector3.right;
+            rotationY = Vector3.up;
+        }
+        else if (inputManager.rightClick_ia.inProgress)
+        {
+            rotationX = Vector3.right;
+            rotationY = Vector3.forward;
+        }
+        else
+        {
+            return;
         }
 
-        if (inputManager.rightClick_ia.inProgress)
-        {
-            transform.Rotate(Vector3.forward * (invertedControl ? 1 : -1), mouseDelta.x, Space.World);
-            transform.Rotate(Vector3.right * (invertedControl ? -1 : 1), mouseDelta.y, Space.World);
-        }
+        Quaternion finalRotation = Quaternion.AngleAxis(mouseDelta.x * -1, rotationY) * Quaternion.AngleAxis(mouseDelta.y, rotationX);
+
+        piece.GetGroup().RotatePiece(piece.GetGroup().GetCentralPivot(), finalRotation);
     }
 
     private void InitializeClickInput()
@@ -163,28 +134,28 @@ public class Rotate3DObject : MonoBehaviour
     {
         previousPosition = transform.position;
 
-        if (context.started || context.performed)
+        /*if (context.started || context.performed)
         {
             rotationXYAllowed = true;
         }
         else if (context.canceled)
         {
             rotationXYAllowed = false;
-        }
+        }*/
     }
 
     protected virtual void OnRightClickPressed(InputAction.CallbackContext context)
     {
         previousPosition = transform.position;
 
-        if (context.started || context.performed)
+        /*if (context.started || context.performed)
         {
             rotationZAllowed = true;
         }
         else if (context.canceled)
         {
             rotationZAllowed = false;
-        }
+        }*/
     }
 
     public void EnableRotation()

@@ -7,7 +7,7 @@ public class Move3DObject : MonoBehaviour
 {
     InputManager inputManager;
     Camera cam;
-    [SerializeField] LayerMask mask;
+    [SerializeField] LayerMask mask = 6;
     PieceController piece;
 
     private float pointDistance = 10f;
@@ -45,15 +45,15 @@ public class Move3DObject : MonoBehaviour
             return;
         }
         
-        if (piece.HasSnapped())
+        /*if (piece.HasSnapped())
         {
             piece.SwitchWithParent();
             return;
-        }
+        }*/
 
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 10f;
-        mousePos = cam.ScreenToWorldPoint(mousePos);
+        //Vector3 mousePos = Input.mousePosition;
+        //mousePos.z = 10f;
+        //mousePos = cam.ScreenToWorldPoint(mousePos);
 
         MovePiece(RaycastPoint());
     }
@@ -83,6 +83,8 @@ public class Move3DObject : MonoBehaviour
 
         if (distance > breakSnapDistance)
         {
+            piece.DisconnectAll();
+
             MovePiece(RaycastPoint());
         }
 
@@ -92,9 +94,14 @@ public class Move3DObject : MonoBehaviour
 
     public void MovePiece(Vector3 moveTarget)
     {
-        Vector3 followPos = moveTarget;
-        GetComponent<Rigidbody>().velocity = (followPos - transform.position) * 50f;
-        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+        Vector3 followPos = moveTarget - piece.GetGroup().GetCentralPivot();
+        //GetComponent<Rigidbody>().velocity = (followPos - transform.position) * 50f;
+        //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
+
+        if (piece.GetGroup() != null && piece.canSnap)
+        {
+            piece.GetGroup().MovePiece(followPos);
+        }
     }
 
     public void AdjustPointDistance()
