@@ -23,9 +23,15 @@ public class Minigame3 : MonoBehaviour
     public Vector3 maxSpawn; // màxim X i Y
 
 
+    public float bpm = 110f;
+    public float spawnInterval;
+
+
     private void Start()
     {
-        SpawnNextNote();
+        spawnInterval = 60 / bpm;
+        StartCoroutine(SpawnNotesRoutine());
+        //SpawnNextNote();
     }
 
     private void Update()
@@ -52,6 +58,14 @@ public class Minigame3 : MonoBehaviour
         }        
     }
 
+    IEnumerator SpawnNotesRoutine()
+    {
+        while (true)
+        {
+            SpawnNextNote();
+            yield return new WaitForSeconds(spawnInterval);
+        }
+    }
     void SpawnNextNote()
     {
         NoteData data = sequenceNotes[currentNoteIndex];
@@ -78,98 +92,6 @@ public class Minigame3 : MonoBehaviour
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*private void Update()
-    {
-        timer += Time.deltaTime;
-
-        //Crear la seguent nota quan toca
-        if(currentNoteIndex < sequenceNotes.Count)
-        {
-            if(timer >= sequenceNotes[currentNoteIndex].time && activateNote == null)
-            {
-                SpawnNote(sequenceNotes[currentNoteIndex]);
-            }
-        }
-
-        if(activateNote!= null)
-        {
-            if (Input.GetKeyDown(activateNote.expectedKey))
-            {
-                float diff = Mathf.Abs(timer - activateNote.spawnTime);
-
-                if(diff <= hitWindow)
-                {
-                    Debug.Log("HIT!!");
-                    Destroy(activateNote.gameObject);
-                    activateNote = null;
-                    currentNoteIndex++;
-
-                    if(currentNoteIndex >= sequenceNotes.Count)
-                    {
-                        CompleteMinigame();
-                    }
-                }
-                else
-                {
-                    Debug.Log("FAIL (mal timing)");
-                }
-            }
-        }
-
-
-    }
-
-    void SpawnNote(NoteData data)
-    {
-
-        Debug.Log("Spawneando nota en tiempo: " + timer);
-
-        float x = Random.Range(minSpawn.x, maxSpawn.x);
-        float y = Random.Range(minSpawn.y, maxSpawn.y);
-        Vector3 randomPos = new Vector3(x, y, 0);
-
-        GameObject obj = Instantiate(notePrefab, randomPos, Quaternion.identity);
-
-        Debug.Log(
-            "Instanciado: " + obj.name +
-            " | Pos: " + obj.transform.position +
-            " | Escala: " + obj.transform.localScale +
-            " | Tiene MeshRenderer: " + (obj.GetComponent<MeshRenderer>() != null)
-        );
-
-
-        activateNote = obj.GetComponent<RythmNote>();
-        activateNote.Init(data.key, timer);
-    }
-
-
-
-    void CompleteMinigame()
-    {
-        Debug.Log("Minijioc ritrmic completat");
-        if(heart != null)
-        {
-            heart.PlayHeartAnimation(); //Animacio amb dotween
-        }
-        
-        
-    }*/
 
 
 }

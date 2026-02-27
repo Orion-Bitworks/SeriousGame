@@ -23,27 +23,6 @@ public class RythmNote : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-
-    /*public void Init(KeyCode key, float spawnTimeValue)
-    {
-        expectedKey = key;
-        spawnTime = spawnTimeValue;
-
-        if (textKey != null)
-            textKey.text = expectedKey.ToString();
-    }
-
-    private void Update()
-    {
-        transform.Translate(Vector3.down * 3f * Time.deltaTime);
-    }*/
 }
 
 
