@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary>
 /// Se encarga de gestionar la colocación y eliminación de todas las tuberías en la grid, así como del sistema de undo/redo
@@ -10,6 +13,11 @@ public class BuildController : MonoBehaviour
     public static BuildController Instance { get; private set; }    // Referencia Singleton
 
     [SerializeField] GameObject[] objectsToPlace;                   // Vector de prefabs disponibles
+    [SerializeField] Button leftButton;                             // Referencia al botón de cambiar de pieza (hacia atrás)
+    [SerializeField] Button rightButton;                            // Referencia al botón de cambiar de pieza (hacia delante)
+    [SerializeField] Button rotateButton;                           // Referencia al botón de rotar pieza
+    [SerializeField] Button undoButton;                             // Referencia al botón de deshacer pieza
+    [SerializeField] Button redoButton;                             // Referencia al botón de rehacer pieza
     
     [HideInInspector] public bool isUndoing;                        // Controla si el usuario está deshaciendo acciones
     [HideInInspector] public bool isRedoing;                        // Controla si el usuario está rehaciendo acciones
@@ -72,13 +80,14 @@ public class BuildController : MonoBehaviour
     /// <summary>
     /// Rota tanto el ghost como la preview
     /// </summary>
-    private void RotateGhostAndPreview()
+    public void RotateGhostAndPreview()
     {
         // Si el sistema está en marcha, abortamos
         if (GameManager.Instance.isPlaying) return;
 
         ghost.RotateGhost();
         previewController.RotatePreview(ghost.currentRotation);
+        StartCoroutine(PressUIButton(rotateButton));
     }
 
     private void Update()
@@ -108,7 +117,8 @@ public class BuildController : MonoBehaviour
 
         if (isUndoing)
         {
-            // Primer undo instantáneo, después del delay, repetir cada "repeatRate"
+            // Primer undo instantáneo, después del delay, repetir cada "repeatRate", activamos el botón visualmente
+            SetButtonPressed(undoButton);
             if (undoHoldTimer == 0f)
                 Undo();
             else if (undoHoldTimer > initialDelay)
@@ -121,7 +131,8 @@ public class BuildController : MonoBehaviour
 
         if (isRedoing)
         {
-            // Primer redo instantáneo, después del delay, repetir cada "repeatRate"
+            // Primer redo instantáneo, después del delay, repetir cada "repeatRate", activamos el botón visualmente
+            SetButtonPressed(redoButton);
             if (redoHoldTimer == 0f)
                 Redo();
             else if (redoHoldTimer > initialDelay)
@@ -132,12 +143,18 @@ public class BuildController : MonoBehaviour
             redoHoldTimer += Time.deltaTime;
         }
 
-        // Reseteamos los temporizadores al soltar la tecla
+        // Reseteamos los temporizadores al soltar la tecla y ponemos su botón en el estado normal
         if (!isUndoing)
+        {
             undoHoldTimer = 0f;
+            SetButtonNormal(undoButton);
+        }
 
         if (!isRedoing)
+        {
             redoHoldTimer = 0f;
+            SetButtonNormal(redoButton);
+        }
     }
 
     /// <summary>
@@ -155,8 +172,10 @@ public class BuildController : MonoBehaviour
         // Crea un rayo desde la cámara hacia el ratón
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
+        int mask = LayerMask.GetMask("Grid");
+
         // Si el rayo golpea algo
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit, 1000f, mask))
         {
             // Obtiene el punto de impacto, lo ajusta al grid y le manda al ghost la información relevante
             Vector3Int snapped = grid.Snap(hit.point);
@@ -283,7 +302,7 @@ public class BuildController : MonoBehaviour
     /// Cambia el ghost por el siguiente o el anterior dentro de las piezas disponibles
     /// </summary>
     /// <param name="next">Si es true, lo hace en positivo, si es false, en negativo</param>
-    void ChangeObject(bool next)
+    public void ChangeObject(bool next)
     {
         // Si el sistema está en marcha, abortamos
         if (GameManager.Instance.isPlaying) return;
@@ -313,6 +332,10 @@ public class BuildController : MonoBehaviour
         }
         // Cambia también la preview a mostrar según la tecla utilizada
         previewController.ChangePreview(selectedIndex);
+        if (next)
+            StartCoroutine(PressUIButton(rightButton));
+        else
+            StartCoroutine(PressUIButton(leftButton));
     }
 
     /// <summary>
@@ -320,6 +343,7 @@ public class BuildController : MonoBehaviour
     /// </summary>
     public void Undo()
     {
+        // Si la pila de deshacer está vacía, abortamos
         if (undoStack.Count == 0)
             return;
 
@@ -335,7 +359,6 @@ public class BuildController : MonoBehaviour
                     Destroy(grid.placedObjects[action.cell]);
                     grid.placedObjects.Remove(action.cell);
                 }
-
                 break;
             case BuildActionType.Erase:
                 // Volvemos a colocar la pieza borrada
@@ -348,7 +371,21 @@ public class BuildController : MonoBehaviour
                     piece.connections = (RoadDirection[])action.connections.Clone();
 
                 grid.placedObjects.Add(action.cell, obj);
+                break;
+            case BuildActionType.HeartPlace:
+                // Eliminar el corazón y spawnear objeto del cajón
+                if (grid.placedObjects.ContainsKey(action.cell))
+                {
+                    var heartObj = grid.placedObjects[action.cell];
+                    Destroy(heartObj);
+                    grid.placedObjects.Remove(action.cell);
+                    FindAnyObjectByType<HeartDrag3D>().SpawnMiniHeart();
+                }
 
+                // Desregistrar tuberías internas
+                HeartPlacementController.Instance.UnregisterHeartInternalPipes();
+
+                GameManager.Instance.heartPlaced = false;
                 break;
         }
 
@@ -361,6 +398,7 @@ public class BuildController : MonoBehaviour
     /// </summary>
     public void Redo()
     {
+        // Si la pila de rehacer está vacía, abortamos
         if (redoStack.Count == 0)
             return;
 
@@ -380,7 +418,6 @@ public class BuildController : MonoBehaviour
                     piece.connections = (RoadDirection[])action.connections.Clone();
 
                 grid.placedObjects.Add(action.cell, obj);
-
                 break;
             case BuildActionType.Erase:
                 // Recolocamos la pieza borrada
@@ -389,11 +426,82 @@ public class BuildController : MonoBehaviour
                     Destroy(grid.placedObjects[action.cell]);
                     grid.placedObjects.Remove(action.cell);
                 }
+                break;
+            case BuildActionType.HeartPlace:
+                // Volver a colocar el corazón, registrar tuberías y despawnear objeto del cajón
+                GameObject heart = Instantiate(action.prefab, action.cell, action.rotation);
 
+                var reg = heart.GetComponent<InternalPipeRegister>();
+                reg.Register(grid);
+
+                grid.placedObjects[action.cell] = heart;
+                FindAnyObjectByType<HeartDrag3D>().DespawnMiniHeart();
+
+                GameManager.Instance.heartPlaced = true;
                 break;
         }
 
         // Guardamos en la pila de deshacer
         undoStack.Push(action);
+    }
+
+    /// <summary>
+    /// Simula visualmente una pulsación de botón en UI
+    /// </summary>
+    /// <param name="button">El botón a modificar visualmente</param>
+    IEnumerator PressUIButton(Button button)
+    {
+        // Simula pulsar el botón visualmente
+        ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerDownHandler);
+
+        yield return new WaitForSeconds(0.15f);
+
+        // Simula soltar el botón visualmente
+        ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerUpHandler);
+    }
+
+    /// <summary>
+    /// Le cambia el color al botón para que parezca que está siendo pulsado
+    /// ¡IMPORTANTE, SE UTILIZA PARA UNDO/REDO DEBIDO A QUE SE PUEDEN MANTENER!
+    /// </summary>
+    /// <param name="button">Botón a modificar visualmente</param>
+    void SetButtonPressed(Button button)
+    {
+        if (button == null) return;
+
+        var colors = button.colors;
+        button.targetGraphic.color = colors.pressedColor;
+    }
+
+    /// <summary>
+    /// Le cambia el color al botón para que parezca que ya no se está pulsando
+    /// ¡IMPORTANTE, SE UTILIZA PARA UNDO/REDO DEBIDO A QUE SE PUEDEN MANTENER!
+    /// </summary>
+    /// <param name="button">Botón a modificar visualmente</param>
+    void SetButtonNormal(Button button)
+    {
+        if (button == null) return;
+
+        var colors = button.colors;
+        button.targetGraphic.color = colors.normalColor;
+    }
+
+    /// <summary>
+    /// Registra el corazón en la pila de deshacer
+    /// </summary>
+    /// <param name="cell">Celda donde se ha colocado</param>
+    /// <param name="prefab">Prefab del corazón</param>
+    /// <param name="rotation">Rotación del corazón</param>
+    public void RegisterHeartPlaced(Vector3Int cell, GameObject prefab, Quaternion rotation)
+    {
+        undoStack.Push(new BuildAction(
+            BuildActionType.HeartPlace,
+            cell,
+            prefab,
+            rotation,
+            null
+        ));
+
+        redoStack.Clear();
     }
 }

@@ -1,12 +1,13 @@
 using UnityEngine;
 
 /// <summary>
-/// Define los dos tipos de acciones que pueden ocurrir en el sistema de construcción
+/// Define los tres tipos de acciones que pueden ocurrir en el sistema de construcción
 /// </summary>
 public enum BuildActionType
 {
     Place,
-    Erase
+    Erase,
+    HeartPlace
 }
 
 /// <summary>
@@ -34,6 +35,7 @@ public class BuildAction
         this.cell = cell;
         this.prefab = prefab;
         this.rotation = rotation;
-        this.connections = (RoadDirection[])connections.Clone();
+        if (connections != null) this.connections = (RoadDirection[])connections.Clone();
+        else this.connections = null;
     }
 }

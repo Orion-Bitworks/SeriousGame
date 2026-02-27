@@ -14,8 +14,6 @@ public class RoadUIManager : MonoBehaviour
     [SerializeField] Button undoButton;                             // Referencia al botón de Undo
     [SerializeField] Button playButton;                             // Referencia al botón de Play
     [SerializeField] Button stopButton;                             // Referencia al botón de Stop
-    [SerializeField] Button heartButton;                            // Referencia al botón de colocar Corazón
-    [SerializeField] HeartPlacementController heartController;      // Referencia al controlador de la colocación del corazón
 
     private void Start()
     {
@@ -33,7 +31,6 @@ public class RoadUIManager : MonoBehaviour
         undoButton.interactable = false;
         playButton.interactable = false;
         stopButton.interactable = true;
-        heartButton.interactable = false;
     }
 
     /// <summary>
@@ -46,8 +43,6 @@ public class RoadUIManager : MonoBehaviour
         undoButton.interactable = true;
         playButton.interactable = true;
         stopButton.interactable = false;
-        if (!GameManager.Instance.heartPlaced)
-            heartButton.interactable = true;
     }
 
     /// <summary>
@@ -114,14 +109,5 @@ public class RoadUIManager : MonoBehaviour
     public void OnRedoHoverExit()
     {
         redoShortcutPanel.SetActive(false);
-    }
-
-    /// <summary>
-    /// Cuando se presiona el botón del corazón, se activa la secuencia de colocación
-    /// </summary>
-    public void OnPlaceHeartButton()
-    {
-        heartController.StartPlacingHeart();
-        heartButton.interactable = false;       // Desactivamos el botón tras usarlo
     }
 }

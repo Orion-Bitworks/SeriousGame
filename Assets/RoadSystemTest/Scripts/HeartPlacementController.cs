@@ -27,28 +27,10 @@ public class HeartPlacementController : MonoBehaviour
         grid = GridManager.Instance;
     }
 
-    /// <summary>
-    /// Creamos el ghost del corazón y activamos el modo colocación
-    /// </summary>
-    public void StartPlacingHeart()
-    {
-        // Si el corazón ya está colocado, abortamos
-        if (GameManager.Instance.heartPlaced) return;
-
-        isPlacingHeart = true;
-        ghost = Instantiate(heartPrefab);
-    }
-
-    // Actualizamos la posición del ghost en cada frame e intentamos colocar el corazón cuando el usuario lo desee
+    // Actualizamos la posición del ghost en cada frame
     private void Update()
     {
-        // Si no estamos colocando, abortamos
-        if (!isPlacingHeart) return;
-
         UpdateGhostPosition();
-
-        if (Input.GetMouseButtonDown(0))
-            PlaceHeart();
     }
 
     /// <summary>
@@ -56,6 +38,8 @@ public class HeartPlacementController : MonoBehaviour
     /// </summary>
     void UpdateGhostPosition()
     {
+        if (!isPlacingHeart) return;
+
         // Creamos un rayo de la cámara al ratón
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
@@ -73,27 +57,64 @@ public class HeartPlacementController : MonoBehaviour
     }
 
     /// <summary>
-    /// Se encarga de la colocación del corazón en la grid
+    /// Empezamos a arrastrar el ghost del corazón
     /// </summary>
-    void PlaceHeart()
+    /// <param name="ghostObj">Objeto del corazón fantasma</param>
+    public void BeginDragGhost(GameObject ghostObj)
     {
-        // Obtiene la última celda donde se encuentra el ghost
+        // Si el corazón ya está colocado, abortamos
+        if (GameManager.Instance.heartPlaced) return;
+
+        ghost = ghostObj;
+        isPlacingHeart = true;
+    }
+
+    /// <summary>
+    /// Dejamos de arrastrar el ghost del corazón
+    /// </summary>
+    /// <returns></returns>
+    public bool EndDragGhost()
+    {
+        // Si ya no estamos colocando, devolvemos false
+        if (!isPlacingHeart) return false;
+
+        // Desactivamos el modo colocación
+        isPlacingHeart = false;
+
         Vector3Int cell = Vector3Int.RoundToInt(ghost.transform.position);
 
-        // Si no se puede colocar en esa posición, abortamos
-        if (!CanPlaceHeartAt(cell)) return;
+        // Comprobamos si se puede colocar el corazón, y si se puede lo colocamos, eliminando el ghost y devolviendo true
+        if (CanPlaceHeartAt(cell))
+        {
+            PlaceHeartAt(cell);
+            Destroy(ghost);
+            ghost = null;
+            return true;
+        }
 
-        // Instanciamos el corazón real y registramos sus tuberías en la grid
+        // Si no se puede colocar, eliminamos el ghost y devolvemos false
+        Destroy(ghost);
+        ghost = null;
+        return false;
+    }
+
+    /// <summary>
+    /// Gestiona la colocación del corazón en la grid
+    /// </summary>
+    /// <param name="cell">Celda de la grid donde colocar el corazón</param>
+    void PlaceHeartAt(Vector3Int cell)
+    {
+        // Instanciamos el corazón
         GameObject heart = Instantiate(heartPrefab, cell, Quaternion.identity);
+
+        // Registramos sus tuberías internas y el propio objeto del corazón
         var reg = heart.GetComponent<InternalPipeRegister>();
         reg.Register(GridManager.Instance);
+        grid.placedObjects[cell] = heart;
 
-        // Marcamos que el corazón ya ha sido colocado
+        // Marcamos el corazón como colocado y lo registramos en la pila de deshacer
         GameManager.Instance.heartPlaced = true;
-
-        // Eliminamos el ghost y salimos del modo colocación
-        Destroy(ghost);
-        isPlacingHeart = false;
+        BuildController.Instance.RegisterHeartPlaced(cell, heartPrefab, heart.transform.rotation);
     }
 
     /// <summary>
@@ -134,5 +155,15 @@ public class HeartPlacementController : MonoBehaviour
         {
             r.material.color = c;
         }
+    }
+
+    /// <summary>
+    /// Se encarga de mandar a desregistrar las tuberías del corazón
+    /// </summary>
+    public void UnregisterHeartInternalPipes()
+    {
+        var reg = FindObjectOfType<InternalPipeRegister>();
+        if (reg != null)
+            reg.Unregister(GridManager.Instance);
     }
 }

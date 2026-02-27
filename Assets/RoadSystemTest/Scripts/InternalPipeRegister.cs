@@ -43,4 +43,25 @@ public class InternalPipeRegister : MonoBehaviour
              grid.outputs[cell] = output;
         }
     }
+
+    /// <summary>
+    /// Elimina tanto tuberías como outputs en los diccionarios correspondientes
+    /// </summary>
+    /// <param name="grid"></param>
+    public void Unregister(GridManager grid)
+    {
+        // Para cada tubería, calcula su celda y la elimina de su diccionario
+        foreach (var pipe in GetComponentsInChildren<RoadPiece>())
+        {
+            Vector3Int cell = Vector3Int.RoundToInt(pipe.transform.position);
+            grid.placedObjects.Remove(cell);
+        }
+
+        // Para cada output, calcula su celda y la elimina de su diccionario
+        foreach (var output in GetComponentsInChildren<RoadOutput>())
+        {
+            Vector3Int cell = Vector3Int.RoundToInt(output.transform.position);
+            grid.outputs.Remove(cell);
+        }
+    }
 }
