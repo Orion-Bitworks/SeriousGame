@@ -4,35 +4,37 @@ using UnityEngine;
 
 public class Minigame3 : MonoBehaviour
 {
-    public float bpm = 110f;
-    private float spawnInterval;
+    public float bpm; // beats per minute
+    private float spawnInterval; //interval de spawn entre nota i nota
 
-    public int maxNotes = 20;
+    public int maxNotes ; //Quantitat de notes que es mostraran
     private int spawnedNotes = 0;
 
-    public GameObject notePrefab;
+    public GameObject notePrefab; //prefab de la nota
+
+    //Zona de spawn de les notes
     public Vector3 minSpawn;
     public Vector3 maxSpawn;
 
     private Queue<RythmNote> noteQueue = new Queue<RythmNote>();
     private RythmNote currentNote;
 
-    private int completedNotes = 0;
+    private int completedNotes = 0; //notes completades
 
     [SerializeField] PopUp popUpManager;
-    private bool gameActive = false;
+    private bool gameActive = false; //Variable per pausar el joc
 
     private void Awake()
     {
-
-        StartCoroutine(ShowInstructions());
+        StartCoroutine(ShowInstructions()); //Corrutina per mostrar les instruccions del minijoc
     }
 
+    //Rutina perque fagin spawn les notes
     IEnumerator SpawnNotesRoutine()
     {
         while (spawnedNotes < maxNotes)
         {
-            if (gameActive)
+            if (gameActive) //si el joc esta actiu
             {
                 SpawnNextNote();
                 spawnedNotes++;
@@ -52,17 +54,18 @@ public class Minigame3 : MonoBehaviour
             4f
         );
 
-        // Espera en temps real (NO afectat per timeScale)
+        // Espera en temps real 
         yield return new WaitForSecondsRealtime(6f);
 
         Time.timeScale = 1f;
         gameActive = true;
 
+        //Despres de mostrar les instruccions, comença la corrutina de spawn de les notes
         spawnInterval = 60f / bpm;
         StartCoroutine(SpawnNotesRoutine());
     }
 
-
+    //Mostrar seguent nota
     void SpawnNextNote()
     {
         Vector3 randomPos = new Vector3(
@@ -81,6 +84,7 @@ public class Minigame3 : MonoBehaviour
         TryActivateNext();
     }
 
+    //Activar la seguent nota (sense marcar)
     void TryActivateNext()
     {
         if (currentNote != null) return;
@@ -101,7 +105,7 @@ public class Minigame3 : MonoBehaviour
 
         if (completedNotes >= maxNotes)
         {
-            gameActive = false; // 🔒 Bloqueja el joc
+            gameActive = false; // Bloqueja el joc
             Debug.Log("HAS ACABAT!  Has completat totes les notes correctament!");
             popUpManager.ShowPopUp("Has acabat el tercer minijoc, Felicitats! Has acabat tots els minijocs correctament", 3f);
             return;
@@ -110,6 +114,7 @@ public class Minigame3 : MonoBehaviour
         TryActivateNext();
     }
 
+    //Treure teclas random per mostrar
     KeyCode GetRandomKey()
     {
         KeyCode[] keys = { KeyCode.A, KeyCode.S, KeyCode.D };

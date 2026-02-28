@@ -8,21 +8,19 @@ using UnityEngine.UI;
 public class Minigame2 : MonoBehaviour
 {
     public DragAndDrop[] draggagleVeins; //array de objetos que son arrastables
-    int totalVeins;
-    int placedVeins;
+    int totalVeins; 
+    int placedVeins; //venes colocades
 
     public int correct = 0;
 
     public TextMeshProUGUI remainVeinstoDrag;
 
-    [SerializeField] Button CheckButton;
+    [SerializeField] Button CheckButton; //Boto per comprovar
 
     public FasesMinigames phasesManager; //Instancia del script fasesMinigames
 
     [SerializeField]
     private PopUp popUpManager;
-
-
 
 
     private void Awake()
@@ -39,16 +37,14 @@ public class Minigame2 : MonoBehaviour
     {
         placedVeins = 0;
 
-        foreach (DragAndDrop obj in draggagleVeins) //para cada objeto dragAndDrop que este dentro del array
+        foreach (DragAndDrop obj in draggagleVeins) //per a cada objecte dragAndDrop que estigui dins del array
         {
             if (obj.placed)
             {
-                placedVeins++; //suma 1 si el objeto esta puesto
+                placedVeins++; //suma 1 si el objecte esta posat
 
             }
-
         }
-
         showInfo();
     }
 
@@ -59,23 +55,22 @@ public class Minigame2 : MonoBehaviour
 
     public void checkPlacementButton()
     {
-
         correct = 0;
 
         foreach (DragAndDrop obj in draggagleVeins)
         {
-            // Tiene que estar en una DropArea
+            // Ha de estar en una dropArea
             if (obj.CurrentDropArea != null)
             {
                 DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
 
-                // La dropArea exista
+                // Que la dropArea existeixi
                 if (drop != null)
                 {
-                    // Comprueba que sea la pieza correcta
+                    // Comprova que sigui la peça correcte
                     if (drop.valveType == obj.valveType)
                     {
-                        // Comprobar rotación correcta usando quaternions
+                        // Comprovar rotació correcta usando quaternions
                         Quaternion currentRot = obj.transform.rotation;
                         float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
 
@@ -103,15 +98,15 @@ public class Minigame2 : MonoBehaviour
                         float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
                         if (angleDiff <= drop.rotationTolerance)
                         {
-                            obj.locked = true;
-                            obj.GetComponent<Collider>().enabled = false;
+                            obj.locked = true; //bloquejem els objectes
+                            obj.GetComponent<Collider>().enabled = false; //desactivem els colliders dels objectes
 
                         }
                     }
                 }
             }
-            popUpManager.ShowPopUp("Has acabat el segon minijoc!", 2f);
-            phasesManager.PasarAFase3(); //pasa a la siguiente fase
+            popUpManager.ShowPopUp("Has acabat el segon minijoc!", 2f); //pop up
+            phasesManager.PasarAFase3(); //Pasar a la seguent fase
             
 
         }

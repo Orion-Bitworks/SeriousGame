@@ -100,8 +100,8 @@ public class Minigame1 : MonoBehaviour
                         float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
                         if (angleDiff <= drop.rotationTolerance)
                         {
-                            obj.locked = true;
-                            obj.GetComponent<Collider>().enabled = false;
+                            obj.locked = true; //bloqueja el objecte
+                            obj.GetComponent<Collider>().enabled = false; //desactiva el collider
 
                         }
                     }
@@ -109,7 +109,7 @@ public class Minigame1 : MonoBehaviour
             }
 
             phasesManager.PasarAFase2(); //pasa a la siguiente fase
-            popUpManager.ShowPopUp("Has acabat el primer minijoc!", 2f);
+            popUpManager.ShowPopUp("Has acabat el primer minijoc!", 2f); //pop up
 
         }
 

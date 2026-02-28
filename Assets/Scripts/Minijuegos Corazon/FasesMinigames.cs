@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class FasesMinigames : MonoBehaviour
 {
-    public GameObject fase1Root;
-    public GameObject fase2Root;
-    public GameObject fase3Root;
+    public GameObject fase1Root; //Minijoc1
+    public GameObject fase2Root; //Minijoc2
+    public GameObject fase3Root; //Minijoc3
 
     public GameObject venas;
 
     private void Start()
     {
-        fase1Root.SetActive(true);
+        fase1Root.SetActive(true); //Activar la primera fase des de un inici
     }
 
     public void LimpiarSeleccion()
@@ -33,25 +33,26 @@ public class FasesMinigames : MonoBehaviour
     }
 
 
-    // Llamar cuando el minijuego 1 termine correctamente
+    //Quan el minijoc1 acabi, pasara a la seguent fase (2)
     public void PasarAFase2()
     {
         LimpiarSeleccion();
 
-        fase1Root.SetActive(false);   // Oculta todo el minijuego 1
-        fase2Root.SetActive(true);    // Muestra todo el minijuego 2
-        fase3Root.SetActive(false);   // Oculta todo el minijuego 3
+        fase1Root.SetActive(false);   // Oculta tot el minijoc 1
+        fase2Root.SetActive(true);    // Mostra tot el minijoc 2
+        fase3Root.SetActive(false);   // Oculta tot el minijoc 3
 
-        venas.SetActive(true);
+        venas.SetActive(true); //Activar les venes quan pasi a la seguent fase
     }
 
+    //Quan el minijoc2 acabi, pasara a la seguent fase (3)
     public void PasarAFase3()
     {
         LimpiarSeleccion();
 
-        fase1Root.SetActive(false); // Oculta todo el minijuego 1
-        fase2Root.SetActive(false); // Oculta todo el minijuego 2
-        fase3Root.SetActive(true);  // Muestra todo el minijuego 3
+        fase1Root.SetActive(false); // Oculta tot el minijoc 1
+        fase2Root.SetActive(false); // Oculta tot el minijoc 2 
+        fase3Root.SetActive(true);  // Mostra tot el minijoc 3
     }
 
 }
