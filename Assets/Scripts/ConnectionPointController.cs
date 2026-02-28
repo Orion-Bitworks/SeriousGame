@@ -8,12 +8,18 @@ public class ConnectionPointController : MonoBehaviour
     [SerializeField] private string partnerId = "Undefined";
     [SerializeField] private LayerMask layerToDetect;
     [SerializeField] private Transform parent;
+    [SerializeField] private bool canBeRegistered = false;
 
     private bool pairedWithPartner = false;
     PieceController piece;
 
     private void Start()
     {
+        if (canBeRegistered)
+        {
+            ScoreManager.instance.RegisterConnectionPoint(this);
+        }
+        
         piece = GetComponentInParent<PieceController>();
         parent = transform.parent;
     }
@@ -23,7 +29,7 @@ public class ConnectionPointController : MonoBehaviour
         if (other.gameObject.tag == "ConnectionPoint")
         {
             piece.SnapToPoint(this, other.transform, other.transform.parent);
-            //CheckPairing(other.GetComponent<ConnectionPointController>());
+            CheckPairing(other.GetComponent<ConnectionPointController>());
         }
     }
 
@@ -44,14 +50,25 @@ public class ConnectionPointController : MonoBehaviour
             Debug.Log(id + " ha chocado con " + partnerPoint.GetId() + ": Bien emparejadas!");
             pairedWithPartner = true;
         }
-        else
-        {
-            Debug.Log(id + " ha chocado con " + partnerPoint.GetId() + ": Mal emparejadas...");
-        }
     }
 
     public string GetId()
     {
         return id;
+    }
+
+    public bool PairedWithPartner()
+    {
+        return pairedWithPartner;
+    }
+
+    public bool CanBeRegistered()
+    {
+        return canBeRegistered;
+    }
+
+    public void CanBeRegistered(bool canBeRegistered)
+    {
+        this.canBeRegistered = canBeRegistered;
     }
 }

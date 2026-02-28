@@ -7,10 +7,7 @@ public class Rotate3DObject : MonoBehaviour
 {
     private InputManager inputManager;
 
-    //private bool rotationXYAllowed;
-    //private bool rotationZAllowed;
     private Camera currentCamera;
-    private Vector3 previousPosition;
 
     bool selected = false;
     PieceController piece;
@@ -128,34 +125,6 @@ public class Rotate3DObject : MonoBehaviour
     protected virtual void OnRotationCancelled(InputAction.CallbackContext context)
     {
         piece.DisableControls();
-    }
-
-    protected virtual void OnLeftClickPressed(InputAction.CallbackContext context)
-    {
-        previousPosition = transform.position;
-
-        /*if (context.started || context.performed)
-        {
-            rotationXYAllowed = true;
-        }
-        else if (context.canceled)
-        {
-            rotationXYAllowed = false;
-        }*/
-    }
-
-    protected virtual void OnRightClickPressed(InputAction.CallbackContext context)
-    {
-        previousPosition = transform.position;
-
-        /*if (context.started || context.performed)
-        {
-            rotationZAllowed = true;
-        }
-        else if (context.canceled)
-        {
-            rotationZAllowed = false;
-        }*/
     }
 
     public void EnableRotation()
