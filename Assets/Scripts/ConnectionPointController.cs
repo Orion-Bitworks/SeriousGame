@@ -29,7 +29,12 @@ public class ConnectionPointController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        piece.UnParent();
+        if (other.gameObject.tag == "ConnectionPoint")
+        {
+            //piece.DisconnectPiece(other.GetComponent<PieceController>());
+            //CheckPairing(other.GetComponent<ConnectionPointController>());
+        }
+        //piece.UnParent();
     }
 
     public void CheckPairing(ConnectionPointController partnerPoint)

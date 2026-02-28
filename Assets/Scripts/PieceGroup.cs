@@ -12,10 +12,21 @@ public class PieceGroup
 
     private bool canMove = true;
 
+    private Vector3 lastParentPosition;
+    private Quaternion lastParentRotation;
+    private PieceController parent;
+
     public PieceGroup(/*Material originalMaterial, Material clickMaterial*/)
     {
         //this.material = originalMaterial;
         //this.clickMaterial = clickMaterial;
+    }
+
+    public void SetParent(PieceController piece)
+    {
+        parent = piece;
+        lastParentPosition = piece.transform.position;
+        lastParentRotation = piece.transform.rotation;
     }
 
     public void AddPiece(PieceController piece)
@@ -43,6 +54,31 @@ public class PieceGroup
         return pivot;
     }
 
+    public void TransformWithParent()
+    {
+        if (parent == null) return;
+
+        Vector3 posDelta = parent.transform.position - lastParentPosition;
+        Quaternion rotDelta = parent.transform.rotation * Quaternion.Inverse(lastParentRotation);
+
+        Vector3 pivot = lastParentPosition;
+
+        foreach (PieceController piece in pieces)
+        {
+            if (piece != parent)
+            {
+                Vector3 dir = piece.transform.position - pivot;
+                dir = rotDelta * dir;
+
+                piece.transform.position = pivot + dir + posDelta;
+                piece.transform.rotation = rotDelta * piece.transform.rotation;
+            }
+        }
+
+        lastParentPosition = parent.transform.position;
+        lastParentRotation = parent.transform.rotation;
+    }
+
     public void RemovePiece(PieceController piece)
     {
         pieces.Remove(piece);
@@ -61,7 +97,7 @@ public class PieceGroup
         }
     }
 
-    public void MovePiece(Vector3 targetMovement)
+    public void MovePiece(Vector3 targetMovement, bool b = false)
     {
         if (!canMove)
         {
@@ -75,12 +111,14 @@ public class PieceGroup
                 piece.gameObject.layer = 0;
             }
 
-            //Rigidbody rb = piece.GetComponent<Rigidbody>();
-            
-            piece.transform.position += targetMovement;
-
-            //Vector3 speed = targetMovement * 20f;
-            //rb.velocity = speed;
+            if (!b)
+            {
+                piece.transform.position += targetMovement;
+            }
+            else
+            {
+                piece.transform.position = targetMovement;
+            }
         }
     }
 

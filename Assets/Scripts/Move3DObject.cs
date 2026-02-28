@@ -95,8 +95,6 @@ public class Move3DObject : MonoBehaviour
     public void MovePiece(Vector3 moveTarget)
     {
         Vector3 followPos = moveTarget - piece.GetGroup().GetCentralPivot();
-        //GetComponent<Rigidbody>().velocity = (followPos - transform.position) * 50f;
-        //GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
 
         if (piece.GetGroup() != null && piece.canSnap)
         {

@@ -36,31 +36,29 @@ public class PieceController : MonoBehaviour
         group.AddPiece(this);
     }
 
+    private void LateUpdate()
+    {
+        if(group != null)
+        {
+            group.TransformWithParent();
+        }
+    }
+
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
     {
-        if (hasSnapped)
-        {
-            return;
-        }
 
         if (!canSnap)
         {
             return;
         }
 
-        //hasSnapped = true;
-
-        DisableControls();
+        PieceController otherPiece = targetParent.GetComponent<PieceController>();
+        
+        Vector3 oldPos = transform.position;
+        Quaternion oldRot = transform.rotation;    
 
         // Guarda la rotacion original de la pieza
         Quaternion previousRotation = transform.rotation;
-
-        ConnectPieces(targetParent.GetComponent<PieceController>());
-
-        //transform.SetParent(targetParent, true);
-        //parentPiece = targetParent;
-
-        //parentPiece.GetComponent<PieceController>().GetChildrenPieces().Add(transform);
 
         // Conecta los ejes forward del punto de conexión de target y de la pieza
         Quaternion baseRotation = Quaternion.LookRotation(-target.forward, target.up) * Quaternion.Inverse(point.transform.localRotation);
@@ -71,7 +69,30 @@ public class PieceController : MonoBehaviour
 
         // Coloca la pieza para que coincidan los dos puntos de conexion
         Vector3 delta = point.transform.position - transform.position;
-        transform.position = target.position - delta;
+        Vector3 snappedPos = target.position - delta;
+        
+        transform.position = snappedPos;
+
+        Vector3 posDelta = transform.position - oldPos;
+        Quaternion rotDelta = transform.rotation * Quaternion.Inverse(oldRot);
+
+        transform.position = oldPos;
+        transform.rotation = oldRot;
+
+        Vector3 pivot = transform.position;
+
+        foreach (var piece in group.GetPieces())
+        {
+            Vector3 dir = piece.transform.position - pivot;
+            dir = rotDelta * dir;
+
+            piece.transform.position = pivot + dir + posDelta;
+            piece.transform.rotation = rotDelta * piece.transform.rotation;
+        }
+
+        ConnectPieces(targetParent.GetComponent<PieceController>());
+
+        DisableControls();
     }
 
     Quaternion GetBestAxialSnap(Quaternion baseRotation, Vector3 snapAxis, Quaternion referenceRotation)
@@ -127,14 +148,15 @@ public class PieceController : MonoBehaviour
         if (!connectedPieces.Contains(otherPiece))
         {
             connectedPieces.Add(otherPiece);
-            hasSnapped = true;
         }
 
         if (!otherPiece.connectedPieces.Contains(this))
         {
             otherPiece.connectedPieces.Add(this);
-            otherPiece.HasSnapped(true);
         }
+
+        hasSnapped = true;
+        otherPiece.HasSnapped(true);
 
         group.MergeGroups(otherPiece.GetGroup());
     }
@@ -150,66 +172,36 @@ public class PieceController : MonoBehaviour
         }
     }
 
-    public void MovePiece(Vector3 moveTarget)
-    {
-        if (!hasSnapped && rb != null)
-        {
-            Vector3 followPos = moveTarget;
-            rb.velocity = (followPos - transform.position) * 50f;
-            rb.constraints = RigidbodyConstraints.FreezeRotation;
-        }
-    }
-
-    public void EnableRigidBody()
-    {
-        if (GetComponent<Rigidbody>())
-        {
-            //canSnap = true;
-            //GetComponent<MeshRenderer>().material = clickMaterial;
-            //gameObject.layer = 0;
-            rb = GetComponent<Rigidbody>();
-            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-            rb.useGravity = false;
-            rb.isKinematic = false;
-        }
-    }
-
-    public void DisableRigidBody()
-    {
-        if (GetComponent<Rigidbody>())
-        {
-            //canSnap = false;
-            //GetComponent<MeshRenderer>().material = originalMaterial;
-            //gameObject.layer = 6; // Layer 6 -> Raycast
-            rb.isKinematic = true;
-            //Destroy(GetComponent<Rigidbody>());
-        }
-    }
-
     public void EnableControls()
     {
         //EnableRigidBody();
-        canSnap = true;
         //GetComponent<MeshRenderer>().material = clickMaterial;
         gameObject.layer = 0;
         movement.EnableMovement();
         rotation.EnableRotation();
+
+        canSnap = true;
+
+        foreach (PieceController piece in connectedPieces)
+        {
+            piece.canSnap = true;
+        }
     }
 
     public void DisableControls()
     {
         //DisableRigidBody();
-        canSnap = false;
         //GetComponent<MeshRenderer>().material = originalMaterial;
         gameObject.layer = 6; // Layer 6 -> Raycast
         movement.DisableMovement();
         rotation.DisableRotation();
-    }
 
-    public void UnParent()
-    {
-        transform.parent = null;
-        hasSnapped = false;
+        canSnap = false;
+
+        foreach (PieceController piece in connectedPieces)
+        {
+            piece.canSnap = false;
+        }
     }
 
     public bool HasSnapped()
@@ -220,40 +212,6 @@ public class PieceController : MonoBehaviour
     public void HasSnapped(bool b)
     {
         hasSnapped = b;
-    }
-
-    public void SwitchWithParent()
-    {
-        if (!transform.parent)
-        {
-            return;
-        }
-
-        PieceController controller = parentPiece.GetComponent<PieceController>();
-
-        UnParent();
-
-        if (parentPiece.parent)
-        {
-            controller.SwitchWithParent();
-        }
-
-        controller.hasSnapped = true;
-        parentPiece.SetParent(transform, true);
-        controller.parentPiece = transform;
-        parentPiece = null;
-    }
-
-    public PieceController GetPieceToSnap()
-    {
-        if (transform.parent)
-        {
-            return transform.parent.GetComponent<PieceController>().GetPieceToSnap();
-        }
-        else
-        {
-            return this;
-        }
     }
 
     public PieceGroup GetGroup()
@@ -278,6 +236,15 @@ public class PieceController : MonoBehaviour
         foreach (PieceController piece in connectedPiecesCopy)
         {
             DisconnectPiece(piece);
+        }
+
+        //hasSnapped = false;
+        //canSnap = false;
+
+        foreach (PieceController piece in connectedPiecesCopy)
+        {
+            piece.hasSnapped = false;
+            piece.canSnap = false;
         }
 
         PieceGroupManager.RebuildGroups();
