@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RoadSystemTest.unity
     guid: f665859fb1afb3e43a960de24da6d788
+  - enabled: 1
+    path: Assets/Scenes/TestMinijuegosCorazon.unity
+    guid: 57a80574954073f4f884ca1f9505ac6f
   m_configObjects: {}

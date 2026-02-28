@@ -29,12 +29,17 @@ public class MainMenuScene : MonoBehaviour
 
 	public void StartActivarCorazonMiniGame()
 	{
-		SceneManager.LoadScene("LearnGame");
+		SceneManager.LoadScene("TestMinijuegosCorazon");
 	}
 
     public void StartIntercambioDeGasesMiniGame()
     {
         SceneManager.LoadScene("LearnGame");
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuGame");
     }
 
 	public void quitGame()
