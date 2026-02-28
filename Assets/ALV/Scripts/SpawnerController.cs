@@ -14,6 +14,7 @@ public class SpawnerController : MonoBehaviour
     private SpawnVenaController spawnVenaController;
     [SerializeField] Material O2Material;
     [SerializeField] Material CO2Material;
+    [SerializeField] StartAndWinCondition startGame;
 
     public float intervalo = 2f;
 
@@ -63,8 +64,9 @@ public class SpawnerController : MonoBehaviour
     public void StartSpawns()
     {
         StartCoroutine(Spawners());
+        startGame.StartGame();
 
-    }
+	}
 
     public void StopSpawns()
     {

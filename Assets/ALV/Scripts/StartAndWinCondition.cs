@@ -5,17 +5,19 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class WinCondition : MonoBehaviour
+public class StartAndWinCondition : MonoBehaviour
 {
 	[SerializeField] MolCountSO molCountSO;
 	[SerializeField] UICounter ui;
-	[SerializeField] GameObject FinishGamePanel;
+	[SerializeField] GameObject finishGamePanel;
+	[SerializeField] GameObject startPanel;
 	[SerializeField] private int pointsToWin;
 
 	private void Start()
 	{
-		//OnPressResset();
+
 		SetActiveFinishPanel(false);
+		startPanel.SetActive(true);
 		molCountSO.RestoreParameters();
 
 
@@ -30,6 +32,10 @@ public class WinCondition : MonoBehaviour
 		molCountSO.OnValueChanged -= DoYouWin;
 	}
 
+	public void StartGame()
+	{
+		startPanel.SetActive(false);
+	}
 
 	public void DoYouWin()
 	{
@@ -43,15 +49,20 @@ public class WinCondition : MonoBehaviour
 
 	public void SetActiveFinishPanel(bool trueFalse)
 	{
-		FinishGamePanel.SetActive(trueFalse);
+		finishGamePanel.SetActive(trueFalse);
 	}
 
 	public void OnPressResset()
 	{
 		SceneManager.LoadScene("AlvMiniGame");
 		molCountSO.RestoreParameters();
-		/*SetActiveFinishPanel(false);*/
 		Time.timeScale = 1f;
 	}
 
+	public void OnPressExit()
+	{
+		SceneManager.LoadScene("MainMenuGame");
+		molCountSO.RestoreParameters();
+		Time.timeScale = 1f;
+	}
 }
