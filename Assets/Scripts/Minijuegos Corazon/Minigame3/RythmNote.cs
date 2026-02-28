@@ -72,5 +72,7 @@ public class RythmNote : MonoBehaviour
         canBePressed = true;
     }
 
+
+
     
 }

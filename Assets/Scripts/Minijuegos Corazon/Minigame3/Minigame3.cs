@@ -79,7 +79,7 @@ public class Minigame3 : MonoBehaviour
         RythmNote note = obj.GetComponent<RythmNote>();
         note.Init(GetRandomKey(), this);
 
-        noteQueue.Enqueue(note);
+        noteQueue.Enqueue(note); //posa a la queue la nota (especie de llista)
 
         TryActivateNext();
     }
