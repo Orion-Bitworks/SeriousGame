@@ -34,7 +34,7 @@ public class MainMenuScene : MonoBehaviour
 
     public void StartIntercambioDeGasesMiniGame()
     {
-        SceneManager.LoadScene("LearnGame");
+        SceneManager.LoadScene("AlvMiniGame");
     }
 
     public void GoToMainMenu()
