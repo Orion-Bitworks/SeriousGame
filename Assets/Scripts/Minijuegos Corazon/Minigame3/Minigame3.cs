@@ -20,23 +20,48 @@ public class Minigame3 : MonoBehaviour
     private int completedNotes = 0;
 
     [SerializeField] PopUp popUpManager;
+    private bool gameActive = false;
 
-
-    private void Start()
+    private void Awake()
     {
-        spawnInterval = 60f / bpm;
-        StartCoroutine(SpawnNotesRoutine());
+
+        StartCoroutine(ShowInstructions());
     }
 
     IEnumerator SpawnNotesRoutine()
     {
         while (spawnedNotes < maxNotes)
         {
-            SpawnNextNote();
-            spawnedNotes++;
+            if (gameActive)
+            {
+                SpawnNextNote();
+                spawnedNotes++;
+            }
+
             yield return new WaitForSeconds(spawnInterval);
         }
     }
+
+    IEnumerator ShowInstructions()
+    {
+        gameActive = false;
+        Time.timeScale = 0f;
+
+        popUpManager.ShowPopUp(
+            "Et sortira un joc on apareixeran una serie de boles. Has de pitjar la tecla que contigui la bola marcada en verd. Tens un cert temps per clicar, ja que van el ritme de la macarena",
+            4f
+        );
+
+        // Espera en temps real (NO afectat per timeScale)
+        yield return new WaitForSecondsRealtime(6f);
+
+        Time.timeScale = 1f;
+        gameActive = true;
+
+        spawnInterval = 60f / bpm;
+        StartCoroutine(SpawnNotesRoutine());
+    }
+
 
     void SpawnNextNote()
     {
@@ -76,8 +101,9 @@ public class Minigame3 : MonoBehaviour
 
         if (completedNotes >= maxNotes)
         {
+            gameActive = false; // 🔒 Bloqueja el joc
             Debug.Log("HAS ACABAT!  Has completat totes les notes correctament!");
-            popUpManager.ShowPopUp("Has acabat el tercer minijoc!");
+            popUpManager.ShowPopUp("Has acabat el tercer minijoc, Felicitats! Has acabat tots els minijocs correctament", 3f);
             return;
         }
 

@@ -110,9 +110,9 @@ public class Minigame2 : MonoBehaviour
                     }
                 }
             }
-
+            popUpManager.ShowPopUp("Has acabat el segon minijoc!", 2f);
             phasesManager.PasarAFase3(); //pasa a la siguiente fase
-            popUpManager.ShowPopUp("Has acabat el segon minijoc!");
+            
 
         }
 

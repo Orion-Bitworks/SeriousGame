@@ -11,8 +11,9 @@ public class PopUp : MonoBehaviour
     [SerializeField]
     private float duration;
 
-    public void ShowPopUp(string text)
+    public void ShowPopUp(string text, float duration)
     {
+        this.duration = duration;
         messageText.text = text;
         panel.SetActive(true);
 
@@ -22,7 +23,7 @@ public class PopUp : MonoBehaviour
 
     private IEnumerator HideAfterSeconds()
     {
-        yield return new WaitForSeconds(duration);
+        yield return new WaitForSecondsRealtime(duration); //Temps real
         panel.SetActive(false);
     }
 

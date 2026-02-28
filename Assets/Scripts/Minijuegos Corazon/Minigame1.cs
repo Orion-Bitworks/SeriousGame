@@ -109,7 +109,7 @@ public class Minigame1 : MonoBehaviour
             }
 
             phasesManager.PasarAFase2(); //pasa a la siguiente fase
-            popUpManager.ShowPopUp("Has acabat el primer minijoc!");
+            popUpManager.ShowPopUp("Has acabat el primer minijoc!", 2f);
 
         }
 
