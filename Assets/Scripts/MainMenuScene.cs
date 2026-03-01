@@ -42,6 +42,11 @@ public class MainMenuScene : MonoBehaviour
         SceneManager.LoadScene("MainMenuGame");
     }
 
+    public void ReturnToHeartMinigames()
+    {
+        SceneManager.LoadScene("TestMinijuegosCorazon");
+    }
+
 	public void quitGame()
     {
         Application.Quit();
