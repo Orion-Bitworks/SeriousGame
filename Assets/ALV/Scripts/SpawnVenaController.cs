@@ -20,6 +20,7 @@ public class SpawnVenaController : MonoBehaviour
             rb.useGravity = false;
         }
 
+            rb.isKinematic = false; 
         rb.velocity = Vector3.right * speed;
 
          

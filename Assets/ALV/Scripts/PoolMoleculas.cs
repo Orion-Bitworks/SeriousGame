@@ -41,6 +41,14 @@ public class PoolMoleculas : MonoBehaviour
 
     public void Return(GameObject obj)
     {
+        Rigidbody rb = obj.GetComponent<Rigidbody>();
+        if(rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true;
+        }
+
         obj.SetActive(false);
     }
 }

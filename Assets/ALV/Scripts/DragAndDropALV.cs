@@ -30,6 +30,14 @@ public class DragAndDropALV : MonoBehaviour
 
 			transform.position = liftedPos;
 		}
+
+		Rigidbody rb = GetComponent<Rigidbody>();
+		if(rb != null)
+		{
+			rb.velocity = Vector3.zero;
+			rb.angularVelocity = Vector3.zero;
+			rb.isKinematic = true;
+		}
 	}
 
 	//cuando arrastras el mouse
@@ -70,6 +78,12 @@ public class DragAndDropALV : MonoBehaviour
 		if (!foundZone)
 		{
 			mol.SetNone();
+		}
+
+		Rigidbody rb = GetComponent<Rigidbody>();
+		if(rb != null)
+		{
+			rb.isKinematic = false;
 		}
 	}
 }

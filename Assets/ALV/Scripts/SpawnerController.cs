@@ -44,10 +44,11 @@ public class SpawnerController : MonoBehaviour
         obj.GetComponent<MeshRenderer>().material = O2Material;
         obj.GetComponent<MoleculaObject>().ChangeTipe(tipeZone.Alveolo);
         obj.tag = "MolAlv";
+        
 
     }
     /// <summary>
-    /// Metodo para spawnear las moleculas en 
+    /// Metodo para spawnear las moleculas en la vena
     /// </summary>
     /// <param name="spawn"></param>
     public void SpawnMoleculasVena(GameObject spawn)
