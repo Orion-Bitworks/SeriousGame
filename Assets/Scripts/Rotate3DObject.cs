@@ -10,12 +10,8 @@ public class Rotate3DObject : MonoBehaviour
     bool selected = false;
     PieceController piece;
 
-    [SerializeField] private float currentFov;
-    [SerializeField] private float originalFov;
-
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 10f;
-    [SerializeField] private bool invertedControl = false;
 
     private void Awake()
     {

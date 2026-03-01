@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
 
-    [SerializeField] Transform canvas;
     [SerializeField] GameObject widget;
 
     [SerializeField] public HashSet<ConnectionPointController> connections = new HashSet<ConnectionPointController>();
@@ -38,6 +38,11 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
+        if (connections.Count == 0)
+        {
+            allRight = false;
+        }
+
         if (allRight)
         {
             ToggleWidget();
@@ -46,6 +51,11 @@ public class ScoreManager : MonoBehaviour
 
     private void ToggleWidget()
     {
-        Instantiate(widget, canvas);
+        widget.SetActive(true);
+    }
+
+    public void LoadScene(string targetScene)
+    {
+        SceneManager.LoadScene(targetScene);
     }
 }
