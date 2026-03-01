@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class OptionMenuController : MonoBehaviour
 {
+
     [SerializeField] GameObject[] allOptionPanels;
     GameObject currentPanel;
     [SerializeField] GameObject currentRebindPanel;
@@ -12,6 +13,7 @@ public class OptionMenuController : MonoBehaviour
 
     private void Start()
     {
+
         foreach(GameObject panel in allOptionPanels) {
             
             if (panel.name == "SoundPanel")
