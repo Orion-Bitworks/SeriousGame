@@ -8,7 +8,6 @@ public class PieceController : MonoBehaviour
     [SerializeField] Material clickMaterial;
     Material originalMaterial;
 
-    Rigidbody rb;
     [SerializeField] bool hasSnapped = false;
     public bool canSnap = false;
 
@@ -166,7 +165,9 @@ public class PieceController : MonoBehaviour
 
     public void EnableControls()
     {
-        gameObject.layer = 0;
+        group.ChangeGroupLayer(0);
+        group.ChangeGroupMaterial(clickMaterial);
+
         movement.EnableMovement();
         rotation.EnableRotation();
 
@@ -180,7 +181,9 @@ public class PieceController : MonoBehaviour
 
     public void DisableControls()
     {
-        gameObject.layer = 6;
+        group.ChangeGroupLayer(6);
+        group.ChangeGroupMaterial(originalMaterial);
+
         movement.DisableMovement();
         rotation.DisableRotation();
 

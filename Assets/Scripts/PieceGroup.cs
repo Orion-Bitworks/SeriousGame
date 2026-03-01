@@ -107,4 +107,20 @@ public class PieceGroup
     {
         this.canMove = canMove;
     }
+
+    public void ChangeGroupMaterial(Material material)
+    {
+        foreach (PieceController piece in pieces)
+        {
+            piece.GetComponent<MeshRenderer>().material = material;
+        }
+    }
+
+    public void ChangeGroupLayer(int layer)
+    {
+        foreach (PieceController piece in pieces)
+        {
+            piece.gameObject.layer = layer;
+        }
+    }
 }
