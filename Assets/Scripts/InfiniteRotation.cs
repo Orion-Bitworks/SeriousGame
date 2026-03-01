@@ -12,19 +12,43 @@ public class InfiniteRotation : MonoBehaviour
     [Header("Rotation speed")]
     [SerializeField] private float speed = 40f;
 
-    private Vector3 angleRotation;
+    [Header("Rotation parameters")]
+    [SerializeField] private bool inverted = false;
+    [SerializeField] private bool rotateOnCreation = false;
 
-    private float axisX = 0;
-    private float axisY = 0;
-    private float axisZ = 0;
+    private int value = 1;
+
+    private bool canRotate = true;
+
+    private Vector3 initialRotation;
 
     private void Start()
     {
-        //angleRotation = new Vector3(x ? 1 : 0, y ? 1 : 0, z ? 1 : 0);
+        if (inverted)
+        {
+            value = -1;
+        }
+
+        initialRotation = transform.rotation.eulerAngles;
+
+        canRotate = rotateOnCreation;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        transform.Rotate(new Vector3(x ? 1 : 0, y ? 1 : 0, z ? 1 : 0) * speed * Time.deltaTime);
+        if (canRotate)
+        {
+            transform.Rotate(new Vector3(x ? value : 0, y ? value : 0, z ? value : 0) * speed * Time.deltaTime);
+        }
+    }
+
+    public void ToggleRotation(bool toggle)
+    {
+        canRotate = toggle;
+    }
+
+    public void ResetRotation()
+    {
+        transform.rotation = Quaternion.Euler(initialRotation);
     }
 }

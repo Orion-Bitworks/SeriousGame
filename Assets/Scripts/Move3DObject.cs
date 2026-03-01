@@ -34,26 +34,11 @@ public class Move3DObject : MonoBehaviour
             return;
         }
 
-        /*if (!piece.HasSnapped() && inputManager.separateMode_ia.inProgress && !piece.parentPiece)
-        {
-            piece.SwitchWithChildren();
-        }*/
-
         if (piece.HasSnapped() && inputManager.separateMode_ia.inProgress)
         {
             TryMove();
             return;
         }
-        
-        /*if (piece.HasSnapped())
-        {
-            piece.SwitchWithParent();
-            return;
-        }*/
-
-        //Vector3 mousePos = Input.mousePosition;
-        //mousePos.z = 10f;
-        //mousePos = cam.ScreenToWorldPoint(mousePos);
 
         MovePiece(RaycastPoint());
     }
@@ -87,9 +72,6 @@ public class Move3DObject : MonoBehaviour
 
             MovePiece(RaycastPoint());
         }
-
-        //piece.UnParent();
-        //piece.SwitchParent();
     }
 
     public void MovePiece(Vector3 moveTarget)
@@ -130,10 +112,5 @@ public class Move3DObject : MonoBehaviour
     public void DisableMovement()
     {
         selected = false;
-    }
-
-    public void GetChildrenCount()
-    {
-        
     }
 }

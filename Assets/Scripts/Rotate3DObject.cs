@@ -7,8 +7,6 @@ public class Rotate3DObject : MonoBehaviour
 {
     private InputManager inputManager;
 
-    private Camera currentCamera;
-
     bool selected = false;
     PieceController piece;
 
@@ -18,11 +16,6 @@ public class Rotate3DObject : MonoBehaviour
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 10f;
     [SerializeField] private bool invertedControl = false;
-
-    [Header("Zoom")]
-    [SerializeField] private float zoomSpeed = 10f;
-    [SerializeField] private float maxZoomIn = 10f;
-    [SerializeField] private float maxZoomOut = 20f;
 
     private void Awake()
     {
@@ -50,13 +43,6 @@ public class Rotate3DObject : MonoBehaviour
     private void Start()
     {
         piece = GetComponent<PieceController>();
-
-        currentCamera = Camera.main;
-        
-        originalFov = currentCamera.fieldOfView;
-        currentFov = originalFov;
-        maxZoomOut += originalFov;
-        maxZoomIn = originalFov - maxZoomIn;
     }
 
     private void Update()

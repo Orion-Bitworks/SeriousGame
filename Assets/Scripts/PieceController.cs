@@ -32,16 +32,8 @@ public class PieceController : MonoBehaviour
 
     private void Start()
     {
-        group = new PieceGroup(/*originalMaterial, clickMaterial*/);
+        group = new PieceGroup();
         group.AddPiece(this);
-    }
-
-    private void LateUpdate()
-    {
-        if(group != null)
-        {
-            group.TransformWithParent();
-        }
     }
 
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
@@ -174,8 +166,6 @@ public class PieceController : MonoBehaviour
 
     public void EnableControls()
     {
-        //EnableRigidBody();
-        //GetComponent<MeshRenderer>().material = clickMaterial;
         gameObject.layer = 0;
         movement.EnableMovement();
         rotation.EnableRotation();
@@ -190,9 +180,7 @@ public class PieceController : MonoBehaviour
 
     public void DisableControls()
     {
-        //DisableRigidBody();
-        //GetComponent<MeshRenderer>().material = originalMaterial;
-        gameObject.layer = 6; // Layer 6 -> Raycast
+        gameObject.layer = 6;
         movement.DisableMovement();
         rotation.DisableRotation();
 
@@ -237,9 +225,6 @@ public class PieceController : MonoBehaviour
         {
             DisconnectPiece(piece);
         }
-
-        //hasSnapped = false;
-        //canSnap = false;
 
         foreach (PieceController piece in connectedPiecesCopy)
         {

@@ -7,26 +7,11 @@ public class PieceGroup
 {
     [SerializeField] private HashSet<PieceController> pieces = new HashSet<PieceController>();
 
-    private Material material;
-    private Material clickMaterial;
-
     private bool canMove = true;
 
-    private Vector3 lastParentPosition;
-    private Quaternion lastParentRotation;
-    private PieceController parent;
-
-    public PieceGroup(/*Material originalMaterial, Material clickMaterial*/)
+    public PieceGroup()
     {
-        //this.material = originalMaterial;
-        //this.clickMaterial = clickMaterial;
-    }
 
-    public void SetParent(PieceController piece)
-    {
-        parent = piece;
-        lastParentPosition = piece.transform.position;
-        lastParentRotation = piece.transform.rotation;
     }
 
     public void AddPiece(PieceController piece)
@@ -52,31 +37,6 @@ public class PieceGroup
         pivot = pivot / pieces.Count;
 
         return pivot;
-    }
-
-    public void TransformWithParent()
-    {
-        if (parent == null) return;
-
-        Vector3 posDelta = parent.transform.position - lastParentPosition;
-        Quaternion rotDelta = parent.transform.rotation * Quaternion.Inverse(lastParentRotation);
-
-        Vector3 pivot = lastParentPosition;
-
-        foreach (PieceController piece in pieces)
-        {
-            if (piece != parent)
-            {
-                Vector3 dir = piece.transform.position - pivot;
-                dir = rotDelta * dir;
-
-                piece.transform.position = pivot + dir + posDelta;
-                piece.transform.rotation = rotDelta * piece.transform.rotation;
-            }
-        }
-
-        lastParentPosition = parent.transform.position;
-        lastParentRotation = parent.transform.rotation;
     }
 
     public void RemovePiece(PieceController piece)

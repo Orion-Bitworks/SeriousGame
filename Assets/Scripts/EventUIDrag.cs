@@ -10,22 +10,10 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     [SerializeField] private GameObject prefabPiece;
     private GameObject newPiece;
 
-    private bool dragging = false;
-    bool canGrow = false;
-    bool canShrink = false;
     bool hovering = false;
-
-    private Vector3 originalScale = new Vector3(1,1,1);
-    private Vector3 shrinkScale = new Vector3(0.5f, 0.5f, 0.5f);
-
-    private float timer = 0.2f;
-    private float timePassed;
-
-    float canvasAlpha = 1;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        dragging = true;
         newPiece = Instantiate(prefabPiece, transform.position, Quaternion.identity);
         newPiece.GetComponent<PieceController>().EnableControls();
 
@@ -40,8 +28,6 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
 
         Destroy(newPiece.GetComponent<InfiniteRotation>());
-        //originalScale = newPiece.transform.localScale;
-        newPiece.transform.localScale = originalScale;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -60,34 +46,16 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             newPiece.GetComponent<PieceController>().DisableControls();
         }
 
-        dragging = false;
         newPiece = null;
-        canShrink = false;
-        canGrow = false;
-        timePassed = 0;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         hovering = true;
-
-        if (dragging)
-        {
-            timePassed = 0;
-            canShrink = true;
-            canGrow = false;
-        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         hovering = false;
-
-        if (dragging)
-        {
-            timePassed = 0;
-            canGrow = true;
-            canShrink = false;
-        }
     }
 }

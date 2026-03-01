@@ -7,7 +7,6 @@ public class ConnectionPointController : MonoBehaviour
     [SerializeField] private string id = "";
     [SerializeField] private string partnerId = "Undefined";
     [SerializeField] private LayerMask layerToDetect;
-    [SerializeField] private Transform parent;
     [SerializeField] private bool canBeRegistered = false;
 
     private bool pairedWithPartner = false;
@@ -21,7 +20,6 @@ public class ConnectionPointController : MonoBehaviour
         }
         
         piece = GetComponentInParent<PieceController>();
-        parent = transform.parent;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -40,7 +38,6 @@ public class ConnectionPointController : MonoBehaviour
             //piece.DisconnectPiece(other.GetComponent<PieceController>());
             //CheckPairing(other.GetComponent<ConnectionPointController>());
         }
-        //piece.UnParent();
     }
 
     public void CheckPairing(ConnectionPointController partnerPoint)
