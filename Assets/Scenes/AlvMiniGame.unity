@@ -963,7 +963,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1963972916}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -4816378482172361126, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: sfxSlider
@@ -1083,11 +1083,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_Pivot.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_Pivot.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1107,23 +1107,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1920
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1080
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.3333334
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.3333334
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.3333334
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1143,23 +1143,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1280
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 720
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2421,11 +2421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba1ae9e50e3dc84fae71ced85087ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &739327131 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4920330682355935729, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
-  m_PrefabInstance: {fileID: 407839193}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &742724806
 GameObject:
   m_ObjectHideFlags: 0
@@ -5279,7 +5274,6 @@ RectTransform:
   - {fileID: 97839907}
   - {fileID: 1030304056}
   - {fileID: 187165911}
-  - {fileID: 739327131}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -5465,3 +5459,4 @@ SceneRoots:
   - {fileID: 1544047982}
   - {fileID: 1958348490}
   - {fileID: 742724808}
+  - {fileID: 407839193}
