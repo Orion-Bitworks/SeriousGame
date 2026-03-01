@@ -31,7 +31,6 @@ public class MenuPauseController : MonoBehaviour
 
 	}
 
-
 	private void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
@@ -46,7 +45,6 @@ public class MenuPauseController : MonoBehaviour
 			}
 		}
 	}
-
 
 	private void OpenMenuPause()
 	{

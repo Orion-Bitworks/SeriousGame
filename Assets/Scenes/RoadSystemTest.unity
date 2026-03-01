@@ -2971,7 +2971,7 @@ GameObject:
   - component: {fileID: 1281585788}
   - component: {fileID: 1281585787}
   - component: {fileID: 1281585790}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: GridManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3788,6 +3788,10 @@ PrefabInstance:
     - target: {fileID: 2294812349341523042, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_Name
       value: OptionsCanvasMenuPause
+      objectReference: {fileID: 0}
+    - target: {fileID: 2294812349341523042, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3393868597359472422, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_AnchorMax.y

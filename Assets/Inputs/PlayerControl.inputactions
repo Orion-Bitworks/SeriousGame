@@ -147,6 +147,17 @@
                 {
                     "name": "",
                     "id": "1137990d-6284-4919-b20f-c3d7edee3089",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Delete",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82b13365-e319-44a6-9bf9-747e54101fa3",
                     "path": "<Keyboard>/delete",
                     "interactions": "",
                     "processors": "",
