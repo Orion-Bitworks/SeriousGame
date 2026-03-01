@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - DropArea
+  - Despawner
+  - MolAlv
+  - MolVein
   layers:
   - Default
   - TransparentFX
