@@ -44,6 +44,7 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         else
         {
             newPiece.GetComponent<PieceController>().DisableControls();
+            newPiece.GetComponent<PieceController>().CanSnap(false);
         }
 
         CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.DEFAULT);

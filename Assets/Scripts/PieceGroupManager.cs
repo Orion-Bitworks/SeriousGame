@@ -42,6 +42,14 @@ public class PieceGroupManager : MonoBehaviour
                         }
                     }
                 }
+
+                if (newGroup.GetPieces().Count > 1)
+                {
+                    foreach (PieceController pieceInGroup in newGroup.GetPieces())
+                    {
+                        pieceInGroup.HasSnapped(true);
+                    }
+                }
             }
         }
     }

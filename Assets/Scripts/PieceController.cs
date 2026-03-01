@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 //[RequireComponent(typeof(Move3DObject))]
 //[RequireComponent(typeof(Rotate3DObject))]
@@ -35,13 +37,25 @@ public class PieceController : MonoBehaviour
         group.AddPiece(this);
     }
 
+    private void Update()
+    {
+        if (InputManager.instance.deletePiece_ia.triggered && canSnap)
+        {
+            DeletePiece();
+        }
+    }
+
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
     {
-
         if (!canSnap)
         {
             return;
         }
+
+        point.Paired(true);
+        target.GetComponent<ConnectionPointController>().Paired(true);
+
+        Debug.Log($"Snap intento: {name} -> {targetParent.name} | canSnap:{canSnap}");
 
         PieceController otherPiece = targetParent.GetComponent<PieceController>();
         
@@ -187,7 +201,7 @@ public class PieceController : MonoBehaviour
         movement.DisableMovement();
         rotation.DisableRotation();
 
-        canSnap = false;
+        //canSnap = false;
 
         foreach (PieceController piece in connectedPieces)
         {
@@ -239,5 +253,23 @@ public class PieceController : MonoBehaviour
         }
 
         PieceGroupManager.RebuildGroups();
+    }
+
+    public bool CanSnap()
+    {
+        return canSnap;
+    }
+
+    public void CanSnap(bool canSnap)
+    {
+        this.canSnap = canSnap;
+    }
+
+    public void DeletePiece()
+    {
+        foreach (PieceController piece in group.GetPieces())
+        {
+            Destroy(piece.gameObject);
+        }
     }
 }

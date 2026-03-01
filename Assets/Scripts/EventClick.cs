@@ -25,6 +25,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         if (!InputManager.instance.rotateMode_ia.inProgress)
         {
             piece.DisableControls();
+            piece.CanSnap(false);
         }
 
         CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.DEFAULT);

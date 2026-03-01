@@ -12,6 +12,9 @@ public class ConnectionPointController : MonoBehaviour
     private bool pairedWithPartner = false;
     PieceController piece;
 
+    [SerializeField] private bool paired = false;
+    [SerializeField] private string pairId = "";
+
     private void Start()
     {
         if (canBeRegistered)
@@ -26,18 +29,32 @@ public class ConnectionPointController : MonoBehaviour
     {
         if (other.gameObject.tag == "ConnectionPoint")
         {
-            piece.SnapToPoint(this, other.transform, other.transform.parent);
-            CheckPairing(other.GetComponent<ConnectionPointController>());
+            ConnectionPointController otherPoint = other.GetComponent<ConnectionPointController>();
+
+            if (!paired && !otherPoint.Paired())
+            {
+                piece.SnapToPoint(this, other.transform, other.transform.parent);
+                CheckPairing(other.GetComponent<ConnectionPointController>());
+                pairId = otherPoint.GetId();
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "ConnectionPoint")
+        if (other.gameObject.tag == "ConnectionPoint" && paired && (other.GetComponent<ConnectionPointController>().GetId() == pairId))
         {
+            paired = false;
+            pairedWithPartner = false;
+            pairId = "";
             //piece.DisconnectPiece(other.GetComponent<PieceController>());
             //CheckPairing(other.GetComponent<ConnectionPointController>());
         }
+    }
+
+    private void OnDestroy()
+    {
+        ScoreManager.instance.UnregisterConnectionPoint(this);
     }
 
     public void CheckPairing(ConnectionPointController partnerPoint)
@@ -67,5 +84,15 @@ public class ConnectionPointController : MonoBehaviour
     public void CanBeRegistered(bool canBeRegistered)
     {
         this.canBeRegistered = canBeRegistered;
+    }
+
+    public bool Paired()
+    {
+        return paired;
+    }
+
+    public void Paired(bool paired)
+    {
+        this.paired = paired;
     }
 }

@@ -21,6 +21,11 @@ public class ScoreManager : MonoBehaviour
         connections.Add(point);
     }
 
+    public void UnregisterConnectionPoint(ConnectionPointController point)
+    {
+        connections.Remove(point);
+    }
+
     public void CheckConnections()
     {
         bool allRight = true;
