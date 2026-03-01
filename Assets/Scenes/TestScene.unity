@@ -1553,18 +1553,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AurIZPiece (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8634167741212262521, guid: 4da2aad4f6275904bbb3b3bb412c0c3b, type: 3}
-      propertyPath: id
-      value: A_IZ_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 8634167741212262521, guid: 4da2aad4f6275904bbb3b3bb412c0c3b, type: 3}
-      propertyPath: partnerId
-      value: A_DR_01
-      objectReference: {fileID: 0}
-    - target: {fileID: 8634167741212262521, guid: 4da2aad4f6275904bbb3b3bb412c0c3b, type: 3}
-      propertyPath: canBeRegistered
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
