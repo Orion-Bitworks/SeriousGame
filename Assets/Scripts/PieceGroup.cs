@@ -64,6 +64,8 @@ public class PieceGroup
             return;
         }
 
+        CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.MOVING);
+
         foreach (PieceController piece in pieces)
         {
             if (piece.gameObject.layer != 0)
@@ -84,6 +86,8 @@ public class PieceGroup
 
     public void RotatePiece(Vector3 pivot, Quaternion rotation)
     {
+        CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.ROTATING);
+
         foreach (var piece in pieces)
         {
             Vector3 dir = piece.transform.position - pivot;
@@ -108,11 +112,14 @@ public class PieceGroup
         this.canMove = canMove;
     }
 
-    public void ChangeGroupMaterial(Material material)
+    public void ChangeGroupMaterial(Material material, PieceController exception = null)
     {
         foreach (PieceController piece in pieces)
         {
-            piece.GetComponent<MeshRenderer>().material = material;
+            if (piece != exception)
+            {
+                piece.GetComponent<MeshRenderer>().material = material;
+            }
         }
     }
 

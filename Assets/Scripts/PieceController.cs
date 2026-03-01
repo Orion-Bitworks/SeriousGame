@@ -224,6 +224,9 @@ public class PieceController : MonoBehaviour
     {
         List<PieceController> connectedPiecesCopy = new List<PieceController>(connectedPieces);
 
+        group.ChangeGroupLayer(6);
+        group.ChangeGroupMaterial(originalMaterial, this);
+
         foreach (PieceController piece in connectedPiecesCopy)
         {
             DisconnectPiece(piece);

@@ -66,6 +66,8 @@ public class Move3DObject : MonoBehaviour
     {
         float distance = Vector3.Distance(transform.position, RaycastPoint());
 
+        CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.SEPARATING);
+
         if (distance > breakSnapDistance)
         {
             piece.DisconnectAll();

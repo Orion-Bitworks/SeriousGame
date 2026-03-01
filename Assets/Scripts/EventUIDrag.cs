@@ -46,6 +46,8 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
             newPiece.GetComponent<PieceController>().DisableControls();
         }
 
+        CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.DEFAULT);
+
         newPiece = null;
     }
 
