@@ -24,7 +24,7 @@ public class MainMenuScene : MonoBehaviour
 
     public void Start3DCorazonMiniGame()
     {
-        SceneManager.LoadScene("LearnGame");
+        SceneManager.LoadScene("PuzzleScene");
     }
 
 	public void StartActivarCorazonMiniGame()
