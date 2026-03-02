@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuPauseController : MonoBehaviour
 {
@@ -70,5 +72,9 @@ public class MenuPauseController : MonoBehaviour
 		Time.timeScale = 1f;
 	}
 
+	public void ReturnToMenu()
+	{
+		SceneManager.LoadScene("MainMenuGame");
+	}
 
 }
