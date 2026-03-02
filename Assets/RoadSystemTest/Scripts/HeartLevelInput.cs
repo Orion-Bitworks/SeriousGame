@@ -8,7 +8,7 @@ using UnityEngine;
 public class HeartLevelInput : MonoBehaviour
 {
     RoadInput inputToActivate;      // Referencia al input a activar
-    int requiredOutputs = 2;        // Número mínimo de salidas que deben haber recibido bolitas
+    int requiredLungsOutputs = 2;   // Número mínimo de salidas que deben haber recibido bolitas
     bool activated = false;         // Flag para saber si el input ya ha sido activado
 
     // Nos aseguramos que no se están generando bolitas del input al iniciar
@@ -29,21 +29,21 @@ public class HeartLevelInput : MonoBehaviour
     }
 
     /// <summary>
-    /// Comprueba si todos los outputs del corazón ("requiredOutputs") necesarios han recibido bolitas
+    /// Comprueba si todos los outputs del corazón ("requiredLungsOutputs") necesarios han recibido bolitas
     /// </summary>
-    /// <returns>True si el número de "HeartOutputs" que han recibido bola es mayor o igual que "requiredOutputs"</returns>
+    /// <returns>True si el número de "HeartToLungsOutputs" que han recibido bola es mayor o igual que "requiredLungsOutputs"</returns>
     public bool CheckSystem()
     {
-        // Recorremos todos los outputs y sumamos 1 en un contador si los "HeartOutput" han recibido bolita
+        // Recorremos todos los outputs y sumamos 1 en un contador si los "HeartToLungsOutput" han recibido bolita
         RoadOutput[] roadOutputs = FindObjectsOfType<RoadOutput>();
         int count = 0;
         foreach (var roadOutput in roadOutputs)
         {
-            if (roadOutput.CompareTag("HeartOutput") && roadOutput.ballReceived)
+            if (roadOutput.CompareTag("HeartToLungsOutput") && roadOutput.ballReceived)
                 count++;
         }
 
-        return count >= requiredOutputs;
+        return count >= requiredLungsOutputs;
     }
 
     /// <summary>

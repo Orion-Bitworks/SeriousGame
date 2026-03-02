@@ -9,7 +9,8 @@ TagManager:
   - MolAlv
   - MolVein
   - ConnectionPoint
-  - HeartOutput
+  - FinalHeartOutput
+  - HeartToLungsOutput
   layers:
   - Default
   - TransparentFX

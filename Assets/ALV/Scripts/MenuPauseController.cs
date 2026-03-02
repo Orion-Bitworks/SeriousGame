@@ -10,7 +10,7 @@ public class MenuPauseController : MonoBehaviour
 	[SerializeField] GameObject menuPausePanel;
 	[SerializeField] GameObject[] allOptionPanels;
 	GameObject currentPanel;
-
+	GameObject miniHeart;
 
 	private void Start()
 	{
@@ -52,6 +52,13 @@ public class MenuPauseController : MonoBehaviour
 	{
 		menuPausePanel.SetActive(true);
 		Time.timeScale = 0f;
+
+		if (SceneManager.GetActiveScene().name == "RoadSystemTest")
+		{
+			GameManager.Instance.isPlaying = true;
+			miniHeart = FindAnyObjectByType<HeartDrag3D>().gameObject;
+			miniHeart.SetActive(false);
+		}
 	}
 
 
@@ -70,7 +77,13 @@ public class MenuPauseController : MonoBehaviour
 	{
 		menuPausePanel.SetActive(false);
 		Time.timeScale = 1f;
-	}
+
+        if (SceneManager.GetActiveScene().name == "RoadSystemTest")
+		{
+            GameManager.Instance.isPlaying = false;
+            miniHeart.SetActive(true);
+        }
+    }
 
 	public void ReturnToMenu()
 	{

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 /// <summary>
@@ -63,19 +64,60 @@ public class BuildController : MonoBehaviour
         controls = new Controls();
         controls.Enable();
 
-        // Suscribimos todos los inputActions a funciones o booleanos que gestionan funciones
-        controls.InRoadGame.Place.started += _ => isPlacing = true;
-        controls.InRoadGame.Place.canceled += _ => isPlacing = false;
-        controls.InRoadGame.Erase.started += _ => isErasing = true;
-        controls.InRoadGame.Erase.canceled += _ => isErasing = false;
-        controls.InRoadGame.Rotate.performed += _ => RotateGhostAndPreview();
-        controls.InRoadGame.PrevPiece.performed += _ => ChangeObject(false);
-        controls.InRoadGame.NextPiece.performed += _ => ChangeObject(true);
-        controls.InRoadGame.Undo.started += _ => { isUndoing = true; undoHoldTimer = 0f; };
-        controls.InRoadGame.Undo.canceled += _ => isUndoing = false;
-        controls.InRoadGame.Redo.started += _ => { isRedoing = true; redoHoldTimer = 0f; };
-        controls.InRoadGame.Redo.canceled += _ => isRedoing = false;
+        // Suscribimos todos los inputActions a sus funciones correspondientes
+        controls.InRoadGame.Place.started += OnPlaceStarted;
+        controls.InRoadGame.Place.canceled += OnPlaceCanceled;
+        controls.InRoadGame.Erase.started += OnEraseStarted;
+        controls.InRoadGame.Erase.canceled += OnEraseCanceled;
+        controls.InRoadGame.Rotate.performed += OnRotate;
+        controls.InRoadGame.PrevPiece.performed += OnPrevPiece;
+        controls.InRoadGame.NextPiece.performed += OnNextPiece;
+        controls.InRoadGame.Undo.started += OnUndoStarted;
+        controls.InRoadGame.Undo.canceled += OnUndoCanceled;
+        controls.InRoadGame.Redo.started += OnRedoStarted;
+        controls.InRoadGame.Redo.canceled += OnRedoCanceled;
     }
+
+    private void OnDestroy()
+    {
+        // Desuscribimos todos los inputActions a sus funciones correspondientes
+        if (controls == null) return;
+
+        controls.InRoadGame.Place.started -= OnPlaceStarted;
+        controls.InRoadGame.Place.canceled -= OnPlaceCanceled;
+        controls.InRoadGame.Erase.started -= OnEraseStarted;
+        controls.InRoadGame.Erase.canceled -= OnEraseCanceled;
+        controls.InRoadGame.Rotate.performed -= OnRotate;
+        controls.InRoadGame.PrevPiece.performed -= OnPrevPiece;
+        controls.InRoadGame.NextPiece.performed -= OnNextPiece;
+        controls.InRoadGame.Undo.started -= OnUndoStarted;
+        controls.InRoadGame.Undo.canceled -= OnUndoCanceled;
+        controls.InRoadGame.Redo.started -= OnRedoStarted;
+        controls.InRoadGame.Redo.canceled -= OnRedoCanceled;
+
+        controls.Disable();
+    }
+
+    // Lista de funciones para las distintas acciones de los inputActions
+    private void OnPlaceStarted(InputAction.CallbackContext ctx) => isPlacing = true;
+    private void OnPlaceCanceled(InputAction.CallbackContext ctx) => isPlacing = false;
+    private void OnEraseStarted(InputAction.CallbackContext ctx) => isErasing = true;
+    private void OnEraseCanceled(InputAction.CallbackContext ctx) => isErasing = false;
+    private void OnRotate(InputAction.CallbackContext ctx) => RotateGhostAndPreview();
+    private void OnPrevPiece(InputAction.CallbackContext ctx) => ChangeObject(false);
+    private void OnNextPiece(InputAction.CallbackContext ctx) => ChangeObject(true);
+    private void OnUndoStarted(InputAction.CallbackContext ctx)
+    {
+        isUndoing = true;
+        undoHoldTimer = 0f;
+    }
+    private void OnUndoCanceled(InputAction.CallbackContext ctx) => isUndoing = false;
+    private void OnRedoStarted(InputAction.CallbackContext ctx)
+    {
+        isRedoing = true;
+        redoHoldTimer = 0f;
+    }
+    private void OnRedoCanceled(InputAction.CallbackContext ctx) => isRedoing = false;
 
     /// <summary>
     /// Rota tanto el ghost como la preview

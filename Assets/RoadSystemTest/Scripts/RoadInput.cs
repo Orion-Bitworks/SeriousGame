@@ -17,11 +17,17 @@ public class RoadInput : MonoBehaviour
         StartCoroutine(SpawnRoutine());
     }
 
+    /// <summary>
+    /// Empieza a generar bolitas
+    /// </summary>
     public void StartGenerating()
     {
         StartCoroutine(SpawnRoutine());
     }
 
+    /// <summary>
+    /// Deja de generar bolitas
+    /// </summary>
     public void StopGenerating()
     {
         StopAllCoroutines();
