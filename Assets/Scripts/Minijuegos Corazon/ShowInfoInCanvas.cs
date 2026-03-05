@@ -6,12 +6,10 @@ using UnityEngine;
 public class ShowInfoInCanvas : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI namePiecesText;
-    [SerializeField] TextMeshProUGUI numberOfPiecesCollocatedText;
 
     private void Update()
     {
         ShowInfoNames();
-        ShowInfoPieces();
     }
 
     void ShowInfoNames()
@@ -26,8 +24,4 @@ public class ShowInfoInCanvas : MonoBehaviour
         }
     }
 
-    void ShowInfoPieces()
-    {
-
-    }
 }

@@ -50,7 +50,6 @@ public class ObjectSelector : MonoBehaviour
             return;
         }
 
-        Debug.Log(" Rotando: " + currentlySelected.name);
 
         if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase1Root != null && minigamesPhasesInstance.fase1Root.activeSelf)
         {
