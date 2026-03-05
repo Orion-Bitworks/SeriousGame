@@ -19,6 +19,8 @@ public class Minigame1 : MonoBehaviour
     [SerializeField] Button CheckButton;
 
     [SerializeField]private PopUp popUpManager;
+    private bool popUpShown = false;
+
 
     private void Awake()
     {
@@ -51,7 +53,7 @@ public class Minigame1 : MonoBehaviour
     //Metodo para mostrar la informacion de las valvulas
     void showInfo() 
     {
-        remainObjectsToDrag.text = placedValves + " / " + totalValves; 
+        remainObjectsToDrag.text = placedValves.ToString() + " / " + totalValves.ToString(); 
     }
 
     public void checkPlacementButton()
@@ -61,24 +63,20 @@ public class Minigame1 : MonoBehaviour
 
         foreach (DragAndDrop obj in draggableValves)
         {
-            // Tiene que estar en una DropArea
-            if (obj.CurrentDropArea != null)
+            if (obj.placed && obj.CurrentDropArea != null)
             {
                 DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
 
-                // La dropArea existe
                 if (drop != null)
                 {
-                    // Comprueba que sea la pieza correcta
                     if (drop.valveType == obj.valveType)
                     {
-                        // Comprobar rotación correcta usando quaternions
                         Quaternion currentRot = obj.transform.rotation;
                         float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
 
-                        if (angleDiff <= drop.rotationTolerance) //la rotationTolerance esta explicada en dropArea
+                        if (angleDiff <= drop.rotationTolerance)
                         {
-                            correct++; //suma 1 a los aciertos
+                            correct++;
                         }
                     }
                 }
@@ -108,10 +106,21 @@ public class Minigame1 : MonoBehaviour
                 }
             }
 
-            phasesManager.PasarAFase2(); //pasa a la siguiente fase
-            popUpManager.ShowPopUp("Has acabat el primer minijoc!", 2f); //pop up
+            if (!popUpShown)
+            {
+                popUpManager.ShowPopUp("Has acabat el primer minijoc!", 2f);
+                popUpShown = true;
+                phasesManager.PasarAFase2(); //pasa a la siguiente fase
+            }
+            else
+            {
+                popUpManager.ShowPopUp($"Només has fet: {correct}, torna-ho a intentar", 2f);
+            }
+
+
 
         }
+        
 
     }
 }

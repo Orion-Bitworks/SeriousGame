@@ -31,6 +31,8 @@ public class DragAndDrop : MonoBehaviour
     {
         initialPosition = transform.position; //Al iniciar, guarda la posición inicial del objeto.
         selectObj = GetComponent<SelectObject>();
+
+
     }
 
     //inicio del drag
@@ -38,13 +40,22 @@ public class DragAndDrop : MonoBehaviour
     {
         if (locked) return; // Bloqueja TOT el clic
 
-        if (GetComponent<DragAndDrop>().locked) return; // Si está bloqueado, ignorar clic
-
+        //Liberar la DropArea actual si estaba colocado
         //Liberar la DropArea actual si estaba colocado
         if (placed && CurrentDropArea != null)
         {
             DropArea drop = CurrentDropArea.GetComponent<DropArea>();
             if (drop != null) drop.occupied = false;
+
+            placed = false; // 👈 IMPORTANTE
+            CurrentDropArea = null;
+
+            //Actualizar contador
+            if (minigame1Instance != null && minigame1Instance.gameObject.activeSelf)
+                minigame1Instance.objectsRemaining();
+
+            if (minigame2Instance != null && minigame2Instance.gameObject.activeSelf)
+                minigame2Instance.objectsRemaining();
         }
 
         //Gestión de selección exclusiva con currentlySelected
@@ -70,13 +81,15 @@ public class DragAndDrop : MonoBehaviour
         //Calcula el drag
         offset = transform.position - MouseWorldPosition();
         GetComponent<Collider>().enabled = false;
+
+
     }
 
 
     //Mover el objeto
     void OnMouseDrag()
     {
-        if (locked) return; // ❌ No permet moure
+        if (locked) return; // No permet moure
 
         transform.position = MouseWorldPosition() + offset; //El objeto sigue la posición del ratón en el mundo respetando el offset inicial
     }

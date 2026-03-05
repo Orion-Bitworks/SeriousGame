@@ -19,6 +19,14 @@ public class ObjectSelector : MonoBehaviour
         dragAndDropInstance = GetComponent<DragAndDrop>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            rotatePiece();
+        }
+    }
+
     private void rotatePiece()
     {
 
