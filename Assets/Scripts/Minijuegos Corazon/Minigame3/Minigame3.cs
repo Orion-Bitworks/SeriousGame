@@ -153,14 +153,15 @@ public class Minigame3 : MonoBehaviour
     {
         gameActive = false;
 
-        if(completedNotes >= maxNotes)
-        {
-            popUpManager.ShowPopUp("Has acabat el tercer minijoc, Felicitats! Has acabat tots els minijocs correctament", 3f);
-        }
-        else
+        if(completedNotes < maxNotes)
         {
             rebootButton.SetActive(true);
             popUpManager.ShowPopUp($"Has fet un total de {completedNotes} de {maxNotes}, torna a intentar-ho de nou", 4);
+            
+        }
+        else
+        {
+            popUpManager.ShowPopUp("Has acabat el tercer minijoc, Felicitats! Has acabat tots els minijocs correctament", 3f);
         }
     }
 
