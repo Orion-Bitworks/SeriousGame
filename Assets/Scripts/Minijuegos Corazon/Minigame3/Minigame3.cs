@@ -179,6 +179,9 @@ public class Minigame3 : MonoBehaviour
 
     public void RestartMinigame()
     {
+
+        rebootButton.SetActive(false);
+
         StopAllCoroutines();
         gameActive = false;
 
