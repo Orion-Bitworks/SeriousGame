@@ -1,7 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public static class TempLevelHolder
+{
+    public static LevelID nextLevel = LevelID.Pipe;
+}
 
 /// <summary>
 /// Gestiona el funcionamiento del flujo de bolitas en el juego (game loop)
@@ -11,41 +15,61 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }    // Referencia Singleton
 
     [SerializeField] GameObject gameoverPanel;                  // Referencia al panel de GameOver
+    [SerializeField] Button continueButton;                     // Referencia al panel de GameOver
+    [SerializeField] GameObject[] levels;
 
     [HideInInspector] public bool isPlaying = false;            // Controla si el sistema de bolitas está en marcha
     [HideInInspector] public bool heartPlaced = false;          // Controla si el corazón ha sido colocado
 
-    int requiredFinalOutputs = 3;                               // Número mínimo de salidas que deben haber recibido bolitas
     HeartLogic heartLogic;                                      // Referencia al controlador de la lógica del corazón
+
+    LevelID currentLevel;
 
     private void Awake()
     {
         Instance = this;    // Inicializamos el Singleton
     }
 
-    // Comprueba si el sistema ha sido completado correctamente, y si es así, muestra la pantalla de fin de juego
-    private void Update()
+    private void Start()
     {
-        if (CheckFinalSystem())
-            gameoverPanel.SetActive(true);
+        LoadLevel(TempLevelHolder.nextLevel);
     }
 
-    /// <summary>
-    /// Comprueba si todos los outputs del corazón ("requiredFinalOutputs") necesarios han recibido bolitas
-    /// </summary>
-    /// <returns>True si el número de "FinalHeartOutputs" que han recibido bola es mayor o igual que "requiredFinalOutputs"</returns>
-    public bool CheckFinalSystem()
+    public void LoadLevel(LevelID level)
     {
-        // Recorremos todos los outputs y sumamos 1 en un contador si los "FinalHeartOutput" han recibido bolita
-        RoadOutput[] roadOutputs = FindObjectsOfType<RoadOutput>();
-        int count = 0;
-        foreach (var roadOutput in roadOutputs)
+        if (level == 0)
+            FindAnyObjectByType<HeartDrag3D>().DespawnMiniHeart();
+        else
+            FindAnyObjectByType<HeartDrag3D>().SpawnMiniHeart();
+
+        currentLevel = level;
+
+        int index = (int)level;
+
+        if (level > 0 && !LevelProgress.IsLevelCompleted(index - 1))
         {
-            if (roadOutput.CompareTag("FinalHeartOutput") && roadOutput.ballReceived)
-                count++;
+            Debug.Log("Nivel bloqueado");
+            return;
         }
 
-        return count >= requiredFinalOutputs;
+        Instantiate(levels[index]);
+    }
+
+    public void LoadNextLevel()
+    {
+        int nextIndex = (int)currentLevel + 1;
+
+        if (nextIndex >= levels.Length)
+        {
+            Debug.Log("No hay más niveles");
+            return;
+        }
+
+        // Guardamos el siguiente nivel en una variable estática temporal
+        TempLevelHolder.nextLevel = (LevelID)nextIndex;
+
+        // Recargamos la escena actual
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     /// <summary>
@@ -74,9 +98,9 @@ public class GameManager : MonoBehaviour
             roadOutput.ballReceived = false;
 
         // Desactiva todos los inputs del sistema
-        HeartLevelInput[] heartLevelInputs = FindObjectsOfType<HeartLevelInput>();
-        foreach (var heartLevelInput in heartLevelInputs)
-            heartLevelInput.DeactivateInputs();
+        LevelInputActivator[] levelInputs = FindObjectsOfType<LevelInputActivator>();
+        foreach (var levelInput in levelInputs)
+            levelInput.DeactivateInputs();
 
         // Desactiva los inputs de dentro del sistema del corazón
         if (heartLogic = FindAnyObjectByType<HeartLogic>())
@@ -89,6 +113,15 @@ public class GameManager : MonoBehaviour
     public void LoadScene(string targetScene)
     {
         SceneManager.LoadScene(targetScene);
+    }
+
+    public void EndLevel()
+    {
+        LevelProgress.CompleteLevel((int)currentLevel);
+        gameoverPanel.SetActive(true);
+
+        continueButton.onClick.RemoveAllListeners();
+        continueButton.onClick.AddListener(LoadNextLevel);
     }
 }
 

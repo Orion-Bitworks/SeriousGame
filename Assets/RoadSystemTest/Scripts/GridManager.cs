@@ -8,10 +8,10 @@ public class GridManager : MonoBehaviour
 {
     public static GridManager Instance { get; private set; }    // Referencia Singleton
 
-    float gridSize = 1f;                                 // Tamaño de las celdas de la grid
+    float gridSize = 1f;                                        // Tamaño de las celdas de la grid
 
-    Vector2Int minBounds = new Vector2Int(-14, -8);      // Límite del área mínima donde se pueden colocar piezas
-    Vector2Int maxBounds = new Vector2Int(14, 8);        // Límite del área máxima donde se pueden colocar piezas
+    Vector2Int minBounds = new Vector2Int(-14, -8);            // Límite del área mínima donde se pueden colocar piezas
+    Vector2Int maxBounds = new Vector2Int(12, 8);               // Límite del área máxima donde se pueden colocar piezas
 
     [HideInInspector] public Dictionary<Vector3Int, GameObject> placedObjects = new Dictionary<Vector3Int, GameObject>();     // Diccionario de piezas colocadas
     [HideInInspector] public Dictionary<Vector3Int, RoadOutput> outputs = new Dictionary<Vector3Int, RoadOutput>();           // Diccionario de salidas colocadas
