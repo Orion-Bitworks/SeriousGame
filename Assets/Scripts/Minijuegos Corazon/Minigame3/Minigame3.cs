@@ -57,6 +57,10 @@ public class Minigame3 : MonoBehaviour
 
             yield return new WaitForSeconds(spawnInterval);
         }
+
+        yield return new WaitForSeconds(1f);
+
+        EndMinigame();
     }
 
     IEnumerator ShowInstructions()
