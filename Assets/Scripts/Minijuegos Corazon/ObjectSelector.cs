@@ -1,0 +1,59 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+public class ObjectSelector : MonoBehaviour
+{
+    public static SelectObject currentlySelected = null;
+
+    [SerializeField]private Button rotateButton; //Boton de rotar
+
+    static RotateObjects rotateObjectsInstance; //Instancia del script RotateObjects
+
+    public FasesMinigames minigamesPhasesInstance; //Instancia del script FasesMinigames
+
+    private DragAndDrop dragAndDropInstance;
+
+    private void Awake()
+    {
+        rotateButton.onClick.AddListener(rotatePiece); //Listener
+        dragAndDropInstance = GetComponent<DragAndDrop>();
+    }
+
+    private void rotatePiece()
+    {
+
+        if (currentlySelected == null)
+        {
+            Debug.Log("No se ha seleccionado ningun objeto");
+            return;
+        }
+
+        if (dragAndDropInstance != null && dragAndDropInstance.locked) 
+        { 
+            Debug.Log("Este objeto está bloqueado y no se puede rotar."); 
+            return; 
+        }
+
+        rotateObjectsInstance = currentlySelected.GetComponentInParent<RotateObjects>(); //script rotateObjects
+
+        if (rotateObjectsInstance == null)
+        {
+            Debug.LogError("RotateObjects NO encontrado en: " + currentlySelected.name);
+            return;
+        }
+
+        Debug.Log(" Rotando: " + currentlySelected.name);
+
+        if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase1Root != null && minigamesPhasesInstance.fase1Root.activeSelf)
+        {
+            rotateObjectsInstance.rotateObjectsMinigame1(currentlySelected);
+            Debug.Log("Fase 1 - 180°");
+        }
+        else if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase2Root != null && minigamesPhasesInstance.fase2Root.activeSelf)
+        {
+            rotateObjectsInstance.rotateObjectsMinigame2(currentlySelected);
+            Debug.Log("Fase 2 - 90°");
+        }
+    }
+
+}

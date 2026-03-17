@@ -47,6 +47,7 @@ public class ConnectionPointController : MonoBehaviour
             paired = false;
             pairedWithPartner = false;
             pairId = "";
+            Debug.Log(id + " ha dejado de estar conectado con " + other.GetComponent<ConnectionPointController>().GetId());
             //piece.DisconnectPiece(other.GetComponent<PieceController>());
             //CheckPairing(other.GetComponent<ConnectionPointController>());
         }
