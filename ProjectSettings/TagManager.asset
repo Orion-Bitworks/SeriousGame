@@ -4,7 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - DropArea
+  - Despawner
+  - MolAlv
+  - MolVein
   - ConnectionPoint
+  - FinalHeartOutput
+  - HeartToLungsOutput
   layers:
   - Default
   - TransparentFX
@@ -12,8 +18,8 @@ TagManager:
   - 
   - Water
   - UI
-  - Raycast
-  - ConnectionPoint
+  - Grid
+  - 
   - 
   - 
   - 
