@@ -47,13 +47,13 @@ public class PieceController : MonoBehaviour
 
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
     {
-        if (!canSnap)
+        /*if (!canSnap)
         {
             return;
-        }
+        }*/
 
-        point.Paired(true);
-        target.GetComponent<ConnectionPointController>().Paired(true);
+        //point.Paired(true);
+        //target.GetComponent<ConnectionPointController>().Paired(true);
 
         Debug.Log($"Snap intento: {name} -> {targetParent.name} | canSnap:{canSnap}");
 

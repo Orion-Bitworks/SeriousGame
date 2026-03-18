@@ -31,11 +31,18 @@ public class ConnectionPointController : MonoBehaviour
         {
             ConnectionPointController otherPoint = other.GetComponent<ConnectionPointController>();
 
-            if (!paired && !otherPoint.Paired())
+            if (!paired && !otherPoint.Paired()) 
             {
                 piece.SnapToPoint(this, other.transform, other.transform.parent);
-                CheckPairing(other.GetComponent<ConnectionPointController>());
+
                 pairId = otherPoint.GetId();
+                otherPoint.SetPairId(id);
+
+                CheckPairing(otherPoint);
+                otherPoint.CheckPairing(this);
+
+                paired = true;
+                otherPoint.Paired(true);
             }
         }
     }
@@ -95,5 +102,10 @@ public class ConnectionPointController : MonoBehaviour
     public void Paired(bool paired)
     {
         this.paired = paired;
+    }
+
+    public void SetPairId(string id)
+    {
+        pairId = id;
     }
 }

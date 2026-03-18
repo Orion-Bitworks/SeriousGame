@@ -29,7 +29,6 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         }
 
         Destroy(newPiece.GetComponent<InfiniteRotation>());
-        newPiece.GetComponent<PieceController>().CanSnap(true);
     }
 
     public void OnDrag(PointerEventData eventData)
