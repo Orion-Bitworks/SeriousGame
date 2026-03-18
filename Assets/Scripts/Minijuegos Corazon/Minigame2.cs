@@ -98,13 +98,19 @@ public class Minigame2 : MonoBehaviour
             if (!popUpShown)
             {
                 popUpManager.ShowPopUp("Has acabat el segon minijoc!", 2f);
-                popUpShown = true;
-                phasesManager.PasarAFase3();
+                StartCoroutine(EndMinigame());                
             }
         }
         else // Caso fallo
         {
             popUpManager.ShowPopUp($"Només has fet: {correct}, torna-ho a intentar", 2f);
         }
+    }
+
+    IEnumerator EndMinigame()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        popUpShown = true;
+        phasesManager.PasarAFase3();
     }
 }

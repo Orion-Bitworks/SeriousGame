@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Minigame3 : MonoBehaviour
 {
@@ -33,6 +31,21 @@ public class Minigame3 : MonoBehaviour
     //ELEMENTOS A ESCONDER
     [SerializeField] private GameObject[] elementsToHide;
 
+    public event System.Action<bool> OnGameCompleted;
+
+    private bool _gameCompleted = false;
+    [HideInInspector] public bool gameCompleted
+    {
+        get => _gameCompleted;
+        set
+        {
+            if (_gameCompleted == value)
+                return;
+
+            _gameCompleted = value;
+            OnGameCompleted?.Invoke(_gameCompleted);
+        }
+    }
 
     private void Awake()
     {
@@ -69,8 +82,8 @@ public class Minigame3 : MonoBehaviour
         Time.timeScale = 0f;
 
         popUpManager.ShowPopUp(
-            "Et sortira un joc on apareixeran una serie de boles. Has de pitjar la tecla que contigui la bola marcada en verd. Tens un cert temps per clicar, ja que van el ritme de la macarena",
-            4f
+            "Et sortira un joc on apareixeran una serie de boles. Has de pitjar la tecla que contigui la bola marcada en verd (A, S, D). Tens un cert temps per clicar, ja que van el ritme de la macarena",
+            5f
         );
 
         // Espera en temps real 
@@ -105,9 +118,9 @@ public class Minigame3 : MonoBehaviour
         }
 
         Vector3 randomPos = new Vector3(
-            Random.Range(minSpawn.x, maxSpawn.x),
-            Random.Range(minSpawn.y, maxSpawn.y),
-            0
+            Random.Range(transform.position.x + minSpawn.x, transform.position.x + maxSpawn.x),
+            Random.Range(transform.position.y + minSpawn.y, transform.position.y + maxSpawn.y),
+            Random.Range(transform.position.z + minSpawn.z, transform.position.z + maxSpawn.z)
         );
 
         GameObject obj = Instantiate(notePrefab, randomPos, Quaternion.identity);
@@ -166,9 +179,15 @@ public class Minigame3 : MonoBehaviour
         else
         {
             popUpManager.ShowPopUp("Has acabat el tercer minijoc, Felicitats! Has acabat tots els minijocs correctament", 3f);
+            StartCoroutine(FinishGame());
         }
     }
 
+    IEnumerator FinishGame()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+        gameCompleted = true;
+    }
 
     //Treure teclas random per mostrar
     KeyCode GetRandomKey()

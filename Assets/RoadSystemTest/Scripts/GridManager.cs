@@ -13,6 +13,9 @@ public class GridManager : MonoBehaviour
     Vector2Int minBounds = new Vector2Int(-14, -8);            // Límite del área mínima donde se pueden colocar piezas
     Vector2Int maxBounds = new Vector2Int(12, 8);               // Límite del área máxima donde se pueden colocar piezas
 
+    Vector2Int minHeartBounds = new Vector2Int(-9, -4);
+    Vector2Int maxHeartBounds = new Vector2Int(7, 5);
+
     [HideInInspector] public Dictionary<Vector3Int, GameObject> placedObjects = new Dictionary<Vector3Int, GameObject>();     // Diccionario de piezas colocadas
     [HideInInspector] public Dictionary<Vector3Int, RoadOutput> outputs = new Dictionary<Vector3Int, RoadOutput>();           // Diccionario de salidas colocadas
 
@@ -58,6 +61,19 @@ public class GridManager : MonoBehaviour
                cell.x <= maxBounds.x &&
                cell.z >= minBounds.y &&
                cell.z <= maxBounds.y;
+    }
+
+    /// <summary>
+    /// Comprueba si una celda se encuentra dentro del área permitida
+    /// </summary>
+    /// <param name="cell">Celda a comprobar</param>
+    /// <returns>True si se encuentra dentro del área, false si no</returns>
+    public bool IsHeartInsideBounds(Vector3Int cell)
+    {
+        return cell.x >= minHeartBounds.x &&
+               cell.x <= maxHeartBounds.x &&
+               cell.z >= minHeartBounds.y &&
+               cell.z <= maxHeartBounds.y;
     }
 
     /// <summary>

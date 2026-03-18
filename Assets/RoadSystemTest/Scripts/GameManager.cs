@@ -1,10 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public static class TempLevelHolder
 {
-    public static LevelID nextLevel = LevelID.Pipe;
+    public static LevelID nextLevel = LevelID.Heart;
 }
 
 /// <summary>
@@ -19,11 +20,30 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject[] levels;
 
     [HideInInspector] public bool isPlaying = false;            // Controla si el sistema de bolitas está en marcha
-    [HideInInspector] public bool heartPlaced = false;          // Controla si el corazón ha sido colocado
+    //[HideInInspector] public bool heartPlaced = false;          // Controla si el corazón ha sido colocado
+    public Vector3 heartPosition;
 
     HeartLogic heartLogic;                                      // Referencia al controlador de la lógica del corazón
 
     LevelID currentLevel;
+
+    public GameObject currentLevelGameObject;
+
+    public event Action<bool> OnHeartPlacedChanged;
+
+    private bool _heartPlaced = false;
+    [HideInInspector] public bool heartPlaced 
+    {
+        get => _heartPlaced;
+        set
+        {
+            if (_heartPlaced == value)
+                return;
+
+            _heartPlaced = value;
+            OnHeartPlacedChanged?.Invoke(_heartPlaced);
+        }
+    }
 
     private void Awake()
     {
@@ -52,7 +72,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        Instantiate(levels[index]);
+        currentLevelGameObject = Instantiate(levels[index]);
     }
 
     public void LoadNextLevel()

@@ -54,6 +54,7 @@ public class HeartDrag3D : MonoBehaviour
 
         // Creamos el ghost del corazón real
         ghost = Instantiate(heartPrefab);
+        ghost.transform.position = ghost.transform.position;
         HeartPlacementController.Instance.BeginDragGhost(ghost);
     }
 
