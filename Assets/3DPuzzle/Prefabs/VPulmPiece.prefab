@@ -124,6 +124,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   canBeRegistered: 0
+  paired: 0
+  pairId: 
 --- !u!1 &8085032616867743319
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,6 +250,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   canBeRegistered: 0
+  paired: 0
+  pairId: 
 --- !u!1001 &3980744004077435799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -259,6 +263,10 @@ PrefabInstance:
     - target: {fileID: 4035821797165758195, guid: b3d5392e33a37b64abf92e519fd8478b, type: 3}
       propertyPath: m_Name
       value: VPulmPiece
+      objectReference: {fileID: 0}
+    - target: {fileID: 4035821797165758195, guid: b3d5392e33a37b64abf92e519fd8478b, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7112725083468181140, guid: b3d5392e33a37b64abf92e519fd8478b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -299,6 +307,10 @@ PrefabInstance:
     - target: {fileID: 7112725083468181140, guid: b3d5392e33a37b64abf92e519fd8478b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7364047095761343212, guid: b3d5392e33a37b64abf92e519fd8478b, type: 3}
+      propertyPath: mask.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

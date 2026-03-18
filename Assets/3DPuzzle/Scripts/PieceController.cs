@@ -195,7 +195,7 @@ public class PieceController : MonoBehaviour
 
     public void DisableControls()
     {
-        group.ChangeGroupLayer(6);
+        group.ChangeGroupLayer(8);
         group.ChangeGroupMaterial(originalMaterial);
 
         movement.DisableMovement();
@@ -240,7 +240,7 @@ public class PieceController : MonoBehaviour
     {
         List<PieceController> connectedPiecesCopy = new List<PieceController>(connectedPieces);
 
-        group.ChangeGroupLayer(6);
+        group.ChangeGroupLayer(8);
         group.ChangeGroupMaterial(originalMaterial, this);
 
         foreach (PieceController piece in connectedPiecesCopy)

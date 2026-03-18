@@ -8,12 +8,17 @@ public class GameLoopController : MonoBehaviour
 {
     [SerializeField] GameObject heartMinigames;
     [SerializeField] GameObject heartMinigamesUI;
+    [SerializeField] GameObject threeDMinigame;
+    [SerializeField] GameObject threeDMinigameUI;
     [SerializeField] GameObject pipesUI;
     [SerializeField] CinemachineVirtualCamera pipesCamera;
     [SerializeField] CinemachineVirtualCamera heartMinigamesCamera;
+    [SerializeField] CinemachineVirtualCamera threeDMinigameCamera;
 
-    bool started = false;
-    bool finished = false;
+    bool minigamesStarted = false;
+    bool minigamesFinished = false;
+    bool threeDStarted = false;
+    bool threeDFinished = false;
 
     private void Start()
     {
@@ -23,7 +28,7 @@ public class GameLoopController : MonoBehaviour
 
     private void HandleHeartPlaced(bool placed)
     {
-        if (!placed || started) return;
+        if (!placed || minigamesStarted) return;
 
         StartCoroutine(WaitASecond());
     }
@@ -32,7 +37,7 @@ public class GameLoopController : MonoBehaviour
     {
         yield return new WaitForNextFrameUnit();
 
-        started = true;
+        minigamesStarted = true;
         GameManager.Instance.isPlaying = true;
         GameManager.Instance.currentLevelGameObject.SetActive(false);
         heartMinigames.gameObject.SetActive(true);
@@ -44,14 +49,27 @@ public class GameLoopController : MonoBehaviour
 
     private void HandleGameCompleted(bool completed)
     {
-        if (!completed || finished) return;
+        if (!completed || minigamesFinished) return;
 
-        finished = true;
-        GameManager.Instance.isPlaying = false;
+        minigamesFinished = true;
         GameManager.Instance.currentLevelGameObject.SetActive(true);
+        GameManager.Instance.isPlaying = false;
         heartMinigames.gameObject.SetActive(false);
         pipesUI.gameObject.SetActive(true);
         heartMinigamesUI.gameObject.SetActive(false);
         heartMinigamesCamera.Priority = 0;
+    }
+
+    public void Start3DLevel()
+    {
+        if (threeDStarted) return;
+
+        threeDStarted = true;
+        GameManager.Instance.isPlaying = true;
+        GameManager.Instance.currentLevelGameObject.SetActive(false);
+        threeDMinigame.gameObject.SetActive(true);
+        pipesUI.gameObject.SetActive(false);
+        threeDMinigameUI.gameObject.SetActive(true);
+        threeDMinigameCamera.Priority = 2;
     }
 }

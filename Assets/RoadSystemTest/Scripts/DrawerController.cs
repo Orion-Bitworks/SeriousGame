@@ -17,6 +17,8 @@ public class DrawerController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.isPlaying) return;
+
         if (IsMouseOverHandle() && !drawerOut)
         {
             // Si hacemos click encima del corazón del cajón, empezamos a arrastrar el corazón real

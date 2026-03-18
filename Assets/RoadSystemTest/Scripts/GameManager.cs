@@ -73,6 +73,9 @@ public class GameManager : MonoBehaviour
         }
 
         currentLevelGameObject = Instantiate(levels[index]);
+
+        if (level == LevelID.Heart)
+            FindObjectOfType<GameLoopController>().Start3DLevel();
     }
 
     public void LoadNextLevel()

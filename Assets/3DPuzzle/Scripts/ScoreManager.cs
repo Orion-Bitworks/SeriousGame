@@ -34,6 +34,7 @@ public class ScoreManager : MonoBehaviour
         {
             if (!point.PairedWithPartner())
             {
+                Debug.Log("Incorrecto");
                 allRight = false;
             }
         }
