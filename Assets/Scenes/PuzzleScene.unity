@@ -2863,6 +2863,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: MenuPauseController, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 818959482231664861, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -4.0809326
+      objectReference: {fileID: 0}
     - target: {fileID: 1058955191933131338, guid: fc7fa26644c5094489205e635eb2fbd2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -3235,6 +3239,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 63bcefb67dfe6f345afe46f9c3aa651a, type: 2}
+    - target: {fileID: 386784186011173146, guid: b0651abc95aae7148b56d2c90f772aef, type: 3}
+      propertyPath: layerToDetect.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2981249606261327050, guid: b0651abc95aae7148b56d2c90f772aef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
