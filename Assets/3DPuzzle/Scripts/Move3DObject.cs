@@ -10,11 +10,11 @@ public class Move3DObject : MonoBehaviour
     [SerializeField] LayerMask mask = 6;
     PieceController piece;
 
-    private float pointDistance = 10f;
+    private float pointDistance = 3f;
     private float breakSnapDistance = 1f;
 
-    [SerializeField] private float minPointDistance = 2f;
-    [SerializeField] private float maxPointDistance = 15f;
+    private float minPointDistance = 2f;
+    private float maxPointDistance = 6f;
 
     private bool selected = false;
 

@@ -37,6 +37,11 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!newPiece)
+        {
+            return;
+        }
+
         if (hovering)
         {
             Destroy(newPiece);

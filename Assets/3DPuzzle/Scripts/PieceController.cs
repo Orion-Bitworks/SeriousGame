@@ -207,6 +207,8 @@ public class PieceController : MonoBehaviour
         {
             piece.canSnap = false;
         }
+
+        CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.DEFAULT);
     }
 
     public bool HasSnapped()
@@ -271,5 +273,7 @@ public class PieceController : MonoBehaviour
         {
             Destroy(piece.gameObject);
         }
+
+        CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.DEFAULT);
     }
 }

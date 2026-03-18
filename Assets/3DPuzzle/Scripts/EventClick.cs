@@ -28,7 +28,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
             piece.CanSnap(false);
         }
 
-        CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.DEFAULT);
+        //CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.DEFAULT);
     }
 
     // Cuando se hace click
