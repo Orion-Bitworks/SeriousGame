@@ -9,7 +9,6 @@ public class OptionMenuController : MonoBehaviour
     [SerializeField] GameObject[] allOptionPanels;
     GameObject currentPanel;
     [SerializeField] GameObject currentRebindPanel;
-    //Button button;
 
     private void Start()
     {
