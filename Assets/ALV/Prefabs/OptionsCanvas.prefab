@@ -495,7 +495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2601787586657805977
 RectTransform:
   m_ObjectHideFlags: 0
@@ -688,7 +688,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7717399068867689133}
         m_TargetAssemblyTypeName: ButtonsUIManagerController, Assembly-CSharp
         m_MethodName: SelectButton
         m_Mode: 2
@@ -1210,7 +1210,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7717399068867689133}
         m_TargetAssemblyTypeName: ButtonsUIManagerController, Assembly-CSharp
         m_MethodName: SelectButton
         m_Mode: 2
@@ -1355,7 +1355,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7717399068867689133}
         m_TargetAssemblyTypeName: ButtonsUIManagerController, Assembly-CSharp
         m_MethodName: SelectButton
         m_Mode: 2
@@ -3379,7 +3379,7 @@ RectTransform:
   m_Father: {fileID: 1644569317401476780}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.521, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3453,8 +3453,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5007855733141891071}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.363, y: 0}
+  m_AnchorMax: {x: 0.363, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3740,10 +3740,10 @@ RectTransform:
   - {fileID: 338513081530105954}
   m_Father: {fileID: 8893299127224771675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 525, y: -22.5}
-  m_SizeDelta: {x: 350, y: 45}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5606374522736233244
 CanvasRenderer:
@@ -3984,7 +3984,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 7717399068867689133}
         m_TargetAssemblyTypeName: ButtonsUIManagerController, Assembly-CSharp
         m_MethodName: SelectButton
         m_Mode: 2
@@ -4105,10 +4105,10 @@ RectTransform:
   - {fileID: 5594801201538672568}
   m_Father: {fileID: 8893299127224771675}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 175, y: -22.5}
-  m_SizeDelta: {x: 350, y: 45}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7440436966460661997
 CanvasRenderer:
@@ -5001,8 +5001,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 8774848127366112536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.521, y: 0}
+  m_AnchorMax: {x: 0.521, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5378,7 +5378,7 @@ RectTransform:
   m_Father: {fileID: 6161539846783976788}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.363, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5921,6 +5921,7 @@ GameObject:
   - component: {fileID: 5373715206209073753}
   - component: {fileID: 6434631548141349459}
   - component: {fileID: 6310458334249277178}
+  - component: {fileID: 7717399068867689133}
   m_Layer: 5
   m_Name: OptionsCanvas
   m_TagString: Untagged
@@ -6011,6 +6012,21 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &7717399068867689133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8153471543876510988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989fe93641353f34280e32678c728793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alphaActive: 1
+  alphaInactive: 0
+  buttonActive: {fileID: 7330952401923686182}
 --- !u!1 &8327327432003179676
 GameObject:
   m_ObjectHideFlags: 0

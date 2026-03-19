@@ -11,6 +11,21 @@ public class ButtonsUIManagerController : MonoBehaviour
 
 	Image currentActiveButton;
 
+	[SerializeField] Button buttonActive;
+
+	private void Start()
+	{
+		if (buttonActive != null)
+		{
+			currentActiveButton = buttonActive.GetComponent<Image>();
+
+			Color c = currentActiveButton.color;
+			c.a = alphaActive;
+			currentActiveButton.color = c;
+
+		}
+	}
+
 	public void SelectButton(Button button)
 	{
 		Image img = button.GetComponent<Image>();
