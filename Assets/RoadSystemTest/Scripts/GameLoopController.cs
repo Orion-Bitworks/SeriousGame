@@ -72,4 +72,17 @@ public class GameLoopController : MonoBehaviour
         threeDMinigameUI.gameObject.SetActive(true);
         threeDMinigameCamera.Priority = 2;
     }
+
+    public void End3DLevel()
+    {
+        if (threeDFinished) return;
+
+        threeDFinished = true;
+        GameManager.Instance.currentLevelGameObject.SetActive(true);
+        GameManager.Instance.isPlaying = false;
+        threeDMinigame.gameObject.SetActive(false);
+        pipesUI.gameObject.SetActive(true);
+        threeDMinigameUI.gameObject.SetActive(false);
+        threeDMinigameCamera.Priority = 0;
+    }
 }

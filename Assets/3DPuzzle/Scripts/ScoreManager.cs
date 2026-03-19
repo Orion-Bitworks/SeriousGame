@@ -55,6 +55,11 @@ public class ScoreManager : MonoBehaviour
         widget.SetActive(true);
     }
 
+    public void End3DMinigame()
+    {
+        FindObjectOfType<GameLoopController>().End3DLevel();
+    }
+
     public void LoadScene(string targetScene)
     {
         SceneManager.LoadScene(targetScene);

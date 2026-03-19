@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public static class TempLevelHolder
 {
-    public static LevelID nextLevel = LevelID.Heart;
+    public static LevelID nextLevel = LevelID.Pipe;
 }
 
 /// <summary>
