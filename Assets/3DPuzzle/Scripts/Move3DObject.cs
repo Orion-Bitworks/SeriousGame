@@ -7,7 +7,7 @@ public class Move3DObject : MonoBehaviour
 {
     InputManager inputManager;
     Camera cam;
-    [SerializeField] LayerMask mask = 6;
+    [SerializeField] LayerMask mask = 8;
     PieceController piece;
 
     private float pointDistance = 3f;

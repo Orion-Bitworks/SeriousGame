@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuPauseController : MonoBehaviour
 {
+	[SerializeField] GameObject pause;
 	[SerializeField] GameObject menuPausePanel;
 	[SerializeField] GameObject[] allOptionPanels;
 	GameObject currentPanel;
@@ -10,6 +11,7 @@ public class MenuPauseController : MonoBehaviour
 
 	private void Start()
 	{
+		pause.SetActive(false);
 		menuPausePanel.SetActive(false);
 		foreach (GameObject panel in allOptionPanels)
 		{
@@ -33,28 +35,46 @@ public class MenuPauseController : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (!menuPausePanel.activeSelf)
+			if (!pause.activeSelf)
 			{
-				OpenMenuPause();
+				StartPause();
 			}
 			else
 			{
-				CloseMenuPause();
+				ClosePause();
 			}
 		}
 	}
 
-	private void OpenMenuPause()
+	private void StartPause()
 	{
-		menuPausePanel.SetActive(true);
+		pause.SetActive(true);
 		Time.timeScale = 0f;
-
 		if (SceneManager.GetActiveScene().name == "RoadSystemTest")
 		{
 			GameManager.Instance.isPlaying = true;
 			miniHeart = FindAnyObjectByType<HeartDrag3D>().gameObject;
 			miniHeart.SetActive(false);
 		}
+	}
+
+	public void ClosePause()
+	{
+		pause.SetActive(false);
+		Time.timeScale = 1f;
+
+        if (SceneManager.GetActiveScene().name == "RoadSystemTest")
+		{
+            GameManager.Instance.isPlaying = false;
+            miniHeart.SetActive(true);
+        }
+	}
+
+	public void OpenOptionMenuPause()
+	{
+		menuPausePanel.SetActive(true);
+
+
 	}
 
 
@@ -69,16 +89,10 @@ public class MenuPauseController : MonoBehaviour
 	}
 
 
-	public void CloseMenuPause()
+	public void CloseOptionMenuPause()
 	{
 		menuPausePanel.SetActive(false);
-		Time.timeScale = 1f;
 
-        if (SceneManager.GetActiveScene().name == "RoadSystemTest")
-		{
-            GameManager.Instance.isPlaying = false;
-            miniHeart.SetActive(true);
-        }
     }
 
 	public void ReturnToMenu()

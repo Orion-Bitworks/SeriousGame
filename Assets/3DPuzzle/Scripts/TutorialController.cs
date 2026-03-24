@@ -109,7 +109,7 @@ public class TutorialController : MonoBehaviour
             Outline outline = progressDot.AddComponent<Outline>();
             outline.effectColor = unselected;
 
-            progressDot.transform.SetParent(progressPanel, true);
+            progressDot.transform.SetParent(progressPanel, false);
 
             dots.Add(progressDot);
         }

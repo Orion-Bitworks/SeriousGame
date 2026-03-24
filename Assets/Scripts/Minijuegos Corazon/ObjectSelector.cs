@@ -19,6 +19,14 @@ public class ObjectSelector : MonoBehaviour
         dragAndDropInstance = GetComponent<DragAndDrop>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            rotatePiece();
+        }
+    }
+
     private void rotatePiece()
     {
 
@@ -42,7 +50,6 @@ public class ObjectSelector : MonoBehaviour
             return;
         }
 
-        Debug.Log(" Rotando: " + currentlySelected.name);
 
         if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase1Root != null && minigamesPhasesInstance.fase1Root.activeSelf)
         {

@@ -24,8 +24,36 @@ public class Minigame3 : MonoBehaviour
     [SerializeField] PopUp popUpManager;
     private bool gameActive = false; //Variable per pausar el joc
 
+    private List<RythmNote> activateNotes = new List<RythmNote>(); //lista per controlar les notes actives
+
+    [SerializeField] public GameObject rebootButton; //boto per reiniciar el minijoc en cas de haver-ho fet malament
+
+    //ELEMENTOS A ESCONDER
+    [SerializeField] private GameObject[] elementsToHide;
+
+    public event System.Action<bool> OnGameCompleted;
+
+    private bool _gameCompleted = false;
+    [HideInInspector] public bool gameCompleted
+    {
+        get => _gameCompleted;
+        set
+        {
+            if (_gameCompleted == value)
+                return;
+
+            _gameCompleted = value;
+            OnGameCompleted?.Invoke(_gameCompleted);
+        }
+    }
+
     private void Awake()
     {
+        foreach(GameObject obj in elementsToHide) //amagar tots els elements dins del array
+        {
+            obj.SetActive(false);
+        }
+
         StartCoroutine(ShowInstructions()); //Corrutina per mostrar les instruccions del minijoc
     }
 
@@ -42,6 +70,10 @@ public class Minigame3 : MonoBehaviour
 
             yield return new WaitForSeconds(spawnInterval);
         }
+
+        yield return new WaitForSeconds(1f);
+
+        EndMinigame();
     }
 
     IEnumerator ShowInstructions()
@@ -50,8 +82,8 @@ public class Minigame3 : MonoBehaviour
         Time.timeScale = 0f;
 
         popUpManager.ShowPopUp(
-            "Et sortira un joc on apareixeran una serie de boles. Has de pitjar la tecla que contigui la bola marcada en verd. Tens un cert temps per clicar, ja que van el ritme de la macarena",
-            4f
+            "Et sortira un joc on apareixeran una serie de boles. Has de pitjar la tecla que contigui la bola marcada en verd (A, S, D). Tens un cert temps per clicar, ja que van el ritme de la macarena",
+            5f
         );
 
         // Espera en temps real 
@@ -68,10 +100,27 @@ public class Minigame3 : MonoBehaviour
     //Mostrar seguent nota
     void SpawnNextNote()
     {
+
+        if(activateNotes.Count >= 2)
+        {
+            RythmNote oldest = activateNotes[0];
+            activateNotes.RemoveAt(0);
+
+            bool wasCurrent = (oldest == currentNote); //tornem a reasignar la nota que s'haura de clicar
+
+            Destroy(oldest.gameObject); //es destrueix la nota mes antiga (la que ha estat mes temps en pantalla)
+
+            if(wasCurrent)
+            {
+                currentNote = null;
+                TryActivateNext();
+            }
+        }
+
         Vector3 randomPos = new Vector3(
-            Random.Range(minSpawn.x, maxSpawn.x),
-            Random.Range(minSpawn.y, maxSpawn.y),
-            0
+            Random.Range(transform.position.x + minSpawn.x, transform.position.x + maxSpawn.x),
+            Random.Range(transform.position.y + minSpawn.y, transform.position.y + maxSpawn.y),
+            Random.Range(transform.position.z + minSpawn.z, transform.position.z + maxSpawn.z)
         );
 
         GameObject obj = Instantiate(notePrefab, randomPos, Quaternion.identity);
@@ -79,10 +128,14 @@ public class Minigame3 : MonoBehaviour
         RythmNote note = obj.GetComponent<RythmNote>();
         note.Init(GetRandomKey(), this);
 
+        activateNotes.Add(note);
+
         noteQueue.Enqueue(note); //posa a la queue la nota (especie de llista)
 
         TryActivateNext();
     }
+
+    
 
     //Activar la seguent nota (sense marcar)
     void TryActivateNext()
@@ -98,6 +151,7 @@ public class Minigame3 : MonoBehaviour
     {
         if (note != currentNote) return;
 
+        activateNotes.Remove(note); //treure la nota de la llista si es completa
         Destroy(note.gameObject);
         currentNote = null;
 
@@ -105,13 +159,34 @@ public class Minigame3 : MonoBehaviour
 
         if (completedNotes >= maxNotes)
         {
-            gameActive = false; // Bloqueja el joc
-            Debug.Log("HAS ACABAT!  Has completat totes les notes correctament!");
-            popUpManager.ShowPopUp("Has acabat el tercer minijoc, Felicitats! Has acabat tots els minijocs correctament", 3f);
+            EndMinigame(); //Al finalitzar el minijoc
             return;
         }
+            TryActivateNext();
+    }
 
-        TryActivateNext();
+    //Metode per la condicio de finalitzacio del minijoc
+    private void EndMinigame()
+    {
+        gameActive = false;
+
+        if(completedNotes < maxNotes)
+        {
+            rebootButton.SetActive(true);
+            popUpManager.ShowPopUp($"Has fet un total de {completedNotes} de {maxNotes}, torna a intentar-ho de nou", 4);
+            
+        }
+        else
+        {
+            popUpManager.ShowPopUp("Has acabat el tercer minijoc, Felicitats! Has acabat tots els minijocs correctament", 3f);
+            StartCoroutine(FinishGame());
+        }
+    }
+
+    IEnumerator FinishGame()
+    {
+        yield return new WaitForSecondsRealtime(3f);
+        gameCompleted = true;
     }
 
     //Treure teclas random per mostrar
@@ -119,5 +194,36 @@ public class Minigame3 : MonoBehaviour
     {
         KeyCode[] keys = { KeyCode.A, KeyCode.S, KeyCode.D };
         return keys[Random.Range(0, keys.Length)];
+    }
+
+    public void RestartMinigame()
+    {
+
+        rebootButton.SetActive(false);
+
+        StopAllCoroutines();
+        gameActive = false;
+
+        spawnedNotes = 0;
+        completedNotes = 0;
+        currentNote = null;
+        noteQueue.Clear();
+
+        foreach(RythmNote n in activateNotes)
+        {
+            if(n != null)
+            {
+                Destroy(n.gameObject);
+            }
+            
+        }
+        activateNotes.Clear();
+
+        foreach(GameObject obj in elementsToHide)
+        {
+            obj.SetActive(false);
+        }
+
+        StartCoroutine(ShowInstructions());
     }
 }

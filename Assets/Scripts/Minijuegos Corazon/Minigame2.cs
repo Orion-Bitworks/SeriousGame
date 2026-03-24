@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -10,7 +10,7 @@ public class Minigame2 : MonoBehaviour
     int totalVeins; 
     int placedVeins; //venes colocades
 
-    public int correct = 0;
+    public int correct = 0; //Aciertos
 
     public TextMeshProUGUI remainVeinstoDrag;
 
@@ -20,6 +20,8 @@ public class Minigame2 : MonoBehaviour
 
     [SerializeField]
     private PopUp popUpManager;
+
+    private bool popUpShown = false;
 
 
     private void Awake()
@@ -58,25 +60,15 @@ public class Minigame2 : MonoBehaviour
 
         foreach (DragAndDrop obj in draggagleVeins)
         {
-            // Ha de estar en una dropArea
-            if (obj.CurrentDropArea != null)
+            if (obj.placed && obj.CurrentDropArea != null)
             {
                 DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
-
-                // Que la dropArea existeixi
-                if (drop != null)
+                if (drop != null && drop.valveType == obj.valveType)
                 {
-                    // Comprova que sigui la peça correcte
-                    if (drop.valveType == obj.valveType)
+                    float angleDiff = Quaternion.Angle(obj.transform.rotation, drop.requiredRotation);
+                    if (angleDiff <= drop.rotationTolerance)
                     {
-                        // Comprovar rotació correcta usando quaternions
-                        Quaternion currentRot = obj.transform.rotation;
-                        float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
-
-                        if (angleDiff <= drop.rotationTolerance) //la rotationTolerance esta explicada en dropArea
-                        {
-                            correct++;
-                        }
+                        correct++;
                     }
                 }
             }
@@ -84,7 +76,7 @@ public class Minigame2 : MonoBehaviour
 
         Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleVeins.Length);
 
-        if (correct == draggagleVeins.Length) // Si el numero de aciertos es igual al numero de venas que hay en el array
+        if (correct == draggagleVeins.Length) // Caso Ã©xito
         {
             foreach (DragAndDrop obj in draggagleVeins)
             {
@@ -93,22 +85,32 @@ public class Minigame2 : MonoBehaviour
                     DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
                     if (drop != null && drop.valveType == obj.valveType)
                     {
-                        Quaternion currentRot = obj.transform.rotation;
-                        float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
+                        float angleDiff = Quaternion.Angle(obj.transform.rotation, drop.requiredRotation);
                         if (angleDiff <= drop.rotationTolerance)
                         {
-                            obj.locked = true; //bloquejem els objectes
-                            obj.GetComponent<Collider>().enabled = false; //desactivem els colliders dels objectes
-
+                            obj.locked = true;
+                            obj.GetComponent<Collider>().enabled = false;
                         }
                     }
                 }
             }
-            popUpManager.ShowPopUp("Has acabat el segon minijoc!", 2f); //pop up
-            phasesManager.PasarAFase3(); //Pasar a la seguent fase
-            
 
+            if (!popUpShown)
+            {
+                popUpManager.ShowPopUp("Has acabat el segon minijoc!", 2f);
+                StartCoroutine(EndMinigame());                
+            }
         }
+        else // Caso fallo
+        {
+            popUpManager.ShowPopUp($"NomÃ©s has fet: {correct}, torna-ho a intentar", 2f);
+        }
+    }
 
+    IEnumerator EndMinigame()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+        popUpShown = true;
+        phasesManager.PasarAFase3();
     }
 }

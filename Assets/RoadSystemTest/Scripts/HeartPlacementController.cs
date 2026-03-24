@@ -47,7 +47,7 @@ public class HeartPlacementController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             Vector3Int cell = grid.Snap(hit.point);
-            ghost.transform.position = cell;
+            ghost.transform.position = cell + new Vector3Int (0, 3, 0);
 
             // Comprobar si el corazón cabe
             bool valid = CanPlaceHeartAt(cell);
@@ -81,7 +81,7 @@ public class HeartPlacementController : MonoBehaviour
         // Desactivamos el modo colocación
         isPlacingHeart = false;
 
-        Vector3Int cell = Vector3Int.RoundToInt(ghost.transform.position);
+        Vector3Int cell = Vector3Int.RoundToInt(ghost.transform.position) - new Vector3Int(0, 3, 0);
 
         // Comprobamos si se puede colocar el corazón, y si se puede lo colocamos, eliminando el ghost y devolviendo true
         if (CanPlaceHeartAt(cell))
@@ -114,6 +114,7 @@ public class HeartPlacementController : MonoBehaviour
 
         // Marcamos el corazón como colocado y lo registramos en la pila de deshacer
         GameManager.Instance.heartPlaced = true;
+        GameManager.Instance.heartPosition = heart.transform.position;
         BuildController.Instance.RegisterHeartPlaced(cell, heartPrefab, heart.transform.rotation);
     }
 
@@ -132,7 +133,7 @@ public class HeartPlacementController : MonoBehaviour
         {
             Vector3Int target = cell + offset;
 
-            if (!grid.IsInsideBounds(target))
+            if (!grid.IsHeartInsideBounds(target))
                 return false;
 
             if (grid.placedObjects.ContainsKey(target))

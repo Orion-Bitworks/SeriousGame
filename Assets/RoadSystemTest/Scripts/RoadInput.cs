@@ -11,7 +11,7 @@ public class RoadInput : MonoBehaviour
     [SerializeField] RoadDirection outputDirection;     // Dirección en la cual se envian las bolitas
     [SerializeField] BallType ballTypeToSpawn;          // Tipo de bolita que queremos que aparezca
 
-    private void Start()
+    private void OnEnable()
     {
         // Inicia una corutina que genera bolitas periódicamente
         StartCoroutine(SpawnRoutine());

@@ -34,6 +34,7 @@ public class ScoreManager : MonoBehaviour
         {
             if (!point.PairedWithPartner())
             {
+                Debug.Log("Incorrecto");
                 allRight = false;
             }
         }
@@ -52,6 +53,11 @@ public class ScoreManager : MonoBehaviour
     private void ToggleWidget()
     {
         widget.SetActive(true);
+    }
+
+    public void End3DMinigame()
+    {
+        FindObjectOfType<GameLoopController>().End3DLevel();
     }
 
     public void LoadScene(string targetScene)

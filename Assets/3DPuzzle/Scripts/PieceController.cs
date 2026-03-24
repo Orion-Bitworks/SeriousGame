@@ -47,13 +47,13 @@ public class PieceController : MonoBehaviour
 
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
     {
-        if (!canSnap)
+        /*if (!canSnap)
         {
             return;
-        }
+        }*/
 
-        point.Paired(true);
-        target.GetComponent<ConnectionPointController>().Paired(true);
+        //point.Paired(true);
+        //target.GetComponent<ConnectionPointController>().Paired(true);
 
         Debug.Log($"Snap intento: {name} -> {targetParent.name} | canSnap:{canSnap}");
 
@@ -195,7 +195,7 @@ public class PieceController : MonoBehaviour
 
     public void DisableControls()
     {
-        group.ChangeGroupLayer(6);
+        group.ChangeGroupLayer(8);
         group.ChangeGroupMaterial(originalMaterial);
 
         movement.DisableMovement();
@@ -240,7 +240,7 @@ public class PieceController : MonoBehaviour
     {
         List<PieceController> connectedPiecesCopy = new List<PieceController>(connectedPieces);
 
-        group.ChangeGroupLayer(6);
+        group.ChangeGroupLayer(8);
         group.ChangeGroupMaterial(originalMaterial, this);
 
         foreach (PieceController piece in connectedPiecesCopy)

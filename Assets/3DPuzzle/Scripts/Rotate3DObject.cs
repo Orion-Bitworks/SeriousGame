@@ -10,6 +10,9 @@ public class Rotate3DObject : MonoBehaviour
     bool selected = false;
     PieceController piece;
 
+    Vector3 firstPos;
+    float minDistance = 25;
+
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 10f;
 
@@ -58,35 +61,71 @@ public class Rotate3DObject : MonoBehaviour
         }
     }
 
+    public Vector3 GetMousePosInScreen()
+    {
+        return Input.mousePosition;
+    }
+
     public void RotateObject()
     {
         Vector2 mouseDelta = GetMouseLookInput();
 
         mouseDelta *= rotationSpeed * Time.deltaTime;
 
-        Vector3 rotationX = Vector3.right;
-        Vector3 rotationY = Vector3.up;
+        Vector3 variableAxis;
+
+        Vector3 dragPos;
+
+        float distance = 0;
 
         piece.GetGroup().CanMove(false);
 
+        if (inputManager.leftClick_ia.triggered || inputManager.rightClick_ia.triggered)
+        {
+            firstPos = GetMousePosInScreen();
+            //Debug.Log("Trigger Mouse Pos: " + firstPos);
+        }
+
         if (inputManager.leftClick_ia.inProgress)
         {
-            rotationX = Vector3.right;
-            rotationY = Vector3.up;
+            dragPos = GetMousePosInScreen();
+            //Debug.Log("Dragging Mouse Pos: " + dragPos);
+            distance = Vector3.Distance(firstPos, dragPos);
+
+            variableAxis = Vector3.up;
         }
         else if (inputManager.rightClick_ia.inProgress)
         {
-            rotationX = Vector3.right;
-            rotationY = Vector3.forward;
+            dragPos = GetMousePosInScreen();
+            distance = Vector3.Distance(firstPos, dragPos);
+
+            variableAxis = Vector3.forward;
         }
         else
         {
             return;
         }
 
-        Quaternion finalRotation = Quaternion.AngleAxis(mouseDelta.x * -1, rotationY) * Quaternion.AngleAxis(mouseDelta.y, rotationX);
+        if (distance >= minDistance)
+        {
+            Quaternion finalRotation = Quaternion.identity;
 
-        piece.GetGroup().RotatePiece(piece.GetGroup().GetCentralPivot(), finalRotation);
+            Vector3 checkAxis = firstPos - dragPos;
+
+            float posX = Mathf.Abs(checkAxis.x);
+            float posY = Mathf.Abs(checkAxis.y);
+
+            if (posX > posY)
+            {
+                finalRotation = Quaternion.AngleAxis(mouseDelta.x * -1, variableAxis);
+            }
+            else if (posY > posX)
+            {
+                finalRotation = Quaternion.AngleAxis(mouseDelta.y, Vector3.right);
+            }
+
+            piece.GetGroup().RotatePiece(piece.GetGroup().GetCentralPivot(), finalRotation);
+        }
     }
 
     private void InitializeClickInput()

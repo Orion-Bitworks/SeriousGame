@@ -31,6 +31,7 @@ public class RoadOutput : MonoBehaviour
         }
         else {
             // Rechazada, instanciamos un efecto visual en su posición
+            Debug.Log("Bolita Rechazada");
             Instantiate(destroyParticle, transform.position, Quaternion.identity);
         }
     }
