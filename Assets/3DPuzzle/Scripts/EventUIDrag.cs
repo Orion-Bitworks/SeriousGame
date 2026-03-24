@@ -16,7 +16,7 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
     {
         newPiece = Instantiate(prefabPiece, transform.position, Quaternion.identity);
         newPiece.GetComponent<PieceController>().EnableControls();
-        
+        ScoreManager.instance.pieces.Add(newPiece);
 
         ConnectionPointController[] connections = newPiece.GetComponentsInChildren<ConnectionPointController>();
 

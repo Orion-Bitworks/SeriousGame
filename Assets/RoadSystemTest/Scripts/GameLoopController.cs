@@ -28,12 +28,12 @@ public class GameLoopController : MonoBehaviour
 
     private void HandleHeartPlaced(bool placed)
     {
-        if (!placed || !minigamesStarted) return;
+        if (!placed || minigamesStarted) return;
 
-        StartCoroutine(WaitASecond());
+        StartCoroutine(DelayedHandleHeartPlaced());
     }
 
-    IEnumerator WaitASecond()
+    IEnumerator DelayedHandleHeartPlaced()
     {
         yield return new WaitForNextFrameUnit();
 
@@ -60,9 +60,11 @@ public class GameLoopController : MonoBehaviour
         heartMinigamesCamera.Priority = 0;
     }
 
-    public void Start3DLevel()
+    private IEnumerator DelayedStart3DLevel()
     {
-        if (threeDStarted) return;
+        yield return new WaitForSecondsRealtime(2f);
+
+        if (threeDStarted) yield break;
 
         threeDStarted = true;
         GameManager.Instance.isPlaying = true;
@@ -73,16 +75,14 @@ public class GameLoopController : MonoBehaviour
         threeDMinigameCamera.Priority = 2;
     }
 
-    public void End3DLevel()
+    public void Start3DLevel()
     {
-        StartCoroutine(DelayedEnd3DLevel());
+        StartCoroutine(DelayedStart3DLevel());
     }
 
-    private IEnumerator DelayedEnd3DLevel()
+    public void End3DLevel()
     {
-        yield return new WaitForSecondsRealtime(2f);
-
-        if (threeDFinished) yield break;
+        if (threeDFinished) return;
 
         threeDFinished = true;
         GameManager.Instance.currentLevelGameObject.SetActive(true);
@@ -91,5 +91,5 @@ public class GameLoopController : MonoBehaviour
         pipesUI.gameObject.SetActive(true);
         threeDMinigameUI.gameObject.SetActive(false);
         threeDMinigameCamera.Priority = 0;
-	}
+    }
 }

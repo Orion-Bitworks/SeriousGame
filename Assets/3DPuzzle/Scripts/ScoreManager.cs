@@ -10,6 +10,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] GameObject widget;
 
     [SerializeField] public HashSet<ConnectionPointController> connections = new HashSet<ConnectionPointController>();
+    [SerializeField] public HashSet<GameObject> pieces = new HashSet<GameObject>();
 
     private void Awake()
     {
@@ -58,6 +59,10 @@ public class ScoreManager : MonoBehaviour
     public void End3DMinigame()
     {
         FindObjectOfType<GameLoopController>().End3DLevel();
+        foreach (GameObject piece in pieces)
+        {
+            Destroy(piece);
+        }
     }
 
     public void LoadScene(string targetScene)

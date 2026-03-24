@@ -494,12 +494,12 @@ public class BuildController : MonoBehaviour
     IEnumerator PressUIButton(Button button)
     {
         // Simula pulsar el botón visualmente
-        ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerDownHandler);
+        //ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerDownHandler);
 
         yield return new WaitForSeconds(0.15f);
 
         // Simula soltar el botón visualmente
-        ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerUpHandler);
+        //ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerUpHandler);
     }
 
     /// <summary>
