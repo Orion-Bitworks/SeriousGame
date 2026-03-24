@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: UI_Menu_Texts_ca
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ca
+  m_SharedData: {fileID: 11400000, guid: ee5e659010dbea64c9d99edb2a78e67f, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 60033953792
+    m_Localized: Jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13699885395968
+    m_Localized: Opcions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13729639788544
+    m_Localized: "Cr\xE8dits"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13930563727360
+    m_Localized: Sortir
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14046263603200
+    m_Localized: No
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14575106617344
+    m_Localized: Si
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16354670112768
+    m_Localized: "Est\xE0s segur que vols sortir?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17089885466624
+    m_Localized: "C\xE8dits"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17288896802816
+    m_Localized: Enrere
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17578203115520
+    m_Localized: So
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17726710837248
+    m_Localized: Video
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17857640230912
+    m_Localized: Controls
+    m_Metadata:
+      m_Items: []
+  - m_Id: 17986824794112
+    m_Localized: Llenguatge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18241804922880
+    m_Localized: "M\xF9sica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18354178715648
+    m_Localized: Efectes de so
+    m_Metadata:
+      m_Items: []
+  - m_Id: 18665425432576
+    m_Localized: Pantalla completa
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19227470557184
+    m_Localized: "Resoluci\xF3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19563853737984
+    m_Localized: "Teclat / Ratol\xED"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19875809292288
+    m_Localized: Comandament
+    m_Metadata:
+      m_Items: []
+  - m_Id: 20369726337024
+    m_Localized: Reiniciar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21030215970816
+    m_Localized: Reiniciar tot
+    m_Metadata:
+      m_Items: []
+  - m_Id: 21242548416512
+    m_Localized: Esperant un control nou...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22317397536768
+    m_Localized: "Catal\xE0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22673716244480
+    m_Localized: "Espa\xF1ol"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 22903656378368
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

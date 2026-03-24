@@ -20,4 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AlvMiniGame.unity
     guid: 526562da54dc66b40bf6e942cb2bbf9c
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: bc1deff7fdd0abc4abdcdf15416d3c43, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 8f109ba34331d7d4b8e235f2f4a13fcf, type: 2}
