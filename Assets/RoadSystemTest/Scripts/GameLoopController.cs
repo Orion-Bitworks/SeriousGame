@@ -28,7 +28,7 @@ public class GameLoopController : MonoBehaviour
 
     private void HandleHeartPlaced(bool placed)
     {
-        if (!placed || minigamesStarted) return;
+        if (!placed || !minigamesStarted) return;
 
         StartCoroutine(WaitASecond());
     }
@@ -75,7 +75,14 @@ public class GameLoopController : MonoBehaviour
 
     public void End3DLevel()
     {
-        if (threeDFinished) return;
+        StartCoroutine(DelayedEnd3DLevel());
+    }
+
+    private IEnumerator DelayedEnd3DLevel()
+    {
+        yield return new WaitForSecondsRealtime(2f);
+
+        if (threeDFinished) yield break;
 
         threeDFinished = true;
         GameManager.Instance.currentLevelGameObject.SetActive(true);
@@ -84,5 +91,5 @@ public class GameLoopController : MonoBehaviour
         pipesUI.gameObject.SetActive(true);
         threeDMinigameUI.gameObject.SetActive(false);
         threeDMinigameCamera.Priority = 0;
-    }
+	}
 }
