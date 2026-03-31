@@ -187,7 +187,7 @@ public class PieceGroup
 
         Quaternion finalRotation = new Quaternion(0, targetRotation.y, 0, 0);
 
-        sequence.Append(pivot.transform.DORotateQuaternion(finalRotation, 0.5f).SetEase(Ease.Linear));
+        sequence.Append(pivot.transform.DORotateQuaternion(finalRotation, 0.5f).SetEase(Ease.OutCirc));
 
         sequence.OnComplete(() => 
         {

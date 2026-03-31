@@ -18,6 +18,8 @@ public class Rotate3DObject : MonoBehaviour
     Vector3 firstPos;
     float minDistance = 100;
 
+    private bool dragStarted = false;
+
     int basicDirection;
 
     [Header("Rotation")]
@@ -67,6 +69,12 @@ public class Rotate3DObject : MonoBehaviour
         else if (!inputManager.rotateMode_ia.inProgress && !piece.GetGroup().CanMove())
         {
             piece.GetGroup().CanMove(true);
+
+            if (dragStarted)
+            {
+                dragStarted = false;
+            }
+
         }
     }
 
@@ -114,9 +122,14 @@ public class Rotate3DObject : MonoBehaviour
 
         CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.ROTATING);
 
-        if (distance <= minDistance && state == ROTATION_STATE.STATIC)
+        if (!dragStarted)
         {
-            return;
+            if (distance <= minDistance)
+            {
+                return;
+            }
+
+            dragStarted = true;
         }
 
         Quaternion finalRotation = Quaternion.identity;
@@ -218,10 +231,11 @@ public class Rotate3DObject : MonoBehaviour
 
     private void ResetRotationState(Vector3 dragPos, int directionId)
     {
-        //Debug.Log("Direccion cambiada");
         state = ROTATION_STATE.STATIC;
         firstPos = dragPos;
         basicDirection = directionId;
+
+        dragStarted = false;
     }
 
     private void InitializeClickInput()
@@ -242,6 +256,8 @@ public class Rotate3DObject : MonoBehaviour
     protected virtual void OnRotationCancelled(InputAction.CallbackContext context)
     {
         piece.DisableControls();
+        state = ROTATION_STATE.STATIC;
+        dragStarted = false;
     }
 
     public void EnableRotation()
