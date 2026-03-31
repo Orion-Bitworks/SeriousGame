@@ -130,4 +130,12 @@ public class PieceGroup
             piece.gameObject.layer = layer;
         }
     }
+
+    public void ChangeGroupPlacedState(bool isPlaced)
+    {
+        foreach (PieceController piece in pieces)
+        {
+            piece.IsPlaced(isPlaced);
+        }
+    }
 }

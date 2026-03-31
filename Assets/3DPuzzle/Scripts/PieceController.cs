@@ -11,12 +11,14 @@ public class PieceController : MonoBehaviour
     Material originalMaterial;
 
     [SerializeField] bool hasSnapped = false;
-    public bool canSnap = false;
+    [SerializeField] public bool canSnap = false;
 
     public Transform parentPiece;
 
     private Move3DObject movement;
     private Rotate3DObject rotation;
+
+    private bool isPlaced = false;
 
     [SerializeField] private PieceGroup group;
 
@@ -47,10 +49,10 @@ public class PieceController : MonoBehaviour
 
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
     {
-        /*if (!canSnap)
+        if (isPlaced)
         {
             return;
-        }*/
+        }
 
         //point.Paired(true);
         //target.GetComponent<ConnectionPointController>().Paired(true);
@@ -179,6 +181,7 @@ public class PieceController : MonoBehaviour
 
     public void EnableControls()
     {
+        group.ChangeGroupPlacedState(false);
         group.ChangeGroupLayer(0);
         group.ChangeGroupMaterial(clickMaterial);
 
@@ -195,6 +198,7 @@ public class PieceController : MonoBehaviour
 
     public void DisableControls()
     {
+        group.ChangeGroupPlacedState(true);
         group.ChangeGroupLayer(8);
         group.ChangeGroupMaterial(originalMaterial);
 
@@ -275,5 +279,15 @@ public class PieceController : MonoBehaviour
         }
 
         CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.DEFAULT);
+    }
+
+    public bool IsPlaced()
+    {
+        return isPlaced;
+    }
+
+    public void IsPlaced(bool isPlaced)
+    {
+        this.isPlaced = isPlaced;
     }
 }

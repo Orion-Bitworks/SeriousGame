@@ -31,7 +31,7 @@ public class ConnectionPointController : MonoBehaviour
         {
             ConnectionPointController otherPoint = other.GetComponent<ConnectionPointController>();
 
-            if (!paired && !otherPoint.Paired()) 
+            if (!paired && !otherPoint.Paired() && otherPoint.piece.IsPlaced()) 
             {
                 piece.SnapToPoint(this, other.transform, other.transform.parent);
 

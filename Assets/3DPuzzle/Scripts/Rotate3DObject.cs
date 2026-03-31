@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+public enum ROTATION_STATE { STATIC, ROTATING_X, ROTATING_Y }
 
 public class Rotate3DObject : MonoBehaviour
 {
@@ -10,11 +13,17 @@ public class Rotate3DObject : MonoBehaviour
     bool selected = false;
     PieceController piece;
 
+    private ROTATION_STATE state = ROTATION_STATE.STATIC;
+
     Vector3 firstPos;
-    float minDistance = 25;
+    float minDistance = 100;
+
+    int basicDirection;
 
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 10f;
+    [SerializeField] private float threshold = 0.1f;
+
 
     private void Awake()
     {
@@ -78,27 +87,24 @@ public class Rotate3DObject : MonoBehaviour
 
         float distance = 0;
 
+        int directionMultiplier = 0;
+
         piece.GetGroup().CanMove(false);
 
         if (inputManager.leftClick_ia.triggered || inputManager.rightClick_ia.triggered)
         {
             firstPos = GetMousePosInScreen();
-            //Debug.Log("Trigger Mouse Pos: " + firstPos);
         }
+
+        dragPos = GetMousePosInScreen();
+        distance = Vector3.Distance(firstPos, dragPos);
 
         if (inputManager.leftClick_ia.inProgress)
         {
-            dragPos = GetMousePosInScreen();
-            //Debug.Log("Dragging Mouse Pos: " + dragPos);
-            distance = Vector3.Distance(firstPos, dragPos);
-
             variableAxis = Vector3.up;
         }
         else if (inputManager.rightClick_ia.inProgress)
         {
-            dragPos = GetMousePosInScreen();
-            distance = Vector3.Distance(firstPos, dragPos);
-
             variableAxis = Vector3.forward;
         }
         else
@@ -106,26 +112,114 @@ public class Rotate3DObject : MonoBehaviour
             return;
         }
 
-        if (distance >= minDistance)
+        if (distance <= minDistance && state == ROTATION_STATE.STATIC)
         {
-            Quaternion finalRotation = Quaternion.identity;
-
-            Vector3 checkAxis = firstPos - dragPos;
-
-            float posX = Mathf.Abs(checkAxis.x);
-            float posY = Mathf.Abs(checkAxis.y);
-
-            if (posX > posY)
-            {
-                finalRotation = Quaternion.AngleAxis(mouseDelta.x * -1, variableAxis);
-            }
-            else if (posY > posX)
-            {
-                finalRotation = Quaternion.AngleAxis(mouseDelta.y, Vector3.right);
-            }
-
-            piece.GetGroup().RotatePiece(piece.GetGroup().GetCentralPivot(), finalRotation);
+            return;
         }
+
+        Quaternion finalRotation = Quaternion.identity;
+
+        Vector3 checkAxis = firstPos - dragPos;
+
+        float posX = Mathf.Abs(checkAxis.x);
+        float posY = Mathf.Abs(checkAxis.y);
+        // DEcide estado dependiendo de en que eje se ha movido mas el mouse
+
+        Debug.Log("MouseDelta" + mouseDelta);
+        Debug.Log("MouseDelta" + mouseDelta.magnitude);
+        Debug.Log("checkAxis" + checkAxis);
+        Vector3 direction = dragPos.normalized;
+
+        if (state != ROTATION_STATE.STATIC && directionMultiplier != basicDirection)
+        {
+            ResetRotationState(dragPos, directionMultiplier);
+        }
+
+        switch (state)
+        {
+            case ROTATION_STATE.STATIC:
+                if (posX > posY)
+                {
+                    state = ROTATION_STATE.ROTATING_X;
+                }
+                else
+                {
+                    state = ROTATION_STATE.ROTATING_Y;
+                }
+                break;
+            case ROTATION_STATE.ROTATING_X:
+
+                if (Mathf.Abs(mouseDelta.y) > Mathf.Abs(mouseDelta.x))
+                {
+                    ResetRotationState(dragPos, directionMultiplier);
+                    state = ROTATION_STATE.ROTATING_Y;
+                }
+                else
+                {
+                    UpdateDirectionMultiplierX(direction, ref directionMultiplier);
+
+                    finalRotation = Quaternion.AngleAxis(mouseDelta.x * -1, variableAxis);
+                }
+
+                break;
+            case ROTATION_STATE.ROTATING_Y:
+                if (Mathf.Abs(mouseDelta.x) > Mathf.Abs(mouseDelta.y))
+                {
+                    ResetRotationState(dragPos, directionMultiplier);
+                    state = ROTATION_STATE.ROTATING_X;
+                }
+                else
+                {
+                    UpdateDirectionMultiplierY(direction, ref directionMultiplier);
+
+                    finalRotation = Quaternion.AngleAxis(mouseDelta.y, Vector3.right);
+                }
+                break;
+        }
+
+        piece.GetGroup().RotatePiece(piece.GetGroup().GetCentralPivot(), finalRotation);
+    }
+
+    private void UpdateDirectionMultiplierY(Vector3 direction, ref int directionMultiplier)
+    {
+        if (direction.y > 0)
+        {
+            directionMultiplier = 1;
+        }
+        else if (direction.y < 0)
+        {
+            directionMultiplier = -1;
+        }
+        else
+        {
+            directionMultiplier = 0;
+        }
+    }
+
+    void UpdateDirectionMultiplierX
+        (Vector3 direction, ref int directionMultiplier)
+    {
+        if (direction.x > 0)
+        {
+            directionMultiplier = 1;
+        }
+        else if (direction.x < 0)
+        {
+            directionMultiplier = -1;
+        }
+        else
+        {
+            directionMultiplier = 0;
+        }
+
+    }
+
+    private void ResetRotationState(Vector3 dragPos, int directionId)
+    {
+        Debug.Log("Direccion cambiada");
+        state = ROTATION_STATE.STATIC;
+        firstPos = dragPos;
+        basicDirection = directionId;
     }
 
     private void InitializeClickInput()
