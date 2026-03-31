@@ -86,8 +86,6 @@ public class PieceGroup
 
     public void RotatePiece(Vector3 pivot, Quaternion rotation)
     {
-        CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.ROTATING);
-
         foreach (var piece in pieces)
         {
             Vector3 dir = piece.transform.position - pivot;

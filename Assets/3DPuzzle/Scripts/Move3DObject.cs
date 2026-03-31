@@ -18,11 +18,14 @@ public class Move3DObject : MonoBehaviour
 
     private bool selected = false;
 
+    private float targetPointDistance;
+
     void Start()
     {
         inputManager = InputManager.instance;
         piece = GetComponent<PieceController>();
         cam = Camera.main;
+        targetPointDistance = pointDistance;
     }
 
     void Update()
@@ -100,8 +103,12 @@ public class Move3DObject : MonoBehaviour
 
         if (scroll != 0)
         {
-            pointDistance += scroll * Time.deltaTime;
+            targetPointDistance += scroll * Time.deltaTime;
         }
+
+        targetPointDistance = Mathf.Clamp(targetPointDistance, minPointDistance, maxPointDistance);
+
+        pointDistance = Mathf.Lerp(pointDistance, targetPointDistance, Time.deltaTime * 10f);
 
         pointDistance = Mathf.Clamp(pointDistance, minPointDistance, maxPointDistance);
     }

@@ -112,6 +112,8 @@ public class Rotate3DObject : MonoBehaviour
             return;
         }
 
+        CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.ROTATING);
+
         if (distance <= minDistance && state == ROTATION_STATE.STATIC)
         {
             return;
@@ -125,9 +127,9 @@ public class Rotate3DObject : MonoBehaviour
         float posY = Mathf.Abs(checkAxis.y);
         // DEcide estado dependiendo de en que eje se ha movido mas el mouse
 
-        Debug.Log("MouseDelta" + mouseDelta);
-        Debug.Log("MouseDelta" + mouseDelta.magnitude);
-        Debug.Log("checkAxis" + checkAxis);
+        //Debug.Log("MouseDelta" + mouseDelta);
+        //Debug.Log("MouseDelta" + mouseDelta.magnitude);
+        //Debug.Log("checkAxis" + checkAxis);
         Vector3 direction = dragPos.normalized;
 
         if (state != ROTATION_STATE.STATIC && directionMultiplier != basicDirection)
@@ -216,7 +218,7 @@ public class Rotate3DObject : MonoBehaviour
 
     private void ResetRotationState(Vector3 dragPos, int directionId)
     {
-        Debug.Log("Direccion cambiada");
+        //Debug.Log("Direccion cambiada");
         state = ROTATION_STATE.STATIC;
         firstPos = dragPos;
         basicDirection = directionId;
