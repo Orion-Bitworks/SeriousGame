@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -63,5 +64,13 @@ public class ScoreManager : MonoBehaviour
     public void LoadScene(string targetScene)
     {
         SceneManager.LoadScene(targetScene);
+    }
+
+    public void PlayFinishAnimation()
+    {
+        foreach (ConnectionPointController point in connections)
+        {
+            point.GetPiece().GetGroup().PlayFinishAnimation();
+        }
     }
 }

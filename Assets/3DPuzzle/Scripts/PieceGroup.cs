@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,8 @@ public class PieceGroup
     [SerializeField] private HashSet<PieceController> pieces = new HashSet<PieceController>();
 
     private bool canMove = true;
+
+    private bool canPlay = true;
 
     public PieceGroup()
     {
@@ -86,7 +89,7 @@ public class PieceGroup
 
     public void RotatePiece(Vector3 pivot, Quaternion rotation)
     {
-        foreach (var piece in pieces)
+        foreach (PieceController piece in pieces)
         {
             Vector3 dir = piece.transform.position - pivot;
             dir = rotation * dir;
@@ -135,5 +138,65 @@ public class PieceGroup
         {
             piece.IsPlaced(isPlaced);
         }
+    }
+
+    public void PlayFinishAnimation()
+    {
+        if (!canPlay)
+        {
+            return;
+        }
+
+        canPlay = false;
+
+        GameObject pivot = new GameObject("Group Pivot");
+        pivot.transform.position = GetCentralPivot();
+
+        Vector3 combinedForward = Vector3.zero;
+        foreach (PieceController piece in pieces)
+        {
+            combinedForward += piece.transform.forward;
+        }
+        combinedForward.Normalize();
+        pivot.transform.rotation = Quaternion.LookRotation(combinedForward, Vector3.up);
+
+        Dictionary<PieceController, Transform> originalHierarchy = new Dictionary<PieceController, Transform>();
+
+        foreach (PieceController piece in pieces)
+        {
+            originalHierarchy[piece] = piece.transform.parent;
+            piece.transform.SetParent(pivot.transform);
+        }
+
+        // Squencia que mueve el grupo arriba y abajo
+        Sequence upDownSequence = DOTween.Sequence().SetAutoKill(false);
+        upDownSequence.AppendInterval(0.3f);
+        upDownSequence.Append(pivot.transform.DOMoveY(0.5f, 0.3f).SetEase(Ease.OutSine));
+        upDownSequence.Append(pivot.transform.DOMoveY(0f, 0.3f).SetEase(Ease.OutSine));
+
+        // Sequencia que rota el grupo y lo coloca en su sitio
+        Sequence sequence = DOTween.Sequence().SetAutoKill(false);
+        sequence.Append(pivot.transform.DOMove(new Vector3(0f, 0f, 0f), 1f).SetEase(Ease.InOutQuad));
+        sequence.Append(pivot.transform.DOLocalRotate(new Vector3(0f, 360f, 0f), 1f, RotateMode.LocalAxisAdd).SetEase(Ease.Linear));
+        sequence.Join(upDownSequence);
+
+        Vector3 direction = Camera.main.transform.position - pivot.transform.position;
+        direction = direction.normalized;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+        Quaternion finalRotation = new Quaternion(0, targetRotation.y, 0, 0);
+
+        sequence.Append(pivot.transform.DORotateQuaternion(finalRotation, 0.5f).SetEase(Ease.Linear));
+
+        sequence.OnComplete(() => 
+        {
+            foreach (PieceController piece in pieces)
+            {
+                piece.transform.SetParent(originalHierarchy[piece]);
+            }
+            GameObject.Destroy(pivot);
+            canPlay = true;
+        });
     }
 }

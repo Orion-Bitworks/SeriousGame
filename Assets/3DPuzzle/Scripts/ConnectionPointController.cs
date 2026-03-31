@@ -108,4 +108,9 @@ public class ConnectionPointController : MonoBehaviour
     {
         pairId = id;
     }
+
+    public PieceController GetPiece()
+    {
+        return piece;
+    }
 }
