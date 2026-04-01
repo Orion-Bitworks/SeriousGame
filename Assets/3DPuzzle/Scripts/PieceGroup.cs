@@ -170,24 +170,29 @@ public class PieceGroup
 
         // Squencia que mueve el grupo arriba y abajo
         Sequence upDownSequence = DOTween.Sequence().SetAutoKill(false);
-        upDownSequence.AppendInterval(0.3f);
-        upDownSequence.Append(pivot.transform.DOMoveY(0.5f, 0.3f).SetEase(Ease.OutSine));
-        upDownSequence.Append(pivot.transform.DOMoveY(0f, 0.3f).SetEase(Ease.OutSine));
+        upDownSequence.AppendInterval(0.2f);
+        upDownSequence.Append(pivot.transform.DOMoveY(0.5f, 0.5f).SetEase(Ease.InBack));
+        upDownSequence.AppendInterval(0.1f);
+        upDownSequence.Append(pivot.transform.DOMoveY(0f, 0.5f).SetEase(Ease.OutBack));
+
+        // Sequencia que tota el grupo 360º
+        Sequence rotationSequence = DOTween.Sequence().SetAutoKill(false);
+        rotationSequence.AppendInterval(0.97f);
+        rotationSequence.Append(pivot.transform.DOLocalRotate(new Vector3(0f, 360f, 0f), 1.5f, RotateMode.LocalAxisAdd).SetEase(Ease.OutCubic));
+        rotationSequence.Join(upDownSequence);
 
         // Sequencia que rota el grupo y lo coloca en su sitio
         Sequence sequence = DOTween.Sequence().SetAutoKill(false);
-        sequence.Append(pivot.transform.DOMove(new Vector3(0f, 0f, 0f), 1f).SetEase(Ease.InOutQuad));
-        sequence.Append(pivot.transform.DOLocalRotate(new Vector3(0f, 360f, 0f), 1f, RotateMode.LocalAxisAdd).SetEase(Ease.Linear));
-        sequence.Join(upDownSequence);
+        sequence.Append(pivot.transform.DOMove(new Vector3(0f, 0f, 0f), 1f).SetEase(Ease.InQuad));
 
         Vector3 direction = Camera.main.transform.position - pivot.transform.position;
         direction = direction.normalized;
-
         Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-
         Quaternion finalRotation = new Quaternion(0, targetRotation.y, 0, 0);
 
-        sequence.Append(pivot.transform.DORotateQuaternion(finalRotation, 0.5f).SetEase(Ease.OutCirc));
+        // Rota el grupo para que mire a camara
+        sequence.Join(pivot.transform.DORotateQuaternion(finalRotation, 0.8f).SetEase(Ease.InOutQuad));
+        sequence.Join(rotationSequence);        
 
         sequence.OnComplete(() => 
         {
