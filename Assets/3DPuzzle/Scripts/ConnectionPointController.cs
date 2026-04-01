@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class ConnectionPointController : MonoBehaviour
@@ -33,6 +34,8 @@ public class ConnectionPointController : MonoBehaviour
 
             if (!paired && !otherPoint.Paired() && otherPoint.piece.IsPlaced()) 
             {
+                ParticleManager.instance.SpawnParticles("SnappingParticles", transform);
+
                 piece.SnapToPoint(this, other.transform, other.transform.parent);
 
                 pairId = otherPoint.GetId();

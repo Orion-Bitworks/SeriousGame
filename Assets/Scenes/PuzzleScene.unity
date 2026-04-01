@@ -3085,6 +3085,7 @@ GameObject:
   - component: {fileID: 1487366263}
   - component: {fileID: 1487366262}
   - component: {fileID: 1487366264}
+  - component: {fileID: 1487366265}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -3137,6 +3138,20 @@ MonoBehaviour:
   rotationTexture: {fileID: 2800000, guid: dfa9be707af79134096fd684a01da466, type: 3}
   separatingTexture: {fileID: 2800000, guid: 6e1f42b83824a4743bcaacbb0e9a9968, type: 3}
   clickPoistion: {x: 0, y: 0}
+--- !u!114 &1487366265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487366261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fdbeda9bce242f43ad28fbdbc3db137, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  particles:
+  - {fileID: 3082929688375421012, guid: 694d792edd88d3a4a87ef63ce7fe1319, type: 3}
 --- !u!1 &1651814702
 GameObject:
   m_ObjectHideFlags: 0

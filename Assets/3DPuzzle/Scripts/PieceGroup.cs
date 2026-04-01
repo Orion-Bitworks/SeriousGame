@@ -171,7 +171,7 @@ public class PieceGroup
         // Squencia que mueve el grupo arriba y abajo
         Sequence upDownSequence = DOTween.Sequence().SetAutoKill(false);
         upDownSequence.AppendInterval(0.2f);
-        upDownSequence.Append(pivot.transform.DOMoveY(0.5f, 0.5f).SetEase(Ease.InBack));
+        upDownSequence.Append(pivot.transform.DOMoveY(0.3f, 0.5f).SetEase(Ease.InBack));
         upDownSequence.AppendInterval(0.1f);
         upDownSequence.Append(pivot.transform.DOMoveY(0f, 0.5f).SetEase(Ease.OutBack));
 

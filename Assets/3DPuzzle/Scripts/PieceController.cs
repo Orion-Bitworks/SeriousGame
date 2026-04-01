@@ -18,7 +18,7 @@ public class PieceController : MonoBehaviour
     private Move3DObject movement;
     private Rotate3DObject rotation;
 
-    private bool isPlaced = false;
+    [SerializeField] private bool isPlaced = false;
 
     [SerializeField] private PieceGroup group;
 
@@ -244,6 +244,7 @@ public class PieceController : MonoBehaviour
     {
         List<PieceController> connectedPiecesCopy = new List<PieceController>(connectedPieces);
 
+        group.ChangeGroupPlacedState(true);
         group.ChangeGroupLayer(8);
         group.ChangeGroupMaterial(originalMaterial, this);
 
