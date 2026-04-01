@@ -10,7 +10,7 @@ public class AnimationPivotController : MonoBehaviour
     [Header("Pipe Parameters")]
 
     [SerializeField] GameObject pipePrefab;
-    [SerializeField] private float spawnDistance = 15;
+    private float spawnDistance = 60;
 
     public int GetPriority()
     {
@@ -27,7 +27,7 @@ public class AnimationPivotController : MonoBehaviour
 
         Sequence sequence = DOTween.Sequence().SetAutoKill(false);
         sequence.AppendInterval(priority * 0.1f);
-        sequence.Append(newPipe.transform.DOMove(transform.position, 0.9f).SetEase(Ease.OutBack));
-        sequence.Join(newPipe.transform.DOLocalRotate(new Vector3(0f, 0f, 360f), 1.1f, RotateMode.FastBeyond360).SetEase(Ease.InOutQuad));
+        sequence.Append(newPipe.transform.DOMove(transform.position, 1.1f).SetEase(Ease.OutBack));
+        sequence.Join(newPipe.transform.DOLocalRotate(new Vector3(0f, 0f, 360f), 1.3f, RotateMode.FastBeyond360).SetEase(Ease.InOutQuad));
     }
 }
