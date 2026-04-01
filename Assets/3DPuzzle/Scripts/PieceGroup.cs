@@ -214,9 +214,9 @@ public class PieceGroup
 
         foreach (PieceController piece in pieces)
         {
-            AnimationPivotController pivot = piece.GetComponentInChildren<AnimationPivotController>();
+            AnimationPivotController[] pivots = piece.GetComponentsInChildren<AnimationPivotController>();
 
-            if (pivot != null)
+            foreach (AnimationPivotController pivot in pivots)
             {
                 animationPivots.Add(pivot);
             }
