@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class AnimationPivotController : MonoBehaviour
     [Header("Pipe Parameters")]
 
     [SerializeField] GameObject pipePrefab;
-    [SerializeField] private float spawnDistance = 1;
+    [SerializeField] private float spawnDistance = 15;
 
     public int GetPriority()
     {
@@ -24,5 +25,7 @@ public class AnimationPivotController : MonoBehaviour
         newPipe.transform.SetParent(transform, true);
         newPipe.transform.localPosition = spawnPosition;
 
+        Sequence sequence = DOTween.Sequence().SetAutoKill(false);
+        sequence.Append(newPipe.transform.DOMove(transform.position, 1f).SetEase(Ease.OutBack));
     }
 }
