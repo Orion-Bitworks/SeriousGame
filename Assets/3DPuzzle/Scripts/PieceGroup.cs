@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [System.Serializable]
@@ -191,7 +192,7 @@ public class PieceGroup
         Quaternion finalRotation = new Quaternion(0, targetRotation.y, 0, 0);
 
         // Rota el grupo para que mire a camara
-        sequence.Join(pivot.transform.DORotateQuaternion(finalRotation, 0.8f).SetEase(Ease.InOutQuad));
+        sequence.Join(pivot.transform.DORotateQuaternion(finalRotation, 1f).SetEase(Ease.InOutQuad));
         sequence.Join(rotationSequence);        
 
         sequence.OnComplete(() => 
@@ -202,6 +203,28 @@ public class PieceGroup
             }
             GameObject.Destroy(pivot);
             canPlay = true;
+
+            StartPipeAnimation();
         });
+    }
+
+    public void StartPipeAnimation()
+    {
+        List<AnimationPivotController> animationPivots = new List<AnimationPivotController>();
+
+        foreach (PieceController piece in pieces)
+        {
+            AnimationPivotController pivot = piece.GetComponentInChildren<AnimationPivotController>();
+
+            if (pivot != null)
+            {
+                animationPivots.Add(pivot);
+            }
+        }
+
+        foreach (AnimationPivotController pivot in animationPivots)
+        {
+            pivot.StartAnimation();
+        }
     }
 }
