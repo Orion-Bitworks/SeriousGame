@@ -18,11 +18,6 @@ public class ConnectionPointController : MonoBehaviour
 
     private void Start()
     {
-        if (canBeRegistered)
-        {
-            ScoreManager.instance.RegisterConnectionPoint(this);
-        }
-        
         piece = GetComponentInParent<PieceController>();
     }
 
@@ -115,5 +110,13 @@ public class ConnectionPointController : MonoBehaviour
     public PieceController GetPiece()
     {
         return piece;
+    }
+
+    public void Register()
+    {
+        if (canBeRegistered)
+        {
+            ScoreManager.instance.RegisterConnectionPoint(this);
+        }
     }
 }

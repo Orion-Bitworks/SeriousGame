@@ -291,4 +291,14 @@ public class PieceController : MonoBehaviour
     {
         this.isPlaced = isPlaced;
     }
+
+    public void RegisterConnectionPoints()
+    {
+        ConnectionPointController[] connections = GetComponentsInChildren<ConnectionPointController>();
+
+        foreach (ConnectionPointController connection in connections) 
+        {
+            connection.Register();
+        }
+    }
 }
