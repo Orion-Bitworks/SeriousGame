@@ -4,20 +4,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private PieceController piece;
 
     private bool onUI = true;
+
+    private bool beingDragged = false;
+
+    private Sequence sequence;
+
+    [SerializeField] private Transform originalParent;
 
     private void Start()
     {
         piece = GetComponent<PieceController>();
     }
 
+    private void Update()
+    {
+        if (!beingDragged)
+        {
+            return;
+        }
+
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Input.mousePosition;
+
+        bool isOverUI = IsPointerOverWorldUI(eventData);
+
+        if (isOverUI && !onUI)
+        {
+            MoveToUI();
+        }
+        else if (!isOverUI && onUI)
+        {
+            MoveOutUI();
+        }
+    }
+
     // Cuando se pulsa el boton
     public void OnPointerDown(PointerEventData eventData)
     {
+        beingDragged = true;
+
         MoveOutUI();
         piece.EnableControls();
     }
@@ -25,38 +55,35 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     // Cuando se suelta el boton
     public void OnPointerUp(PointerEventData eventData)
     {
+        beingDragged = false;
+
         if (!InputManager.instance.rotateMode_ia.inProgress)
         {
             piece.DisableControls();
             piece.CanSnap(false);
         }
 
-        //CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.DEFAULT);
-    }
-
-    // Cuando se hace click
-    public void OnPointerClick(PointerEventData eventData)
-    {
-
-    }
-
-    // Cuando se hace hover
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        
-    }
-
-    // Cuando se deja de hacer hover
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        
+        if (onUI)
+        {
+            piece.transform.position = originalParent.position;
+        }
     }
 
     public void MoveToUI()
     {
         onUI = true;
-        //piece.transform.SetParent(null);
-        piece.transform.localScale = Vector3.one;
+        piece.UnRegisterConnectionPoints();
+
+        if (sequence != null)
+        {
+            sequence.Kill();
+        }
+
+        piece.transform.SetParent(originalParent);
+
+        sequence = DOTween.Sequence();
+        sequence.Append(piece.transform.DOScale(new Vector3(100f, 100f, 100f), 0.5f));
+        sequence.Join(piece.transform.DOMoveZ(originalParent.transform.position.z, 0.5f));
     }
 
     public void MoveOutUI()
@@ -64,10 +91,30 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         onUI = false;
         piece.RegisterConnectionPoints();
 
-        Sequence sequence = DOTween.Sequence().SetAutoKill(false);
-        sequence.Append(piece.transform.DOScale(Vector3.one, 0.5f));
+        if (sequence != null)
+        {
+            sequence.Kill();
+        }
 
         piece.transform.SetParent(null);
-        //piece.transform.localScale = Vector3.one;
+
+        sequence = DOTween.Sequence();
+        sequence.Append(piece.transform.DOScale(Vector3.one, 0.5f));
+    }
+
+    bool IsPointerOverWorldUI(PointerEventData eventData)
+    {
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        foreach (var r in results)
+        {
+            if (r.gameObject.CompareTag("WorldUI"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -119,4 +119,12 @@ public class ConnectionPointController : MonoBehaviour
             ScoreManager.instance.RegisterConnectionPoint(this);
         }
     }
+
+    public void UnRegister()
+    {
+        if (canBeRegistered)
+        {
+            ScoreManager.instance.UnregisterConnectionPoint(this);
+        }
+    }
 }

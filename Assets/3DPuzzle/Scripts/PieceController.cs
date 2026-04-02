@@ -301,4 +301,14 @@ public class PieceController : MonoBehaviour
             connection.Register();
         }
     }
+
+    public void UnRegisterConnectionPoints()
+    {
+        ConnectionPointController[] connections = GetComponentsInChildren<ConnectionPointController>();
+
+        foreach (ConnectionPointController connection in connections)
+        {
+            connection.UnRegister();
+        }
+    }
 }
