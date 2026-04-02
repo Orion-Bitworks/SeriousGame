@@ -27,7 +27,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private void Update()
     {
-        if (!beingDragged)
+        if (!beingDragged || piece.IsInteracting())
         {
             return;
         }

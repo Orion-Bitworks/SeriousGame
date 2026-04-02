@@ -39,8 +39,9 @@ public class Move3DObject : MonoBehaviour
 
         if (piece.HasSnapped() && inputManager.separateMode_ia.inProgress)
         {
+            piece.GetGroup().CanMove(false);
             TryMove();
-            return;
+            //return;
         }
 
         MovePiece(RaycastPoint());

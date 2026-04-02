@@ -333,4 +333,9 @@ public class PieceController : MonoBehaviour
             connection.Disable();
         }
     }
+
+    public bool IsInteracting()
+    {
+        return InputManager.instance.rotateMode_ia.inProgress || InputManager.instance.separateMode_ia.inProgress;
+    }
 }
