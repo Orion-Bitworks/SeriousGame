@@ -301,6 +301,10 @@ PrefabInstance:
       value: VentrDRPiece (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4474662117708642905, guid: 63a1fc23c2edd6644b7d1b8759ef4faa, type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 733099282}
+    - target: {fileID: 4474662117708642905, guid: 63a1fc23c2edd6644b7d1b8759ef4faa, type: 3}
       propertyPath: originalParent
       value: 
       objectReference: {fileID: 1875572174}
@@ -497,7 +501,7 @@ GameObject:
   - component: {fileID: 161607290}
   - component: {fileID: 161607289}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: WorldCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -759,8 +763,8 @@ RectTransform:
   - {fileID: 1349608012}
   m_Father: {fileID: 1615837642}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -823,7 +827,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 100, y: 1100, z: 50}
+  m_Size: {x: 200, y: 1100, z: 50}
   m_Center: {x: 0, y: 0, z: -25}
 --- !u!1 &275044315
 GameObject:
@@ -1887,6 +1891,63 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+--- !u!1 &733099281
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 733099282}
+  - component: {fileID: 733099283}
+  m_Layer: 5
+  m_Name: DragContent
+  m_TagString: WorldUI
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &733099282
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733099281}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1615837642}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!65 &733099283
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733099281}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 200, y: 1100, z: 50}
+  m_Center: {x: 0, y: 0, z: -25}
 --- !u!1001 &754254170
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2051,6 +2112,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AorPiece
       objectReference: {fileID: 0}
+    - target: {fileID: 5609339493569692575, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 733099282}
     - target: {fileID: 5609339493569692575, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
       propertyPath: originalParent
       value: 
@@ -2584,6 +2649,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AurIZPiece (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6287245694766030346, guid: 4da2aad4f6275904bbb3b3bb412c0c3b, type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 733099282}
     - target: {fileID: 6287245694766030346, guid: 4da2aad4f6275904bbb3b3bb412c0c3b, type: 3}
       propertyPath: originalParent
       value: 
@@ -3853,6 +3922,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3478026131679027957, guid: f4d56f17fd5a1aa46a0cd6bd40ccae87, type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 733099282}
+    - target: {fileID: 3478026131679027957, guid: f4d56f17fd5a1aa46a0cd6bd40ccae87, type: 3}
       propertyPath: originalParent
       value: 
       objectReference: {fileID: 1499635487}
@@ -4126,6 +4199,10 @@ PrefabInstance:
       value: AurDRPiece (1)
       objectReference: {fileID: 0}
     - target: {fileID: 8436434160645159724, guid: b0651abc95aae7148b56d2c90f772aef, type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 733099282}
+    - target: {fileID: 8436434160645159724, guid: b0651abc95aae7148b56d2c90f772aef, type: 3}
       propertyPath: originalParent
       value: 
       objectReference: {fileID: 2027068717}
@@ -4165,10 +4242,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 252137077}
+  - {fileID: 733099282}
   m_Father: {fileID: 161607292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0.05, y: 1}
+  m_AnchorMax: {x: 0.1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4617,6 +4695,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1884251179}
     m_Modifications:
+    - target: {fileID: 702758082025876197, guid: 728a2c874e07d4e4ca92c94d6756d507, type: 3}
+      propertyPath: dragParent
+      value: 
+      objectReference: {fileID: 733099282}
     - target: {fileID: 702758082025876197, guid: 728a2c874e07d4e4ca92c94d6756d507, type: 3}
       propertyPath: originalParent
       value: 

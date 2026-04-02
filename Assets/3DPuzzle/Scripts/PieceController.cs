@@ -205,7 +205,7 @@ public class PieceController : MonoBehaviour
         movement.DisableMovement();
         rotation.DisableRotation();
 
-        //canSnap = false;
+        canSnap = false;
 
         foreach (PieceController piece in connectedPieces)
         {
@@ -276,7 +276,9 @@ public class PieceController : MonoBehaviour
     {
         foreach (PieceController piece in group.GetPieces())
         {
-            Destroy(piece.gameObject);
+            //piece.HasSnapped(false);
+            piece.DisconnectAll();
+            piece.GetComponent<EventClick>().ResetPiece();
         }
 
         CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.DEFAULT);

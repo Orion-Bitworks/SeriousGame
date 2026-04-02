@@ -60,12 +60,9 @@ public class ConnectionPointController : MonoBehaviour
 
         ConnectionPointController otherPoint = other.GetComponent<ConnectionPointController>();
 
-        if (other.gameObject.tag == "ConnectionPoint" && paired && (otherPoint.GetId() == pairId) && otherPoint.IsEnabled())
+        if (other.gameObject.tag == "ConnectionPoint" && paired && (otherPoint.GetId() == pairId)/* && otherPoint.IsEnabled()*/)
         {
-            paired = false;
-            pairedWithPartner = false;
-            pairId = "";
-            Debug.Log(id + " ha dejado de estar conectado con " + other.GetComponent<ConnectionPointController>().GetId());
+            ResetValues();
             //piece.DisconnectPiece(other.GetComponent<PieceController>());
             //CheckPairing(other.GetComponent<ConnectionPointController>());
         }
@@ -125,6 +122,14 @@ public class ConnectionPointController : MonoBehaviour
         return piece;
     }
 
+    public void ResetValues()
+    {
+        paired = false;
+        pairedWithPartner = false;
+        pairId = "";
+        Debug.Log(id + " ha dejado de estar conectado");
+    }
+
     public void Register()
     {
         if (canBeRegistered)
@@ -137,6 +142,7 @@ public class ConnectionPointController : MonoBehaviour
     {
         if (canBeRegistered)
         {
+            ResetValues();
             ScoreManager.instance.UnregisterConnectionPoint(this);
         }
     }
