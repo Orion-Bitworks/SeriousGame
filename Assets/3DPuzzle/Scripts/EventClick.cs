@@ -16,6 +16,9 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private Vector3 scaleUI;
 
+    private GameObject groupPivot;
+    private Dictionary<PieceController, Transform> originalParents = new();
+
     [SerializeField] private Transform originalParent;
     [SerializeField] private Transform dragParent;
 
@@ -28,6 +31,11 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     private void Update()
     {
         if (!beingDragged || piece.IsInteracting())
+        {
+            return;
+        }
+
+        if (piece.GetGroup().GetPieces().Count > 1)
         {
             return;
         }
