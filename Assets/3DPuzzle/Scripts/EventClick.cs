@@ -43,7 +43,6 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
     }
 
-    // Cuando se pulsa el boton
     public void OnPointerDown(PointerEventData eventData)
     {
         beingDragged = true;
@@ -52,7 +51,6 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         piece.EnableControls();
     }
 
-    // Cuando se suelta el boton
     public void OnPointerUp(PointerEventData eventData)
     {
         beingDragged = false;
@@ -65,7 +63,10 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         if (onUI)
         {
-            piece.transform.position = originalParent.position;
+            KillSequence();
+
+            sequence = DOTween.Sequence();
+            sequence.Append(piece.transform.DOMove(originalParent.position, 0.5f).SetEase(Ease.InOutBack, 0.5f));
         }
     }
 
@@ -73,11 +74,9 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         onUI = true;
         piece.UnRegisterConnectionPoints();
+        piece.DisableConnectionPoints();
 
-        if (sequence != null)
-        {
-            sequence.Kill();
-        }
+        KillSequence();
 
         piece.transform.SetParent(originalParent);
 
@@ -90,11 +89,9 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     {
         onUI = false;
         piece.RegisterConnectionPoints();
+        piece.EnableConnectionPoints();
 
-        if (sequence != null)
-        {
-            sequence.Kill();
-        }
+        KillSequence();
 
         piece.transform.SetParent(null);
 
@@ -116,5 +113,13 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
 
         return false;
+    }
+
+    public void KillSequence()
+    {
+        if (sequence != null)
+        {
+            sequence.Kill();
+        }
     }
 }

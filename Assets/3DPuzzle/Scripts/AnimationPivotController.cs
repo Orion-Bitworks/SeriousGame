@@ -27,7 +27,7 @@ public class AnimationPivotController : MonoBehaviour
 
         Sequence sequence = DOTween.Sequence().SetAutoKill(false);
         sequence.AppendInterval(priority * 0.2f);
-        sequence.Append(newPipe.transform.DOMove(transform.position, 1.1f).SetEase(Ease.OutBack));
+        sequence.Append(newPipe.transform.DOMove(transform.position, 1.1f).SetEase(Ease.OutBack, 0.5f));
         sequence.Join(newPipe.transform.DOLocalRotate(new Vector3(0f, 0f, 360f), 1.3f, RotateMode.FastBeyond360).SetEase(Ease.InOutQuad));
     }
 }

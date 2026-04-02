@@ -11,6 +11,7 @@ public class ConnectionPointController : MonoBehaviour
     [SerializeField] private bool canBeRegistered = false;
 
     private bool pairedWithPartner = false;
+    private bool isEnabled = false;
     PieceController piece;
 
     [SerializeField] private bool paired = false;
@@ -23,11 +24,16 @@ public class ConnectionPointController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!isEnabled)
+        {
+            return;
+        }
+
         if (other.gameObject.tag == "ConnectionPoint")
         {
             ConnectionPointController otherPoint = other.GetComponent<ConnectionPointController>();
 
-            if (!paired && !otherPoint.Paired() && otherPoint.piece.IsPlaced()) 
+            if (!paired && !otherPoint.Paired() && otherPoint.piece.IsPlaced() && otherPoint.IsEnabled()) 
             {
                 ParticleManager.instance.SpawnParticles("SnappingParticles", transform);
 
@@ -47,7 +53,14 @@ public class ConnectionPointController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "ConnectionPoint" && paired && (other.GetComponent<ConnectionPointController>().GetId() == pairId))
+        if (!isEnabled)
+        {
+            return;
+        }
+
+        ConnectionPointController otherPoint = other.GetComponent<ConnectionPointController>();
+
+        if (other.gameObject.tag == "ConnectionPoint" && paired && (otherPoint.GetId() == pairId) && otherPoint.IsEnabled())
         {
             paired = false;
             pairedWithPartner = false;
@@ -126,5 +139,20 @@ public class ConnectionPointController : MonoBehaviour
         {
             ScoreManager.instance.UnregisterConnectionPoint(this);
         }
+    }
+
+    public bool IsEnabled()
+    {
+        return isEnabled;
+    }
+
+    public void Enable()
+    {
+        isEnabled = true;
+    }
+
+    public void Disable()
+    {
+        isEnabled = false;
     }
 }
