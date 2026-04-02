@@ -74,7 +74,7 @@ public class Move3DObject : MonoBehaviour
         if (distance > breakSnapDistance)
         {
             piece.DisconnectAll();
-
+            piece.IsPlaced(false);
             MovePiece(RaycastPoint());
         }
     }
