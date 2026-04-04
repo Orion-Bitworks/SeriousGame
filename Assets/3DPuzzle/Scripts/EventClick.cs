@@ -91,18 +91,38 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         KillSequence();
 
+        Transform targetParent;
+
         if (!beingDragged)
         {
-            piece.transform.SetParent(originalParent);
+            //piece.transform.SetParent(originalParent, true);
+            targetParent = originalParent;
         }
         else
         {
-            piece.transform.SetParent(dragParent);
+            //piece.transform.SetParent(dragParent, true);
+            targetParent = dragParent;
         }
+
+        Plane canvasPlane = new Plane(targetParent.forward, targetParent.position);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        float point;
+        Vector3 targetWorldPos = piece.transform.position;
+
+        if (canvasPlane.Raycast(ray, out point))
+        {
+            targetWorldPos = ray.GetPoint(point);
+        }
+
+        piece.transform.SetParent(targetParent, true);
+
+        piece.transform.position = targetWorldPos;
 
         sequence = DOTween.Sequence();
         sequence.Append(piece.transform.DOScale(scaleUI, 0.5f).SetEase(Ease.OutBack));
-        sequence.Join(piece.transform.DOMoveZ(originalParent.transform.position.z, 0.5f));
+        //sequence.Join(piece.transform.DOLocalMoveZ(0, 0.5f));
     }
 
     public void MoveOutUI()
