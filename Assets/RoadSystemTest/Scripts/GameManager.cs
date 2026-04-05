@@ -146,6 +146,7 @@ public class GameManager : MonoBehaviour
     public void EndLevel()
     {
         LevelProgress.CompleteLevel((int)currentLevel);
+        DialogManager.instance.Show("dialog_5_isgood");
         gameoverPanel.SetActive(true);
 
         continueButton.onClick.RemoveAllListeners();

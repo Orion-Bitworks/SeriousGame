@@ -35,6 +35,14 @@ MonoBehaviour:
     m_Key: dialog_5
     m_Metadata:
       m_Items: []
+  - m_Id: 1593436597489664
+    m_Key: dialog_5_isgood
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1593359212580864
+    m_Key: dialog_5_idbad
+    m_Metadata:
+      m_Items: []
   - m_Id: 1695720239104
     m_Key: dialog_6
     m_Metadata:
@@ -120,7 +128,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 3443230863360
-    m_Key: dialog_27_idbad
+    m_Key: dialog_27_isbad
     m_Metadata:
       m_Items: []
   m_Metadata:

@@ -68,9 +68,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 58882824966144
-    m_Key: 't4_carreteras_explanation
-
-'
+    m_Key: t4_carreteras_explanation
     m_Metadata:
       m_Items: []
   - m_Id: 58884066480128
@@ -82,9 +80,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 59435093168128
-    m_Key: 't5_carreteras_explanation
-
-'
+    m_Key: t5_carreteras_explanation
     m_Metadata:
       m_Items: []
   - m_Id: 59436141744128

@@ -28,121 +28,129 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1626078015488
-    m_Localized: We take this job very seriously, so I need you to be careful and
-      think through your actions before doing anything. They can have consequences,
-      and not very pleasant ones.
+    m_Localized: "Nos tomamos este trabajo muy en serio, as\xED que te pido que seas
+      cuidadoso y pienses bien tus acciones antes de actuar. Pueden tener consecuencias,
+      y no muy agradables."
     m_Metadata:
       m_Items: []
   - m_Id: 1651101233152
-    m_Localized: "Great! Now the fun begins\u2026 or maybe not so fun for you."
+    m_Localized: "\xA1Muy bien! Ahora empieza lo divertido\u2026 o no tanto para
+      ti."
     m_Metadata:
       m_Items: []
   - m_Id: 1690984869888
-    m_Localized: "Focus, and let\u2019s get started with the job. Well, not me\u2026
-      you."
+    m_Localized: "Conc\xE9ntrate y empecemos el trabajo. Bueno, yo no\u2026 t\xFA."
     m_Metadata:
       m_Items: []
   - m_Id: 1692792614912
-    m_Localized: 'You only have one mission: make everything work. I trust you.'
+    m_Localized: "Solo tienes una misi\xF3n: que todo funcione. Conf\xEDo en ti."
     m_Metadata:
       m_Items: []
   - m_Id: 1695720239104
-    m_Localized: "As you can see, there\u2019s not much you can do without a heart,
-      right? Do me a favor and read carefully how it works; otherwise, things won\u2019t
-      go too well for you."
+    m_Localized: "Como puedes ver, no hay mucho que hacer sin un coraz\xF3n, \xBFno?
+      Hazme el favor de leer atentamente c\xF3mo funciona; si no, no te ir\xE1 muy
+      bien en la vida."
     m_Metadata:
       m_Items: []
   - m_Id: 1697972580352
-    m_Localized: "Mmh\u2026 can you\u2026?"
+    m_Localized: "Mmh\u2026 \xBFt\xFA puedes\u2026?"
     m_Metadata:
       m_Items: []
   - m_Id: 1762678108160
-    m_Localized: "You did great, but you could go a bit faster, you know? The patient
-      doesn\u2019t have all day."
+    m_Localized: "Lo has hecho genial, pero podr\xEDas ir un poco m\xE1s r\xE1pido,
+      \xBFsabes? El paciente no tiene todo el d\xEDa."
     m_Metadata:
       m_Items: []
   - m_Id: 1766482341888
-    m_Localized: Could you focus? This is important. Try again.
+    m_Localized: "\xBFPodr\xEDas concentrarte? Esto es importante. Int\xE9ntalo de
+      nuevo.\r"
     m_Metadata:
       m_Items: []
   - m_Id: 1767195373568
-    m_Localized: "You\u2019re improving, but this isn\u2019t over yet. You\u2019ve
-      finished the outer part, good."
+    m_Localized: "Vas mejorando, pero esto a\xFAn no ha terminado. Has acabado la
+      parte exterior, bien."
     m_Metadata:
       m_Items: []
   - m_Id: 1767811936256
-    m_Localized: "You\u2019ll have to make the heart work properly, and you\u2019d
-      better do it right. That\u2019s a threat."
+    m_Localized: "Tendr\xE1s que hacer que el coraz\xF3n funcione correctamente,
+      y m\xE1s te vale hacerlo bien. Es una amenaza."
     m_Metadata:
       m_Items: []
   - m_Id: 1838993469440
-    m_Localized: Open the drawer on the right.
+    m_Localized: "Abre el caj\xF3n de la derecha."
     m_Metadata:
       m_Items: []
   - m_Id: 1840071405568
-    m_Localized: "Drag the heart inside and place it on the table. Don\u2019t take
-      too long."
+    m_Localized: "Arrastra el coraz\xF3n que hay dentro y ponlo en la mesa. No tardes.\r"
     m_Metadata:
       m_Items: []
   - m_Id: 1841094815744
-    m_Localized: "Hmm\u2026 it\u2019s not complete. Interesting. I hope you know
-      how this works."
+    m_Localized: "Hmm\u2026 no est\xE1 completo. Qu\xE9 cosas. Espero que sepas c\xF3mo
+      va.\r"
     m_Metadata:
       m_Items: []
   - m_Id: 1842978058240
-    m_Localized: "Great, keep it up! You need some encouragement too, or you\u2019ll
-      lose motivation."
+    m_Localized: "\xA1Genial, sigue as\xED! Tambi\xE9n necesitas un poco de \xE1nimo,
+      que si no te desanimas."
     m_Metadata:
       m_Items: []
   - m_Id: 1844534145024
-    m_Localized: What are you trying to do, kill the patient? Do it properly, please.
+    m_Localized: "\xBFT\xFA qu\xE9 quieres, matar al paciente? Haz el favor y hazlo
+      bien."
     m_Metadata:
       m_Items: []
   - m_Id: 1928055320576
-    m_Localized: Come on, keep going.
+    m_Localized: Venga, sigue.
     m_Metadata:
       m_Items: []
   - m_Id: 1928927735808
-    m_Localized: "Come on, you\u2019re almost done, but don\u2019t lose the rhythm."
+    m_Localized: Va, que ya te queda menos, pero no pierdas el ritmo.
     m_Metadata:
       m_Items: []
   - m_Id: 1929686904832
-    m_Localized: "Let\u2019s not start like this, please. Do things mindfully\u2014think
-      before you act."
+    m_Localized: No empecemos, por favor. Haz las cosas con conciencia, piensa antes
+      de actuar.
     m_Metadata:
       m_Items: []
   - m_Id: 1931482066944
-    m_Localized: The last one.
+    m_Localized: "El \xFAltimo."
     m_Metadata:
       m_Items: []
   - m_Id: 3359982317568
-    m_Localized: "Phew, thank goodness! You\u2019ve finished the most important parts.
-      Let\u2019s get out of here. But don\u2019t get too excited\u2014this isn\u2019t
-      over yet."
+    m_Localized: "Uf, menos mal. Ya has terminado las partes m\xE1s importantes.
+      V\xE1monos de aqu\xED. Pero no te motives demasiado, esto a\xFAn no ha terminado."
     m_Metadata:
       m_Items: []
   - m_Id: 3364927401984
-    m_Localized: "You don\u2019t know the rhythm? Disastrous\u2026"
+    m_Localized: "\xBFNo sabes el ritmo? Desastroso\u2026"
     m_Metadata:
       m_Items: []
   - m_Id: 3367402041344
-    m_Localized: "If you can\u2019t get the last step right, you won\u2019t get anywhere.
-      Get it together and try again."
+    m_Localized: "Si no consigues el \xFAltimo paso, no llegar\xE1s a ning\xFAn sitio.
+      Espabila y vuelve a intentarlo."
     m_Metadata:
       m_Items: []
   - m_Id: 3441859325952
-    m_Localized: "Alright, now it\u2019s time to make everything work. You know how
-      this goes. Let\u2019s go."
+    m_Localized: "Bien, ahora toca hacer que todo funcione. Ya sabes c\xF3mo va.
+      Vamos.\r"
     m_Metadata:
       m_Items: []
   - m_Id: 3442563969024
-    m_Localized: "Congratulations! You\u2019ve completed a big part of the job. You
-      seem dedicated\u2014keep that consistency and don\u2019t lose focus."
+    m_Localized: "\xA1Enhorabuena! Has terminado una gran parte del trabajo. Te veo
+      una persona aplicada, pero sigue con esa constancia y no bajes la cabeza."
     m_Metadata:
       m_Items: []
   - m_Id: 3443230863360
-    m_Localized: "Come on, it can\u2019t be that hard. Remember everything you\u2019ve
-      learned and apply it."
+    m_Localized: "Venga, no puede ser tan complicado. Recuerda todo lo que has estudiado
+      y apl\xEDcalo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1593436597489664
+    m_Localized: Parece que vas por buen camino.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1593359212580864
+    m_Localized: Vuelve a intentarlo, no empieces a decepcionar tan pronto...
     m_Metadata:
       m_Items: []
   references:

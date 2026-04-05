@@ -141,6 +141,14 @@ MonoBehaviour:
       i aplica-ho.
     m_Metadata:
       m_Items: []
+  - m_Id: 1593436597489664
+    m_Localized: "Sembla que vas pel bon cam\xED."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1593359212580864
+    m_Localized: "Torna a provar, no comencis a decebre tan d\u2019hora..."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

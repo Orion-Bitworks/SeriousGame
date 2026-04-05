@@ -47,6 +47,10 @@ MonoBehaviour:
     m_Key: t2_miniGameHart_explanation
     m_Metadata:
       m_Items: []
+  - m_Id: 1450694286348288
+    m_Key: t2_miniGameHart_keys_text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

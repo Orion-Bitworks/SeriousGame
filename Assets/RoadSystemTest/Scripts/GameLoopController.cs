@@ -47,7 +47,10 @@ public class GameLoopController : MonoBehaviour
         pipesUI.gameObject.SetActive(false);
         heartMinigamesUI.gameObject.SetActive(true);
         heartMinigamesCamera.Priority = 2;
-    }
+        DialogManager.instance.Show("dialog_14");
+		
+
+	}
 
     private void HandleGameCompleted(bool completed)
     {
@@ -60,7 +63,9 @@ public class GameLoopController : MonoBehaviour
         pipesUI.gameObject.SetActive(true);
         heartMinigamesUI.gameObject.SetActive(false);
         heartMinigamesCamera.Priority = 0;
-    }
+		DialogManager.instance.Show("dialog_1");
+
+	}
 
     private IEnumerator DelayedStart3DLevel()
     {
@@ -75,7 +80,8 @@ public class GameLoopController : MonoBehaviour
         pipesUI.gameObject.SetActive(false);
         threeDMinigameUI.gameObject.SetActive(true);
         threeDMinigameCamera.Priority = 2;
-    }
+		DialogManager.instance.Show("dialog_7");
+	}
 
     public void Start3DLevel()
     {
@@ -93,5 +99,10 @@ public class GameLoopController : MonoBehaviour
         pipesUI.gameObject.SetActive(true);
         threeDMinigameUI.gameObject.SetActive(false);
         threeDMinigameCamera.Priority = 0;
-    }
+		DialogManager.instance.Show("dialog_11");
+		DialogManager.instance.Show("dialog_12");
+		DialogManager.instance.Show("dialog_13");
+
+
+	}
 }

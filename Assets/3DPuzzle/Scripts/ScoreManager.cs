@@ -35,6 +35,7 @@ public class ScoreManager : MonoBehaviour
         {
             if (!point.PairedWithPartner())
             {
+                DialogManager.instance.Show("dialog_9_isbad");
                 Debug.Log("Incorrecto");
                 allRight = false;
             }
@@ -47,12 +48,15 @@ public class ScoreManager : MonoBehaviour
 
         if (allRight)
         {
+            DialogManager.instance.Show("dialog_8_isgood");
             ToggleWidget();
+            
         }
     }
 
     private void ToggleWidget()
     {
+
         widget.SetActive(true);
     }
 
