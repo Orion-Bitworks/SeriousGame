@@ -13,6 +13,7 @@ public class AnimationPivotController : MonoBehaviour
 
     [SerializeField] GameObject pipePrefab;
     private float spawnDistance = 60;
+    [SerializeField] bool invertedPipeDirection = false;
 
     public int GetPriority()
     {
@@ -35,6 +36,15 @@ public class AnimationPivotController : MonoBehaviour
         sequence.AppendInterval(1f);
         sequence.OnComplete(() =>
         {
+            if (newPipe.GetComponent<AnimatedPipeController>() != null)
+            {
+                newPipe.GetComponent<AnimatedPipeController>().StartAnimation(invertedPipeDirection);
+            }
+            else
+            {
+                Debug.Log("No hay animated pipe controller");
+            }
+            
             if (connection != null)
             {
                 connection.CheckBloodFlow();
