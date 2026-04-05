@@ -25,7 +25,7 @@ public class RoadOutput : MonoBehaviour
             ballReceived = true;
 
             // Notificamos a la lógica del corazón que hemos recibido una bolita si somos parte de él
-            var heart = GetComponentInParent<HeartLogic>();
+            var heart = GetComponentInParent<OrganLogic>();
             if (heart != null)
                 heart.NotifyOutputReceivedBall();
         }

@@ -6,11 +6,12 @@ public class HeartDrag3D : MonoBehaviour
     [SerializeField] bool dragging = false;     // Indica si el corazón está siendo arrastrado
     
     GameObject ghost;                           // Objeto para almacenar el ghost del corazón
+    [SerializeField] OrganData heartData;
 
     void Update()
     {
         // Si el corazón ya está colocado, abortamos
-        if (GameManager.Instance.heartPlaced) return;
+        //if (GameManager.Instance.organPlaced) return;
 
         // Si hacemos click encima del corazón del cajón, empezamos a arrastrar el corazón real
         if (Input.GetMouseButtonDown(0))
@@ -55,7 +56,7 @@ public class HeartDrag3D : MonoBehaviour
         // Creamos el ghost del corazón real
         ghost = Instantiate(heartPrefab);
         ghost.transform.position = ghost.transform.position;
-        HeartPlacementController.Instance.BeginDragGhost(ghost);
+        OrganPlacementController.Instance.BeginPlacingOrgan(heartData, ghost);
     }
 
     /// <summary>
@@ -67,7 +68,7 @@ public class HeartDrag3D : MonoBehaviour
         dragging = false;
 
         // Eliminamos el ghost del corazón real
-        bool placed = HeartPlacementController.Instance.EndDragGhost();
+        bool placed = OrganPlacementController.Instance.EndPlacingOrgan();
 
         // Si no se ha colocado, volvemos a mostrar el corazón del cajón
         if (!placed)

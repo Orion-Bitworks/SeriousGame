@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour
     public InputAction rotateMode_ia;
     public InputAction separateMode_ia;
     public InputAction deletePiece_ia;
-
+        
     private void Awake()
     {
         if (instance == null)
@@ -30,13 +30,13 @@ public class InputManager : MonoBehaviour
 
         EnableInput();
 
-        leftClick_ia = map.FindActionMap("MouseControl").FindAction("Left Click");
-        rightClick_ia = map.FindActionMap("MouseControl").FindAction("Right Click");
-        mouseLook_ia = map.FindActionMap("MouseControl").FindAction("Mouse Look");
-        mouseWheel_ia = map.FindActionMap("MouseControl").FindAction("Mouse Wheel");
-        rotateMode_ia = map.FindActionMap("KeyControl").FindAction("Rotate Mode");
-        separateMode_ia = map.FindActionMap("KeyControl").FindAction("Separate Mode");
-        deletePiece_ia = map.FindActionMap("KeyControl").FindAction("Delete");
+        leftClick_ia = map.FindActionMap("In3DGame").FindAction("Left Click");
+        rightClick_ia = map.FindActionMap("In3DGame").FindAction("Right Click");
+        mouseLook_ia = map.FindActionMap("In3DGame").FindAction("Mouse Look");
+        mouseWheel_ia = map.FindActionMap("In3DGame").FindAction("Mouse Wheel");
+        rotateMode_ia = map.FindActionMap("In3DGame").FindAction("Rotate Mode");
+        separateMode_ia = map.FindActionMap("In3DGame").FindAction("Separate Mode");
+        deletePiece_ia = map.FindActionMap("In3DGame").FindAction("Delete");
     }
 
     public void EnableInput()

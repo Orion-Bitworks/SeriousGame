@@ -22,18 +22,20 @@ public class GameLoopController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnHeartPlacedChanged += HandleHeartPlaced;
+        GameManager.Instance.OnOrganPlaced += HandleHeartPlaced;
         FindObjectOfType<Minigame3>(true).OnGameCompleted += HandleGameCompleted;
     }
 
-    private void HandleHeartPlaced(bool placed)
+    private void HandleHeartPlaced(OrganData organ, Vector3 organPosition)
     {
-        if (!placed || minigamesStarted) return;
+        if (organ.organType != OrganType.Heart) return;
 
-        StartCoroutine(DelayedHandleHeartPlaced());
+        if (minigamesStarted) return;
+
+        StartCoroutine(DelayedHandleHeartPlaced(organPosition));
     }
 
-    IEnumerator DelayedHandleHeartPlaced()
+    IEnumerator DelayedHandleHeartPlaced(Vector3 organPosition)
     {
         yield return new WaitForNextFrameUnit();
 
@@ -41,7 +43,7 @@ public class GameLoopController : MonoBehaviour
         GameManager.Instance.isPlaying = true;
         GameManager.Instance.currentLevelGameObject.SetActive(false);
         heartMinigames.gameObject.SetActive(true);
-        heartMinigames.transform.position = GameManager.Instance.heartPosition;
+        heartMinigames.transform.position = organPosition;
         pipesUI.gameObject.SetActive(false);
         heartMinigamesUI.gameObject.SetActive(true);
         heartMinigamesCamera.Priority = 2;

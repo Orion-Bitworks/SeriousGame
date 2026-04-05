@@ -564,6 +564,165 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""In3DGame"",
+            ""id"": ""e921d6a5-3af3-4ca9-ae7e-3b00ec02ba41"",
+            ""actions"": [
+                {
+                    ""name"": ""Rotate Mode"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa644b61-8a68-489d-a932-cf0af1fc0583"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mouse Wheel"",
+                    ""type"": ""Value"",
+                    ""id"": ""fded7479-0b08-4259-9938-db011f76c0ed"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Right Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""80d6f682-fd24-472f-935c-567721a94648"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mouse Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""a3a5fcc0-5be2-4ef4-beca-de8ad99df9ac"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Left Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""1555beac-798d-4282-b963-5d5912974a26"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Separate Mode"",
+                    ""type"": ""Button"",
+                    ""id"": ""b51adc25-4010-4e37-ad2a-117660b18392"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Delete"",
+                    ""type"": ""Button"",
+                    ""id"": ""b183b550-7eaf-44b4-966d-abc4a4b6a04c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""fcf7027d-b7b7-4d73-befa-a1f58e101429"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c687c56-8628-47c9-9827-7e9d1de9f75d"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Separate Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4171202c-7760-4fc1-9fc2-4a232ea719e8"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Delete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""078d28b6-239f-47ee-876d-92e88b2e8887"",
+                    ""path"": ""<Keyboard>/delete"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Delete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""520eb9fd-021a-4642-bfd4-4561c4961299"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd6c217b-0df0-4907-97c4-03a5a851f729"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mouse Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c946087f-4c17-48a0-8c3d-4a9378e5e4dc"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2aaaba8a-d9f8-4c96-a1a5-d27701ab00b3"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mouse Wheel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -612,6 +771,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_InRoadGame_NextPiece = m_InRoadGame.FindAction("NextPiece", throwIfNotFound: true);
         m_InRoadGame_Undo = m_InRoadGame.FindAction("Undo", throwIfNotFound: true);
         m_InRoadGame_Redo = m_InRoadGame.FindAction("Redo", throwIfNotFound: true);
+        // In3DGame
+        m_In3DGame = asset.FindActionMap("In3DGame", throwIfNotFound: true);
+        m_In3DGame_RotateMode = m_In3DGame.FindAction("Rotate Mode", throwIfNotFound: true);
+        m_In3DGame_MouseWheel = m_In3DGame.FindAction("Mouse Wheel", throwIfNotFound: true);
+        m_In3DGame_RightClick = m_In3DGame.FindAction("Right Click", throwIfNotFound: true);
+        m_In3DGame_MouseLook = m_In3DGame.FindAction("Mouse Look", throwIfNotFound: true);
+        m_In3DGame_LeftClick = m_In3DGame.FindAction("Left Click", throwIfNotFound: true);
+        m_In3DGame_SeparateMode = m_In3DGame.FindAction("Separate Mode", throwIfNotFound: true);
+        m_In3DGame_Delete = m_In3DGame.FindAction("Delete", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -841,6 +1009,100 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public InRoadGameActions @InRoadGame => new InRoadGameActions(this);
+
+    // In3DGame
+    private readonly InputActionMap m_In3DGame;
+    private List<IIn3DGameActions> m_In3DGameActionsCallbackInterfaces = new List<IIn3DGameActions>();
+    private readonly InputAction m_In3DGame_RotateMode;
+    private readonly InputAction m_In3DGame_MouseWheel;
+    private readonly InputAction m_In3DGame_RightClick;
+    private readonly InputAction m_In3DGame_MouseLook;
+    private readonly InputAction m_In3DGame_LeftClick;
+    private readonly InputAction m_In3DGame_SeparateMode;
+    private readonly InputAction m_In3DGame_Delete;
+    public struct In3DGameActions
+    {
+        private @Controls m_Wrapper;
+        public In3DGameActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @RotateMode => m_Wrapper.m_In3DGame_RotateMode;
+        public InputAction @MouseWheel => m_Wrapper.m_In3DGame_MouseWheel;
+        public InputAction @RightClick => m_Wrapper.m_In3DGame_RightClick;
+        public InputAction @MouseLook => m_Wrapper.m_In3DGame_MouseLook;
+        public InputAction @LeftClick => m_Wrapper.m_In3DGame_LeftClick;
+        public InputAction @SeparateMode => m_Wrapper.m_In3DGame_SeparateMode;
+        public InputAction @Delete => m_Wrapper.m_In3DGame_Delete;
+        public InputActionMap Get() { return m_Wrapper.m_In3DGame; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(In3DGameActions set) { return set.Get(); }
+        public void AddCallbacks(IIn3DGameActions instance)
+        {
+            if (instance == null || m_Wrapper.m_In3DGameActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_In3DGameActionsCallbackInterfaces.Add(instance);
+            @RotateMode.started += instance.OnRotateMode;
+            @RotateMode.performed += instance.OnRotateMode;
+            @RotateMode.canceled += instance.OnRotateMode;
+            @MouseWheel.started += instance.OnMouseWheel;
+            @MouseWheel.performed += instance.OnMouseWheel;
+            @MouseWheel.canceled += instance.OnMouseWheel;
+            @RightClick.started += instance.OnRightClick;
+            @RightClick.performed += instance.OnRightClick;
+            @RightClick.canceled += instance.OnRightClick;
+            @MouseLook.started += instance.OnMouseLook;
+            @MouseLook.performed += instance.OnMouseLook;
+            @MouseLook.canceled += instance.OnMouseLook;
+            @LeftClick.started += instance.OnLeftClick;
+            @LeftClick.performed += instance.OnLeftClick;
+            @LeftClick.canceled += instance.OnLeftClick;
+            @SeparateMode.started += instance.OnSeparateMode;
+            @SeparateMode.performed += instance.OnSeparateMode;
+            @SeparateMode.canceled += instance.OnSeparateMode;
+            @Delete.started += instance.OnDelete;
+            @Delete.performed += instance.OnDelete;
+            @Delete.canceled += instance.OnDelete;
+        }
+
+        private void UnregisterCallbacks(IIn3DGameActions instance)
+        {
+            @RotateMode.started -= instance.OnRotateMode;
+            @RotateMode.performed -= instance.OnRotateMode;
+            @RotateMode.canceled -= instance.OnRotateMode;
+            @MouseWheel.started -= instance.OnMouseWheel;
+            @MouseWheel.performed -= instance.OnMouseWheel;
+            @MouseWheel.canceled -= instance.OnMouseWheel;
+            @RightClick.started -= instance.OnRightClick;
+            @RightClick.performed -= instance.OnRightClick;
+            @RightClick.canceled -= instance.OnRightClick;
+            @MouseLook.started -= instance.OnMouseLook;
+            @MouseLook.performed -= instance.OnMouseLook;
+            @MouseLook.canceled -= instance.OnMouseLook;
+            @LeftClick.started -= instance.OnLeftClick;
+            @LeftClick.performed -= instance.OnLeftClick;
+            @LeftClick.canceled -= instance.OnLeftClick;
+            @SeparateMode.started -= instance.OnSeparateMode;
+            @SeparateMode.performed -= instance.OnSeparateMode;
+            @SeparateMode.canceled -= instance.OnSeparateMode;
+            @Delete.started -= instance.OnDelete;
+            @Delete.performed -= instance.OnDelete;
+            @Delete.canceled -= instance.OnDelete;
+        }
+
+        public void RemoveCallbacks(IIn3DGameActions instance)
+        {
+            if (m_Wrapper.m_In3DGameActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IIn3DGameActions instance)
+        {
+            foreach (var item in m_Wrapper.m_In3DGameActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_In3DGameActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public In3DGameActions @In3DGame => new In3DGameActions(this);
     private int m_GamepadControlsSchemeIndex = -1;
     public InputControlScheme GamepadControlsScheme
     {
@@ -876,5 +1138,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnNextPiece(InputAction.CallbackContext context);
         void OnUndo(InputAction.CallbackContext context);
         void OnRedo(InputAction.CallbackContext context);
+    }
+    public interface IIn3DGameActions
+    {
+        void OnRotateMode(InputAction.CallbackContext context);
+        void OnMouseWheel(InputAction.CallbackContext context);
+        void OnRightClick(InputAction.CallbackContext context);
+        void OnMouseLook(InputAction.CallbackContext context);
+        void OnLeftClick(InputAction.CallbackContext context);
+        void OnSeparateMode(InputAction.CallbackContext context);
+        void OnDelete(InputAction.CallbackContext context);
     }
 }
