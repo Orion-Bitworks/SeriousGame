@@ -22,6 +22,8 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField] private Transform originalParent;
     [SerializeField] private Transform dragParent;
 
+    private bool canInteract = true;
+
     private void Start()
     {
         piece = GetComponent<PieceController>();
@@ -30,7 +32,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private void Update()
     {
-        if (!beingDragged || piece.IsInteracting())
+        if (!beingDragged || piece.IsInteracting() || !canInteract)
         {
             return;
         }
@@ -57,6 +59,11 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        if (!canInteract)
+        {
+            return;
+        }
+
         beingDragged = true;
 
         MoveOutUI();
@@ -65,6 +72,11 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (!canInteract)
+        {
+            return;
+        }
+
         beingDragged = false;
 
         if (!InputManager.instance.rotateMode_ia.inProgress)
@@ -186,5 +198,10 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         Sequence resetSequence = DOTween.Sequence();
         resetSequence.AppendInterval(2f);
         resetSequence.Append(piece.transform.DOScale(scaleUI, 0.5f).SetEase(Ease.OutBack));
+    }
+
+    public void CanInteract(bool canInteract)
+    {
+        this.canInteract = canInteract;
     }
 }

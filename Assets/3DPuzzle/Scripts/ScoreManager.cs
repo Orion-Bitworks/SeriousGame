@@ -68,6 +68,11 @@ public class ScoreManager : MonoBehaviour
 
     public void PlayFinishAnimation()
     {
+        foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
+        {
+            eventClick.CanInteract(false);
+        }
+
         foreach (ConnectionPointController point in connections)
         {
             point.GetPiece().GetGroup().PlayFinishAnimation();
