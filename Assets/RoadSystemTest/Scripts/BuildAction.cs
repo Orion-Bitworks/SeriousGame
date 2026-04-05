@@ -7,7 +7,7 @@ public enum BuildActionType
 {
     Place,
     Erase,
-    HeartPlace
+    OrganPlace
 }
 
 /// <summary>
@@ -20,6 +20,7 @@ public class BuildAction
     public GameObject prefab;               // Prefab de la pieza
     public Quaternion rotation;             // Rotación de la pieza
     public RoadDirection[] connections;     // Conexiones de la pieza
+    public OrganData organData;
 
     /// <summary>
     /// Constructor de la acción, asigna cada parámetro recibido al campo correspondiente
@@ -35,7 +36,17 @@ public class BuildAction
         this.cell = cell;
         this.prefab = prefab;
         this.rotation = rotation;
-        if (connections != null) this.connections = (RoadDirection[])connections.Clone();
-        else this.connections = null;
+        this.connections = (RoadDirection[])connections.Clone();
+        this.organData = null;
+    }
+
+    public BuildAction(BuildActionType type, Vector3Int cell, GameObject prefab, Quaternion rotation, OrganData organData)
+    {
+        this.type = type;
+        this.cell = cell;
+        this.prefab = prefab;
+        this.rotation = rotation;
+        this.connections = null;
+        this.organData = organData;
     }
 }

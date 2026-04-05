@@ -21,29 +21,21 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public bool isPlaying = false;            // Controla si el sistema de bolitas está en marcha
     //[HideInInspector] public bool heartPlaced = false;          // Controla si el corazón ha sido colocado
-    public Vector3 heartPosition;
 
-    HeartLogic heartLogic;                                      // Referencia al controlador de la lógica del corazón
+    OrganLogic organLogic;                                      // Referencia al controlador de la lógica del órgano
 
     LevelID currentLevel;
 
     public GameObject currentLevelGameObject;
 
-    public event Action<bool> OnHeartPlacedChanged;
+    public event Action<OrganData, Vector3> OnOrganPlaced;
 
-    private bool _heartPlaced = false;
-    [HideInInspector] public bool heartPlaced 
+    public void NotifyOrganPlaced(OrganData organ, Vector3 organPosition)
     {
-        get => _heartPlaced;
-        set
-        {
-            if (_heartPlaced == value)
-                return;
-
-            _heartPlaced = value;
-            OnHeartPlacedChanged?.Invoke(_heartPlaced);
-        }
+        OnOrganPlaced?.Invoke(organ, organPosition);
     }
+
+    [SerializeField] LevelOrganMap[] organMappings;
 
     private void Awake()
     {
@@ -57,13 +49,30 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(LevelID level)
     {
-        if (level == 0)
-            FindAnyObjectByType<HeartDrag3D>().DespawnMiniHeart();
-        else
-            FindAnyObjectByType<HeartDrag3D>().SpawnMiniHeart();
-
         currentLevel = level;
 
+        // Obtener los órganos requeridos por este nivel
+        OrganType[] organsForLevel = GetOrgansForLevel(level);
+
+        // Encontrar todos los mini-órganos del cajón
+        var draggers = FindObjectsOfType<OrganDrag3D>(true);
+
+        // Mostrar solo los órganos que pertenecen al nivel
+        foreach (var dragger in draggers)
+        {
+            // Si el órgano está en la lista del nivel, mostrarlo
+            if (System.Array.Exists(organsForLevel, o => o == dragger.organData.organType))
+            {
+                dragger.SpawnMiniOrgan();
+            }
+            else
+            {
+                // Si no pertenece al nivel ocultarlo
+                dragger.DespawnMiniOrgan();
+            }
+        }
+
+        // Comprobación de progreso
         int index = (int)level;
 
         if (level > 0 && !LevelProgress.IsLevelCompleted(index - 1))
@@ -72,8 +81,10 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        // Instanciar el nivel
         currentLevelGameObject = Instantiate(levels[index]);
 
+        // Si el nivel es el del corazón, arrancar su minijuego 3D
         if (level == LevelID.Heart)
             FindObjectOfType<GameLoopController>().Start3DLevel();
     }
@@ -111,26 +122,20 @@ public class GameManager : MonoBehaviour
         isPlaying = false;
 
         // Busca y elimina todas las bolitas activas
-        MovingBall[] balls = FindObjectsOfType<MovingBall>();
-        foreach (var ball in balls)
+        foreach (var ball in FindObjectsOfType<MovingBall>())
             ball.DestroyBall();
 
         // Desactiva todos los condicionales de las salidas
-        RoadOutput[] roadOutputs = FindObjectsOfType<RoadOutput>();
-        foreach (var roadOutput in roadOutputs)
+        foreach (var roadOutput in FindObjectsOfType<RoadOutput>())
             roadOutput.ballReceived = false;
 
         // Desactiva todos los inputs del sistema
-        LevelInputActivator[] levelInputs = FindObjectsOfType<LevelInputActivator>();
-        foreach (var levelInput in levelInputs)
+        foreach (var levelInput in FindObjectsOfType<LevelInputActivator>())
             levelInput.DeactivateInputs();
 
         // Desactiva los inputs de dentro del sistema del corazón
-        if (heartLogic = FindAnyObjectByType<HeartLogic>())
-        {
-            heartLogic.DeactivatePulmonaryArteries();
-            heartLogic.DeactivateAorta();
-        }
+        if (organLogic = FindAnyObjectByType<OrganLogic>())
+            organLogic.ResetOrgan();
     }
 
     public void LoadScene(string targetScene)
@@ -146,5 +151,14 @@ public class GameManager : MonoBehaviour
         continueButton.onClick.RemoveAllListeners();
         continueButton.onClick.AddListener(LoadNextLevel);
     }
-}
 
+    public OrganType[] GetOrgansForLevel(LevelID level)
+    {
+        foreach (var map in organMappings)
+            if (map.level == level)
+                return map.organs;
+
+        return new OrganType[0];
+    }
+
+}

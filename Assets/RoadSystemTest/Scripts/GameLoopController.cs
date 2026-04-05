@@ -22,18 +22,20 @@ public class GameLoopController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.OnHeartPlacedChanged += HandleHeartPlaced;
+        GameManager.Instance.OnOrganPlaced += HandleHeartPlaced;
         FindObjectOfType<Minigame3>(true).OnGameCompleted += HandleGameCompleted;
     }
 
-    private void HandleHeartPlaced(bool placed)
+    private void HandleHeartPlaced(OrganData organ, Vector3 organPosition)
     {
-        if (!placed || !minigamesStarted) return;
+        if (organ.organType != OrganType.Heart) return;
 
-        StartCoroutine(WaitASecond());
+        if (minigamesStarted) return;
+
+        StartCoroutine(DelayedHandleHeartPlaced(organPosition));
     }
 
-    IEnumerator WaitASecond()
+    IEnumerator DelayedHandleHeartPlaced(Vector3 organPosition)
     {
         yield return new WaitForNextFrameUnit();
 
@@ -41,7 +43,7 @@ public class GameLoopController : MonoBehaviour
         GameManager.Instance.isPlaying = true;
         GameManager.Instance.currentLevelGameObject.SetActive(false);
         heartMinigames.gameObject.SetActive(true);
-        heartMinigames.transform.position = GameManager.Instance.heartPosition;
+        heartMinigames.transform.position = organPosition;
         pipesUI.gameObject.SetActive(false);
         heartMinigamesUI.gameObject.SetActive(true);
         heartMinigamesCamera.Priority = 2;
@@ -60,9 +62,11 @@ public class GameLoopController : MonoBehaviour
         heartMinigamesCamera.Priority = 0;
     }
 
-    public void Start3DLevel()
+    private IEnumerator DelayedStart3DLevel()
     {
-        if (threeDStarted) return;
+        yield return new WaitForSecondsRealtime(2f);
+
+        if (threeDStarted) yield break;
 
         threeDStarted = true;
         GameManager.Instance.isPlaying = true;
@@ -73,16 +77,14 @@ public class GameLoopController : MonoBehaviour
         threeDMinigameCamera.Priority = 2;
     }
 
-    public void End3DLevel()
+    public void Start3DLevel()
     {
-        StartCoroutine(DelayedEnd3DLevel());
+        StartCoroutine(DelayedStart3DLevel());
     }
 
-    private IEnumerator DelayedEnd3DLevel()
+    public void End3DLevel()
     {
-        yield return new WaitForSecondsRealtime(2f);
-
-        if (threeDFinished) yield break;
+        if (threeDFinished) return;
 
         threeDFinished = true;
         GameManager.Instance.currentLevelGameObject.SetActive(true);
@@ -91,5 +93,5 @@ public class GameLoopController : MonoBehaviour
         pipesUI.gameObject.SetActive(true);
         threeDMinigameUI.gameObject.SetActive(false);
         threeDMinigameCamera.Priority = 0;
-	}
+    }
 }
