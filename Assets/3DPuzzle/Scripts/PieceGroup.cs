@@ -222,9 +222,17 @@ public class PieceGroup
             }
         }
 
-        foreach (AnimationPivotController pivot in animationPivots)
+        animationPivots.Sort((obj1, obj2) => obj1.GetPriority().CompareTo(obj2.GetPriority()));
+
+        /*foreach (AnimationPivotController pivot in animationPivots)
         {
             pivot.StartAnimation();
+        }*/
+
+        for (int i = 0; i < animationPivots.Count; i++)
+        {
+            float animationDelay = (i + 1) * 0.2f;
+            animationPivots[i].StartAnimation(animationDelay);
         }
     }
 }
