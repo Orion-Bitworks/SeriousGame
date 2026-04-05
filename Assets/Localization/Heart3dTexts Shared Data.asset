@@ -13,8 +13,24 @@ MonoBehaviour:
   m_Name: Heart3dTexts Shared Data
   m_EditorClassIdentifier: 
   m_TableCollectionName: Heart3dTexts
-  m_TableCollectionNameGuidString: 00000000000000000000000000000000
-  m_Entries: []
+  m_TableCollectionNameGuidString: f5a71b99f36eb624ba0ee4592deb8ff9
+  m_Entries:
+  - m_Id: 280578846720
+    m_Key: corazon_montado_texto
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2007944228864
+    m_Key: how_to_play3d_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2238870024192
+    m_Key: objective_tutorial_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2579812413440
+    m_Key: howtoplay_description_text
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

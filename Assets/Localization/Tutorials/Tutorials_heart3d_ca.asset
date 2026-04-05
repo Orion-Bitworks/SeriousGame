@@ -1,0 +1,92 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Tutorials_heart3d_ca
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ca
+  m_SharedData: {fileID: 11400000, guid: e23fccfe23303004e886cc27f2755c2e, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 5396400795648
+    m_Localized: Click + SUPR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5110579949568
+    m_Localized: ESPAI + Mantenir Click
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4417118892032
+    m_Localized: 'R + Mantenir Click Dret/ Esquerre '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4414803636224
+    m_Localized: "R + Click Esquerre per rotar la pe\xE7a\nR + Click Dret per rotar
+      la pe\xE7a"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4412270276608
+    m_Localized: "Rotaci\xF3 de Peces"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391757701120
+    m_Localized: "Eliminar Pe\xE7es"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3443709014016
+    m_Localized: Objectiu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3186048724992
+    m_Localized: "Conecta les peces correctament per fer que el cor pugui comen\xE7ar
+      a funcionar"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4036821348352
+    m_Localized: Moure peces
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4039316959232
+    m_Localized: "Fer click i arrossegar les peces per poder moureles. Utilitza la
+      roda del ratol\xED per apropar-la o allunyar-la"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4040797548544
+    m_Localized: "Mantenir Click - Roda Ratol\xED"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5106805075968
+    m_Localized: Separar peces
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5109225189376
+    m_Localized: "ESPAI + Click una pe\xE7a i arrosegala a una certa distancia per
+      poder separar-la del grup"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5394886651904
+    m_Localized: "Click + SUPR per eliminar una pe\xE7a. Per\xF2 ves amb compte,
+      si fas click en un grup, s'eliminen totes les peces!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255117736579072
+    m_Localized: "Com jugar\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3701914562560
+    m_Localized: .
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

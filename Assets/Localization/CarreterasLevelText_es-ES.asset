@@ -17,7 +17,27 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: b8bd4a9a65b85454c824c7a53484827e, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 70142226432
+    m_Localized: "\xA1Felicidades!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 543016448000
+    m_Localized: "Tu coraz\xF3n est\xE1 conectado correctamente. \xA1Enhorabuena!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1494318149632
+    m_Localized: Continuar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1719338364928
+    m_Localized: Recargar nivel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2039690915840
+    m_Localized: Volver al menu
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

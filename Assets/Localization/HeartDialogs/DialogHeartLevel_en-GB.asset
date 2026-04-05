@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DialogHeartLevel_en-GB
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-GB
+  m_SharedData: {fileID: 11400000, guid: 1ef78ba17aeb35f4190d798b5eeab281, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1932895547392
+    m_Localized: "Dale a tu\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41881006080
+    m_Localized: "Hi there! Feeling ready to start your first day at work? I\u2019ll
+      show you around your workspace and today\u2019s tasks."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1626078015488
+    m_Localized: "Nos tomamos este trabajo muy en serio, as\xED que te pido que seas
+      cuidadoso y pienses bien tus acciones antes de actuar. Pueden tener consecuencias,
+      y no muy agradables."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1651101233152
+    m_Localized: "\xA1Muy bien! Ahora empieza lo divertido\u2026 o no tanto para
+      ti."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1690984869888
+    m_Localized: "Conc\xE9ntrate y empecemos el trabajo. Bueno, yo no\u2026 t\xFA."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1692792614912
+    m_Localized: "Solo tienes una misi\xF3n: que todo funcione. Conf\xEDo en ti."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1695720239104
+    m_Localized: "Como puedes ver, no hay mucho que hacer sin un coraz\xF3n, \xBFno?
+      Hazme el favor de leer atentamente c\xF3mo funciona; si no, no te ir\xE1 muy
+      bien en la vida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1697972580352
+    m_Localized: "Mmh\u2026 \xBFt\xFA puedes\u2026?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1762678108160
+    m_Localized: "Lo has hecho genial, pero podr\xEDas ir un poco m\xE1s r\xE1pido,
+      \xBFsabes? El paciente no tiene todo el d\xEDa."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1766482341888
+    m_Localized: "\xBFPodr\xEDas concentrarte? Esto es importante. Int\xE9ntalo de
+      nuevo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1767195373568
+    m_Localized: "Vas mejorando, pero esto a\xFAn no ha terminado. Has acabado la
+      parte exterior, bien."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1767811936256
+    m_Localized: "Tendr\xE1s que hacer que el coraz\xF3n funcione correctamente,
+      y m\xE1s te vale hacerlo bien. Es una amenaza."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1838993469440
+    m_Localized: "Abre el caj\xF3n de la derecha."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1840071405568
+    m_Localized: "Arrastra el coraz\xF3n que hay dentro y ponlo en la mesa. No tardes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1841094815744
+    m_Localized: "Hmm\u2026 no est\xE1 completo. Qu\xE9 cosas. Espero que sepas c\xF3mo
+      va."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1842978058240
+    m_Localized: "\xA1Genial, sigue as\xED! Tambi\xE9n necesitas un poco de \xE1nimo,
+      que si no te desanimas."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1844534145024
+    m_Localized: "\xBFT\xFA qu\xE9 quieres, matar al paciente? Haz el favor y hazlo
+      bien."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1928055320576
+    m_Localized: Venga, sigue.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1928927735808
+    m_Localized: Va, que ya te queda menos, pero no pierdas el ritmo.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1929686904832
+    m_Localized: No empecemos, por favor. Haz las cosas con conciencia, piensa antes
+      de actuar.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1931482066944
+    m_Localized: "El \xFAltimo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3359982317568
+    m_Localized: "Uf, menos mal. Ya has terminado las partes m\xE1s importantes.
+      V\xE1monos de aqu\xED. Pero no te motives demasiado, esto a\xFAn no ha terminado."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3364927401984
+    m_Localized: "\xBFNo sabes el ritmo? Desastroso\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3367402041344
+    m_Localized: "Si no consigues el \xFAltimo paso, no llegar\xE1s a ning\xFAn sitio.
+      Espabila y vuelve a intentarlo."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3441859325952
+    m_Localized: "Bien, ahora toca hacer que todo funcione. Ya sabes c\xF3mo va.
+      Vamos."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3442563969024
+    m_Localized: "\xA1Enhorabuena! Has terminado una gran parte del trabajo. Te veo
+      una persona aplicada, pero sigue con esa constancia y no bajes la cabeza."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3443230863360
+    m_Localized: "Venga, no puede ser tan complicado. Recuerda todo lo que has estudiado
+      y apl\xEDcalo."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

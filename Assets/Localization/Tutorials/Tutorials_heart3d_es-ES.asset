@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Tutorials_heart3d_es-ES
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: e23fccfe23303004e886cc27f2755c2e, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 5396400795648
+    m_Localized: Click + SUPR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5110579949568
+    m_Localized: ESPACIO +  Mantener Click
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4417118892032
+    m_Localized: R + Mantener Click Derecho/ Izquierdo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4414803636224
+    m_Localized: 'R + Click Izquierdo para rotar la pieza
+
+      R + Click Derecho
+      para rotar la pieza'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4412270276608
+    m_Localized: "Rataci\xF3n de piezas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5391757701120
+    m_Localized: Eliminar piezas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3443709014016
+    m_Localized: Objetivo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3186048724992
+    m_Localized: Conecta las peizas correctamente para que el corazon pueda empezar
+      a funcioanr
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4036821348352
+    m_Localized: Mover piezas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4039316959232
+    m_Localized: "Hacer click y arrastrar las peizas para poder moverlas. Utiliza
+      la rueda del rat\xF3n para hacerlas o alejarlas"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4040797548544
+    m_Localized: "Mantenir Click - Rueda rat\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5106805075968
+    m_Localized: Separar piezas
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5109225189376
+    m_Localized: ESPACIO + Click en una pieza para arrastrarla a una cierta distancia
+      para poder separarla del grupo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 5394886651904
+    m_Localized: "Click + SUPR para eliminar una pieza. Pero ves con cuidado, si
+      haces click en un grupo, \xA1se borran todas las piezas!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2255117736579072
+    m_Localized: "C\xF3mo jugar\r"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

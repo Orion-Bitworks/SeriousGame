@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: tutorials2_carreteras Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: tutorials2_carreteras
+  m_TableCollectionNameGuidString: ef695ba3cd87a6e4797cbc43a9f13afb
+  m_Entries:
+  - m_Id: 4414345216
+    m_Key: t0_carreteras2_subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77697224704
+    m_Key: t0_carreteras2_explanation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 426139029504
+    m_Key: t1_carreteras2_subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 428403953664
+    m_Key: t1_carreteras2_explanation
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 2529632145494245376
+  references:
+    version: 2
+    RefIds:
+    - rid: 2529632145494245376
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1775056806687

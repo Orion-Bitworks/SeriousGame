@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: tutorials2_carreteras_ca
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ca
+  m_SharedData: {fileID: 11400000, guid: ef695ba3cd87a6e4797cbc43a9f13afb, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 4414345216
+    m_Localized: Objectiu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 77697224704
+    m_Localized: Connecta les canonades correctament per fer funcionar el sistema,
+      ara integrant-hi el cor.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 426139029504
+    m_Localized: "\xD2rgans"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 428403953664
+    m_Localized: "Per poder col\xB7locar \xF2rgans al sistema, simplement has d\u2019obrir
+      el calaix amb clic esquerre, i arrastrar l\u2019\xF2rgan a la taula de treball.\r"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

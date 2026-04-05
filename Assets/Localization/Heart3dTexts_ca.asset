@@ -17,7 +17,24 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: f5a71b99f36eb624ba0ee4592deb8ff9, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 280578846720
+    m_Localized: Has muntat el cor!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2007944228864
+    m_Localized: Com jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2238870024192
+    m_Localized: Objetivo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2579812413440
+    m_Localized: "Uneix totes les peces correctament perqu\xE8 el cor pugui comen\xE7ar
+      a funcionar."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -17,6 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: c99fe3542b9c7574aa89f77586e92f28
   m_SerializeEntries:
+  - m_GUID: 0539ff9e0a50f0848822186480a6587f
+    m_Address: tutorials2_carreteras_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 09b9137b0e5fa784db3ca2ad442a5685
+    m_Address: Heart3dTexts_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0a5d828d01917dd42ab34163b2e388bb
     m_Address: MenuPauseTable_ca
     m_ReadOnly: 1
@@ -28,6 +40,37 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6bf5136b5c7582b4a9a399b0ea8af777
+    m_Address: CarreterasLevelText_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7e89b625ba3d774da087a00c8f9311f
+    m_Address: tutorials_carreteras_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c22a293456e27d64d8767344e6b02be1
+    m_Address: tutorials_mini_Game_corazon_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c9f8483d10c63f841955a1d56727ca25
+    m_Address: DialogHeartLevel_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3149aaa22e15e54d81f1dc695824171
+    m_Address: Tutorials_heart3d_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 46e5d326f8c7ce14791dbb7f1f628e06, type: 2}

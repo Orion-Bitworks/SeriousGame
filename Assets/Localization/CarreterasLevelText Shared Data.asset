@@ -13,8 +13,32 @@ MonoBehaviour:
   m_Name: CarreterasLevelText Shared Data
   m_EditorClassIdentifier: 
   m_TableCollectionName: CarreterasLevelText
-  m_TableCollectionNameGuidString: 00000000000000000000000000000000
-  m_Entries: []
+  m_TableCollectionNameGuidString: b8bd4a9a65b85454c824c7a53484827e
+  m_Entries:
+  - m_Id: 70142226432
+    m_Key: congratulations_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 543016448000
+    m_Key: description_finish_minigame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1494318149632
+    m_Key: continue_level_button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1639445262336
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1719338364928
+    m_Key: reload_level_button
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2039690915840
+    m_Key: back_menu_buton
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

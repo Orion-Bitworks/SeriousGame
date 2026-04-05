@@ -17,7 +17,24 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: f5a71b99f36eb624ba0ee4592deb8ff9, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 280578846720
+    m_Localized: "Has montado el coraz\xF3n!"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2007944228864
+    m_Localized: "C\xF3mo jugar\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2238870024192
+    m_Localized: Objectiu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2579812413440
+    m_Localized: "Une todas las piezas correctamente para que el coraz\xF3n pueda
+      empezar a funcionar."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

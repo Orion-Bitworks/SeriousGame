@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class TutorialController : MonoBehaviour
 {
     [SerializeField] private string tagToDetect;
-    
-    [Header("Navigation Buttons")]
+	[SerializeField] private TutorialLocalizationController localizationController;
+
+	[Header("Navigation Buttons")]
     [SerializeField] private Button nextButton;
     [SerializeField] private Button priorButton;
 
@@ -21,8 +22,9 @@ public class TutorialController : MonoBehaviour
     private List<GameObject> dots = new List<GameObject>();
     private GameObject activePanel;
     private int panelIndex = 0;
+	public int tutorialID = 5;
 
-    private void Awake()
+	private void Awake()
     {
         RegisterPanels();
     }
@@ -30,8 +32,9 @@ public class TutorialController : MonoBehaviour
     private void Start()
     {
         GenerateProgressCircles();
-        ResetTutorial();
-    }
+        panelIndex = 0;
+        ChangePanel();
+	}
 
     private void OnEnable()
     {
@@ -47,25 +50,27 @@ public class TutorialController : MonoBehaviour
         panels[panelIndex].SetActive(true);
         activePanel = panels[panelIndex];
 
+        localizationController.SetPage(panelIndex);
+
         ToggleButtons();
         SelectProgressDot();
     }
 
     public void NextPanel()
     {
-        panelIndex++;
-        panelIndex = Mathf.Clamp(panelIndex, 0, panels.Count - 1);
+		panelIndex++;
+		panelIndex = Mathf.Clamp(panelIndex, 0, panels.Count - 1);
 
-        ChangePanel();
-    }
+		ChangePanel();
+	}
 
     public void PriorPanel()
     {
-        panelIndex--;
-        panelIndex = Mathf.Clamp(panelIndex, 0, panels.Count - 1);
+		panelIndex--;
+		panelIndex = Mathf.Clamp(panelIndex, 0, panels.Count - 1);
 
-        ChangePanel();
-    }
+		ChangePanel();
+	}
 
     public void ResetTutorial()
     {
@@ -91,7 +96,8 @@ public class TutorialController : MonoBehaviour
             {
                 panels.Add(child.gameObject);
             }
-        }
+
+		}
     }
 
     private void GenerateProgressCircles()

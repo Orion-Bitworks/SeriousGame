@@ -22,8 +22,46 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ef78ba17aeb35f4190d798b5eeab281
+    m_Address: Assets/Localization/HeartDialogs/DialogHeartLevel Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3903e673891e4c6458eea7dedf29fd36
+    m_Address: Assets/Localization/Tutorials/MiniGameCorazon/tutorials_mini_Game_corazon
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4d95848f13f22154896e7687e9bb7e06
+    m_Address: Assets/Localization/Tutorials/carreteras/tutorials_carreteras Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8bd4a9a65b85454c824c7a53484827e
+    m_Address: Assets/Localization/CarreterasLevelText Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e23fccfe23303004e886cc27f2755c2e
+    m_Address: Assets/Localization/Tutorials/Tutorials Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ee5e659010dbea64c9d99edb2a78e67f
     m_Address: Assets/Localization/UI_Texts Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ef695ba3cd87a6e4797cbc43a9f13afb
+    m_Address: Assets/Localization/Tutorials/Carreteras2/tutorials2_carreteras Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f5a71b99f36eb624ba0ee4592deb8ff9
+    m_Address: Assets/Localization/Heart3dTexts Shared Data.asset
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

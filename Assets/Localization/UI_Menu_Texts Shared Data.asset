@@ -47,10 +47,6 @@ MonoBehaviour:
     m_Key: CreditsTitle
     m_Metadata:
       m_Items: []
-  - m_Id: 17283427430400
-    m_Key: New Entry
-    m_Metadata:
-      m_Items: []
   - m_Id: 17288896802816
     m_Key: back_button
     m_Metadata:

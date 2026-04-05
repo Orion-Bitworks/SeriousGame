@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: tutorials_carreteras_es-ES
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: 4d95848f13f22154896e7687e9bb7e06, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 256386101248
+    m_Localized: Objetivo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307787296768
+    m_Localized: "Conecta las tuber\xEDas correctamente para hacer funcionar el sistema.\r\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 694908973056
+    m_Localized: "Mover y colocar tuber\xEDas\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 607734558720
+    m_Localized: "Mueve las tuber\xEDas libremente por la mesa de trabajo. Col\xF3calas
+      en la posici\xF3n deseada pulsando clic izquierdo.\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58139602685952
+    m_Localized: "Clic izquierdo\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58173744320512
+    m_Localized: "Cambiar el tipo de tuber\xEDa\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58176130879488
+    m_Localized: "Puedes cambiar el tipo de tuber\xEDa pulsando Q i E o haciendo
+      clic en las flechas de la pantalla inferior derecha para avanzar hacia delante
+      y hacia atr\xE1s respectivamente en el listado de tuber\xEDas.\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58178244808704
+    m_Localized: Q / E
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58548664766464
+    m_Localized: "Rotar tuber\xEDas\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58551844048896
+    m_Localized: "Para cambiar la rotaci\xF3n de la tuber\xEDa seleccionada, puedes
+      pulsar R o hacer click en la flecha de la pantalla inferior derecha.\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58563437105152
+    m_Localized: R
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58881356959744
+    m_Localized: "Deshacer / rehacer\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58882824966144
+    m_Localized: "Para deshacer o rehacer la colocaci\xF3n de una tuber\xEDa, pulsa
+      Ctrl + Z o Ctrl + Y respectivamente.\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58884066480128
+    m_Localized: "Ctrl + Z / Ctrl + Y\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59434002649088
+    m_Localized: "Eliminar tuber\xEDas\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59435093168128
+    m_Localized: "Por \xFAltimo, para borrar una tuber\xEDa, simplemente haz clic
+      derecho sobre ella.\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59436141744128
+    m_Localized: "Clic derecho\r"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DialogHeartLevel_ca
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ca
+  m_SharedData: {fileID: 11400000, guid: 1ef78ba17aeb35f4190d798b5eeab281, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 41881006080
+    m_Localized: "Bones! Et sents amb forces per comen\xE7ar el teu primer dia de
+      feina? Et mostrar\xE9 una mica la teva zona de treball i les tasques d\u2019avui."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1626078015488
+    m_Localized: "Aquesta feina ens la prenem molt seriosament, aix\xED que et demano
+      que siguis cur\xF3s i pensis b\xE9 les teves accions abans d\u2019actuar. Poden
+      tenir conseq\xFC\xE8ncies, i no gaire agradables."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1651101233152
+    m_Localized: "Molt b\xE9! Ara comen\xE7a el divertit\u2026 o no tant per a tu."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1690984869888
+    m_Localized: "Centra\u2019t i comencem la feina. B\xE9, jo no\u2026 tu."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1692792614912
+    m_Localized: "Nom\xE9s tens una missi\xF3: que tot funcioni. Confio en tu."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1695720239104
+    m_Localized: "Com pots veure, no hi ha gaire a fer sense un cor, oi? Fes-me el
+      favor de llegir atentament com funciona; si no, no t\u2019anir\xE0 gaire b\xE9
+      a la vida."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1697972580352
+    m_Localized: "Mmh\u2026 tu pots\u2026?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1762678108160
+    m_Localized: "Ho has fet genial, per\xF2 podries anar una mica m\xE9s r\xE0pid,
+      saps? El pacient no t\xE9 tot el dia."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1766482341888
+    m_Localized: "Podries centrar-te? Aix\xF2 \xE9s important. Torna-ho a intentar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1767195373568
+    m_Localized: "Vas millorant, per\xF2 aix\xF2 no s\u2019ha acabat encara. Has
+      acabat la part exterior, b\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1767811936256
+    m_Localized: "Haur\xE0s de fer que el cor funcioni correctament, i m\xE9s et
+      val fer-ho b\xE9. \xC9s una amena\xE7a."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1838993469440
+    m_Localized: Obre el calaix de la dreta.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1840071405568
+    m_Localized: "Arrossega el cor que hi ha dins i posa\u2019l a la taula. No triguis."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1841094815744
+    m_Localized: "Hem\u2026 no est\xE0 complet. Quines coses. Espero que s\xE0pigues
+      com va."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1842978058240
+    m_Localized: "Genial, segueix aix\xED! Tamb\xE9 necessites una mica d\u2019\xE0nims,
+      que si no et desanimes."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1844534145024
+    m_Localized: "Tu qu\xE8 vols, matar el pacient? Fes el favor i fes-ho b\xE9."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1928055320576
+    m_Localized: Vinga, segueix.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1928927735808
+    m_Localized: "Va, que ja et queda menys, per\xF2 no perdis el ritme."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1929686904832
+    m_Localized: "No comencem, si us plau. Fes les coses amb consci\xE8ncia, pensa
+      abans d\u2019actuar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1931482066944
+    m_Localized: "L\u2019\xF9ltim."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1932895547392
+    m_Localized: "Dale a tu\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3359982317568
+    m_Localized: "Uf, menys mal! Ja has acabat les parts m\xE9s importants. Sortim
+      d\u2019aqu\xED. Per\xF2 no et motivis massa, aix\xF2 encara no s\u2019ha acabat."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3364927401984
+    m_Localized: "No saps el ritme? Desastr\xF3s\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3367402041344
+    m_Localized: "Si no aconsegueixes l\u2019\xFAltim pas, no arribar\xE0s enlloc.
+      Espavila i torna-ho a intentar."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3441859325952
+    m_Localized: "B\xE9, ara toca fer que tot funcioni. Ja saps com va. Vinga."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3442563969024
+    m_Localized: "Enhorabona! Has acabat una gran part de la feina. Et veig una persona
+      aplicada, per\xF2 segueix amb aquesta const\xE0ncia i no abaixis el cap."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3443230863360
+    m_Localized: Vinga, no pot ser tan complicat. Recorda tot el que has estudiat
+      i aplica-ho.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

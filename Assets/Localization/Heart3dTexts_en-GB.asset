@@ -17,7 +17,19 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: f5a71b99f36eb624ba0ee4592deb8ff9, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 2007944228864
+    m_Localized: How to play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2238870024192
+    m_Localized: Objective
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2579812413440
+    m_Localized: Attach all pieces correctly so the heart can start functioning.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

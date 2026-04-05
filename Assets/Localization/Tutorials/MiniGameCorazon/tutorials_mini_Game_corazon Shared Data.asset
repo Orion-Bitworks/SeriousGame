@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: tutorials_mini_Game_corazon Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: tutorials_mini_Game_corazon
+  m_TableCollectionNameGuidString: 3903e673891e4c6458eea7dedf29fd36
+  m_Entries:
+  - m_Id: 4468871168
+    m_Key: t0_miniGameHart_subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8214384640
+    m_Key: t0_miniGameHart_explanation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 10248622080
+    m_Key: t0_miniGameHart_keys_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 556430888960
+    m_Key: t1_miniGameHart_subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 675226161152
+    m_Key: t1_miniGameHart_explanation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 692540248064
+    m_Key: t1_miniGameHart_keys_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 934480285696
+    m_Key: t2_miniGameHart_subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1208917790720
+    m_Key: t2_miniGameHart_explanation
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 2529632145494245377
+  references:
+    version: 2
+    RefIds:
+    - rid: 2529632145494245377
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1775057064493

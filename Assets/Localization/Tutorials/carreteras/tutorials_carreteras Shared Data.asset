@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: tutorials_carreteras Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: tutorials_carreteras
+  m_TableCollectionNameGuidString: 4d95848f13f22154896e7687e9bb7e06
+  m_Entries:
+  - m_Id: 256386101248
+    m_Key: t0_carreteras_subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307787296768
+    m_Key: t0_carreteras_explanation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 442034384896
+    m_Key: t0_carreteras_keys_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 694908973056
+    m_Key: t1_carreteras_subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 607734558720
+    m_Key: t1_carreteras_explanation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58139602685952
+    m_Key: t1_carreteras_keys_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58173744320512
+    m_Key: t2_carreteras_subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58176130879488
+    m_Key: t2_carreteras_explanation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58178244808704
+    m_Key: t2_carreteras_keys_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58548664766464
+    m_Key: t3_carreteras_subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58551844048896
+    m_Key: t3_carreteras_explanation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58563437105152
+    m_Key: t3_carreteras_keys_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58881356959744
+    m_Key: t4_carreteras_subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58882824966144
+    m_Key: 't4_carreteras_explanation
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58884066480128
+    m_Key: t4_carreteras_keys_text
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59434002649088
+    m_Key: t5_carreteras_subtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59435093168128
+    m_Key: 't5_carreteras_explanation
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59436141744128
+    m_Key: t5_carreteras_keys_text
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 2529632140544180226
+  references:
+    version: 2
+    RefIds:
+    - rid: 2529632140544180226
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1775042340345

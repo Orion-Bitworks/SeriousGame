@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: DialogHeartLevel Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: DialogHeartLevel
+  m_TableCollectionNameGuidString: 1ef78ba17aeb35f4190d798b5eeab281
+  m_Entries:
+  - m_Id: 41881006080
+    m_Key: dialog_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1626078015488
+    m_Key: dialog_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1651101233152
+    m_Key: dialog_3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1690984869888
+    m_Key: dialog_4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1692792614912
+    m_Key: dialog_5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1695720239104
+    m_Key: dialog_6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1697972580352
+    m_Key: dialog_7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1762678108160
+    m_Key: dialog_8_isgood
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1766482341888
+    m_Key: dialog_9_isbad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1767195373568
+    m_Key: dialog_10
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1767811936256
+    m_Key: dialog_11
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1838993469440
+    m_Key: dialog_12
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1840071405568
+    m_Key: dialog_13
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1841094815744
+    m_Key: dialog_14
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1842978058240
+    m_Key: dialog_15_isgood
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1844534145024
+    m_Key: dialog_16_isbad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1928055320576
+    m_Key: dialog_17
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1928927735808
+    m_Key: dialog_18_isgood
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1929686904832
+    m_Key: dialog_19_isbad
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1931482066944
+    m_Key: dialog_20
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1932895547392
+    m_Key: dialog_21
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3359982317568
+    m_Key: dialog_22_isgood
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3364927401984
+    m_Key: dialog_23_isbad_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3367402041344
+    m_Key: dialog_24_isbad_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3441859325952
+    m_Key: dialog_25
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3442563969024
+    m_Key: dialog_26_isgood
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3443230863360
+    m_Key: dialog_27_idbad
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 2529632140544180224
+  references:
+    version: 2
+    RefIds:
+    - rid: 2529632140544180224
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1775037923257

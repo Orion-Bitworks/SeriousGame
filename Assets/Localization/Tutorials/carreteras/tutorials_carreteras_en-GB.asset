@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: tutorials_carreteras_en-GB
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-GB
+  m_SharedData: {fileID: 11400000, guid: 4d95848f13f22154896e7687e9bb7e06, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 256386101248
+    m_Localized: Objective
+    m_Metadata:
+      m_Items: []
+  - m_Id: 307787296768
+    m_Localized: 'Connect the pipes correctly to make the system work.
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 694908973056
+    m_Localized: "Move and place pipes\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 607734558720
+    m_Localized: "Move the pipes freely across the workbench. Place them in the desired
+      position by left-clicking.\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58139602685952
+    m_Localized: "Left click\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58173744320512
+    m_Localized: "Change the pipe type\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58176130879488
+    m_Localized: "You can change the pipe type by pressing Q and E or by clicking
+      the arrows on the bottom right screen to move forward and backward respectively
+      in the pipe list.\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58178244808704
+    m_Localized: Q / E
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58548664766464
+    m_Localized: "Rotate pipes\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58551844048896
+    m_Localized: "To change the pipe's rotation, you can press R or click the arrow
+      on the bottom right screen.\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58563437105152
+    m_Localized: R
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58881356959744
+    m_Localized: Undo / redo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58882824966144
+    m_Localized: "To undo or redo a pipe\u2019s placement, press Ctrl + Z or Ctrl
+      + Y respectively.\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 58884066480128
+    m_Localized: "Ctrl + Z / Ctrl + Y\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59434002649088
+    m_Localized: "Erase pipes\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59435093168128
+    m_Localized: "Finally, to delete a pipe, simply right-click on it.\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 59436141744128
+    m_Localized: "Right click\r"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

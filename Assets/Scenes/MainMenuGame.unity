@@ -4789,6 +4789,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8153471543876510988, guid: a0253dcee5591e245b487f4216c62366, type: 3}
   m_PrefabInstance: {fileID: 4521870783585527268}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1089723630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7717399068867689133, guid: a0253dcee5591e245b487f4216c62366, type: 3}
+  m_PrefabInstance: {fileID: 4521870783585527268}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089723628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989fe93641353f34280e32678c728793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1141179367
 GameObject:
   m_ObjectHideFlags: 0
@@ -9008,6 +9019,10 @@ PrefabInstance:
     - target: {fileID: 520334802700032672, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1089723630}
+    - target: {fileID: 520334802700032672, guid: a0253dcee5591e245b487f4216c62366, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SelectButton
       objectReference: {fileID: 0}
     - target: {fileID: 709979360657477061, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_VerticalAlignment
@@ -9031,6 +9046,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 989909436410378665, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1910448363854041491, guid: a0253dcee5591e245b487f4216c62366, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2184606668621468885, guid: a0253dcee5591e245b487f4216c62366, type: 3}
@@ -9184,6 +9203,10 @@ PrefabInstance:
     - target: {fileID: 3880976886960983061, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1089723630}
+    - target: {fileID: 3880976886960983061, guid: a0253dcee5591e245b487f4216c62366, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SelectButton
       objectReference: {fileID: 0}
     - target: {fileID: 3914837696197779425, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_AnchorMax.y
@@ -9420,6 +9443,10 @@ PrefabInstance:
     - target: {fileID: 6938946024863392548, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1089723630}
+    - target: {fileID: 6938946024863392548, guid: a0253dcee5591e245b487f4216c62366, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SelectButton
       objectReference: {fileID: 0}
     - target: {fileID: 7140290372955305738, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_IsActive
@@ -9432,6 +9459,10 @@ PrefabInstance:
     - target: {fileID: 7330952401923686182, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1089723630}
+    - target: {fileID: 7330952401923686182, guid: a0253dcee5591e245b487f4216c62366, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SelectButton
       objectReference: {fileID: 0}
     - target: {fileID: 7333903175968998954, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_IsActive

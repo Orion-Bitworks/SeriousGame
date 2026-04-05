@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DialogHeartLevel_es-ES
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: 1ef78ba17aeb35f4190d798b5eeab281, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 1932895547392
+    m_Localized: "Dale a tu\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 41881006080
+    m_Localized: "\xA1Hola! \xBFTe ves con fuerzas para empezar tu primer d\xEDa
+      de trabajo? Te voy a mostrar un poco tu zona de trabajo y las tareas de hoy."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1626078015488
+    m_Localized: We take this job very seriously, so I need you to be careful and
+      think through your actions before doing anything. They can have consequences,
+      and not very pleasant ones.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1651101233152
+    m_Localized: "Great! Now the fun begins\u2026 or maybe not so fun for you."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1690984869888
+    m_Localized: "Focus, and let\u2019s get started with the job. Well, not me\u2026
+      you."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1692792614912
+    m_Localized: 'You only have one mission: make everything work. I trust you.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1695720239104
+    m_Localized: "As you can see, there\u2019s not much you can do without a heart,
+      right? Do me a favor and read carefully how it works; otherwise, things won\u2019t
+      go too well for you."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1697972580352
+    m_Localized: "Mmh\u2026 can you\u2026?"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1762678108160
+    m_Localized: "You did great, but you could go a bit faster, you know? The patient
+      doesn\u2019t have all day."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1766482341888
+    m_Localized: Could you focus? This is important. Try again.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1767195373568
+    m_Localized: "You\u2019re improving, but this isn\u2019t over yet. You\u2019ve
+      finished the outer part, good."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1767811936256
+    m_Localized: "You\u2019ll have to make the heart work properly, and you\u2019d
+      better do it right. That\u2019s a threat."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1838993469440
+    m_Localized: Open the drawer on the right.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1840071405568
+    m_Localized: "Drag the heart inside and place it on the table. Don\u2019t take
+      too long."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1841094815744
+    m_Localized: "Hmm\u2026 it\u2019s not complete. Interesting. I hope you know
+      how this works."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1842978058240
+    m_Localized: "Great, keep it up! You need some encouragement too, or you\u2019ll
+      lose motivation."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1844534145024
+    m_Localized: What are you trying to do, kill the patient? Do it properly, please.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1928055320576
+    m_Localized: Come on, keep going.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1928927735808
+    m_Localized: "Come on, you\u2019re almost done, but don\u2019t lose the rhythm."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1929686904832
+    m_Localized: "Let\u2019s not start like this, please. Do things mindfully\u2014think
+      before you act."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1931482066944
+    m_Localized: The last one.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3359982317568
+    m_Localized: "Phew, thank goodness! You\u2019ve finished the most important parts.
+      Let\u2019s get out of here. But don\u2019t get too excited\u2014this isn\u2019t
+      over yet."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3364927401984
+    m_Localized: "You don\u2019t know the rhythm? Disastrous\u2026"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3367402041344
+    m_Localized: "If you can\u2019t get the last step right, you won\u2019t get anywhere.
+      Get it together and try again."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3441859325952
+    m_Localized: "Alright, now it\u2019s time to make everything work. You know how
+      this goes. Let\u2019s go."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3442563969024
+    m_Localized: "Congratulations! You\u2019ve completed a big part of the job. You
+      seem dedicated\u2014keep that consistency and don\u2019t lose focus."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3443230863360
+    m_Localized: "Come on, it can\u2019t be that hard. Remember everything you\u2019ve
+      learned and apply it."
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
