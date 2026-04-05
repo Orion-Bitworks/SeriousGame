@@ -17,6 +17,8 @@ public class ConnectionPointController : MonoBehaviour
     [SerializeField] private bool paired = false;
     [SerializeField] private string pairId = "";
 
+    //ConnectionPointController connectedPoint;
+
     private void Start()
     {
         piece = GetComponentInParent<PieceController>();
@@ -45,6 +47,9 @@ public class ConnectionPointController : MonoBehaviour
                 CheckPairing(otherPoint);
                 otherPoint.CheckPairing(this);
 
+                //connectedPoint = otherPoint;
+                //otherPoint.SetConnectedPoint(this);
+
                 paired = true;
                 otherPoint.Paired(true);
             }
@@ -64,7 +69,7 @@ public class ConnectionPointController : MonoBehaviour
         {
             ResetValues();
             //piece.DisconnectPiece(other.GetComponent<PieceController>());
-            //CheckPairing(other.GetComponent<ConnectionPointController>());
+            //CheckPairing(otherPoint);
         }
     }
 
@@ -79,6 +84,10 @@ public class ConnectionPointController : MonoBehaviour
         {
             Debug.Log(id + " ha chocado con " + partnerPoint.GetId() + ": Bien emparejadas!");
             pairedWithPartner = true;
+        }
+        else
+        {
+            pairedWithPartner = false;
         }
     }
 
@@ -127,6 +136,7 @@ public class ConnectionPointController : MonoBehaviour
         paired = false;
         pairedWithPartner = false;
         pairId = "";
+        //connectedPoint = null;
         Debug.Log(id + " ha dejado de estar conectado");
     }
 
@@ -161,4 +171,14 @@ public class ConnectionPointController : MonoBehaviour
     {
         isEnabled = false;
     }
+
+    /*public void SetConnectedPoint(ConnectionPointController newConnection)
+    {
+        connectedPoint = newConnection;
+    }
+
+    public ConnectionPointController GetConnectedPoint()
+    {
+        return connectedPoint;
+    }*/
 }

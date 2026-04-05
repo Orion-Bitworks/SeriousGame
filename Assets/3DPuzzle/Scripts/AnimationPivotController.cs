@@ -7,6 +7,8 @@ public class AnimationPivotController : MonoBehaviour
 {
     [SerializeField] private int priority = 1;
 
+    [SerializeField] BloodAnimationController connection;
+
     [Header("Pipe Parameters")]
 
     [SerializeField] GameObject pipePrefab;
@@ -30,5 +32,13 @@ public class AnimationPivotController : MonoBehaviour
         sequence.AppendInterval(animationDelay);
         sequence.Append(newPipe.transform.DOMove(transform.position, 1.1f).SetEase(Ease.OutBack, 0.5f));
         sequence.Join(newPipe.transform.DOLocalRotate(new Vector3(0f, 0f, 360f), 1.3f, RotateMode.FastBeyond360).SetEase(Ease.InOutQuad));
+        sequence.AppendInterval(1f);
+        sequence.OnComplete(() =>
+        {
+            if (connection != null)
+            {
+                connection.CheckBloodFlow();
+            }
+        });
     }
 }

@@ -83,6 +83,11 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
     }
 
+    public bool OnUI()
+    {
+        return onUI;
+    }
+
     public void MoveToUI()
     {
         onUI = true;
