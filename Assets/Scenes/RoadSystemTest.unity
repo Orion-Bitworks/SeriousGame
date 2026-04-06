@@ -18414,8 +18414,8 @@ MonoBehaviour:
   bpm: 110
   maxNotes: 10
   notePrefab: {fileID: 7428689821769985889, guid: d113128dc33fa584db69e01bb207dd88, type: 3}
-  minSpawn: {x: -4, y: 6, z: -4}
-  maxSpawn: {x: 3, y: 6, z: 3}
+  minSpawn: {x: -4, y: 4.4, z: -4}
+  maxSpawn: {x: 3, y: 4.4, z: 3}
   popUpManager: {fileID: 4919641588937375142}
   rebootButton: {fileID: 2035897947}
   elementsToHide:
