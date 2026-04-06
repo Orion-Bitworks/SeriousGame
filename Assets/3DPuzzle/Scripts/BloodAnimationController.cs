@@ -13,7 +13,11 @@ public class BloodAnimationController : MonoBehaviour
     private void Start()
     {
         connection = GetComponent<ConnectionPointController>();
-        connectionEventClick = nextConnection.GetComponentInParent<EventClick>();
+
+        if (nextConnection != null)
+        {
+            connectionEventClick = nextConnection.GetComponentInParent<EventClick>();
+        }
     }
 
     public void CheckBloodFlow()

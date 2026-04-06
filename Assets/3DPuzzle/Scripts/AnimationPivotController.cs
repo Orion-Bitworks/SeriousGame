@@ -33,7 +33,7 @@ public class AnimationPivotController : MonoBehaviour
         sequence.AppendInterval(animationDelay);
         sequence.Append(newPipe.transform.DOMove(transform.position, 1.1f).SetEase(Ease.OutBack, 0.5f));
         sequence.Join(newPipe.transform.DOLocalRotate(new Vector3(0f, 0f, 360f), 1.3f, RotateMode.FastBeyond360).SetEase(Ease.InOutQuad));
-        sequence.AppendInterval(1f);
+        sequence.AppendInterval(0.5f);
         sequence.OnComplete(() =>
         {
             if (newPipe.GetComponent<AnimatedPipeController>() != null)
@@ -44,11 +44,18 @@ public class AnimationPivotController : MonoBehaviour
             {
                 Debug.Log("No hay animated pipe controller");
             }
-            
-            if (connection != null)
-            {
-                connection.CheckBloodFlow();
-            }
+
+            StartCoroutine(StartBloodFlow(newPipe.GetComponent<AnimatedPipeController>()));
         });
+    }
+
+    public IEnumerator StartBloodFlow(AnimatedPipeController pipe)
+    {
+        yield return new WaitUntil(() => pipe.CanStartBloodFlow());
+
+        if (connection != null)
+        {
+            connection.CheckBloodFlow();
+        }
     }
 }
