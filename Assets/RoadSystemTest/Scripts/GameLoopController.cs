@@ -44,6 +44,9 @@ public class GameLoopController : MonoBehaviour
         GameManager.Instance.currentLevelGameObject.SetActive(false);
         heartMinigames.gameObject.SetActive(true);
         heartMinigames.transform.position = organPosition;
+
+        yield return new WaitForSecondsRealtime(1f);
+
         pipesUI.gameObject.SetActive(false);
         heartMinigamesUI.gameObject.SetActive(true);
         heartMinigamesCamera.Priority = 2;
