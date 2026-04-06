@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] GameObject widget;
 
     [SerializeField] public HashSet<ConnectionPointController> connections = new HashSet<ConnectionPointController>();
+
+    private bool resetting = false;
 
     private void Awake()
     {
@@ -29,6 +32,11 @@ public class ScoreManager : MonoBehaviour
 
     public void CheckConnections()
     {
+        if (resetting)
+        {
+            return;
+        }
+
         bool allRight = true;
 
         foreach (ConnectionPointController point in connections)
@@ -47,13 +55,13 @@ public class ScoreManager : MonoBehaviour
 
         if (allRight)
         {
-            ToggleWidget();
+            ToggleWidget(true);
         }
     }
 
-    private void ToggleWidget()
+    private void ToggleWidget(bool state)
     {
-        widget.SetActive(true);
+        widget.SetActive(state);
     }
 
     public void End3DMinigame()
@@ -77,5 +85,37 @@ public class ScoreManager : MonoBehaviour
         {
             point.GetPiece().GetGroup().PlayFinishAnimation();
         }
+    }
+
+    public void ResetLevel()
+    {
+        resetting = true;
+
+        ToggleWidget(false);
+
+        foreach (ConnectionPointController point in connections)
+        {
+            point.GetPiece().GetGroup().RetrievePipesAnimation();
+        }
+
+        StartCoroutine(DeleteAllPieces());
+    }
+
+    public IEnumerator DeleteAllPieces()
+    {
+        yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
+
+        while (connections.Count > 0)
+        {
+            ConnectionPointController point = connections.First();
+            point.GetPiece().DeletePiece();
+        }
+
+        foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
+        {
+            eventClick.CanInteract(true);
+        }
+
+        resetting = false;
     }
 }

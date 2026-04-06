@@ -965,8 +965,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1487366262}
         m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
+        m_MethodName: ResetLevel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2272,6 +2272,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 63bcefb67dfe6f345afe46f9c3aa651a, type: 2}
+    - target: {fileID: 2696141869040570611, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: pipePrefab
+      value: 
+      objectReference: {fileID: 8671429059303018738, guid: f7e69efd4e4551e48a5e779343d5a725, type: 3}
+    - target: {fileID: 2696141869040570611, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: animationType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696141869040570611, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: spawnDistanceX
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 2696141869040570611, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: spawnDistanceZ
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5414660813317186590, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
       propertyPath: m_Name
       value: AorPiece
@@ -2284,6 +2300,46 @@ PrefabInstance:
       propertyPath: originalParent
       value: 
       objectReference: {fileID: 1349608012}
+    - target: {fileID: 7945483583344846165, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: pipePrefab
+      value: 
+      objectReference: {fileID: 8671429059303018738, guid: f7e69efd4e4551e48a5e779343d5a725, type: 3}
+    - target: {fileID: 7945483583344846165, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: animationType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7945483583344846165, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: spawnDistanceX
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7945483583344846165, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: spawnDistanceY
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7945483583344846165, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: spawnDistanceZ
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965012873147546409, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: pipePrefab
+      value: 
+      objectReference: {fileID: 8671429059303018738, guid: f7e69efd4e4551e48a5e779343d5a725, type: 3}
+    - target: {fileID: 7965012873147546409, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: animationType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965012873147546409, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: spawnDistanceX
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965012873147546409, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: spawnDistanceY
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7965012873147546409, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
+      propertyPath: spawnDistanceZ
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8447495541209873421, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
       propertyPath: canBeRegistered
       value: 1

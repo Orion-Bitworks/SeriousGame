@@ -13,13 +13,23 @@ public class AnimatedPipeController : MonoBehaviour
     [SerializeField] Transform exit;
 
     bool canStartBloodFlow = false;
+    private bool stopSpawning = false;
+
+    private Sequence spawnSequence;
 
     public void StartAnimation(bool inverted = false)
     {
-        Sequence sequence = DOTween.Sequence();
-        sequence.AppendInterval(0.5f);
-        sequence.AppendCallback(() =>
+        spawnSequence?.Kill();
+
+        spawnSequence = DOTween.Sequence();
+        spawnSequence.AppendInterval(0.5f);
+        spawnSequence.AppendCallback(() =>
         {
+            if (stopSpawning)
+            {
+                return;
+            }
+
             if (inverted)
             {
                 GameObject newMolecule = Instantiate(exitMolecule, exit.position, exit.rotation, entry);
@@ -34,7 +44,7 @@ public class AnimatedPipeController : MonoBehaviour
             
         });
 
-        sequence.SetLoops(-1, LoopType.Restart);
+        spawnSequence.SetLoops(-1, LoopType.Restart);
     }
 
     public bool CanStartBloodFlow()
@@ -45,5 +55,26 @@ public class AnimatedPipeController : MonoBehaviour
     public void SetCanStartBloodFlow(bool state)
     {
         canStartBloodFlow = state;
+    }
+
+    public void StopSpawning()
+    {
+        stopSpawning = true;
+
+        if (spawnSequence != null && spawnSequence.IsActive())
+        {
+            spawnSequence.Kill();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (spawnSequence != null)
+        {
+            spawnSequence.Kill();
+        }
+
+        DOTween.Kill(transform);
+        DOTween.Kill(gameObject);
     }
 }

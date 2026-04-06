@@ -235,4 +235,32 @@ public class PieceGroup
             animationPivots[i].StartAnimation(animationDelay);
         }
     }
+
+    public void RetrievePipesAnimation()
+    {
+        List<AnimationPivotController> animationPivots = new List<AnimationPivotController>();
+
+        foreach (PieceController piece in pieces)
+        {
+            AnimationPivotController[] pivots = piece.GetComponentsInChildren<AnimationPivotController>();
+
+            foreach (AnimationPivotController pivot in pivots)
+            {
+                animationPivots.Add(pivot);
+            }
+        }
+
+        animationPivots.Sort((obj1, obj2) => obj2.GetPriority().CompareTo(obj1.GetPriority()));
+
+        /*foreach (AnimationPivotController pivot in animationPivots)
+        {
+            pivot.StartAnimation();
+        }*/
+
+        for (int i = 0; i < animationPivots.Count; i++)
+        {
+            float animationDelay = (i + 1) * 0.2f;
+            animationPivots[i].StartExitAnimation(animationDelay);
+        }
+    }
 }

@@ -28,9 +28,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1335810328505877898}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.27059805, y: 0.6532815, z: 0.6532815, w: -0.27059805}
-  m_LocalPosition: {x: -0.09314489, y: 0.368, z: 0.16283882}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.099999994}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0.06953025, y: 0.355, z: 0.15689611}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1266595749870304377}
@@ -121,7 +121,11 @@ MonoBehaviour:
   priority: 10
   connection: {fileID: 0}
   pipePrefab: {fileID: 3336385052129331252, guid: 29d605f1d603d3542802d329bb3124ee, type: 3}
+  spawnDistanceX: 0
+  spawnDistanceY: 0
+  spawnDistanceZ: 60
   invertedPipeDirection: 1
+  animationType: 0
 --- !u!1 &2007208161732708675
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,9 +154,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007208161732708675}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.2126311, y: 0.6743797, z: 0.6743797, w: -0.2126311}
-  m_LocalPosition: {x: 0.09885502, y: 0.376, z: -0.12116122}
-  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0.093, y: 0.321, z: -0.119}
+  m_LocalScale: {x: 0.10000001, y: 0.10000001, z: 0.10000001}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1266595749870304377}
@@ -243,7 +247,11 @@ MonoBehaviour:
   priority: 11
   connection: {fileID: 0}
   pipePrefab: {fileID: 3336385052129331252, guid: 29d605f1d603d3542802d329bb3124ee, type: 3}
+  spawnDistanceX: 0
+  spawnDistanceY: 0
+  spawnDistanceZ: 60
   invertedPipeDirection: 1
+  animationType: 0
 --- !u!1 &2723656351910043032
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +373,11 @@ MonoBehaviour:
   priority: 9
   connection: {fileID: 0}
   pipePrefab: {fileID: 3590936521021323110, guid: e51809b6a5b9ece4d907b792c8db645a, type: 3}
+  spawnDistanceX: 0
+  spawnDistanceY: 0
+  spawnDistanceZ: 60
   invertedPipeDirection: 1
+  animationType: 0
 --- !u!1 &2838655469271724117
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,8 +406,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2838655469271724117}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.092296004, y: 0.7010574, z: 0.7010574, w: -0.092296004}
-  m_LocalPosition: {x: 0.11285496, y: 0.123, z: -0.36516118}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: 0.093, y: 0.203, z: -0.332}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -487,7 +499,11 @@ MonoBehaviour:
   priority: 12
   connection: {fileID: 0}
   pipePrefab: {fileID: 3336385052129331252, guid: 29d605f1d603d3542802d329bb3124ee, type: 3}
+  spawnDistanceX: 0
+  spawnDistanceY: 0
+  spawnDistanceZ: 60
   invertedPipeDirection: 1
+  animationType: 0
 --- !u!1 &4757448531598076156
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,7 +20,12 @@ public class AnimationPivotController : MonoBehaviour
     [SerializeField] bool invertedPipeDirection = false;
     [SerializeField] private ANIMATION_TYPE animationType;
 
+    private Vector3 originalPipePos;
+
     private AnimatedPipeController pipeController;
+
+    private Sequence entrySequence;
+    private Sequence exitSequence;
 
     bool started = false;
 
@@ -36,18 +41,18 @@ public class AnimationPivotController : MonoBehaviour
         GameObject newPipe = Instantiate(pipePrefab, transform.position, transform.rotation);
         newPipe.transform.SetParent(transform, true);
         newPipe.transform.localPosition = spawnPosition;
+        originalPipePos = spawnPosition;
+        pipeController = newPipe.GetComponent<AnimatedPipeController>();
 
-        Sequence sequence = DOTween.Sequence().SetAutoKill(false);
+        entrySequence = DOTween.Sequence().SetAutoKill(true);
         //sequence.AppendInterval(priority * 0.2f);
-        sequence.AppendInterval(animationDelay);
+        entrySequence.AppendInterval(animationDelay);
 
-        MakeSequence(sequence, newPipe.transform);
+        MakeSequence(entrySequence, newPipe.transform);
 
-        sequence.AppendInterval(0.5f);
-        sequence.OnComplete(() =>
+        entrySequence.AppendInterval(0.5f);
+        entrySequence.OnComplete(() =>
         {
-            pipeController = newPipe.GetComponent<AnimatedPipeController>();
-
             if (pipeController != null && !invertedPipeDirection)
             {
                 pipeController.StartAnimation(invertedPipeDirection);
@@ -70,6 +75,7 @@ public class AnimationPivotController : MonoBehaviour
                 break;
             case ANIMATION_TYPE.L_SHAPE:
                 sequence.Append(target.DOMoveX(transform.position.x, 0.8f).SetEase(Ease.OutQuad));
+                sequence.Join(target.DOMoveZ(transform.position.z, 0.8f).SetEase(Ease.OutQuad));
                 sequence.AppendInterval(0.1f);
                 sequence.Append(target.DOMoveY(transform.position.y, 0.2f).SetEase(Ease.InOutBack));
                 break;
@@ -85,6 +91,51 @@ public class AnimationPivotController : MonoBehaviour
             Sequence sequence = DOTween.Sequence().AppendInterval(1f);
             sequence.OnComplete(() => { pipeController.StartAnimation(invertedPipeDirection); });
         }
+
+        StartCoroutine(ShowPlayState());
+    }
+
+    public void StartExitAnimation(float animationDelay)
+    {
+        if (pipeController == null)
+        {
+            return;
+        }
+
+        pipeController.StopSpawning();
+
+        AnimatedPipeController pipe = pipeController;
+
+        DOTween.Kill(pipeController.transform);
+        DOTween.Kill(pipeController.gameObject);
+
+        exitSequence = DOTween.Sequence().SetAutoKill(true);
+        exitSequence.AppendInterval(animationDelay);
+
+        switch (animationType)
+        {
+            case ANIMATION_TYPE.LINEAR_SPINNING:
+                exitSequence.Append(pipe.transform.DOLocalMove(originalPipePos, 1.1f).SetEase(Ease.InBack, 0.5f));
+                exitSequence.Join(pipe.transform.DOLocalRotate(new Vector3(0f, 0f, 360f), 1.3f, RotateMode.FastBeyond360).SetEase(Ease.InOutQuad));
+                break;
+            case ANIMATION_TYPE.L_SHAPE:
+                exitSequence.Append(pipe.transform.DOLocalMoveY(originalPipePos.y, 0.2f).SetEase(Ease.InOutBack));
+                exitSequence.AppendInterval(0.1f);
+                exitSequence.Append(pipe.transform.DOLocalMoveX(originalPipePos.x, 0.8f).SetEase(Ease.InQuad));
+                exitSequence.Join(pipe.transform.DOLocalMoveZ(originalPipePos.z, 0.8f).SetEase(Ease.InQuad));
+                break;
+        }
+
+        exitSequence.OnComplete(() => 
+        {
+            if (pipeController != null)
+            {
+                Destroy(pipeController.gameObject);
+            }
+
+            started = false;
+            pipeController = null;
+        });
     }
 
     public IEnumerator StartBloodFlow(AnimatedPipeController pipeController)
@@ -95,5 +146,11 @@ public class AnimationPivotController : MonoBehaviour
         {
             connection.CheckBloodFlow();
         }
+    }
+
+    public IEnumerator ShowPlayState()
+    {
+        yield return new WaitForSeconds(5f);
+        ScoreManager.instance.CheckConnections();
     }
 }
