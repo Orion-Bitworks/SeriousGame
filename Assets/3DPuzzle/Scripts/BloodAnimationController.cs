@@ -67,4 +67,9 @@ public class BloodAnimationController : MonoBehaviour
     {
         return connection.PairedWithPartner();
     }
+
+    public void AlreadyFlowing(bool state)
+    {
+        alreadyFlowing = state;
+    }
 }

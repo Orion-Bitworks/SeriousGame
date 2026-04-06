@@ -122,8 +122,8 @@ MonoBehaviour:
   partnerId: VP_02
   layerToDetect:
     serializedVersion: 2
-    m_Bits: 128
-  canBeRegistered: 0
+    m_Bits: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
 --- !u!1 &3806969998867654840
@@ -248,8 +248,8 @@ MonoBehaviour:
   partnerId: A_IZ_01
   layerToDetect:
     serializedVersion: 2
-    m_Bits: 128
-  canBeRegistered: 0
+    m_Bits: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
 --- !u!1 &8417078868420939801
@@ -373,7 +373,11 @@ MonoBehaviour:
   priority: 3
   connection: {fileID: 0}
   pipePrefab: {fileID: 3590936521021323110, guid: e51809b6a5b9ece4d907b792c8db645a, type: 3}
-  invertedPipeDirection: 0
+  spawnDistanceX: 0
+  spawnDistanceY: 0
+  spawnDistanceZ: 60
+  invertedPipeDirection: 1
+  animationType: 0
 --- !u!1 &8444354742685134444
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,6 +391,7 @@ GameObject:
   - component: {fileID: 2003416142741197781}
   - component: {fileID: 475147474729173723}
   - component: {fileID: 1660199721366161672}
+  - component: {fileID: 8555959034515927423}
   m_Layer: 7
   m_Name: SphereAuriculaDRabajo
   m_TagString: ConnectionPoint
@@ -496,10 +501,25 @@ MonoBehaviour:
   partnerId: V_DR_02
   layerToDetect:
     serializedVersion: 2
-    m_Bits: 128
-  canBeRegistered: 0
+    m_Bits: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
+--- !u!114 &8555959034515927423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8444354742685134444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextConnection: {fileID: 0}
+  animationPivots: []
+  requiredConnections: []
 --- !u!1001 &5470465622193957470
 PrefabInstance:
   m_ObjectHideFlags: 0

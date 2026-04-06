@@ -91,8 +91,6 @@ public class AnimationPivotController : MonoBehaviour
             Sequence sequence = DOTween.Sequence().AppendInterval(1f);
             sequence.OnComplete(() => { pipeController.StartAnimation(invertedPipeDirection); });
         }
-
-        StartCoroutine(ShowPlayState());
     }
 
     public void StartExitAnimation(float animationDelay)
@@ -146,11 +144,5 @@ public class AnimationPivotController : MonoBehaviour
         {
             connection.CheckBloodFlow();
         }
-    }
-
-    public IEnumerator ShowPlayState()
-    {
-        yield return new WaitForSeconds(5f);
-        ScoreManager.instance.CheckConnections();
     }
 }

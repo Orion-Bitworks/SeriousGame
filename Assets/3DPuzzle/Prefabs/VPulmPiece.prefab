@@ -118,10 +118,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ccbdb1ed5102b244bde514f4e936900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 3
-  connection: {fileID: 0}
-  pipePrefab: {fileID: 3590936521021323110, guid: e51809b6a5b9ece4d907b792c8db645a, type: 3}
+  priority: 5
+  connection: {fileID: 6853515102545150118}
+  pipePrefab: {fileID: 3336385052129331252, guid: 29d605f1d603d3542802d329bb3124ee, type: 3}
+  spawnDistanceX: 0
+  spawnDistanceY: 0
+  spawnDistanceZ: 60
   invertedPipeDirection: 0
+  animationType: 0
 --- !u!1 &5135172070297396331
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,10 +244,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ccbdb1ed5102b244bde514f4e936900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 3
-  connection: {fileID: 0}
-  pipePrefab: {fileID: 3590936521021323110, guid: e51809b6a5b9ece4d907b792c8db645a, type: 3}
+  priority: 6
+  connection: {fileID: 6853515102545150118}
+  pipePrefab: {fileID: 3336385052129331252, guid: 29d605f1d603d3542802d329bb3124ee, type: 3}
+  spawnDistanceX: 0
+  spawnDistanceY: 0
+  spawnDistanceZ: 60
   invertedPipeDirection: 0
+  animationType: 0
 --- !u!1 &5446809521279267276
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,10 +370,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ccbdb1ed5102b244bde514f4e936900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 3
-  connection: {fileID: 0}
-  pipePrefab: {fileID: 3590936521021323110, guid: e51809b6a5b9ece4d907b792c8db645a, type: 3}
+  priority: 8
+  connection: {fileID: 8946469232780903272}
+  pipePrefab: {fileID: 3336385052129331252, guid: 29d605f1d603d3542802d329bb3124ee, type: 3}
+  spawnDistanceX: 0
+  spawnDistanceY: 0
+  spawnDistanceZ: 60
   invertedPipeDirection: 0
+  animationType: 0
 --- !u!1 &5573746272844463439
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +391,7 @@ GameObject:
   - component: {fileID: 114469126186770792}
   - component: {fileID: 7941034024126062642}
   - component: {fileID: 2498705089693353154}
+  - component: {fileID: 6853515102545150118}
   m_Layer: 7
   m_Name: SphereVenasPulmonares_AuriculaDR
   m_TagString: ConnectionPoint
@@ -489,9 +502,24 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
-  canBeRegistered: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
+--- !u!114 &6853515102545150118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5573746272844463439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextConnection: {fileID: 0}
+  animationPivots: []
+  requiredConnections: []
 --- !u!1 &5762258332604476602
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,10 +638,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ccbdb1ed5102b244bde514f4e936900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 3
-  connection: {fileID: 0}
-  pipePrefab: {fileID: 3590936521021323110, guid: e51809b6a5b9ece4d907b792c8db645a, type: 3}
+  priority: 7
+  connection: {fileID: 8946469232780903272}
+  pipePrefab: {fileID: 3336385052129331252, guid: 29d605f1d603d3542802d329bb3124ee, type: 3}
+  spawnDistanceX: 0
+  spawnDistanceY: 0
+  spawnDistanceZ: 60
   invertedPipeDirection: 0
+  animationType: 0
 --- !u!1 &8085032616867743319
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,6 +659,7 @@ GameObject:
   - component: {fileID: 3210735408025169033}
   - component: {fileID: 2131555166865220351}
   - component: {fileID: 4828858745065548252}
+  - component: {fileID: 8946469232780903272}
   m_Layer: 7
   m_Name: SphereVenasPulmonares_AuriculaIZ
   m_TagString: ConnectionPoint
@@ -737,9 +770,24 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
-  canBeRegistered: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
+--- !u!114 &8946469232780903272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8085032616867743319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextConnection: {fileID: 0}
+  animationPivots: []
+  requiredConnections: []
 --- !u!1001 &3980744004077435799
 PrefabInstance:
   m_ObjectHideFlags: 0

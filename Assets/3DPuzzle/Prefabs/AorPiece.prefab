@@ -120,12 +120,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 10
   connection: {fileID: 0}
-  pipePrefab: {fileID: 3336385052129331252, guid: 29d605f1d603d3542802d329bb3124ee, type: 3}
-  spawnDistanceX: 0
+  pipePrefab: {fileID: 8671429059303018738, guid: f7e69efd4e4551e48a5e779343d5a725, type: 3}
+  spawnDistanceX: 60
   spawnDistanceY: 0
-  spawnDistanceZ: 60
+  spawnDistanceZ: 2
   invertedPipeDirection: 1
-  animationType: 0
+  animationType: 1
 --- !u!1 &2007208161732708675
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,12 +246,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 11
   connection: {fileID: 0}
-  pipePrefab: {fileID: 3336385052129331252, guid: 29d605f1d603d3542802d329bb3124ee, type: 3}
-  spawnDistanceX: 0
+  pipePrefab: {fileID: 8671429059303018738, guid: f7e69efd4e4551e48a5e779343d5a725, type: 3}
+  spawnDistanceX: 60
   spawnDistanceY: 0
-  spawnDistanceZ: 60
+  spawnDistanceZ: 2
   invertedPipeDirection: 1
-  animationType: 0
+  animationType: 1
 --- !u!1 &2723656351910043032
 GameObject:
   m_ObjectHideFlags: 0
@@ -498,12 +498,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 12
   connection: {fileID: 0}
-  pipePrefab: {fileID: 3336385052129331252, guid: 29d605f1d603d3542802d329bb3124ee, type: 3}
-  spawnDistanceX: 0
+  pipePrefab: {fileID: 8671429059303018738, guid: f7e69efd4e4551e48a5e779343d5a725, type: 3}
+  spawnDistanceX: 60
   spawnDistanceY: 0
-  spawnDistanceZ: 60
+  spawnDistanceZ: 2
   invertedPipeDirection: 1
-  animationType: 0
+  animationType: 1
 --- !u!1 &4757448531598076156
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,7 +627,7 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
-  canBeRegistered: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
 --- !u!1001 &8297499515345720045

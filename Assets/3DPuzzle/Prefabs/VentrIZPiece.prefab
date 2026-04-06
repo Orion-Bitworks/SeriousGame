@@ -119,9 +119,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 4
-  connection: {fileID: 0}
-  pipePrefab: {fileID: 3590936521021323110, guid: e51809b6a5b9ece4d907b792c8db645a, type: 3}
+  connection: {fileID: 5423828027010201069}
+  pipePrefab: {fileID: 3681845289513883515, guid: ec00d92c6be70534886d573e1863172e, type: 3}
+  spawnDistanceX: 60
+  spawnDistanceY: 0
+  spawnDistanceZ: 4
   invertedPipeDirection: 0
+  animationType: 1
 --- !u!1 &1617823620116653863
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,6 +139,7 @@ GameObject:
   - component: {fileID: 2721237655153713235}
   - component: {fileID: 5575921635578877576}
   - component: {fileID: 1681115701348677066}
+  - component: {fileID: 2858685117185037525}
   m_Layer: 7
   m_Name: SphereVentriculoIZ
   m_TagString: ConnectionPoint
@@ -245,9 +250,28 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
-  canBeRegistered: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
+--- !u!114 &2858685117185037525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617823620116653863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextConnection: {fileID: 0}
+  animationPivots:
+  - {fileID: 0}
+  - {fileID: 0}
+  requiredConnections:
+  - {fileID: 2858685117185037525}
+  - {fileID: 0}
 --- !u!1 &7660906288241988748
 GameObject:
   m_ObjectHideFlags: 0
@@ -261,6 +285,7 @@ GameObject:
   - component: {fileID: 6957754070858949531}
   - component: {fileID: 659476947843842032}
   - component: {fileID: 3763036128407982436}
+  - component: {fileID: 5423828027010201069}
   m_Layer: 7
   m_Name: SphereVentriculoIZarriba
   m_TagString: ConnectionPoint
@@ -371,9 +396,24 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
-  canBeRegistered: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
+--- !u!114 &5423828027010201069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7660906288241988748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextConnection: {fileID: 0}
+  animationPivots: []
+  requiredConnections: []
 --- !u!1001 &1061350889532683143
 PrefabInstance:
   m_ObjectHideFlags: 0

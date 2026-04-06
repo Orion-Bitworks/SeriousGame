@@ -32,4 +32,20 @@ public class ParticleManager : MonoBehaviour
             Debug.LogError("No existen particulas con el identificador " + name);
         }
     }
+
+    public void StopAllParticles()
+    {
+        foreach (ParticleSystem particle in FindObjectsOfType<ParticleSystem>())
+        {
+            particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+    }
+
+    public void DeleteAllParticles()
+    {
+        foreach (ParticleSystem particle in FindObjectsOfType<ParticleSystem>())
+        {
+            Destroy(particle.gameObject);
+        }
+    }
 }

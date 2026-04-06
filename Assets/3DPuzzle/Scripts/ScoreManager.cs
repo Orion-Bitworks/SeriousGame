@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -57,6 +58,10 @@ public class ScoreManager : MonoBehaviour
         {
             ToggleWidget(true);
         }
+        else
+        {
+            ResetLevel();
+        }
     }
 
     private void ToggleWidget(bool state)
@@ -85,6 +90,8 @@ public class ScoreManager : MonoBehaviour
         {
             point.GetPiece().GetGroup().PlayFinishAnimation();
         }
+
+        StartCoroutine(ShowPlayState());
     }
 
     public void ResetLevel()
@@ -92,6 +99,18 @@ public class ScoreManager : MonoBehaviour
         resetting = true;
 
         ToggleWidget(false);
+
+        StartCoroutine(StopBloodFlow());
+    }
+
+    public IEnumerator StopBloodFlow()
+    {
+        foreach (AnimatedPipeController pipe in FindObjectsOfType<AnimatedPipeController>())
+        {
+            pipe.StopSpawning();
+        }
+
+        yield return new WaitForSeconds(2f);
 
         foreach (ConnectionPointController point in connections)
         {
@@ -103,19 +122,61 @@ public class ScoreManager : MonoBehaviour
 
     public IEnumerator DeleteAllPieces()
     {
+        ParticleManager.instance.StopAllParticles();
+
         yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
 
-        while (connections.Count > 0)
+        ParticleManager.instance.DeleteAllParticles();
+
+        Sequence sequence = DOTween.Sequence().SetAutoKill(true);
+
+        foreach (ConnectionPointController point in connections)
         {
-            ConnectionPointController point = connections.First();
-            point.GetPiece().DeletePiece();
+            point.Disable();
+            sequence.Join(point.GetPiece().transform.DOMoveY(-5f, 0.5f).SetEase(Ease.InBack, 0.5f));
+        }
+
+        sequence.OnComplete(() =>
+        {
+            while (connections.Count > 0)
+            {
+                ConnectionPointController point = connections.First();
+                point.GetPiece().DeletePiece();
+            }
+
+            resetting = false;
+        });
+
+        foreach (ConnectionPointController point in connections)
+        {
+            point.Enable();
+        }
+
+        foreach (BloodAnimationController controller in FindObjectsOfType<BloodAnimationController>())
+        {
+            controller.AlreadyFlowing(false);
         }
 
         foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
         {
             eventClick.CanInteract(true);
         }
+    }
 
-        resetting = false;
+    public IEnumerator ShowPlayState()
+    {
+        float timeDelay = 10f;
+
+        timeDelay += connections.First().GetPiece().GetGroup().GetPieces().Count();
+
+        yield return new WaitForSeconds(4f);
+
+        if (FindObjectOfType<AnimatedPipeController>() == null)
+        {
+            timeDelay = 0f;
+        }
+
+        yield return new WaitForSeconds(timeDelay);
+        CheckConnections();
     }
 }

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8801728649134508249}
   - component: {fileID: 7980936302446064207}
   - component: {fileID: 3655679825631755124}
+  - component: {fileID: 2486793710616761387}
   m_Layer: 7
   m_Name: SphereAorta2 (1)
   m_TagString: ConnectionPoint
@@ -123,9 +124,29 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
-  canBeRegistered: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
+--- !u!114 &2486793710616761387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368797600769583494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextConnection: {fileID: 0}
+  animationPivots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  requiredConnections:
+  - {fileID: 2486793710616761387}
 --- !u!1 &1446154631956559491
 GameObject:
   m_ObjectHideFlags: 0
@@ -247,7 +268,11 @@ MonoBehaviour:
   priority: 2
   connection: {fileID: 0}
   pipePrefab: {fileID: 3590936521021323110, guid: e51809b6a5b9ece4d907b792c8db645a, type: 3}
-  invertedPipeDirection: 0
+  spawnDistanceX: 0
+  spawnDistanceY: 0
+  spawnDistanceZ: 60
+  invertedPipeDirection: 1
+  animationType: 0
 --- !u!1 &3187246439171279260
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,7 +396,7 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
-  canBeRegistered: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
 --- !u!1 &6014762269152559340
@@ -495,7 +520,11 @@ MonoBehaviour:
   priority: 1
   connection: {fileID: 0}
   pipePrefab: {fileID: 3590936521021323110, guid: e51809b6a5b9ece4d907b792c8db645a, type: 3}
+  spawnDistanceX: 0
+  spawnDistanceY: 0
+  spawnDistanceZ: 60
   invertedPipeDirection: 0
+  animationType: 0
 --- !u!1 &7836747116304775396
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +538,7 @@ GameObject:
   - component: {fileID: 3141012852392053615}
   - component: {fileID: 6408360111386085332}
   - component: {fileID: 3996188726212868580}
+  - component: {fileID: 8248074310159817370}
   m_Layer: 7
   m_Name: SphereAuriculaIZabajo
   m_TagString: ConnectionPoint
@@ -619,9 +649,24 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
-  canBeRegistered: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
+--- !u!114 &8248074310159817370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7836747116304775396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextConnection: {fileID: 0}
+  animationPivots: []
+  requiredConnections: []
 --- !u!1 &8079166091506400272
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +680,7 @@ GameObject:
   - component: {fileID: 1256524237554970697}
   - component: {fileID: 1394129475470093614}
   - component: {fileID: 8634167741212262521}
+  - component: {fileID: 5160533398994863944}
   m_Layer: 7
   m_Name: SphereAuriculaIZ
   m_TagString: ConnectionPoint
@@ -745,9 +791,24 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
-  canBeRegistered: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
+--- !u!114 &5160533398994863944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8079166091506400272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextConnection: {fileID: 0}
+  animationPivots: []
+  requiredConnections: []
 --- !u!1001 &7619540752741224312
 PrefabInstance:
   m_ObjectHideFlags: 0
