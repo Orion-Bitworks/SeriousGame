@@ -19,7 +19,7 @@ public class ScreenController : MonoBehaviour
         screen.transform.DOMove(finalPosition.position, 1f).SetEase(Ease.OutBack);
     }
 
-    void StartMovingOut ()
+    public void StartMovingOut ()
     {
         screen.transform.DOMove(startingPosition.position, 2f).SetEase(Ease.OutCubic);
     }
