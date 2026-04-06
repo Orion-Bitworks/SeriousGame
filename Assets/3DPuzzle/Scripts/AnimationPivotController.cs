@@ -15,6 +15,10 @@ public class AnimationPivotController : MonoBehaviour
     private float spawnDistance = 60;
     [SerializeField] bool invertedPipeDirection = false;
 
+    private AnimatedPipeController pipeController;
+
+    bool started = false;
+
     public int GetPriority()
     {
         return priority;
@@ -36,22 +40,34 @@ public class AnimationPivotController : MonoBehaviour
         sequence.AppendInterval(0.5f);
         sequence.OnComplete(() =>
         {
-            if (newPipe.GetComponent<AnimatedPipeController>() != null)
+            pipeController = newPipe.GetComponent<AnimatedPipeController>();
+
+            if (pipeController != null && !invertedPipeDirection)
             {
-                newPipe.GetComponent<AnimatedPipeController>().StartAnimation(invertedPipeDirection);
+                pipeController.StartAnimation(invertedPipeDirection);
+                StartCoroutine(StartBloodFlow(pipeController));
             }
             else
             {
                 Debug.Log("No hay animated pipe controller");
             }
-
-            StartCoroutine(StartBloodFlow(newPipe.GetComponent<AnimatedPipeController>()));
         });
     }
 
-    public IEnumerator StartBloodFlow(AnimatedPipeController pipe)
+    public void StartInvertedAnimation()
     {
-        yield return new WaitUntil(() => pipe.CanStartBloodFlow());
+        if (pipeController != null && !started)
+        {
+            started = true;
+
+            Sequence sequence = DOTween.Sequence().AppendInterval(1f);
+            sequence.OnComplete(() => { pipeController.StartAnimation(invertedPipeDirection); });
+        }
+    }
+
+    public IEnumerator StartBloodFlow(AnimatedPipeController pipeController)
+    {
+        yield return new WaitUntil(() => pipeController.CanStartBloodFlow());
 
         if (connection != null)
         {

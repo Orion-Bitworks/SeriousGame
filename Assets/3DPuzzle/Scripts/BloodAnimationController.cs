@@ -5,6 +5,8 @@ using UnityEngine;
 public class BloodAnimationController : MonoBehaviour
 {
     [SerializeField] BloodAnimationController nextConnection;
+    [SerializeField] List<AnimationPivotController> animationPivots = new List<AnimationPivotController>();
+    [SerializeField] List<BloodAnimationController> requiredConnections = new List<BloodAnimationController>();
     ConnectionPointController connection;
     EventClick connectionEventClick;
 
@@ -38,12 +40,31 @@ public class BloodAnimationController : MonoBehaviour
         }
         else if (connection.PairedWithPartner())
         {
-            if (nextConnection == null || connectionEventClick.OnUI())
+            if (nextConnection != null && !connectionEventClick.OnUI())
             {
-                return;
+                nextConnection.CheckBloodFlow();
             }
+            
+            if (animationPivots.Count > 0)
+            {
+                foreach (BloodAnimationController required in requiredConnections)
+                {
+                    if (!required.CorrectConnection())
+                    {
+                        return;
+                    }
+                }
 
-            nextConnection.CheckBloodFlow();
+                foreach (AnimationPivotController pivot in animationPivots)
+                {
+                    pivot.StartInvertedAnimation();
+                }
+            }
         }
+    }
+
+    public bool CorrectConnection()
+    {
+        return connection.PairedWithPartner();
     }
 }
