@@ -15,6 +15,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] public HashSet<ConnectionPointController> connections = new HashSet<ConnectionPointController>();
 
     private bool resetting = false;
+    private bool playing = false;
 
     private void Awake()
     {
@@ -81,6 +82,13 @@ public class ScoreManager : MonoBehaviour
 
     public void PlayFinishAnimation()
     {
+        if (playing)
+        {
+            return;
+        }
+
+        playing = true;
+
         foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
         {
             eventClick.CanInteract(false);
@@ -161,6 +169,8 @@ public class ScoreManager : MonoBehaviour
         {
             eventClick.CanInteract(true);
         }
+
+        playing = false;
     }
 
     public IEnumerator ShowPlayState()
