@@ -9,6 +9,7 @@ public class AnimatedPipeController : MonoBehaviour
     [SerializeField] GameObject exitMolecule;
 
     [SerializeField] Transform entry;
+    [SerializeField] List<Transform> targets = new List<Transform>();
     [SerializeField] Transform exit;
 
     bool canStartBloodFlow = false;
@@ -23,12 +24,12 @@ public class AnimatedPipeController : MonoBehaviour
             {
                 GameObject newMolecule = Instantiate(exitMolecule, exit.position, exit.rotation, entry);
                 newMolecule.GetComponent<MoleculeMovement>().SetPipe(this);
-                newMolecule.GetComponent<MoleculeMovement>().StartMovement(entry);
+                newMolecule.GetComponent<MoleculeMovement>().StartMovement(entry, targets);
             }
             else{
                 GameObject newMolecule = Instantiate(entryMolecule, entry.position, entry.rotation, exit);
                 newMolecule.GetComponent<MoleculeMovement>().SetPipe(this);
-                newMolecule.GetComponent<MoleculeMovement>().StartMovement(exit);
+                newMolecule.GetComponent<MoleculeMovement>().StartMovement(exit, targets);
             }
             
         });
