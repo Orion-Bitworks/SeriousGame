@@ -165,7 +165,7 @@ public class ScoreManager : MonoBehaviour
 
     public IEnumerator ShowPlayState()
     {
-        float timeDelay = 10f;
+        float timeDelay = 4f;
 
         timeDelay += connections.First().GetPiece().GetGroup().GetPieces().Count();
 

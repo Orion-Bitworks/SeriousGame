@@ -117,10 +117,10 @@ public class AnimationPivotController : MonoBehaviour
                 exitSequence.Join(pipe.transform.DOLocalRotate(new Vector3(0f, 0f, 360f), 1.3f, RotateMode.FastBeyond360).SetEase(Ease.InOutQuad));
                 break;
             case ANIMATION_TYPE.L_SHAPE:
-                exitSequence.Append(pipe.transform.DOLocalMoveY(originalPipePos.y, 0.2f).SetEase(Ease.InOutBack));
+                exitSequence.Append(pipe.transform.DOLocalMoveZ(originalPipePos.z, 0.2f).SetEase(Ease.InOutBack));
                 exitSequence.AppendInterval(0.1f);
                 exitSequence.Append(pipe.transform.DOLocalMoveX(originalPipePos.x, 0.8f).SetEase(Ease.InQuad));
-                exitSequence.Join(pipe.transform.DOLocalMoveZ(originalPipePos.z, 0.8f).SetEase(Ease.InQuad));
+                exitSequence.Join(pipe.transform.DOLocalMoveY(originalPipePos.y, 0.8f).SetEase(Ease.InQuad));
                 break;
         }
 
