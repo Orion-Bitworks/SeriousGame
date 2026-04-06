@@ -23,10 +23,6 @@ MonoBehaviour:
     m_Key: t0_carreteras_explanation
     m_Metadata:
       m_Items: []
-  - m_Id: 442034384896
-    m_Key: t0_carreteras_keys_text
-    m_Metadata:
-      m_Items: []
   - m_Id: 694908973056
     m_Key: t1_carreteras_subtitle
     m_Metadata:

@@ -8,6 +8,9 @@ public class DialogManager : MonoBehaviour
     public static DialogManager instance;
 
     [SerializeField] private DialogBubbleController bubbleController;
+	public static Queue<System.Action> pendingEvents = new Queue<System.Action>();
+
+	public static bool IsDialogActive = false;
 
 	private void Awake()
 	{
@@ -17,16 +20,32 @@ public class DialogManager : MonoBehaviour
 
 	public void Show(string key)
 	{
-		bubbleController.gameObject.SetActive(true);
-		bubbleController.SetKey(key);
+		if (IsDialogActive)
+		{
+			pendingEvents.Enqueue(() => Show(key));
+			return;
+		}
 		StartCoroutine(ShowAndWait(key));
 	}
 
 	public IEnumerator ShowAndWait(string key)
 	{
+		IsDialogActive = true;
+		bubbleController.gameObject.SetActive(true);
+		bubbleController.SetKey(key);
+
 		yield return new WaitUntil(() => bubbleController.WasContinuePressed());
 
 		bubbleController.gameObject.SetActive(false);
+
+		IsDialogActive = false;
+
+		// Ejecutar eventos pendientes
+		if (pendingEvents.Count > 0)
+		{
+			var nextEvent = pendingEvents.Dequeue();
+			nextEvent.Invoke();
+		}
 	}
 
 	public void Hide()
@@ -37,11 +56,18 @@ public class DialogManager : MonoBehaviour
 
 	public void ShowSequence(string[] keys)
 	{
+		if (IsDialogActive)
+		{
+			pendingEvents.Enqueue(() => ShowSequence(keys));
+			return;
+		}
 		StartCoroutine(SequenceRoutine(keys));
 	}
 
 	IEnumerator SequenceRoutine(string[] keys)
 	{
+		IsDialogActive = true;
+
 		bubbleController.gameObject.SetActive(true);
 
 		foreach (string key in keys)
@@ -52,5 +78,13 @@ public class DialogManager : MonoBehaviour
 
 		}
 		bubbleController.gameObject.SetActive(false);
+
+		IsDialogActive = false;
+
+		if (pendingEvents.Count > 0)
+		{
+			var nextEvent = pendingEvents.Dequeue();
+			nextEvent.Invoke();
+		}
 	}
 }

@@ -47,7 +47,10 @@ public class Minigame3 : MonoBehaviour
         }
     }
 
-    private void Awake()
+	[SerializeField]
+	public TutorialManager tutorial;
+
+	private void Awake()
     {
         foreach(GameObject obj in elementsToHide) //amagar tots els elements dins del array
         {
@@ -81,13 +84,14 @@ public class Minigame3 : MonoBehaviour
         gameActive = false;
         Time.timeScale = 0f;
 
-        popUpManager.ShowPopUp(
+        tutorial.ShowTutorial(4);
+		/*popUpManager.ShowPopUp(
             "Et sortira un joc on apareixeran una serie de boles. Has de pitjar la tecla que contigui la bola marcada en verd (A, S, D). Tens un cert temps per clicar, ja que van el ritme de la macarena",
             5f
-        );
+        );*/
 
-        // Espera en temps real 
-        yield return new WaitForSecondsRealtime(6f);
+		// Espera en temps real 
+		yield return new WaitForSecondsRealtime(6f);
 
         Time.timeScale = 1f;
         gameActive = true;
@@ -173,11 +177,15 @@ public class Minigame3 : MonoBehaviour
         if(completedNotes < maxNotes)
         {
             rebootButton.SetActive(true);
+            //DialogManager.instance.Show("dialog_23_isbad_1");
+            DialogManager.instance.ShowSequence(new string[] {"dialog_23_isbad_1", "dialog_24_isbad_2" });
+			
             popUpManager.ShowPopUp($"Has fet un total de {completedNotes} de {maxNotes}, torna a intentar-ho de nou", 4);
             
         }
         else
         {
+            DialogManager.instance.Show("dialog_22_isgood");
             popUpManager.ShowPopUp("Has acabat el tercer minijoc, Felicitats! Has acabat tots els minijocs correctament", 3f);
             StartCoroutine(FinishGame());
         }

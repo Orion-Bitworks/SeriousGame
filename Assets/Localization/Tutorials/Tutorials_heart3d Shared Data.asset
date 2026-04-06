@@ -23,10 +23,6 @@ MonoBehaviour:
     m_Key: t0_heart_3d_explanation
     m_Metadata:
       m_Items: []
-  - m_Id: 3701914562560
-    m_Key: t0_heart_3D_keys_text
-    m_Metadata:
-      m_Items: []
   - m_Id: 4036821348352
     m_Key: t1_heart_3D_subtitle
     m_Metadata:

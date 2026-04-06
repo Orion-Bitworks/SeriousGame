@@ -45,6 +45,18 @@ MonoBehaviour:
       porque aparecen y desaparecen r\xE1pido. "
     m_Metadata:
       m_Items: []
+  - m_Id: 10248622080
+    m_Localized: Clic derecho
+    m_Metadata:
+      m_Items: []
+  - m_Id: 692540248064
+    m_Localized: Clic derecho
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1450694286348288
+    m_Localized: A, S, D
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

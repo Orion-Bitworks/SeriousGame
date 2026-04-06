@@ -36,6 +36,7 @@ public class ScoreManager : MonoBehaviour
             if (!point.PairedWithPartner())
             {
                 DialogManager.instance.Show("dialog_9_isbad");
+
                 Debug.Log("Incorrecto");
                 allRight = false;
             }
@@ -54,14 +55,21 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+
     private void ToggleWidget()
     {
+		if (DialogManager.IsDialogActive)
+		{
+			DialogManager.pendingEvents.Enqueue(() => ToggleWidget());
+			return;
+		}
 
-        widget.SetActive(true);
-    }
+		widget.SetActive(true);
+	}
 
     public void End3DMinigame()
     {
+        DialogManager.instance.Show("dialog_10");
         FindObjectOfType<GameLoopController>().End3DLevel();
         foreach (GameObject piece in pieces)
         {

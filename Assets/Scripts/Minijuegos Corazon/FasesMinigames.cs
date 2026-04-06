@@ -37,9 +37,11 @@ public class FasesMinigames : MonoBehaviour
     public void PasarAFase2()
     {
         LimpiarSeleccion();
+		DialogManager.instance.Show("dialog_17");
+		fase1Root.SetActive(false);   // Oculta tot el minijoc 1
 
-        fase1Root.SetActive(false);   // Oculta tot el minijoc 1
         fase2Root.SetActive(true);    // Mostra tot el minijoc 2
+
         fase3Root.SetActive(false);   // Oculta tot el minijoc 3
 
         venas.SetActive(true); //Activar les venes quan pasi a la seguent fase

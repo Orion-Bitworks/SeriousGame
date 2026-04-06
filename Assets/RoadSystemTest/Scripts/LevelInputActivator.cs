@@ -11,6 +11,7 @@ public class LevelInputActivator : MonoBehaviour
     [SerializeField] bool endingCondition = false;
 
     bool activated = false;
+    bool IsGameFinished;
 
     private void Start()
     {
@@ -20,7 +21,8 @@ public class LevelInputActivator : MonoBehaviour
             if (input != null)
                 input.StopGenerating();
         }
-    }
+		IsGameFinished = false;
+	}
 
     private void Update()
     {
@@ -30,9 +32,10 @@ public class LevelInputActivator : MonoBehaviour
             activated = true;
         }
 
-        if (endingCondition && CheckCondition())
+        if (endingCondition && CheckCondition() && !IsGameFinished)
         {
             GameManager.Instance.EndLevel();
+            IsGameFinished = true;
         }
     }
 

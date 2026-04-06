@@ -27,10 +27,6 @@ MonoBehaviour:
     m_Key: continue_level_button
     m_Metadata:
       m_Items: []
-  - m_Id: 1639445262336
-    m_Key: New Entry
-    m_Metadata:
-      m_Items: []
   - m_Id: 1719338364928
     m_Key: reload_level_button
     m_Metadata:

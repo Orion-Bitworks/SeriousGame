@@ -23,8 +23,11 @@ public class Minigame2 : MonoBehaviour
 
     private bool popUpShown = false;
 
+	[SerializeField]
+	public TutorialManager tutorial;
 
-    private void Awake()
+
+	private void Awake()
     {
         CheckButton.onClick.AddListener(checkPlacementButton);
     }
@@ -32,6 +35,8 @@ public class Minigame2 : MonoBehaviour
     {
         totalVeins = draggagleVeins.Length; //el total de objetos son la cantidad de objetos que haya en el array
         showInfo();
+        tutorial.ShowTutorial(3);
+
     }
 
     public void objectsRemaining()
@@ -97,13 +102,15 @@ public class Minigame2 : MonoBehaviour
 
             if (!popUpShown)
             {
+                DialogManager.instance.Show("dialog_18_isgood");
                 popUpManager.ShowPopUp("Has acabat el segon minijoc!", 2f);
                 StartCoroutine(EndMinigame());                
             }
         }
         else // Caso fallo
         {
-            popUpManager.ShowPopUp($"Només has fet: {correct}, torna-ho a intentar", 2f);
+			DialogManager.instance.Show("dialog_19_isbad");
+			popUpManager.ShowPopUp($"Només has fet: {correct}, torna-ho a intentar", 2f);
         }
     }
 

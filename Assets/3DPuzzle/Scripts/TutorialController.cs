@@ -7,6 +7,8 @@ public class TutorialController : MonoBehaviour
 {
     [SerializeField] private string tagToDetect;
 	[SerializeField] private TutorialLocalizationController localizationController;
+	[SerializeField] GameObject carpeta;
+
 
 	[Header("Navigation Buttons")]
     [SerializeField] private Button nextButton;
@@ -80,6 +82,7 @@ public class TutorialController : MonoBehaviour
 
     public void CloseTutorial()
     {
+        carpeta.SetActive(false);
         gameObject.SetActive(false);
     }
 

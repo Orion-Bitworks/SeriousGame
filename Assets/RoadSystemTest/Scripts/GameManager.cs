@@ -1,7 +1,9 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public static class TempLevelHolder
 {
@@ -36,6 +38,8 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] LevelOrganMap[] organMappings;
+    [SerializeField] TutorialManager tutorialManager;
+    LevelID thisLevel;
 
     private void Awake()
     {
@@ -83,6 +87,14 @@ public class GameManager : MonoBehaviour
 
         // Instanciar el nivel
         currentLevelGameObject = Instantiate(levels[index]);
+
+		if (level == LevelID.Pipe) {
+            thisLevel = level;
+            DialogManager.instance.Show("dialog_3");
+            DialogManager.instance.Show("dialog_4");
+
+            tutorialManager.ShowTutorial(0);
+        }
 
         // Si el nivel es el del corazón, arrancar su minijuego 3D
         if (level == LevelID.Heart)
@@ -146,14 +158,35 @@ public class GameManager : MonoBehaviour
     public void EndLevel()
     {
         LevelProgress.CompleteLevel((int)currentLevel);
-        DialogManager.instance.Show("dialog_5_isgood");
-        gameoverPanel.SetActive(true);
+		if (thisLevel == LevelID.Pipe)
+		{
+			DialogManager.instance.Show("dialog_5_isgood");
 
-        continueButton.onClick.RemoveAllListeners();
+			DialogManager.instance.Show("dialog_6");
+
+			
+		}
+
+		
+        ActiveGameOverPanel();
+
+
+		continueButton.onClick.RemoveAllListeners();
         continueButton.onClick.AddListener(LoadNextLevel);
     }
 
-    public OrganType[] GetOrgansForLevel(LevelID level)
+	private void ActiveGameOverPanel()
+	{
+		if (DialogManager.IsDialogActive)
+		{
+			DialogManager.pendingEvents.Enqueue(() => ActiveGameOverPanel());
+			return;
+		}
+
+		gameoverPanel.SetActive(true);
+	}
+
+	public OrganType[] GetOrgansForLevel(LevelID level)
     {
         foreach (var map in organMappings)
             if (map.level == level)

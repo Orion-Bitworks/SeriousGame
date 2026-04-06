@@ -83,10 +83,6 @@ MonoBehaviour:
     m_Localized: "Com jugar\r"
     m_Metadata:
       m_Items: []
-  - m_Id: 3701914562560
-    m_Localized: .
-    m_Metadata:
-      m_Items: []
   references:
     version: 2
     RefIds: []

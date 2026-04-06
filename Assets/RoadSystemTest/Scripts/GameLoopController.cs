@@ -14,6 +14,7 @@ public class GameLoopController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera pipesCamera;
     [SerializeField] CinemachineVirtualCamera heartMinigamesCamera;
     [SerializeField] CinemachineVirtualCamera threeDMinigameCamera;
+    [SerializeField] TutorialManager controller;
 
     bool minigamesStarted = false;
     bool minigamesFinished = false;
@@ -49,7 +50,6 @@ public class GameLoopController : MonoBehaviour
         heartMinigamesCamera.Priority = 2;
         DialogManager.instance.Show("dialog_14");
 		
-
 	}
 
     private void HandleGameCompleted(bool completed)
@@ -63,11 +63,13 @@ public class GameLoopController : MonoBehaviour
         pipesUI.gameObject.SetActive(true);
         heartMinigamesUI.gameObject.SetActive(false);
         heartMinigamesCamera.Priority = 0;
-		DialogManager.instance.Show("dialog_1");
+        DialogManager.instance.Show("dialog_25");
+		controller.ShowTutorial(5);
+
 
 	}
 
-    private IEnumerator DelayedStart3DLevel()
+	private IEnumerator DelayedStart3DLevel()
     {
         yield return new WaitForSecondsRealtime(2f);
 
@@ -81,6 +83,9 @@ public class GameLoopController : MonoBehaviour
         threeDMinigameUI.gameObject.SetActive(true);
         threeDMinigameCamera.Priority = 2;
 		DialogManager.instance.Show("dialog_7");
+        controller.ShowTutorial(1);
+        controller.MoveCarpeta(13);
+
 	}
 
     public void Start3DLevel()
@@ -99,9 +104,8 @@ public class GameLoopController : MonoBehaviour
         pipesUI.gameObject.SetActive(true);
         threeDMinigameUI.gameObject.SetActive(false);
         threeDMinigameCamera.Priority = 0;
-		DialogManager.instance.Show("dialog_11");
-		DialogManager.instance.Show("dialog_12");
-		DialogManager.instance.Show("dialog_13");
+        DialogManager.instance.ShowSequence(new string []{ "dialog_11", "dialog_12", "dialog_13" });
+
 
 
 	}

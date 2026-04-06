@@ -22,10 +22,6 @@ MonoBehaviour:
     m_Localized: Attach all pieces correctly so the heart can start functioning.
     m_Metadata:
       m_Items: []
-  - m_Id: 3701914562560
-    m_Localized: 
-    m_Metadata:
-      m_Items: []
   - m_Id: 3443709014016
     m_Localized: Objective
     m_Metadata:

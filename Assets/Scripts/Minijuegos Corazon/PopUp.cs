@@ -14,7 +14,10 @@ public class PopUp : MonoBehaviour
     //Metode per mostrar el pop up amb text i una duració
     public void ShowPopUp(string text, float duration)
     {
-        this.duration = duration;
+        if (DialogManager.IsDialogActive)
+            return;
+
+		this.duration = duration;
         messageText.text = text;
         panel.SetActive(true);
 
