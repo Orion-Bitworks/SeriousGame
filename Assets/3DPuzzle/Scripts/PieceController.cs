@@ -11,12 +11,14 @@ public class PieceController : MonoBehaviour
     Material originalMaterial;
 
     [SerializeField] bool hasSnapped = false;
-    public bool canSnap = false;
+    [SerializeField] public bool canSnap = false;
 
     public Transform parentPiece;
 
     private Move3DObject movement;
     private Rotate3DObject rotation;
+
+    [SerializeField] private bool isPlaced = false;
 
     [SerializeField] private PieceGroup group;
 
@@ -47,10 +49,10 @@ public class PieceController : MonoBehaviour
 
     public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
     {
-        /*if (!canSnap)
+        if (isPlaced)
         {
             return;
-        }*/
+        }
 
         //point.Paired(true);
         //target.GetComponent<ConnectionPointController>().Paired(true);
@@ -179,6 +181,7 @@ public class PieceController : MonoBehaviour
 
     public void EnableControls()
     {
+        group.ChangeGroupPlacedState(false);
         group.ChangeGroupLayer(0);
         group.ChangeGroupMaterial(clickMaterial);
 
@@ -195,13 +198,14 @@ public class PieceController : MonoBehaviour
 
     public void DisableControls()
     {
+        group.ChangeGroupPlacedState(true);
         group.ChangeGroupLayer(8);
         group.ChangeGroupMaterial(originalMaterial);
 
         movement.DisableMovement();
         rotation.DisableRotation();
 
-        //canSnap = false;
+        canSnap = false;
 
         foreach (PieceController piece in connectedPieces)
         {
@@ -240,6 +244,7 @@ public class PieceController : MonoBehaviour
     {
         List<PieceController> connectedPiecesCopy = new List<PieceController>(connectedPieces);
 
+        group.ChangeGroupPlacedState(true);
         group.ChangeGroupLayer(8);
         group.ChangeGroupMaterial(originalMaterial, this);
 
@@ -271,9 +276,66 @@ public class PieceController : MonoBehaviour
     {
         foreach (PieceController piece in group.GetPieces())
         {
-            Destroy(piece.gameObject);
+            //piece.HasSnapped(false);
+            piece.DisconnectAll();
+            piece.GetComponent<EventClick>().ResetPiece();
         }
 
         CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.DEFAULT);
+    }
+
+    public bool IsPlaced()
+    {
+        return isPlaced;
+    }
+
+    public void IsPlaced(bool isPlaced)
+    {
+        this.isPlaced = isPlaced;
+    }
+
+    public void RegisterConnectionPoints()
+    {
+        ConnectionPointController[] connections = GetComponentsInChildren<ConnectionPointController>();
+
+        foreach (ConnectionPointController connection in connections) 
+        {
+            connection.Register();
+        }
+    }
+
+    public void UnRegisterConnectionPoints()
+    {
+        ConnectionPointController[] connections = GetComponentsInChildren<ConnectionPointController>();
+
+        foreach (ConnectionPointController connection in connections)
+        {
+            connection.UnRegister();
+        }
+    }
+
+    public void EnableConnectionPoints()
+    {
+        ConnectionPointController[] connections = GetComponentsInChildren<ConnectionPointController>();
+
+        foreach (ConnectionPointController connection in connections)
+        {
+            connection.Enable();
+        }
+    }
+
+    public void DisableConnectionPoints()
+    {
+        ConnectionPointController[] connections = GetComponentsInChildren<ConnectionPointController>();
+
+        foreach (ConnectionPointController connection in connections)
+        {
+            connection.Disable();
+        }
+    }
+
+    public bool IsInteracting()
+    {
+        return InputManager.instance.rotateMode_ia.inProgress || InputManager.instance.separateMode_ia.inProgress;
     }
 }
