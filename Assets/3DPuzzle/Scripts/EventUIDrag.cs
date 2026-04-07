@@ -14,7 +14,7 @@ public class EventUIDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        newPiece = Instantiate(prefabPiece, transform.position, Quaternion.identity);
+        newPiece = Instantiate(prefabPiece, transform.position, prefabPiece.transform.rotation);
         newPiece.GetComponent<PieceController>().EnableControls();
         ScoreManager.instance.pieces.Add(newPiece);
 

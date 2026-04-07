@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class ConnectionPointController : MonoBehaviour
@@ -10,29 +11,34 @@ public class ConnectionPointController : MonoBehaviour
     [SerializeField] private bool canBeRegistered = false;
 
     private bool pairedWithPartner = false;
+    private bool isEnabled = false;
     PieceController piece;
 
     [SerializeField] private bool paired = false;
     [SerializeField] private string pairId = "";
 
+    //ConnectionPointController connectedPoint;
+
     private void Start()
     {
-        if (canBeRegistered)
-        {
-            ScoreManager.instance.RegisterConnectionPoint(this);
-        }
-        
         piece = GetComponentInParent<PieceController>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!isEnabled)
+        {
+            return;
+        }
+
         if (other.gameObject.tag == "ConnectionPoint")
         {
             ConnectionPointController otherPoint = other.GetComponent<ConnectionPointController>();
 
-            if (!paired && !otherPoint.Paired()) 
+            if (!paired && !otherPoint.Paired() && otherPoint.piece.IsPlaced() && otherPoint.IsEnabled()) 
             {
+                ParticleManager.instance.SpawnParticles("SnappingParticles", transform);
+
                 piece.SnapToPoint(this, other.transform, other.transform.parent);
 
                 pairId = otherPoint.GetId();
@@ -40,6 +46,9 @@ public class ConnectionPointController : MonoBehaviour
 
                 CheckPairing(otherPoint);
                 otherPoint.CheckPairing(this);
+
+                //connectedPoint = otherPoint;
+                //otherPoint.SetConnectedPoint(this);
 
                 paired = true;
                 otherPoint.Paired(true);
@@ -49,14 +58,18 @@ public class ConnectionPointController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "ConnectionPoint" && paired && (other.GetComponent<ConnectionPointController>().GetId() == pairId))
+        if (!isEnabled)
         {
-            paired = false;
-            pairedWithPartner = false;
-            pairId = "";
-            Debug.Log(id + " ha dejado de estar conectado con " + other.GetComponent<ConnectionPointController>().GetId());
+            return;
+        }
+
+        ConnectionPointController otherPoint = other.GetComponent<ConnectionPointController>();
+
+        if (other.gameObject.tag == "ConnectionPoint" && paired && (otherPoint.GetId() == pairId)/* && otherPoint.IsEnabled()*/)
+        {
+            ResetValues();
             //piece.DisconnectPiece(other.GetComponent<PieceController>());
-            //CheckPairing(other.GetComponent<ConnectionPointController>());
+            //CheckPairing(otherPoint);
         }
     }
 
@@ -71,6 +84,10 @@ public class ConnectionPointController : MonoBehaviour
         {
             Debug.Log(id + " ha chocado con " + partnerPoint.GetId() + ": Bien emparejadas!");
             pairedWithPartner = true;
+        }
+        else
+        {
+            pairedWithPartner = false;
         }
     }
 
@@ -108,4 +125,60 @@ public class ConnectionPointController : MonoBehaviour
     {
         pairId = id;
     }
+
+    public PieceController GetPiece()
+    {
+        return piece;
+    }
+
+    public void ResetValues()
+    {
+        paired = false;
+        pairedWithPartner = false;
+        pairId = "";
+        //connectedPoint = null;
+        Debug.Log(id + " ha dejado de estar conectado");
+    }
+
+    public void Register()
+    {
+        if (canBeRegistered)
+        {
+            ScoreManager.instance.RegisterConnectionPoint(this);
+        }
+    }
+
+    public void UnRegister()
+    {
+        if (canBeRegistered)
+        {
+            ResetValues();
+            ScoreManager.instance.UnregisterConnectionPoint(this);
+        }
+    }
+
+    public bool IsEnabled()
+    {
+        return isEnabled;
+    }
+
+    public void Enable()
+    {
+        isEnabled = true;
+    }
+
+    public void Disable()
+    {
+        isEnabled = false;
+    }
+
+    /*public void SetConnectedPoint(ConnectionPointController newConnection)
+    {
+        connectedPoint = newConnection;
+    }
+
+    public ConnectionPointController GetConnectedPoint()
+    {
+        return connectedPoint;
+    }*/
 }

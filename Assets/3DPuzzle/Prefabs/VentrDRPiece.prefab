@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8947827054522477888}
   - component: {fileID: 5983578027635477860}
   - component: {fileID: 8251289360449099925}
+  - component: {fileID: 873398220235421982}
   m_Layer: 7
   m_Name: SphereVentriculoDR
   m_TagString: ConnectionPoint
@@ -123,9 +124,24 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
-  canBeRegistered: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
+--- !u!114 &873398220235421982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2328639013779581866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextConnection: {fileID: 0}
+  animationPivots: []
+  requiredConnections: []
 --- !u!1 &6290251021446196671
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +155,7 @@ GameObject:
   - component: {fileID: 7128909373511075438}
   - component: {fileID: 1494583241456795778}
   - component: {fileID: 14598458981875287}
+  - component: {fileID: 8956589584325668075}
   m_Layer: 7
   m_Name: SphereVentriculoDRarriba
   m_TagString: ConnectionPoint
@@ -249,9 +266,24 @@ MonoBehaviour:
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128
-  canBeRegistered: 0
+  canBeRegistered: 1
   paired: 0
   pairId: 
+--- !u!114 &8956589584325668075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6290251021446196671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextConnection: {fileID: 0}
+  animationPivots: []
+  requiredConnections: []
 --- !u!1001 &65286976941157163
 PrefabInstance:
   m_ObjectHideFlags: 0
