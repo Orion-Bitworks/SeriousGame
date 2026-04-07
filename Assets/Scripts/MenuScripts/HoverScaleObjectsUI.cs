@@ -16,7 +16,9 @@ public class HoverScaleObjectsUI : MonoBehaviour, IPointerEnterHandler, IPointer
 
 	public void OnPointerEnter(PointerEventData eventData)
     {
-        transform.DOScale(gOHover * 2f, 0.5f);
+        transform.DOScale(gOHover * 1.5f, 0.5f);
+
+        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Hover);
     }
 
     public void OnPointerExit(PointerEventData eventData)

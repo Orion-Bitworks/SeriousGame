@@ -38,6 +38,7 @@ public class OptionMenuController : MonoBehaviour
         currentPanel = activePanel;
         currentPanel.SetActive(true);
 
+        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Click);
     }
 
     public void ChangeRebindMenu(GameObject activeRebindPanel)

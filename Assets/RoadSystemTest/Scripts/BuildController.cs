@@ -129,6 +129,7 @@ public class BuildController : MonoBehaviour
 
         ghost.RotateGhost();
         previewController.RotatePreview(ghost.currentRotation);
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Rotate);
         StartCoroutine(PressUIButton(rotateButton));
     }
 
@@ -289,6 +290,8 @@ public class BuildController : MonoBehaviour
 
         // Instancia la pieza
         GameObject obj = Instantiate(objectsToPlace[selectedIndex], cell, ghost.currentRotation);
+
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Place);
 
         obj.AddComponent<PlacedPiece>().originalPrefab = objectsToPlace[selectedIndex];
 

@@ -53,7 +53,7 @@ public class MenuPauseController : MonoBehaviour
 		if (SceneManager.GetActiveScene().name == "RoadSystemTest")
 		{
 			GameManager.Instance.isPlaying = true;
-			miniHeart = FindAnyObjectByType<HeartDrag3D>().gameObject;
+			miniHeart = FindAnyObjectByType<OrganDrag3D>().gameObject;
 			miniHeart.SetActive(false);
 		}
 	}
@@ -73,8 +73,6 @@ public class MenuPauseController : MonoBehaviour
 	public void OpenOptionMenuPause()
 	{
 		menuPausePanel.SetActive(true);
-
-
 	}
 
 
@@ -100,5 +98,4 @@ public class MenuPauseController : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenuGame");
 	}
-
 }
