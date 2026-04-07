@@ -88,6 +88,21 @@ public class ScoreManager : MonoBehaviour
             return;
         }
 
+        bool canPlay = false;
+
+        foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
+        {
+            if (!eventClick.OnUI())
+            {
+                canPlay = true;
+            }
+        }
+
+        if (!canPlay)
+        {
+            return;
+        }
+
         playing = true;
 
         foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
