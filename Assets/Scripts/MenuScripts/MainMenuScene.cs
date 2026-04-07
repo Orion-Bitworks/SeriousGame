@@ -7,12 +7,15 @@ public class MainMenuScene : MonoBehaviour
     public void setCanvasActive(GameObject canva) 
     {
         canva.SetActive(true);
-    
+
+        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Click);
     }
 
     public void setCanvasNotActive(GameObject canva)
     {
         canva.SetActive(false);
+
+        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Click);
     }
 
     public void StartCarreterasMiniGame()
