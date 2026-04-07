@@ -8,6 +8,7 @@ public class DialogManager : MonoBehaviour
     public static DialogManager instance;
 
     [SerializeField] private DialogBubbleController bubbleController;
+	[SerializeField] public GameObject grid;
 	public static Queue<System.Action> pendingEvents = new Queue<System.Action>();
 
 	public static bool IsDialogActive = false;
@@ -30,15 +31,18 @@ public class DialogManager : MonoBehaviour
 
 	public IEnumerator ShowAndWait(string key)
 	{
+		grid.SetActive(false);
 		IsDialogActive = true;
 		bubbleController.gameObject.SetActive(true);
 		bubbleController.SetKey(key);
+
 
 		yield return new WaitUntil(() => bubbleController.WasContinuePressed());
 
 		bubbleController.gameObject.SetActive(false);
 
 		IsDialogActive = false;
+		grid.SetActive(true);
 
 		// Ejecutar eventos pendientes
 		if (pendingEvents.Count > 0)
@@ -69,6 +73,7 @@ public class DialogManager : MonoBehaviour
 		IsDialogActive = true;
 
 		bubbleController.gameObject.SetActive(true);
+
 
 		foreach (string key in keys)
 		{

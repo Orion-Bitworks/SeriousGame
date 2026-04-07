@@ -3,8 +3,11 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScene : MonoBehaviour
 {
-
-    public void setCanvasActive(GameObject canva) 
+	private void Start()
+	{
+		TempLevelHolder.introShown = false;
+	}
+	public void setCanvasActive(GameObject canva) 
     {
         canva.SetActive(true);
     

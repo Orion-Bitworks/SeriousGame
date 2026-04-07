@@ -36,6 +36,8 @@ public class Minigame1 : MonoBehaviour
         showInfo();
 
         tutorial.ShowTutorial(2);
+        tutorial.MoveCarpetaMiniHeart();
+
 
 	}
 
@@ -118,7 +120,6 @@ public class Minigame1 : MonoBehaviour
                 DialogManager.instance.Show("dialog_15_isgood");
                 //popUpManager.ShowPopUp("Has acabat el primer minijoc!", 2f);
                 popUpShown = true;
-                DialogManager.instance.Show("dialog_20");
                 phasesManager.PasarAFase2(); //pasa a la siguiente fase
 
             }

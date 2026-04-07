@@ -65,6 +65,7 @@ public class GameLoopController : MonoBehaviour
         heartMinigamesCamera.Priority = 0;
         DialogManager.instance.Show("dialog_25");
 		controller.ShowTutorial(5);
+        controller.ReposicionarCarpeta();
 
 
 	}
@@ -84,7 +85,7 @@ public class GameLoopController : MonoBehaviour
         threeDMinigameCamera.Priority = 2;
 		DialogManager.instance.Show("dialog_7");
         controller.ShowTutorial(1);
-        controller.MoveCarpeta(13);
+        controller.MoveCarpeta3D(18);
 
 	}
 

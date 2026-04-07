@@ -8,6 +8,7 @@ using static Cinemachine.DocumentationSortingAttribute;
 public static class TempLevelHolder
 {
     public static LevelID nextLevel = LevelID.Pipe;
+	public static bool introShown = false;
 }
 
 /// <summary>
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject gameoverPanel;                  // Referencia al panel de GameOver
     [SerializeField] Button continueButton;                     // Referencia al panel de GameOver
     [SerializeField] GameObject[] levels;
+    [SerializeField] GameObject blackBackground;
 
     [HideInInspector] public bool isPlaying = false;            // Controla si el sistema de bolitas está en marcha
     //[HideInInspector] public bool heartPlaced = false;          // Controla si el corazón ha sido colocado
@@ -85,20 +87,39 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        // Instanciar el nivel
-        currentLevelGameObject = Instantiate(levels[index]);
 
-		if (level == LevelID.Pipe) {
-            thisLevel = level;
-            DialogManager.instance.Show("dialog_3");
-            DialogManager.instance.Show("dialog_4");
 
-            tutorialManager.ShowTutorial(0);
+
+        if (!TempLevelHolder.introShown)
+        {
+            TempLevelHolder.introShown = true;
+
+            blackBackground.SetActive(true);
+
+            DialogManager.instance.Show("dialog_1");
+            DialogManager.instance.Show("dialog_2");
+
+            DialogManager.pendingEvents.Enqueue(() =>
+            {
+                blackBackground.SetActive(false);
+
+                // Instanciar el nivel
+                currentLevelGameObject = Instantiate(levels[index]);
+
+                if (level == LevelID.Pipe)
+                {
+                    DialogManager.instance.Show("dialog_3");
+                    DialogManager.instance.Show("dialog_4");
+                    DialogManager.instance.Show("dialog_5");
+
+                    tutorialManager.ShowTutorial(0);
+                }
+
+            });
+            return;
         }
-
-        // Si el nivel es el del corazón, arrancar su minijuego 3D
-        if (level == LevelID.Heart)
-            FindObjectOfType<GameLoopController>().Start3DLevel();
+            if (level == LevelID.Heart)
+                FindObjectOfType<GameLoopController>().Start3DLevel();
     }
 
     public void LoadNextLevel()
@@ -158,22 +179,32 @@ public class GameManager : MonoBehaviour
     public void EndLevel()
     {
         LevelProgress.CompleteLevel((int)currentLevel);
-		if (thisLevel == LevelID.Pipe)
+		if (currentLevel == LevelID.Pipe)
 		{
 			DialogManager.instance.Show("dialog_5_isgood");
-
 			DialogManager.instance.Show("dialog_6");
 
-			
+			continueButton.onClick.RemoveAllListeners();
+			continueButton.onClick.AddListener(LoadNextLevel);
 		}
 
-		
-        ActiveGameOverPanel();
+        if (currentLevel == LevelID.Heart)
+        {
+			DialogManager.instance.Show("dialog_26_isgood");
 
+			continueButton.onClick.RemoveAllListeners();
+			continueButton.onClick.AddListener(LoadHeartScene);
+		}
 
-		continueButton.onClick.RemoveAllListeners();
-        continueButton.onClick.AddListener(LoadNextLevel);
+		ActiveGameOverPanel();
+
     }
+
+	private void LoadHeartScene()
+	{
+		SceneManager.LoadScene("MainMenuGame");
+	}
+
 
 	private void ActiveGameOverPanel()
 	{

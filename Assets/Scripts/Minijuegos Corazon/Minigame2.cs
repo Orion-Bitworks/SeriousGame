@@ -104,7 +104,9 @@ public class Minigame2 : MonoBehaviour
             {
                 DialogManager.instance.Show("dialog_18_isgood");
                 popUpManager.ShowPopUp("Has acabat el segon minijoc!", 2f);
-                StartCoroutine(EndMinigame());                
+				DialogManager.instance.Show("dialog_20");
+
+				StartCoroutine(EndMinigame());                
             }
         }
         else // Caso fallo
