@@ -11,6 +11,7 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager instance;
 
     [SerializeField] GameObject widget;
+    [SerializeField] CheckTVController checkTV;
 
     [SerializeField] public HashSet<ConnectionPointController> connections = new HashSet<ConnectionPointController>();
     [SerializeField] public HashSet<GameObject> pieces = new HashSet<GameObject>();
@@ -58,10 +59,15 @@ public class ScoreManager : MonoBehaviour
 
         if (allRight)
         {
-            ToggleWidget(true);
+            checkTV.ChangeState(CHECKING_STATE.CORRECT);
+            DOVirtual.DelayedCall(1f, () =>
+            {
+                ToggleWidget(true);
+            });
         }
         else
         {
+            checkTV.ChangeState(CHECKING_STATE.WRONG);
             ResetLevel();
         }
     }
@@ -104,6 +110,9 @@ public class ScoreManager : MonoBehaviour
         }
 
         playing = true;
+
+        checkTV.ShowTV();
+        checkTV.ChangeState(CHECKING_STATE.LOADING);
 
         foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
         {
@@ -155,6 +164,8 @@ public class ScoreManager : MonoBehaviour
     {
         yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
 
+        checkTV.HideTV();
+
         Sequence sequence = DOTween.Sequence().SetAutoKill(true);
 
         foreach (ConnectionPointController point in connections)
@@ -190,6 +201,8 @@ public class ScoreManager : MonoBehaviour
         yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
 
         ParticleManager.instance.DeleteAllParticles();
+
+        checkTV.HideTV();
 
         Sequence sequence = DOTween.Sequence().SetAutoKill(true);
 
