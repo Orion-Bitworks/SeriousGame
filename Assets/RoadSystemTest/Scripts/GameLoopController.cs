@@ -16,9 +16,9 @@ public class GameLoopController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera heartMinigamesCamera;
     [SerializeField] CinemachineVirtualCamera threeDMinigameCamera;
 
-    bool minigamesStarted = false;
+    bool minigamesStarted = true;
     bool minigamesFinished = false;
-    bool threeDStarted = false;
+    bool threeDStarted = true;
     bool threeDFinished = false;
 
     OrganLogic heartObject;
