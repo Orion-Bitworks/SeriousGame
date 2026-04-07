@@ -73,11 +73,7 @@ public class ScoreManager : MonoBehaviour
 
     public void End3DMinigame()
     {
-        FindObjectOfType<GameLoopController>().End3DLevel();
-        foreach (GameObject piece in pieces)
-        {
-            Destroy(piece);
-        }
+        ResetLevel(true);
     }
 
     public void LoadScene(string targetScene)
@@ -107,16 +103,16 @@ public class ScoreManager : MonoBehaviour
         StartCoroutine(ShowPlayState());
     }
 
-    public void ResetLevel()
+    public void ResetLevel(bool continueToScene = false)
     {
         resetting = true;
 
         ToggleWidget(false);
 
-        StartCoroutine(StopBloodFlow());
+        StartCoroutine(StopBloodFlow(continueToScene));
     }
 
-    public IEnumerator StopBloodFlow()
+    public IEnumerator StopBloodFlow(bool continueToScene = false)
     {
         foreach (AnimatedPipeController pipe in FindObjectsOfType<AnimatedPipeController>())
         {
@@ -130,7 +126,46 @@ public class ScoreManager : MonoBehaviour
             point.GetPiece().GetGroup().RetrievePipesAnimation();
         }
 
-        StartCoroutine(DeleteAllPieces());
+        if (!continueToScene)
+        {
+            StartCoroutine(DeleteAllPieces());
+        }
+        else
+        {
+            StartCoroutine(ChangeScene());
+        }
+    }
+
+    public IEnumerator ChangeScene()
+    {
+        yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
+
+        Sequence sequence = DOTween.Sequence().SetAutoKill(true);
+
+        foreach (ConnectionPointController point in connections)
+        {
+            point.Disable();
+            sequence.Join(point.GetPiece().transform.DOMoveY(-5f, 0.5f).SetEase(Ease.InBack, 0.5f));
+        }
+
+        sequence.OnComplete(() =>
+        {
+            while (connections.Count > 0)
+            {
+                ConnectionPointController point = connections.First();
+                point.GetPiece().DeletePiece();
+            }
+
+            resetting = false;
+        });
+
+        yield return new WaitForSeconds(0.5f);
+
+        FindObjectOfType<GameLoopController>().End3DLevel();
+        /*foreach (GameObject piece in pieces)
+        {
+            Destroy(piece);
+        }*/
     }
 
     public IEnumerator DeleteAllPieces()

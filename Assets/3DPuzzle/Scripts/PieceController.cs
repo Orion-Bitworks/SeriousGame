@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -37,6 +38,15 @@ public class PieceController : MonoBehaviour
     {
         group = new PieceGroup();
         group.AddPiece(this);
+
+        StartCoroutine(RegisterPiece());
+    }
+
+    private IEnumerator RegisterPiece()
+    {
+        yield return new WaitUntil(() => ScoreManager.instance != null);
+
+        ScoreManager.instance.pieces.Add(gameObject);
     }
 
     private void Update()

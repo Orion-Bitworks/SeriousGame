@@ -11,6 +11,7 @@ public class GameLoopController : MonoBehaviour
     [SerializeField] GameObject heartMinigamesUI;
     [SerializeField] GameObject threeDMinigame;
     [SerializeField] GameObject threeDMinigameUI;
+    [SerializeField] GameObject threeDMinigamePieces;
     [SerializeField] GameObject pipesUI;
     [SerializeField] CinemachineVirtualCamera pipesCamera;
     [SerializeField] CinemachineVirtualCamera heartMinigamesCamera;
@@ -97,6 +98,7 @@ public class GameLoopController : MonoBehaviour
         threeDMinigame.gameObject.SetActive(true);
         pipesUI.gameObject.SetActive(false);
         threeDMinigameUI.gameObject.SetActive(true);
+        threeDMinigamePieces.gameObject.SetActive(true);
         threeDMinigameCamera.Priority = 2;
     }
 
@@ -115,6 +117,7 @@ public class GameLoopController : MonoBehaviour
         threeDMinigame.gameObject.SetActive(false);
         pipesUI.gameObject.SetActive(true);
         threeDMinigameUI.gameObject.SetActive(false);
+        threeDMinigamePieces.gameObject.SetActive(false);
         threeDMinigameCamera.Priority = 0;
     }
 }
