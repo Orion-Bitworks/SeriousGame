@@ -80,9 +80,8 @@ public class Minigame1 : MonoBehaviour
                 {
                     if (drop.valveType == obj.valveType)
                     {
-                        Quaternion currentRot = obj.transform.rotation;
+                        Quaternion currentRot = obj.transform.localRotation; //comprobamos la rotacion local del transform
                         float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
-
                         if (angleDiff <= drop.rotationTolerance)
                         {
                             correct++;

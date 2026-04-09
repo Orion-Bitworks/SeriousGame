@@ -7,9 +7,12 @@ using UnityEngine;
 public class GameLoopController : MonoBehaviour
 {
     [SerializeField] GameObject heartMinigames;
+    [SerializeField] GameObject heartMinigamesObject;
     [SerializeField] GameObject heartMinigamesUI;
     [SerializeField] GameObject threeDMinigame;
     [SerializeField] GameObject threeDMinigameUI;
+    [SerializeField] GameObject threeDMinigamePieces;
+    [SerializeField] GameObject threeDMinigameScreen;
     [SerializeField] GameObject pipesUI;
     [SerializeField] CinemachineVirtualCamera pipesCamera;
     [SerializeField] CinemachineVirtualCamera heartMinigamesCamera;
@@ -20,6 +23,8 @@ public class GameLoopController : MonoBehaviour
     bool minigamesFinished = false;
     bool threeDStarted = false;
     bool threeDFinished = false;
+
+    OrganLogic heartObject;
 
     private void Start()
     {
@@ -45,12 +50,38 @@ public class GameLoopController : MonoBehaviour
         GameManager.Instance.currentLevelGameObject.SetActive(false);
         heartMinigames.gameObject.SetActive(true);
         heartMinigames.transform.position = organPosition;
+
+        yield return new WaitForSecondsRealtime(1f);
+
+        heartObject = FindAnyObjectByType<OrganLogic>();
+        heartObject.gameObject.SetActive(false);
+        heartMinigamesObject.SetActive(true);
         pipesUI.gameObject.SetActive(false);
         heartMinigamesUI.gameObject.SetActive(true);
         heartMinigamesCamera.Priority = 2;
         DialogManager.instance.Show("dialog_14");
 		
 	}
+
+    IEnumerator DelayedHandleGameCompleted()
+    {
+        minigamesFinished = true;
+        GameManager.Instance.currentLevelGameObject.SetActive(true);
+        GameManager.Instance.isPlaying = false;
+        heartMinigamesObject.SetActive(false);
+        heartObject.gameObject.SetActive(true);
+        pipesUI.gameObject.SetActive(true);
+        heartMinigamesUI.gameObject.SetActive(false);
+        heartMinigamesCamera.Priority = 0;
+        
+        yield return new WaitForSecondsRealtime(1f);
+
+        FindAnyObjectByType<ScreenController>().StartMovingOut();
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        heartMinigames.gameObject.SetActive(false);
+    }
 
     private void HandleGameCompleted(bool completed)
     {
@@ -66,6 +97,8 @@ public class GameLoopController : MonoBehaviour
         DialogManager.instance.Show("dialog_25");
 		controller.ShowTutorial(5);
         controller.ReposicionarCarpeta();
+        StartCoroutine(DelayedHandleGameCompleted());
+    }
 
 
 	}
@@ -82,6 +115,8 @@ public class GameLoopController : MonoBehaviour
         threeDMinigame.gameObject.SetActive(true);
         pipesUI.gameObject.SetActive(false);
         threeDMinigameUI.gameObject.SetActive(true);
+        threeDMinigamePieces.gameObject.SetActive(true);
+        threeDMinigameScreen.gameObject.SetActive(true);
         threeDMinigameCamera.Priority = 2;
 		DialogManager.instance.Show("dialog_7");
         controller.ShowTutorial(1);
@@ -104,6 +139,8 @@ public class GameLoopController : MonoBehaviour
         threeDMinigame.gameObject.SetActive(false);
         pipesUI.gameObject.SetActive(true);
         threeDMinigameUI.gameObject.SetActive(false);
+        threeDMinigamePieces.gameObject.SetActive(false);
+        threeDMinigameScreen.gameObject.SetActive(false);
         threeDMinigameCamera.Priority = 0;
         DialogManager.instance.ShowSequence(new string []{ "dialog_11", "dialog_12", "dialog_13" });
 

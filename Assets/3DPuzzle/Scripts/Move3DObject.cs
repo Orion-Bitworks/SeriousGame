@@ -18,11 +18,14 @@ public class Move3DObject : MonoBehaviour
 
     private bool selected = false;
 
+    private float targetPointDistance;
+
     void Start()
     {
         inputManager = InputManager.instance;
         piece = GetComponent<PieceController>();
         cam = Camera.main;
+        targetPointDistance = pointDistance;
     }
 
     void Update()
@@ -36,8 +39,9 @@ public class Move3DObject : MonoBehaviour
 
         if (piece.HasSnapped() && inputManager.separateMode_ia.inProgress)
         {
+            piece.GetGroup().CanMove(false);
             TryMove();
-            return;
+            //return;
         }
 
         MovePiece(RaycastPoint());
@@ -71,7 +75,7 @@ public class Move3DObject : MonoBehaviour
         if (distance > breakSnapDistance)
         {
             piece.DisconnectAll();
-
+            piece.IsPlaced(false);
             MovePiece(RaycastPoint());
         }
     }
@@ -100,8 +104,12 @@ public class Move3DObject : MonoBehaviour
 
         if (scroll != 0)
         {
-            pointDistance += scroll * Time.deltaTime;
+            targetPointDistance += scroll * Time.deltaTime;
         }
+
+        targetPointDistance = Mathf.Clamp(targetPointDistance, minPointDistance, maxPointDistance);
+
+        pointDistance = Mathf.Lerp(pointDistance, targetPointDistance, Time.deltaTime * 10f);
 
         pointDistance = Mathf.Clamp(pointDistance, minPointDistance, maxPointDistance);
     }

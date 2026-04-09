@@ -12,6 +12,7 @@ TagManager:
   - FinalHeartOutput
   - HeartToLungsOutput
   - Panel
+  - WorldUI
   layers:
   - Default
   - TransparentFX

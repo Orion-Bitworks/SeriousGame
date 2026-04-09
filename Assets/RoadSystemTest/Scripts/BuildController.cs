@@ -129,6 +129,7 @@ public class BuildController : MonoBehaviour
 
         ghost.RotateGhost();
         previewController.RotatePreview(ghost.currentRotation);
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Rotate);
         StartCoroutine(PressUIButton(rotateButton));
     }
 
@@ -259,7 +260,26 @@ public class BuildController : MonoBehaviour
 
         // No coloca si está fuera de límites o si la celda está ocupada
         if (!grid.IsInsideBounds(cell)) return;
-        if (grid.placedObjects.ContainsKey(cell)) EraseObject();
+
+        // Si ya hay una pieza en esa celda, comprobamos si es la misma
+        if (grid.placedObjects.ContainsKey(cell))
+        {
+            GameObject existing = grid.placedObjects[cell];
+
+            // Comprobamos si es el mismo prefab
+            PlacedPiece placed = existing.GetComponent<PlacedPiece>();
+            if (placed != null && placed.originalPrefab == objectsToPlace[selectedIndex])
+            {
+                // Comprobamos si tienen la misma rotación, y si coincide, abortamos
+                if (existing.transform.rotation == ghost.currentRotation)
+                    return;
+            }
+
+            // Si no es la misma pieza, entonces sí borramos
+            EraseObject();
+        }
+
+        //if (grid.placedObjects.ContainsKey(cell)) EraseObject();
 
         // Bloquea colocación encima de órganos
         if (Physics.Raycast(cell + Vector3.up * 5f, Vector3.down, out RaycastHit h, 10f))
@@ -270,6 +290,8 @@ public class BuildController : MonoBehaviour
 
         // Instancia la pieza
         GameObject obj = Instantiate(objectsToPlace[selectedIndex], cell, ghost.currentRotation);
+
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Place);
 
         obj.AddComponent<PlacedPiece>().originalPrefab = objectsToPlace[selectedIndex];
 

@@ -70,7 +70,14 @@ public class Minigame2 : MonoBehaviour
                 DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
                 if (drop != null && drop.valveType == obj.valveType)
                 {
-                    float angleDiff = Quaternion.Angle(obj.transform.rotation, drop.requiredRotation);
+                    //float angleDiff = Quaternion.Angle(obj.transform.rotation, drop.requiredRotation);
+
+                    // Rotación de la pieza relativa a la DropArea
+                    Quaternion relativeRotation = Quaternion.Inverse(drop.transform.rotation) * obj.transform.rotation;
+
+                    // Comparamos esa rotación relativa con la rotación relativa requerida
+                    float angleDiff = Quaternion.Angle(relativeRotation, drop.requiredRotation);
+
                     if (angleDiff <= drop.rotationTolerance)
                     {
                         correct++;
@@ -90,7 +97,11 @@ public class Minigame2 : MonoBehaviour
                     DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
                     if (drop != null && drop.valveType == obj.valveType)
                     {
-                        float angleDiff = Quaternion.Angle(obj.transform.rotation, drop.requiredRotation);
+                        //float angleDiff = Quaternion.Angle(obj.transform.rotation, drop.requiredRotation);
+
+                        Quaternion relativeRotation = Quaternion.Inverse(drop.transform.rotation) * obj.transform.rotation;
+                        float angleDiff = Quaternion.Angle(relativeRotation, drop.requiredRotation);
+
                         if (angleDiff <= drop.rotationTolerance)
                         {
                             obj.locked = true;
