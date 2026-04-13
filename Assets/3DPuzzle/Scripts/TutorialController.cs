@@ -83,7 +83,6 @@ public class TutorialController : MonoBehaviour
     public void CloseTutorial()
     {
         carpeta.SetActive(false);
-        gameObject.SetActive(false);
     }
 
     public void OpenTutorial()

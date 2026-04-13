@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using System;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class TutorialManager : MonoBehaviour
 	private TutorialController activeTutorial;
 
 	[SerializeField] GameObject carpeta;
+	public event Action OnTutorialClosed;
 
 	public void ShowTutorial(int id)
 	{
@@ -45,9 +47,8 @@ public class TutorialManager : MonoBehaviour
 
 	public void MoveCarpetaMiniHeart() 
 	{
-		carpeta.transform.localPosition = new Vector3(0f, -0.3f, 0.75f);
-		//carpeta.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
-		carpeta.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+		carpeta.transform.localPosition = new Vector3(0f, -0.3f, 1.14f);
+		carpeta.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
 	}
 
 	public void ReposicionarCarpeta()
@@ -62,5 +63,10 @@ public class TutorialManager : MonoBehaviour
 		{
 			activeTutorial.gameObject.SetActive(false);
 		}
+
+		carpeta.SetActive(false);
+
+		// Avisar a quien esté esperando
+		OnTutorialClosed?.Invoke();
 	}
 }

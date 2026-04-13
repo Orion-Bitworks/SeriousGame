@@ -8,68 +8,74 @@ using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager instance;
+	public static ScoreManager instance;
 
-    [SerializeField] GameObject widget;
-    [SerializeField] CheckTVController checkTV;
+	[SerializeField] GameObject widget;
+	[SerializeField] CheckTVController checkTV;
 
-    [SerializeField] public HashSet<ConnectionPointController> connections = new HashSet<ConnectionPointController>();
-    [SerializeField] public HashSet<GameObject> pieces = new HashSet<GameObject>();
+	[SerializeField] public HashSet<ConnectionPointController> connections = new HashSet<ConnectionPointController>();
+	[SerializeField] public HashSet<GameObject> pieces = new HashSet<GameObject>();
 
-    private bool resetting = false;
-    private bool playing = false;
+	private bool resetting = false;
+	private bool playing = false;
 
-    private void Awake()
-    {
-        instance = this;
-    }
+	private void Awake()
+	{
+		instance = this;
+	}
 
-    public void RegisterConnectionPoint(ConnectionPointController point)
-    {
-        connections.Add(point);
-    }
+	public void RegisterConnectionPoint(ConnectionPointController point)
+	{
+		connections.Add(point);
+	}
 
-    public void UnregisterConnectionPoint(ConnectionPointController point)
-    {
-        connections.Remove(point);
-    }
+	public void UnregisterConnectionPoint(ConnectionPointController point)
+	{
+		connections.Remove(point);
+	}
 
-    public void CheckConnections()
-    {
-        if (resetting)
-        {
-            return;
-        }
+	public void CheckConnections()
+	{
+		if (resetting)
+		{
+			return;
+		}
 
-        bool allRight = true;
+		bool allRight = true;
 
-        foreach (ConnectionPointController point in connections)
-        {
-            if (!point.PairedWithPartner())
-            {
-                DialogManager.instance.Show("dialog_9_isbad");
+		foreach (ConnectionPointController point in connections)
+		{
+			if (!point.PairedWithPartner())
+			{
+				DialogManager.instance.Show("dialog_9_isbad");
+				allRight = false;
+			}
+		}
 
-                Debug.Log("Incorrecto");
-                allRight = false;
-            }
-        }
+		if (connections.Count == 0)
+		{
+			allRight = false;
+		}
 
-        if (connections.Count == 0)
-        {
-            allRight = false;
-        }
+		if (allRight)
+		{
+			DialogManager.instance.Show("dialog_8_isgood");
 
-        if (allRight)
-        {
-            DialogManager.instance.Show("dialog_8_isgood");
-            ToggleWidget(true);
-            
-        }
-    }
+			checkTV.ChangeState(CHECKING_STATE.CORRECT);
+			DOVirtual.DelayedCall(1f, () =>
+			{
+				ToggleWidget(true);
+			});
+		}
+		else
+		{
+			checkTV.ChangeState(CHECKING_STATE.WRONG);
+			ResetLevel();
+		}
+	}
 
-
-    private void ToggleWidget(bool state)
-    {
+	private void ToggleWidget(bool state)
+	{
 		if (DialogManager.IsDialogActive)
 		{
 			DialogManager.pendingEvents.Enqueue(() => ToggleWidget(state));
@@ -79,201 +85,186 @@ public class ScoreManager : MonoBehaviour
 		widget.SetActive(state);
 	}
 
-    public void End3DMinigame()
-    {
-        DialogManager.instance.Show("dialog_10");
-        FindObjectOfType<GameLoopController>().End3DMinigame();
-        foreach (GameObject piece in pieces)
-        {
-            Destroy(piece);
-        
-            checkTV.ChangeState(CHECKING_STATE.CORRECT);
-            DOVirtual.DelayedCall(1f, () =>
-            {
-                ToggleWidget(true);
-            });
-        }
-        else
-        {
-            checkTV.ChangeState(CHECKING_STATE.WRONG);
-            ResetLevel();
-        }
-    }
+	public void End3DMinigame()
+	{
+		DialogManager.instance.Show("dialog_10");
 
+		ResetLevel(true);
+	}
 
-    public void LoadScene(string targetScene)
-    {
-        SceneManager.LoadScene(targetScene);
-    }
+	public void LoadScene(string targetScene)
+	{
+		SceneManager.LoadScene(targetScene);
+	}
 
-    public void PlayFinishAnimation()
-    {
-        if (playing)
-        {
-            return;
-        }
+	public void PlayFinishAnimation()
+	{
+		if (playing)
+		{
+			return;
+		}
 
-        bool canPlay = false;
+		bool canPlay = false;
 
-        foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
-        {
-            if (!eventClick.OnUI())
-            {
-                canPlay = true;
-            }
-        }
+		foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
+		{
+			if (!eventClick.OnUI())
+			{
+				canPlay = true;
+			}
+		}
 
-        if (!canPlay)
-        {
-            return;
-        }
+		if (!canPlay)
+		{
+			return;
+		}
 
-        playing = true;
+		playing = true;
 
-        checkTV.ShowTV();
-        checkTV.ChangeState(CHECKING_STATE.LOADING);
+		checkTV.ShowTV();
+		checkTV.ChangeState(CHECKING_STATE.LOADING);
 
-        foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
-        {
-            eventClick.CanInteract(false);
-        }
+		foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
+		{
+			eventClick.CanInteract(false);
+		}
 
-        foreach (ConnectionPointController point in connections)
-        {
-            point.GetPiece().GetGroup().PlayFinishAnimation();
-        }
+		foreach (ConnectionPointController point in connections)
+		{
+			point.GetPiece().GetGroup().PlayFinishAnimation();
+		}
 
-        StartCoroutine(ShowPlayState());
-    }
+		StartCoroutine(ShowPlayState());
+	}
 
-    public void ResetLevel(bool continueToScene = false)
-    {
-        resetting = true;
+	public void ResetLevel(bool continueToScene = false)
+	{
+		resetting = true;
 
-        ToggleWidget(false);
+		ToggleWidget(false);
 
-        StartCoroutine(StopBloodFlow(continueToScene));
-    }
+		StartCoroutine(StopBloodFlow(continueToScene));
+	}
 
-    public IEnumerator StopBloodFlow(bool continueToScene = false)
-    {
-        foreach (AnimatedPipeController pipe in FindObjectsOfType<AnimatedPipeController>())
-        {
-            pipe.StopSpawning();
-        }
+	public IEnumerator StopBloodFlow(bool continueToScene = false)
+	{
+		foreach (AnimatedPipeController pipe in FindObjectsOfType<AnimatedPipeController>())
+		{
+			pipe.StopSpawning();
+		}
 
-        yield return new WaitForSeconds(2f);
+		yield return new WaitForSeconds(2f);
 
-        foreach (ConnectionPointController point in connections)
-        {
-            point.GetPiece().GetGroup().RetrievePipesAnimation();
-        }
+		foreach (ConnectionPointController point in connections)
+		{
+			point.GetPiece().GetGroup().RetrievePipesAnimation();
+		}
 
-        if (!continueToScene)
-        {
-            StartCoroutine(DeleteAllPieces());
-        }
-        else
-        {
-            StartCoroutine(ChangeScene());
-        }
-    }
+		if (!continueToScene)
+		{
+			StartCoroutine(DeleteAllPieces());
+		}
+		else
+		{
+			StartCoroutine(ChangeScene());
+		}
+	}
 
-    public IEnumerator ChangeScene()
-    {
-        yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
+	public IEnumerator ChangeScene()
+	{
+		yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
 
-        checkTV.HideTV();
+		checkTV.HideTV();
 
-        Sequence sequence = DOTween.Sequence().SetAutoKill(true);
+		Sequence sequence = DOTween.Sequence().SetAutoKill(true);
 
-        foreach (ConnectionPointController point in connections)
-        {
-            point.Disable();
-            sequence.Join(point.GetPiece().transform.DOMoveY(-5f, 0.5f).SetEase(Ease.InBack, 0.5f));
-        }
+		foreach (ConnectionPointController point in connections)
+		{
+			point.Disable();
+			sequence.Join(point.GetPiece().transform.DOMoveY(-5f, 0.5f).SetEase(Ease.InBack, 0.5f));
+		}
 
-        sequence.OnComplete(() =>
-        {
-            while (connections.Count > 0)
-            {
-                ConnectionPointController point = connections.First();
-                point.GetPiece().DeletePiece();
-            }
+		sequence.OnComplete(() =>
+		{
+			while (connections.Count > 0)
+			{
+				ConnectionPointController point = connections.First();
+				point.GetPiece().DeletePiece();
+			}
 
-            resetting = false;
-        });
+			resetting = false;
+		});
 
-        yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.5f);
 
-        FindObjectOfType<GameLoopController>().End3DMinigame();
-        /*foreach (GameObject piece in pieces)
+		FindObjectOfType<GameLoopController>().End3DLevel();
+		/*foreach (GameObject piece in pieces)
         {
             Destroy(piece);
         }*/
-    }
+	}
 
-    public IEnumerator DeleteAllPieces()
-    {
-        ParticleManager.instance.StopAllParticles();
+	public IEnumerator DeleteAllPieces()
+	{
+		ParticleManager.instance.StopAllParticles();
 
-        yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
+		yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
 
-        ParticleManager.instance.DeleteAllParticles();
+		ParticleManager.instance.DeleteAllParticles();
 
-        checkTV.HideTV();
+		checkTV.HideTV();
 
-        Sequence sequence = DOTween.Sequence().SetAutoKill(true);
+		Sequence sequence = DOTween.Sequence().SetAutoKill(true);
 
-        foreach (ConnectionPointController point in connections)
-        {
-            point.Disable();
-            sequence.Join(point.GetPiece().transform.DOMoveY(-5f, 0.5f).SetEase(Ease.InBack, 0.5f));
-        }
+		foreach (ConnectionPointController point in connections)
+		{
+			point.Disable();
+			sequence.Join(point.GetPiece().transform.DOMoveY(-5f, 0.5f).SetEase(Ease.InBack, 0.5f));
+		}
 
-        sequence.OnComplete(() =>
-        {
-            while (connections.Count > 0)
-            {
-                ConnectionPointController point = connections.First();
-                point.GetPiece().DeletePiece();
-            }
+		sequence.OnComplete(() =>
+		{
+			while (connections.Count > 0)
+			{
+				ConnectionPointController point = connections.First();
+				point.GetPiece().DeletePiece();
+			}
 
-            resetting = false;
-        });
+			resetting = false;
+		});
 
-        foreach (ConnectionPointController point in connections)
-        {
-            point.Enable();
-        }
+		foreach (ConnectionPointController point in connections)
+		{
+			point.Enable();
+		}
 
-        foreach (BloodAnimationController controller in FindObjectsOfType<BloodAnimationController>())
-        {
-            controller.AlreadyFlowing(false);
-        }
+		foreach (BloodAnimationController controller in FindObjectsOfType<BloodAnimationController>())
+		{
+			controller.AlreadyFlowing(false);
+		}
 
-        foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
-        {
-            eventClick.CanInteract(true);
-        }
+		foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
+		{
+			eventClick.CanInteract(true);
+		}
 
-        playing = false;
-    }
+		playing = false;
+	}
 
-    public IEnumerator ShowPlayState()
-    {
-        float timeDelay = 4f;
+	public IEnumerator ShowPlayState()
+	{
+		float timeDelay = 4f;
 
-        timeDelay += connections.First().GetPiece().GetGroup().GetPieces().Count();
+		timeDelay += connections.First().GetPiece().GetGroup().GetPieces().Count();
 
-        yield return new WaitForSeconds(4f);
+		yield return new WaitForSeconds(4f);
 
-        if (FindObjectOfType<AnimatedPipeController>() == null)
-        {
-            timeDelay = 0f;
-        }
+		if (FindObjectOfType<AnimatedPipeController>() == null)
+		{
+			timeDelay = 0f;
+		}
 
-        yield return new WaitForSeconds(timeDelay);
-        CheckConnections();
-    }
+		yield return new WaitForSeconds(timeDelay);
+		CheckConnections();
+	}
 }

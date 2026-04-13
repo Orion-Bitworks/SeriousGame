@@ -79,30 +79,45 @@ public class Minigame3 : MonoBehaviour
         EndMinigame();
     }
 
-    IEnumerator ShowInstructions()
-    {
-        gameActive = false;
-        Time.timeScale = 0f;
+	IEnumerator ShowInstructions()
+	{
+		gameActive = false;
+		Time.timeScale = 0f;
 
-        tutorial.ShowTutorial(4);
-		/*popUpManager.ShowPopUp(
-            "Et sortira un joc on apareixeran una serie de boles. Has de pitjar la tecla que contigui la bola marcada en verd (A, S, D). Tens un cert temps per clicar, ja que van el ritme de la macarena",
-            5f
-        );*/
+		bool tutorialClosed = false;
 
-		// Espera en temps real 
-		yield return new WaitForSecondsRealtime(6f);
+		void Handler()
+		{
+			tutorialClosed = true;
+		}
 
-        Time.timeScale = 1f;
-        gameActive = true;
+		tutorial.OnTutorialClosed += Handler;
 
-        //Despres de mostrar les instruccions, comença la corrutina de spawn de les notes
-        spawnInterval = 60f / bpm;
-        StartCoroutine(SpawnNotesRoutine());
-    }
+		tutorial.ShowTutorial(4);
 
-    //Mostrar seguent nota
-    void SpawnNextNote()
+		// Esperar hasta que el tutorial se cierre
+		yield return new WaitUntil(() => tutorialClosed);
+
+		tutorial.OnTutorialClosed -= Handler;
+
+		Time.timeScale = 1f;
+		gameActive = true;
+
+		StartMiniGame3();
+	}
+
+	public void StartMiniGame3()
+	{
+		Time.timeScale = 1f;
+		gameActive = true;
+
+		//Despres de mostrar les instruccions, comença la corrutina de spawn de les notes
+		spawnInterval = 60f / bpm;
+		StartCoroutine(SpawnNotesRoutine());
+	}
+
+	//Mostrar seguent nota
+	void SpawnNextNote()
     {
 
         if(activateNotes.Count >= 2)

@@ -101,11 +101,11 @@ public class GameLoopController : MonoBehaviour
     }
 
 
-	}
+	
 
 	private IEnumerator DelayedStart3DLevel()
     {
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForEndOfFrame();
 
         if (threeDStarted) yield break;
 

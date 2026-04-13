@@ -36,8 +36,9 @@ public class Minigame2 : MonoBehaviour
         totalVeins = draggagleVeins.Length; //el total de objetos son la cantidad de objetos que haya en el array
         showInfo();
         tutorial.ShowTutorial(3);
+		tutorial.MoveCarpetaMiniHeart();
 
-    }
+	}
 
     public void objectsRemaining()
     {

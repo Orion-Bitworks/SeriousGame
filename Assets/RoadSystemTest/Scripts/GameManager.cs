@@ -87,39 +87,40 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-
-
-
-        if (!TempLevelHolder.introShown)
+        if (level == LevelID.Pipe)
         {
-            TempLevelHolder.introShown = true;
-
-            blackBackground.SetActive(true);
-
-            DialogManager.instance.Show("dialog_1");
-            DialogManager.instance.Show("dialog_2");
-
-            DialogManager.pendingEvents.Enqueue(() =>
+            if (!TempLevelHolder.introShown)
             {
-                blackBackground.SetActive(false);
+                TempLevelHolder.introShown = true;
 
-                // Instanciar el nivel
-                currentLevelGameObject = Instantiate(levels[index]);
+                blackBackground.SetActive(true);
 
-                if (level == LevelID.Pipe)
+                DialogManager.instance.Show("dialog_1");
+                DialogManager.instance.Show("dialog_2");
+
+                DialogManager.pendingEvents.Enqueue(() =>
                 {
-                    DialogManager.instance.Show("dialog_3");
-                    DialogManager.instance.Show("dialog_4");
-                    DialogManager.instance.Show("dialog_5");
+                    blackBackground.SetActive(false);
 
-                    tutorialManager.ShowTutorial(0);
-                }
+                    // Instanciar el nivel
+                    currentLevelGameObject = Instantiate(levels[index]);
 
-            });
-            return;
+                        DialogManager.instance.Show("dialog_3");
+                        DialogManager.instance.Show("dialog_4");
+                        DialogManager.instance.Show("dialog_5");
+
+                        tutorialManager.ShowTutorial(0);
+                });
+                return;
+            }
         }
-            if (level == LevelID.Heart)
-                FindObjectOfType<GameLoopController>().Start3DLevel();
+        else if (level == LevelID.Heart)
+        {
+            currentLevelGameObject = Instantiate(levels[index]);
+        }
+
+        if (level == LevelID.Heart)
+        FindObjectOfType<GameLoopController>().Start3DLevel();
     }
 
     public void LoadNextLevel()
