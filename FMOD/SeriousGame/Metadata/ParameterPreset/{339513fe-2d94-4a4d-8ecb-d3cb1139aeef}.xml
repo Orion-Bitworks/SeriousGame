@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{339513fe-2d94-4a4d-8ecb-d3cb1139aeef}">
+		<property name="name">
+			<value>PipeActions</value>
+		</property>
+		<relationship name="folder">
+			<destination>{f0e52e71-842d-4214-858c-9f773e3481d8}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{efc3290e-a592-4ab6-9300-ce666eda4779}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{efc3290e-a592-4ab6-9300-ce666eda4779}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>5</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Place</value>
+			<value>Rotate</value>
+			<value>Delete</value>
+			<value>Undo</value>
+			<value>Redo</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

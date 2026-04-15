@@ -14,9 +14,9 @@ public class BuildController : MonoBehaviour
     public static BuildController Instance { get; private set; }    // Referencia Singleton
 
     [SerializeField] GameObject[] objectsToPlace;                   // Vector de prefabs disponibles
-    [SerializeField] Button leftButton;                             // Referencia al botón de cambiar de pieza (hacia atrás)
-    [SerializeField] Button rightButton;                            // Referencia al botón de cambiar de pieza (hacia delante)
-    [SerializeField] Button rotateButton;                           // Referencia al botón de rotar pieza
+    [SerializeField] WorldSpaceButton leftButton;                   // Referencia al botón de cambiar de pieza (hacia atrás)
+    [SerializeField] WorldSpaceButton rightButton;                  // Referencia al botón de cambiar de pieza (hacia delante)
+    [SerializeField] WorldSpaceButton rotateButton;                 // Referencia al botón de rotar pieza
     [SerializeField] Button undoButton;                             // Referencia al botón de deshacer pieza
     [SerializeField] Button redoButton;                             // Referencia al botón de rehacer pieza
     
@@ -129,6 +129,7 @@ public class BuildController : MonoBehaviour
 
         ghost.RotateGhost();
         previewController.RotatePreview(ghost.currentRotation);
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Rotate);
         StartCoroutine(PressUIButton(rotateButton));
     }
 
@@ -205,7 +206,7 @@ public class BuildController : MonoBehaviour
     void UpdateGhostMovement()
     {
         // Si el sistema está en marcha, abortamos y dejamos de mostrar el fantasma
-        if (GameManager.Instance.isPlaying || HeartPlacementController.Instance.isPlacingHeart)
+        if (GameManager.Instance.isPlaying || OrganPlacementController.Instance.isPlacingOrgan)
         {
             ghost.ghostObject.SetActive(false);
             return;
@@ -259,7 +260,26 @@ public class BuildController : MonoBehaviour
 
         // No coloca si está fuera de límites o si la celda está ocupada
         if (!grid.IsInsideBounds(cell)) return;
-        if (grid.placedObjects.ContainsKey(cell)) return;
+
+        // Si ya hay una pieza en esa celda, comprobamos si es la misma
+        if (grid.placedObjects.ContainsKey(cell))
+        {
+            GameObject existing = grid.placedObjects[cell];
+
+            // Comprobamos si es el mismo prefab
+            PlacedPiece placed = existing.GetComponent<PlacedPiece>();
+            if (placed != null && placed.originalPrefab == objectsToPlace[selectedIndex])
+            {
+                // Comprobamos si tienen la misma rotación, y si coincide, abortamos
+                if (existing.transform.rotation == ghost.currentRotation)
+                    return;
+            }
+
+            // Si no es la misma pieza, entonces sí borramos
+            EraseObject();
+        }
+
+        //if (grid.placedObjects.ContainsKey(cell)) EraseObject();
 
         // Bloquea colocación encima de órganos
         if (Physics.Raycast(cell + Vector3.up * 5f, Vector3.down, out RaycastHit h, 10f))
@@ -270,6 +290,8 @@ public class BuildController : MonoBehaviour
 
         // Instancia la pieza
         GameObject obj = Instantiate(objectsToPlace[selectedIndex], cell, ghost.currentRotation);
+
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Place);
 
         obj.AddComponent<PlacedPiece>().originalPrefab = objectsToPlace[selectedIndex];
 
@@ -414,20 +436,21 @@ public class BuildController : MonoBehaviour
 
                 grid.placedObjects.Add(action.cell, obj);
                 break;
-            case BuildActionType.HeartPlace:
-                // Eliminar el corazón y spawnear objeto del cajón
+            case BuildActionType.OrganPlace:
+                // Eliminar el órgano y spawnear objeto del cajón
                 if (grid.placedObjects.ContainsKey(action.cell))
                 {
-                    var heartObj = grid.placedObjects[action.cell];
-                    Destroy(heartObj);
+                    var organObj = grid.placedObjects[action.cell];
+                    Destroy(organObj);
                     grid.placedObjects.Remove(action.cell);
-                    FindAnyObjectByType<HeartDrag3D>().SpawnMiniHeart();
+                    FindAnyObjectByType<OrganDrag3D>().SpawnMiniOrgan();
                 }
 
                 // Desregistrar tuberías internas
-                HeartPlacementController.Instance.UnregisterHeartInternalPipes();
+                OrganPlacementController.Instance.UnregisterOrganInternalPipes();
 
-                GameManager.Instance.heartPlaced = false;
+                if (action.organData != null)
+                    action.organData.isPlaced = false;
                 break;
         }
 
@@ -469,17 +492,18 @@ public class BuildController : MonoBehaviour
                     grid.placedObjects.Remove(action.cell);
                 }
                 break;
-            case BuildActionType.HeartPlace:
-                // Volver a colocar el corazón, registrar tuberías y despawnear objeto del cajón
-                GameObject heart = Instantiate(action.prefab, action.cell, action.rotation);
+            case BuildActionType.OrganPlace:
+                // Volver a colocar el órgano, registrar tuberías y despawnear objeto del cajón
+                GameObject organ = Instantiate(action.prefab, action.cell, action.rotation);
 
-                var reg = heart.GetComponent<InternalPipeRegister>();
+                var reg = organ.GetComponent<InternalPipeRegister>();
                 reg.Register(grid);
 
-                grid.placedObjects[action.cell] = heart;
-                FindAnyObjectByType<HeartDrag3D>().DespawnMiniHeart();
+                grid.placedObjects[action.cell] = organ;
+                FindAnyObjectByType<OrganDrag3D>().DespawnMiniOrgan();
 
-                GameManager.Instance.heartPlaced = true;
+                if (action.organData != null)
+                    action.organData.isPlaced = true;
                 break;
         }
 
@@ -491,15 +515,15 @@ public class BuildController : MonoBehaviour
     /// Simula visualmente una pulsación de botón en UI
     /// </summary>
     /// <param name="button">El botón a modificar visualmente</param>
-    IEnumerator PressUIButton(Button button)
+    IEnumerator PressUIButton(WorldSpaceButton button)
     {
         // Simula pulsar el botón visualmente
-        //ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerDownHandler);
+        ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerDownHandler);
 
         yield return new WaitForSeconds(0.15f);
 
         // Simula soltar el botón visualmente
-        //ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerUpHandler);
+        ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerUpHandler);
     }
 
     /// <summary>
@@ -529,19 +553,19 @@ public class BuildController : MonoBehaviour
     }
 
     /// <summary>
-    /// Registra el corazón en la pila de deshacer
+    /// Registra el órgano en la pila de deshacer
     /// </summary>
     /// <param name="cell">Celda donde se ha colocado</param>
-    /// <param name="prefab">Prefab del corazón</param>
-    /// <param name="rotation">Rotación del corazón</param>
-    public void RegisterHeartPlaced(Vector3Int cell, GameObject prefab, Quaternion rotation)
+    /// <param name="prefab">Prefab del órgano</param>
+    /// <param name="rotation">Rotación del órgano</param>
+    public void RegisterOrganPlaced(Vector3Int cell, GameObject prefab, Quaternion rotation, OrganData organData)
     {
         undoStack.Push(new BuildAction(
-            BuildActionType.HeartPlace,
+            BuildActionType.OrganPlace,
             cell,
             prefab,
             rotation,
-            null
+            organData
         ));
 
         redoStack.Clear();

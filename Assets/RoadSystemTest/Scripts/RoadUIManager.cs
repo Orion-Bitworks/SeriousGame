@@ -84,7 +84,7 @@ public class RoadUIManager : MonoBehaviour
     /// </summary>
     public void OnUndoHoverEnter()
     {
-        undoShortcutPanel.SetActive(true);
+        //undoShortcutPanel.SetActive(true);
     }
 
     /// <summary>
@@ -92,7 +92,7 @@ public class RoadUIManager : MonoBehaviour
     /// </summary>
     public void OnUndoHoverExit()
     {
-        undoShortcutPanel.SetActive(false);
+        //undoShortcutPanel.SetActive(false);
     }
 
     /// <summary>
@@ -100,7 +100,7 @@ public class RoadUIManager : MonoBehaviour
     /// </summary>
     public void OnRedoHoverEnter()
     {
-        redoShortcutPanel.SetActive(true);
+        //redoShortcutPanel.SetActive(true);
     }
 
     /// <summary>
@@ -108,6 +108,6 @@ public class RoadUIManager : MonoBehaviour
     /// </summary>
     public void OnRedoHoverExit()
     {
-        redoShortcutPanel.SetActive(false);
+        //redoShortcutPanel.SetActive(false);
     }
 }

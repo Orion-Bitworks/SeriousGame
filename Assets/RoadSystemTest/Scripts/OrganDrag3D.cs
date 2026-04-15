@@ -1,0 +1,62 @@
+using UnityEngine;
+
+public class OrganDrag3D : MonoBehaviour
+{
+    [Header("Organ Settings")]
+    [SerializeField] public OrganData organData;      // ScriptableObject con info del órgano
+
+    bool dragging = false;
+    GameObject ghost;
+
+    void Update()
+    {
+        // Si el órgano ya está colocado, no se puede volver a arrastrar
+        if (organData.isPlaced) return;
+
+        // Iniciar arrastre
+        if (Input.GetMouseButtonDown(0) && IsMouseOverThis())
+            StartDragging();
+
+        // Soltar órgano
+        if (dragging && Input.GetMouseButtonUp(0))
+            StopDragging();
+    }
+
+    bool IsMouseOverThis()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        return Physics.Raycast(ray, out RaycastHit hit) && hit.transform == transform;
+    }
+
+    void StartDragging()
+    {
+        dragging = true;
+
+        // Ocultar mini-órgano del cajón
+        DespawnMiniOrgan();
+
+        // Crear ghost
+        ghost = Instantiate(organData.prefab);
+        OrganPlacementController.Instance.BeginPlacingOrgan(organData, ghost);
+    }
+
+    void StopDragging()
+    {
+        dragging = false;
+
+        bool placed = OrganPlacementController.Instance.EndPlacingOrgan();
+
+        if (!placed)
+            SpawnMiniOrgan(); // Si no se colocó, volver a mostrar el mini-órgano
+    }
+
+    public void DespawnMiniOrgan()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+    }
+
+    public void SpawnMiniOrgan()
+    {
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+}
