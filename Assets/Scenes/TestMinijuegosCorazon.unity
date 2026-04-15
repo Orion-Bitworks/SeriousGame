@@ -1498,6 +1498,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 186419023824788884, guid: 6c66b39d091c9f84ea23fce5ba4965e1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 317445266600009163, guid: 6c66b39d091c9f84ea23fce5ba4965e1, type: 3}
       propertyPath: requiredEulerAngles.x
       value: 70
