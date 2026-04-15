@@ -96,7 +96,7 @@ public class DragAndDrop : MonoBehaviour
 
 
     //Soltar el objeto
-    void OnMouseUp()
+    /*void OnMouseUp()
     {
         if (locked) return;
 
@@ -144,7 +144,19 @@ public class DragAndDrop : MonoBehaviour
         }
 
         GetComponent<Collider>().enabled = true;
+    }*/
+
+    void OnMouseUp()
+    {
+        if (locked) return;
+
+        // Si no se ha colocado mediante trigger, vuelve a la posición inicial
+        if (!placed)
+            transform.position = initialPosition;
+
+        GetComponent<Collider>().enabled = true;
     }
+
 
 
     Vector3 MouseWorldPosition()
@@ -153,4 +165,36 @@ public class DragAndDrop : MonoBehaviour
         mouseScreenPos.z = Camera.main.WorldToScreenPoint(transform.position).z; //Ajusta z usando la distancia del objeto a la cámara
         return Camera.main.ScreenToWorldPoint(mouseScreenPos); //Convierte esa posición de pantalla a coordenadas del mundo
     }
+
+    public void TrySnap(Transform dropArea)
+    {
+        if (locked) return;
+
+        DropArea drop = dropArea.GetComponent<DropArea>();
+        if (drop == null || drop.occupied) return;
+
+        // Al sacar la pieza de la drop area, la liberamos para que se pueda volver a ocupar de nuevo
+        if (CurrentDropArea != null)
+        {
+            DropArea oldDrop = CurrentDropArea.GetComponent<DropArea>();
+            if (oldDrop != null)
+                oldDrop.occupied = false;
+        }
+
+        // Colocar la pieza en la DropArea
+        transform.position = dropArea.position;
+        CurrentDropArea = dropArea;
+        drop.occupied = true;
+
+        placed = true;
+
+        // Actualizar minijuegos
+        if (minigame1Instance != null && minigame1Instance.gameObject.activeSelf)
+            minigame1Instance.objectsRemaining();
+
+        if (minigame2Instance != null && minigame2Instance.gameObject.activeSelf)
+            minigame2Instance.objectsRemaining();
+    }
+
+
 }
