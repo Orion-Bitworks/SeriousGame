@@ -6,52 +6,49 @@ using UnityEngine.UI;
 
 public class Minigame2 : MonoBehaviour
 {
-    public DragAndDrop[] draggagleVeins; //array de objetos que son arrastables
-    int totalVeins; 
-    int placedVeins; //venes colocades
+    public DragAndDropMinigame2[] draggagleVeins; // ← ADAPTADO
+    int totalVeins;
+    int placedVeins;
 
-    public int correct = 0; //Aciertos
+    public int correct = 0;
 
     public TextMeshProUGUI remainVeinstoDrag;
 
-    [SerializeField] Button CheckButton; //Boto per comprovar
+    [SerializeField] Button CheckButton;
 
-    public FasesMinigames phasesManager; //Instancia del script fasesMinigames
+    public FasesMinigames phasesManager;
 
     [SerializeField]
     private PopUp popUpManager;
 
     private bool popUpShown = false;
 
-	[SerializeField]
-	public TutorialManager tutorial;
+    [SerializeField]
+    public TutorialManager tutorial;
 
-
-	private void Awake()
+    private void Awake()
     {
         CheckButton.onClick.AddListener(checkPlacementButton);
     }
+
     void Start()
     {
-        totalVeins = draggagleVeins.Length; //el total de objetos son la cantidad de objetos que haya en el array
+        totalVeins = draggagleVeins.Length;
         showInfo();
         tutorial.ShowTutorial(3);
-		tutorial.MoveCarpetaMiniHeart();
-
-	}
+        tutorial.MoveCarpetaMiniHeart();
+    }
 
     public void objectsRemaining()
     {
         placedVeins = 0;
 
-        foreach (DragAndDrop obj in draggagleVeins) //per a cada objecte dragAndDrop que estigui dins del array
+        foreach (DragAndDropMinigame2 obj in draggagleVeins) // ← ADAPTADO
         {
             if (obj.placed)
-            {
-                placedVeins++; //suma 1 si el objecte esta posat
-
-            }
+                placedVeins++;
         }
+
         showInfo();
     }
 
@@ -64,49 +61,43 @@ public class Minigame2 : MonoBehaviour
     {
         correct = 0;
 
-        foreach (DragAndDrop obj in draggagleVeins)
+        foreach (DragAndDropMinigame2 obj in draggagleVeins) // ← ADAPTADO
         {
             if (obj.placed && obj.CurrentDropArea != null)
             {
                 DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
+
                 if (drop != null && drop.valveType == obj.valveType)
                 {
-                    //float angleDiff = Quaternion.Angle(obj.transform.rotation, drop.requiredRotation);
-
-                    // Rotación de la pieza relativa a la DropArea
+                    // Rotación relativa
                     Quaternion relativeRotation = Quaternion.Inverse(drop.transform.rotation) * obj.transform.rotation;
-
-                    // Comparamos esa rotación relativa con la rotación relativa requerida
                     float angleDiff = Quaternion.Angle(relativeRotation, drop.requiredRotation);
 
                     if (angleDiff <= drop.rotationTolerance)
-                    {
                         correct++;
-                    }
                 }
             }
         }
 
         Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleVeins.Length);
 
-        if (correct == draggagleVeins.Length) // Caso éxito
+        if (correct == draggagleVeins.Length)
         {
-            foreach (DragAndDrop obj in draggagleVeins)
+            foreach (DragAndDropMinigame2 obj in draggagleVeins) // ← ADAPTADO
             {
                 if (obj.CurrentDropArea != null)
                 {
                     DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
+
                     if (drop != null && drop.valveType == obj.valveType)
                     {
-                        //float angleDiff = Quaternion.Angle(obj.transform.rotation, drop.requiredRotation);
-
                         Quaternion relativeRotation = Quaternion.Inverse(drop.transform.rotation) * obj.transform.rotation;
                         float angleDiff = Quaternion.Angle(relativeRotation, drop.requiredRotation);
 
                         if (angleDiff <= drop.rotationTolerance)
                         {
                             obj.locked = true;
-                            obj.GetComponent<Collider>().enabled = false;
+                            obj.dragCollider.enabled = false; // ← ADAPTADO
                         }
                     }
                 }
@@ -116,15 +107,15 @@ public class Minigame2 : MonoBehaviour
             {
                 DialogManager.instance.Show("dialog_18_isgood");
                 popUpManager.ShowPopUp("Has acabat el segon minijoc!", 2f);
-				DialogManager.instance.Show("dialog_20");
+                DialogManager.instance.Show("dialog_20");
 
-				StartCoroutine(EndMinigame());                
+                StartCoroutine(EndMinigame());
             }
         }
-        else // Caso fallo
+        else
         {
-			DialogManager.instance.Show("dialog_19_isbad");
-			popUpManager.ShowPopUp($"Només has fet: {correct}, torna-ho a intentar", 2f);
+            DialogManager.instance.Show("dialog_19_isbad");
+            popUpManager.ShowPopUp($"Només has fet: {correct}, torna-ho a intentar", 2f);
         }
     }
 

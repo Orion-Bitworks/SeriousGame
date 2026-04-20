@@ -6,21 +6,23 @@ public class SelectObject : MonoBehaviour
     public Color selectedColor = Color.red; //color seleccionado el rojo
     public Color defaultColor = Color.white; //el color default es el blanco
 
-    private DragAndDrop dragScript;
+    private DragAndDrop dragAndDropScriptMinigame1;
+    private DragAndDropMinigame2 dragScriptMinigame2;
 
     private void Start()
     {
         renderers = GetComponentsInChildren<Renderer>();
-        dragScript = GetComponentInParent<DragAndDrop>();
+        dragScriptMinigame2 = GetComponentInParent<DragAndDropMinigame2>();
         SetColor(defaultColor);
     }
 
     public void Select() 
     {
-        if (dragScript != null && dragScript.locked) return; // ❌ No permetre seleccionar si està bloquejat
+        if (dragAndDropScriptMinigame1 != null && dragAndDropScriptMinigame1.locked) return; // ❌ No permetre seleccionar si està bloquejat
+        if (dragScriptMinigame2 != null && dragScriptMinigame2.locked ) return; // ❌ No permetre seleccionar si està bloquejat
 
         SetColor(selectedColor);
-        Debug.Log(dragScript.name);
+        //Debug.Log(dragScript.name);
     }
 
     public void Deselect()
