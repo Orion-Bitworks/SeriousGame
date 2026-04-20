@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SnapPoint : MonoBehaviour
 {
-    public DragAndDrop dragAndDrop;
+    /*public DragAndDrop dragAndDrop;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("DropArea")){
             dragAndDrop.TrySnap(other.transform);
         }
-    }
+    }*/
 }
