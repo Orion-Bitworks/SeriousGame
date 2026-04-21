@@ -47,15 +47,14 @@ public class DragAndDrop : MonoBehaviour
             DropArea drop = CurrentDropArea.GetComponent<DropArea>();
             if (drop != null) drop.occupied = false;
 
-            placed = false; // 👈 IMPORTANTE
+            placed = false; // 
             CurrentDropArea = null;
 
             //Actualizar contador
             if (minigame1Instance != null && minigame1Instance.gameObject.activeSelf)
                 minigame1Instance.objectsRemaining();
 
-            if (minigame2Instance != null && minigame2Instance.gameObject.activeSelf)
-                minigame2Instance.objectsRemaining();
+
         }
 
         //Gestión de selección exclusiva con currentlySelected
@@ -124,8 +123,6 @@ public class DragAndDrop : MonoBehaviour
                         if (minigame1Instance != null && minigame1Instance.gameObject.activeSelf)
                             minigame1Instance.objectsRemaining();
 
-                        if (minigame2Instance != null && minigame2Instance.gameObject.activeSelf)
-                            minigame2Instance.objectsRemaining();
                     }
                 }
                 else

@@ -14,6 +14,6 @@ public class RotateObjects : MonoBehaviour
     public void rotateObjectsMinigame2(SelectObject objeto)
     {
         if (objeto != null)
-            objeto.transform.Rotate(0, 90f, 0, Space.Self);
+            objeto.transform.Rotate(0, 30f, 0, Space.Self);
     }
 }

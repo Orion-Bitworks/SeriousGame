@@ -43,7 +43,7 @@ public class Minigame2 : MonoBehaviour
     {
         placedVeins = 0;
 
-        foreach (DragAndDropMinigame2 obj in draggagleVeins) // ← ADAPTADO
+        foreach (DragAndDropMinigame2 obj in draggagleVeins) 
         {
             if (obj.placed)
                 placedVeins++;

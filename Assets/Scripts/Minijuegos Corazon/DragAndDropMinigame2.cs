@@ -9,7 +9,7 @@ public class DragAndDropMinigame2 : MonoBehaviour
     Vector3 offset;
     public string destinationTag = "DropArea";
     public bool placed = false;
-    public Transform CurrentDropArea;
+    public Transform CurrentDropArea; //No rellenar
     private Vector3 initialPosition;
 
     public SelectObject selectObj;
@@ -26,6 +26,8 @@ public class DragAndDropMinigame2 : MonoBehaviour
     public Collider dragCollider;   // NO trigger, para el click
     public Collider tipTrigger;     // Trigger en la punta
 
+    private bool hasDragged = false;
+
     private void Start()
     {
         initialPosition = transform.position;
@@ -36,6 +38,8 @@ public class DragAndDropMinigame2 : MonoBehaviour
     {
         if (locked) return;
 
+        hasDragged = false;
+
         if (placed && CurrentDropArea != null)
         {
             DropArea drop = CurrentDropArea.GetComponent<DropArea>();
@@ -44,8 +48,8 @@ public class DragAndDropMinigame2 : MonoBehaviour
             placed = false;
             CurrentDropArea = null;
 
-            if (minigame1Instance != null && minigame1Instance.gameObject.activeSelf)
-                minigame1Instance.objectsRemaining();
+            /*if (minigame1Instance != null && minigame1Instance.gameObject.activeSelf)
+                minigame1Instance.objectsRemaining();*/
 
             if (minigame2Instance != null && minigame2Instance.gameObject.activeSelf)
                 minigame2Instance.objectsRemaining();
@@ -73,6 +77,9 @@ public class DragAndDropMinigame2 : MonoBehaviour
     void OnMouseDrag()
     {
         if (locked) return;
+
+        hasDragged = true;
+
         transform.position = MouseWorldPosition() + offset;
     }
 
@@ -80,7 +87,7 @@ public class DragAndDropMinigame2 : MonoBehaviour
     {
         if (locked) return;
 
-        if (CurrentDropArea != null)
+        if (hasDragged && CurrentDropArea != null)
         {
             DropArea drop = CurrentDropArea.GetComponent<DropArea>();
             if (drop != null && !drop.occupied)
@@ -93,11 +100,20 @@ public class DragAndDropMinigame2 : MonoBehaviour
                 if (snapPivot != null)
                 {
                     // Snap EXACTO al pivote central
+                    Debug.Log("Snap pivot detectado");
                     transform.position = snapPivot.position;
                     //transform.rotation = drop.requiredRotation;
 
                     drop.occupied = true;
-                    placed = true;
+
+                    if (!placed)
+                    {
+                        placed = true;
+
+                        if (minigame2Instance != null && minigame2Instance.gameObject.activeSelf)
+                            minigame2Instance.objectsRemaining();
+                    }
+                    
                 }
             }
         }
