@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Minigame2 : MonoBehaviour
 {
-    public DragAndDropMinigame2[] draggagleVeins; // ← ADAPTADO
+    public DragAndDropMinigame2[] draggagleVeins;
     int totalVeins;
     int placedVeins;
 
@@ -43,7 +43,7 @@ public class Minigame2 : MonoBehaviour
     {
         placedVeins = 0;
 
-        foreach (DragAndDropMinigame2 obj in draggagleVeins) //
+        foreach (DragAndDropMinigame2 obj in draggagleVeins)
         {
             if (obj.placed)
                 placedVeins++;
@@ -61,29 +61,61 @@ public class Minigame2 : MonoBehaviour
     {
         correct = 0;
 
-        foreach (DragAndDropMinigame2 obj in draggagleVeins) // ← ADAPTADO
+        Debug.Log("────────────── VALIDACIÓN MINIJUEGO 2 ──────────────");
+
+        foreach (DragAndDropMinigame2 obj in draggagleVeins)
         {
-            if (obj.placed && obj.CurrentDropArea != null)
+            // No está colocada
+            if (!obj.placed || obj.CurrentDropArea == null)
             {
-                DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
+                Debug.LogWarning($"❌ {obj.name} NO está colocada en ninguna DropArea.");
+                continue;
+            }
 
-                if (drop != null && drop.valveType == obj.valveType)
-                {
-                    // Rotación relativa
-                    Quaternion relativeRotation = Quaternion.Inverse(drop.transform.rotation) * obj.transform.rotation;
-                    float angleDiff = Quaternion.Angle(relativeRotation, drop.requiredRotation);
+            DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
 
-                    if (angleDiff <= drop.rotationTolerance)
-                        correct++;
-                }
+            if (drop == null)
+            {
+                Debug.LogError($"⚠ {obj.name} tiene una CurrentDropArea sin DropArea script.");
+                continue;
+            }
+
+            // Debug de DropArea asignada
+            Debug.Log($"{obj.name} está usando DropArea: {drop.name}");
+
+            // Comprobación de tipo
+            if (drop.valveType != obj.valveType)
+            {
+                Debug.LogWarning($"❌ {obj.name} está en la DropArea equivocada ({drop.name}). " +
+                                 $"Tipo requerido: {obj.valveType}, tipo DropArea: {drop.valveType}");
+                continue;
+            }
+
+            // Comprobación de rotación
+            Quaternion relativeRotation = Quaternion.Inverse(drop.transform.rotation) * obj.transform.rotation;
+            float angleDiff = Quaternion.Angle(relativeRotation, drop.requiredRotation);
+
+            Debug.Log($"{obj.name} → Rot actual: {obj.transform.rotation.eulerAngles} | " +
+                      $"Rot requerida: {drop.requiredEulerAngles} | " +
+                      $"Diff: {angleDiff}° (tol: {drop.rotationTolerance}°)");
+
+            if (angleDiff <= drop.rotationTolerance)
+            {
+                Debug.Log($"✔ {obj.name} está correctamente colocada.");
+                correct++;
+            }
+            else
+            {
+                Debug.LogWarning($"❌ {obj.name} está mal rotada. Diferencia: {angleDiff}°");
             }
         }
 
-        Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleVeins.Length);
+        Debug.Log($"RESULTADO FINAL → {correct} / {draggagleVeins.Length} correctas");
 
+        // Caso éxito
         if (correct == draggagleVeins.Length)
         {
-            foreach (DragAndDropMinigame2 obj in draggagleVeins) // ← ADAPTADO
+            foreach (DragAndDropMinigame2 obj in draggagleVeins)
             {
                 if (obj.CurrentDropArea != null)
                 {
@@ -97,7 +129,7 @@ public class Minigame2 : MonoBehaviour
                         if (angleDiff <= drop.rotationTolerance)
                         {
                             obj.locked = true;
-                            obj.dragCollider.enabled = false; // ← ADAPTADO
+                            obj.dragCollider.enabled = false;
                         }
                     }
                 }

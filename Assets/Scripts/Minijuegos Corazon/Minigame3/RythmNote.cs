@@ -13,6 +13,13 @@ public class RythmNote : MonoBehaviour
 
     private Minigame3 manager;
 
+    public Animator animator;
+
+    private void Start()
+    {
+        
+    }
+
     void Update()
     {
         if (!isActive || !canBePressed) return; //Nomes processa la nota si esta activa i es pot premer
@@ -53,13 +60,16 @@ public class RythmNote : MonoBehaviour
         isActive = value;
 
         if (rend != null) //verd si esta activa, blanc si no ho esta
-        {
+        { 
+            //Añadir animacion 
             rend.material.color = value ? Color.green : Color.white;
         }
             
 
         if (value) //si s'activa, permet premer a la seguent actualització del frame
         {
+            animator.SetTrigger("ActivateNote");
+
             StartCoroutine(EnablePressNextFrame());
         }
             
