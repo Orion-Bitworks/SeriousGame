@@ -13,10 +13,12 @@ public class RythmNote : MonoBehaviour
 
     private Minigame3 manager;
 
-    public Animator animator;
+    private Animator animator;
 
     private void Start()
     {
+        animator = GetComponentInParent<Animator>();
+        
         
     }
 
