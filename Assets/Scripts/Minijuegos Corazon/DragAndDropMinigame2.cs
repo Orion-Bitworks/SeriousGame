@@ -11,7 +11,6 @@ public class DragAndDropMinigame2 : MonoBehaviour
     public bool placed = false;
     public Transform CurrentDropArea; //No rellenar
     private Vector3 initialPosition;
-    private Quaternion initialRotation;
 
     public SelectObject selectObj;
 
@@ -32,8 +31,6 @@ public class DragAndDropMinigame2 : MonoBehaviour
     private void Start()
     {
         initialPosition = transform.position;
-        initialRotation = transform.rotation;
-
         selectObj = GetComponent<SelectObject>();
     }
 
@@ -43,8 +40,7 @@ public class DragAndDropMinigame2 : MonoBehaviour
 
         hasDragged = false;
 
-        // ❌ NO descolocar aquí (ya lo quitaste)
-        // ❌ NO desactivar el dragCollider
+        
 
         if (currentlySelected != null && currentlySelected != this)
             currentlySelected.selectObj?.Deselect();
@@ -59,8 +55,11 @@ public class DragAndDropMinigame2 : MonoBehaviour
         selectObj.Select();
 
         offset = transform.position - MouseWorldPosition();
-    }
 
+        // 🔹 Solo desactivamos el collider de drag, NO el trigger
+        if (dragCollider != null)
+            dragCollider.enabled = false;
+    }
 
     void OnMouseDrag()
     {
@@ -68,17 +67,18 @@ public class DragAndDropMinigame2 : MonoBehaviour
 
         Vector3 newPos = MouseWorldPosition() + offset;
 
-        // 🔥 Solo marcar como arrastrado si realmente se movió
+        // Solo marcar como arrastrado si realmente se movió
         if (Vector3.Distance(transform.position, newPos) > 0.01f)
-        {
             hasDragged = true;
-        }
 
         // Si estaba colocada y empieza a arrastrarse → liberar DropArea
-        if (hasDragged && placed && CurrentDropArea != null)
+        if (hasDragged && placed)
         {
-            DropArea drop = CurrentDropArea.GetComponent<DropArea>();
-            if (drop != null) drop.occupied = false;
+            if (CurrentDropArea != null)
+            {
+                DropArea drop = CurrentDropArea.GetComponent<DropArea>();
+                if (drop != null) drop.occupied = false;
+            }
 
             placed = false;
             CurrentDropArea = null;
@@ -88,37 +88,30 @@ public class DragAndDropMinigame2 : MonoBehaviour
         }
 
         transform.position = newPos;
-
-
     }
-
 
 
     void OnMouseUp()
     {
         if (locked) return;
 
-        // 🔹 Si NO se ha arrastrado, NO hacemos nada especial
-        // (solo se seleccionó la pieza, no debe volver al inicio)
-        if (!hasDragged)
-        {
-            if (dragCollider != null)
-                dragCollider.enabled = true;
-            return;
-        }
-
-        // 🔹 Si SÍ se ha arrastrado:
-        if (CurrentDropArea != null)
+        if (hasDragged && CurrentDropArea != null)
         {
             DropArea drop = CurrentDropArea.GetComponent<DropArea>();
-
             if (drop != null && !drop.occupied)
             {
+                Debug.Log("Buscando SnapPivot en: " + CurrentDropArea.name);
                 Transform snapPivot = CurrentDropArea.Find("SnapPivot");
+                Debug.Log("SnapPivot encontrado: " + snapPivot);
+
 
                 if (snapPivot != null)
                 {
+                    // Snap EXACTO al pivote central
+                    Debug.Log("Snap pivot detectado");
                     transform.position = snapPivot.position;
+                    //transform.rotation = drop.requiredRotation;
+
                     drop.occupied = true;
 
                     if (!placed)
@@ -128,22 +121,19 @@ public class DragAndDropMinigame2 : MonoBehaviour
                         if (minigame2Instance != null && minigame2Instance.gameObject.activeSelf)
                             minigame2Instance.objectsRemaining();
                     }
+                    
                 }
             }
         }
         else
         {
-            // Si la pieza se arrastra pero no esta en una drop area, vuelve a su sitioo
             transform.position = initialPosition;
-            transform.rotation = initialRotation;
-            placed = false;
-            CurrentDropArea = null;
         }
 
+        // 🔹 Volvemos a activar el collider de drag
         if (dragCollider != null)
             dragCollider.enabled = true;
     }
-
 
     Vector3 MouseWorldPosition()
     {
@@ -151,7 +141,6 @@ public class DragAndDropMinigame2 : MonoBehaviour
         mouseScreenPos.z = Camera.main.WorldToScreenPoint(transform.position).z;
         return Camera.main.ScreenToWorldPoint(mouseScreenPos);
     }
-
 
     void OnTriggerEnter(Collider other)
     {
@@ -166,7 +155,6 @@ public class DragAndDropMinigame2 : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         if (!hasDragged) return;
-
         if (other.CompareTag("DropArea") && CurrentDropArea == other.transform)
             CurrentDropArea = null;
     }
