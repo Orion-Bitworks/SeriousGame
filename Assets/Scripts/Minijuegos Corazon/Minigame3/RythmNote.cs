@@ -13,11 +13,11 @@ public class RythmNote : MonoBehaviour
 
     private Minigame3 manager;
 
-    private Animator animator;
+    [SerializeField]public Animator animator;
 
     private void Start()
     {
-        animator = GetComponentInParent<Animator>();
+        animator = GetComponent<Animator>();
         
         
     }
