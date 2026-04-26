@@ -127,6 +127,8 @@ public class DragAndDropMinigame2 : MonoBehaviour
         }
         else
         {
+            // Si no se arrastró pero estaba colocada, NO volver al inicio
+            if (!placed)
             transform.position = initialPosition;
         }
 
