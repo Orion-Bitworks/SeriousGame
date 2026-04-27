@@ -417,6 +417,24 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Play"",
+                    ""type"": ""Button"",
+                    ""id"": ""1998856c-ef92-480d-882a-f1ebd9d7f150"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Multiplier"",
+                    ""type"": ""Button"",
+                    ""id"": ""b22a84ae-4db5-47cb-ab87-4a040522393c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -560,6 +578,76 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Redo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""014bdcd4-038e-4da5-8381-79e687fc65bf"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Play"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b6507e3-557e-4027-b8b5-0931b3d4c52f"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Multiplier"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""InMiniGame"",
+            ""id"": ""79e02167-d9b8-46e0-a869-e4e105a5fe88"",
+            ""actions"": [
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""680ff207-d4ef-462a-88c4-6060e1f5377b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Check"",
+                    ""type"": ""Button"",
+                    ""id"": ""94a412bb-b09c-40e4-9756-584a4652e5af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""28dbd7f7-07dd-4d85-b261-89d02d51d456"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fa00bfcf-11bf-4af1-938f-30f9297899f8"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Check"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -771,6 +859,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_InRoadGame_NextPiece = m_InRoadGame.FindAction("NextPiece", throwIfNotFound: true);
         m_InRoadGame_Undo = m_InRoadGame.FindAction("Undo", throwIfNotFound: true);
         m_InRoadGame_Redo = m_InRoadGame.FindAction("Redo", throwIfNotFound: true);
+        m_InRoadGame_Play = m_InRoadGame.FindAction("Play", throwIfNotFound: true);
+        m_InRoadGame_Multiplier = m_InRoadGame.FindAction("Multiplier", throwIfNotFound: true);
+        // InMiniGame
+        m_InMiniGame = asset.FindActionMap("InMiniGame", throwIfNotFound: true);
+        m_InMiniGame_Rotate = m_InMiniGame.FindAction("Rotate", throwIfNotFound: true);
+        m_InMiniGame_Check = m_InMiniGame.FindAction("Check", throwIfNotFound: true);
         // In3DGame
         m_In3DGame = asset.FindActionMap("In3DGame", throwIfNotFound: true);
         m_In3DGame_RotateMode = m_In3DGame.FindAction("Rotate Mode", throwIfNotFound: true);
@@ -926,6 +1020,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_InRoadGame_NextPiece;
     private readonly InputAction m_InRoadGame_Undo;
     private readonly InputAction m_InRoadGame_Redo;
+    private readonly InputAction m_InRoadGame_Play;
+    private readonly InputAction m_InRoadGame_Multiplier;
     public struct InRoadGameActions
     {
         private @Controls m_Wrapper;
@@ -937,6 +1033,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @NextPiece => m_Wrapper.m_InRoadGame_NextPiece;
         public InputAction @Undo => m_Wrapper.m_InRoadGame_Undo;
         public InputAction @Redo => m_Wrapper.m_InRoadGame_Redo;
+        public InputAction @Play => m_Wrapper.m_InRoadGame_Play;
+        public InputAction @Multiplier => m_Wrapper.m_InRoadGame_Multiplier;
         public InputActionMap Get() { return m_Wrapper.m_InRoadGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -967,6 +1065,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Redo.started += instance.OnRedo;
             @Redo.performed += instance.OnRedo;
             @Redo.canceled += instance.OnRedo;
+            @Play.started += instance.OnPlay;
+            @Play.performed += instance.OnPlay;
+            @Play.canceled += instance.OnPlay;
+            @Multiplier.started += instance.OnMultiplier;
+            @Multiplier.performed += instance.OnMultiplier;
+            @Multiplier.canceled += instance.OnMultiplier;
         }
 
         private void UnregisterCallbacks(IInRoadGameActions instance)
@@ -992,6 +1096,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Redo.started -= instance.OnRedo;
             @Redo.performed -= instance.OnRedo;
             @Redo.canceled -= instance.OnRedo;
+            @Play.started -= instance.OnPlay;
+            @Play.performed -= instance.OnPlay;
+            @Play.canceled -= instance.OnPlay;
+            @Multiplier.started -= instance.OnMultiplier;
+            @Multiplier.performed -= instance.OnMultiplier;
+            @Multiplier.canceled -= instance.OnMultiplier;
         }
 
         public void RemoveCallbacks(IInRoadGameActions instance)
@@ -1009,6 +1119,60 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public InRoadGameActions @InRoadGame => new InRoadGameActions(this);
+
+    // InMiniGame
+    private readonly InputActionMap m_InMiniGame;
+    private List<IInMiniGameActions> m_InMiniGameActionsCallbackInterfaces = new List<IInMiniGameActions>();
+    private readonly InputAction m_InMiniGame_Rotate;
+    private readonly InputAction m_InMiniGame_Check;
+    public struct InMiniGameActions
+    {
+        private @Controls m_Wrapper;
+        public InMiniGameActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Rotate => m_Wrapper.m_InMiniGame_Rotate;
+        public InputAction @Check => m_Wrapper.m_InMiniGame_Check;
+        public InputActionMap Get() { return m_Wrapper.m_InMiniGame; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InMiniGameActions set) { return set.Get(); }
+        public void AddCallbacks(IInMiniGameActions instance)
+        {
+            if (instance == null || m_Wrapper.m_InMiniGameActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_InMiniGameActionsCallbackInterfaces.Add(instance);
+            @Rotate.started += instance.OnRotate;
+            @Rotate.performed += instance.OnRotate;
+            @Rotate.canceled += instance.OnRotate;
+            @Check.started += instance.OnCheck;
+            @Check.performed += instance.OnCheck;
+            @Check.canceled += instance.OnCheck;
+        }
+
+        private void UnregisterCallbacks(IInMiniGameActions instance)
+        {
+            @Rotate.started -= instance.OnRotate;
+            @Rotate.performed -= instance.OnRotate;
+            @Rotate.canceled -= instance.OnRotate;
+            @Check.started -= instance.OnCheck;
+            @Check.performed -= instance.OnCheck;
+            @Check.canceled -= instance.OnCheck;
+        }
+
+        public void RemoveCallbacks(IInMiniGameActions instance)
+        {
+            if (m_Wrapper.m_InMiniGameActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IInMiniGameActions instance)
+        {
+            foreach (var item in m_Wrapper.m_InMiniGameActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_InMiniGameActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public InMiniGameActions @InMiniGame => new InMiniGameActions(this);
 
     // In3DGame
     private readonly InputActionMap m_In3DGame;
@@ -1138,6 +1302,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnNextPiece(InputAction.CallbackContext context);
         void OnUndo(InputAction.CallbackContext context);
         void OnRedo(InputAction.CallbackContext context);
+        void OnPlay(InputAction.CallbackContext context);
+        void OnMultiplier(InputAction.CallbackContext context);
+    }
+    public interface IInMiniGameActions
+    {
+        void OnRotate(InputAction.CallbackContext context);
+        void OnCheck(InputAction.CallbackContext context);
     }
     public interface IIn3DGameActions
     {

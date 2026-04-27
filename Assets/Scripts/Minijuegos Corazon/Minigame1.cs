@@ -18,18 +18,18 @@ public class Minigame1 : MonoBehaviour
 
     [SerializeField] Button CheckButton;
 
-    [SerializeField]private PopUp popUpManager;
     private bool popUpShown = false;
 
     [SerializeField]
     public TutorialManager tutorial;
 
-
+    Controls controls;
 
     private void Awake()
     {
         CheckButton.onClick.AddListener(checkPlacementButton); //Listener
     }
+
     void Start()
     {
         totalValves = draggableValves.Length; //el total de objetos son la cantidad de objetos que haya en el array
@@ -37,8 +37,6 @@ public class Minigame1 : MonoBehaviour
 
         tutorial.ShowTutorial(2);
         tutorial.MoveCarpetaMiniHeart();
-
-
 	}
 
 	public void objectsRemaining()
@@ -117,21 +115,13 @@ public class Minigame1 : MonoBehaviour
             if (!popUpShown)
             {
                 DialogManager.instance.Show("dialog_15_isgood");
-                //popUpManager.ShowPopUp("Has acabat el primer minijoc!", 2f);
                 popUpShown = true;
                 phasesManager.PasarAFase2(); //pasa a la siguiente fase
-
             }
             else
             {
                 DialogManager.instance.Show("dialog_16_isbad");
-                //popUpManager.ShowPopUp($"Només has fet: {correct}, torna-ho a intentar", 2f);
             }
-
-
-
         }
-        
-
     }
 }

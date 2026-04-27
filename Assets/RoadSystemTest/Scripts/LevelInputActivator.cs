@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class LevelInputActivator : MonoBehaviour
@@ -10,8 +11,16 @@ public class LevelInputActivator : MonoBehaviour
 
     [SerializeField] bool endingCondition = false;
 
+    RoadUIManager roadUIManager;
+
     bool activated = false;
     bool IsGameFinished;
+    bool coroutineStarted = false;
+
+    private void Awake()
+    {
+        roadUIManager = FindObjectOfType<RoadUIManager>();
+    }
 
     private void Start()
     {
@@ -34,8 +43,8 @@ public class LevelInputActivator : MonoBehaviour
 
         if (endingCondition && CheckCondition() && !IsGameFinished)
         {
-            GameManager.Instance.EndLevel();
-            IsGameFinished = true;
+            if (!coroutineStarted)
+                StartCoroutine(CheckWin());
         }
     }
 
@@ -56,6 +65,61 @@ public class LevelInputActivator : MonoBehaviour
     {
         foreach (var input in inputsToActivate)
             input.StartGenerating();
+    }
+
+    IEnumerator CheckWin()
+    {
+        coroutineStarted = true;
+
+        while (!AllPiecesFullyCovered() && !GameManager.Instance.failed)
+            yield return null;
+
+        yield return new WaitForSeconds(1f);
+
+        if (!GameManager.Instance.failed)
+        {
+            GameManager.Instance.EndLevel();
+            IsGameFinished = true;
+            coroutineStarted = false;
+        }
+        else
+        {
+            roadUIManager.OnStopButtonDown();
+            coroutineStarted = false;
+
+            if (GameManager.Instance.currentLevel == LevelID.Pipe)
+                DialogManager.instance.Show("dialog_5_idbad");
+            else if (GameManager.Instance.currentLevel == LevelID.Heart)
+                DialogManager.instance.Show("dialog_27_isbad");
+        }
+    }
+
+    bool AllPiecesFullyCovered()
+    {
+        foreach (var kvp in GridManager.Instance.placedObjects)
+        {
+            RoadPiece piece = kvp.Value.GetComponent<RoadPiece>();
+            if (piece == null) continue;
+
+            if (!piece.wasUsed)
+                continue;
+
+            if (!PieceFullyCovered(piece))
+                return false;
+        }
+
+        return true;
+    }
+
+    bool PieceFullyCovered(RoadPiece piece)
+    {
+        int used = 0;
+
+        for (int i = 0; i < piece.exitUsed.Length; i++)
+            if (piece.exitUsed[i])
+                used++;
+
+        return used >= piece.requiredExits;
     }
 
     public void DeactivateInputs()

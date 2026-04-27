@@ -6,6 +6,10 @@ using UnityEngine;
 /// </summary>
 public enum BallType
 {
+    NotO2FromPipe,
+    NotO2FromHeart,
+    O2FromPipe,
+    O2FromHeart,
     Red,
     Blue,
     Green,
@@ -19,6 +23,10 @@ public static class BallTypeColors
     /// </summary>
     private static readonly Dictionary<BallType, Color> colors = new()
     {
+        { BallType.NotO2FromPipe, Color.blue },
+        { BallType.NotO2FromHeart, Color.blue },
+        { BallType.O2FromPipe, Color.red },
+        { BallType.O2FromHeart, Color.red },
         { BallType.Red, Color.red },
         { BallType.Blue, Color.blue },
         { BallType.Green, Color.green },
@@ -77,7 +85,6 @@ public class MovingBall : MonoBehaviour
         {
             // Si no puede, destruye la bolita
             DestroyBall();
-            Debug.Log("Bolita destruida porque no puede entrar hacia la siguiente carretera.");
             return;
         }
 
@@ -156,6 +163,21 @@ public class MovingBall : MonoBehaviour
         // Calcula la dirección desde la que la bolita está entrando
         RoadDirection incoming = DirectionUtils.Opposite(direction);
 
+        int entryIndex = System.Array.IndexOf(piece.connections, incoming);
+
+        // Si entra por un lado que ya fue usado como salida, error
+        if (entryIndex >= 0 && piece.exitUsed[entryIndex])
+        {
+            DestroyBall();
+        }
+
+        // Marcar entrada usada
+        if (entryIndex >= 0)
+        {
+            piece.entryUsed[entryIndex] = true;
+            piece.wasUsed = true;
+        }
+
         // Recorre las conexiones de la carretera, si alguna coincide con la dirección de entrada, la carretera acepta la bolita
         foreach (var c in piece.connections)
             if (c == incoming)
@@ -220,7 +242,20 @@ public class MovingBall : MonoBehaviour
         int index = piece.nextOutputIndex % valid.Count;
         piece.nextOutputIndex++;
 
-        return valid[index];
+        RoadDirection chosen = valid[index];
+
+        // Marcamos la salida utilizada como usada
+        int originalIndex = System.Array.IndexOf(piece.connections, chosen);
+        if (originalIndex >= 0)
+            piece.exitUsed[originalIndex] = true;
+
+        // Si esta salida también fue usada como entrada, error
+        if (originalIndex >= 0 && piece.entryUsed[originalIndex])
+        {
+            DestroyBall();
+        }
+
+        return chosen;
     }
 
     /// <summary>
@@ -230,6 +265,8 @@ public class MovingBall : MonoBehaviour
     {
         // Cuando la bolita se destruye, instancia un efecto visual en su posición
         Instantiate(deathParticle, transform.position, Quaternion.identity);
+        Debug.Log("La bolita no ha llegado a ninguna parte");
+        GameManager.Instance.failed = true;
         Destroy(gameObject);
     }
 
@@ -241,7 +278,7 @@ public class MovingBall : MonoBehaviour
         // Calcula la posición central de la celda actual
         Vector3 targetPos = currentCell;
         // Mueve la bolita suavemente hacia el centro de la celda
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPos, speed * GameManager.Instance.velocityMultiplier * Time.deltaTime);
     }
 
     /// <summary>

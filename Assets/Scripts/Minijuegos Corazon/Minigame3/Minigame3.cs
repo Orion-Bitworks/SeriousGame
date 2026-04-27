@@ -21,7 +21,6 @@ public class Minigame3 : MonoBehaviour
 
     private int completedNotes = 0; //notes completades
 
-    [SerializeField] PopUp popUpManager;
     private bool gameActive = false; //Variable per pausar el joc
 
     private List<RythmNote> activateNotes = new List<RythmNote>(); //lista per controlar les notes actives
@@ -194,14 +193,10 @@ public class Minigame3 : MonoBehaviour
             rebootButton.SetActive(true);
             //DialogManager.instance.Show("dialog_23_isbad_1");
             DialogManager.instance.ShowSequence(new string[] {"dialog_23_isbad_1", "dialog_24_isbad_2" });
-			
-            popUpManager.ShowPopUp($"Has fet un total de {completedNotes} de {maxNotes}, torna a intentar-ho de nou", 4);
-            
         }
         else
         {
             DialogManager.instance.Show("dialog_22_isgood");
-            popUpManager.ShowPopUp("Has acabat el tercer minijoc, Felicitats! Has acabat tots els minijocs correctament", 3f);
             StartCoroutine(FinishGame());
         }
     }

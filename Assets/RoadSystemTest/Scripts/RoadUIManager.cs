@@ -14,12 +14,15 @@ public class RoadUIManager : MonoBehaviour
     [SerializeField] Button undoButton;                             // Referencia al botón de Undo
     [SerializeField] Button playButton;                             // Referencia al botón de Play
     [SerializeField] Button stopButton;                             // Referencia al botón de Stop
+    [SerializeField] Button leftButton;                             // Referencia al botón de Left
+    [SerializeField] Button rotateButton;                           // Referencia al botón de Rotate
+    [SerializeField] Button rightButton;                            // Referencia al botón de Right
+    [SerializeField] Button x1Button;                               // Referencia al botón de x1
+    [SerializeField] Button x2Button;                               // Referencia al botón de x2
+    [SerializeField] Button x3Button;                               // Referencia al botón de x3
 
-    private void Start()
-    {
-        // Al iniciar, desactivamos el botón de stop
-        stopButton.interactable = false;
-    }
+    [SerializeField] TableButtonsController tableButtonsController;
+    [SerializeField] MiniScreenController miniScreen;
 
     /// <summary>
     /// Activamos el flujo en el sistema, y desactivamos todos los botones excepto el de stop, que lo activamos
@@ -29,8 +32,10 @@ public class RoadUIManager : MonoBehaviour
         GameManager.Instance.Play();
         redoButton.interactable = false;
         undoButton.interactable = false;
-        playButton.interactable = false;
-        stopButton.interactable = true;
+        playButton.gameObject.SetActive(false);
+        stopButton.gameObject.SetActive(true);
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.TableButtons);
+        tableButtonsController.RumbleButton(ButtonType.play);
     }
 
     /// <summary>
@@ -41,8 +46,58 @@ public class RoadUIManager : MonoBehaviour
         GameManager.Instance.Stop();
         redoButton.interactable = true;
         undoButton.interactable = true;
-        playButton.interactable = true;
-        stopButton.interactable = false;
+        stopButton.gameObject.SetActive(false);
+        playButton.gameObject.SetActive(true);
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.TableButtons);
+        tableButtonsController.RumbleButton(ButtonType.play);
+    }
+
+    public void OnLeftButtonDown()
+    {
+        BuildController.Instance.ChangeObject(false);
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.ScreenTouch);
+        miniScreen.RumbleLeft();
+    }
+
+    public void OnRotateButtonDown()
+    {
+        BuildController.Instance.RotateGhostAndPreview();
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.ScreenTouch);
+        miniScreen.RumbleDouble();
+    }
+
+    public void OnRightButtonDown()
+    {
+        BuildController.Instance.ChangeObject(true);
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.ScreenTouch);
+        miniScreen.RumbleRight();
+    }
+
+    public void X1ButtonDown()
+    {
+        x1Button.gameObject.SetActive(false);
+        x2Button.gameObject.SetActive(true);
+        GameManager.Instance.velocityMultiplier = 2;
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.TableButtons);
+        tableButtonsController.RumbleButton(ButtonType.multiplier);
+    }
+
+    public void X2ButtonDown()
+    {
+        x2Button.gameObject.SetActive(false);
+        x3Button.gameObject.SetActive(true);
+        GameManager.Instance.velocityMultiplier = 3;
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.TableButtons);
+        tableButtonsController.RumbleButton(ButtonType.multiplier);
+    }
+
+    public void X3ButtonDown()
+    {
+        x3Button.gameObject.SetActive(false);
+        x1Button.gameObject.SetActive(true);
+        GameManager.Instance.velocityMultiplier = 1;
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.TableButtons);
+        tableButtonsController.RumbleButton(ButtonType.multiplier);
     }
 
     /// <summary>
@@ -52,6 +107,9 @@ public class RoadUIManager : MonoBehaviour
     {
         BuildController.Instance.isUndoing = true;
         BuildController.Instance.undoHoldTimer = 0f;
+
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.TableButtons);
+        tableButtonsController.RumbleButton(ButtonType.undo);
     }
 
     /// <summary>
@@ -60,6 +118,8 @@ public class RoadUIManager : MonoBehaviour
     public void OnUndoButtonUp()
     {
         BuildController.Instance.isUndoing = false;
+
+        tableButtonsController.StopRumbleButton(ButtonType.undo);
     }
 
     /// <summary>
@@ -69,6 +129,9 @@ public class RoadUIManager : MonoBehaviour
     {
         BuildController.Instance.isRedoing = true;
         BuildController.Instance.redoHoldTimer = 0f;
+
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.TableButtons);
+        tableButtonsController.RumbleButton(ButtonType.redo);
     }
 
     /// <summary>
@@ -77,6 +140,8 @@ public class RoadUIManager : MonoBehaviour
     public void OnRedoButtonUp()
     {
         BuildController.Instance.isRedoing = false;
+
+        tableButtonsController.StopRumbleButton(ButtonType.redo);
     }
 
     /// <summary>

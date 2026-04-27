@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 97665d6214e35ae43baf3b10d6eaae7e, type: 2}
+  - {fileID: 2100000, guid: 97c93a94196568348b69a93af93fa4b2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,6 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connections: 0000000002000000
   nextOutputIndex: 0
+  requiredExits: 1
+  entryUsed: 
+  exitUsed: 
+  wasUsed: 0
 --- !u!23 &3372775819343713880
 MeshRenderer:
   m_ObjectHideFlags: 0

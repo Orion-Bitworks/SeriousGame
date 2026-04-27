@@ -42,7 +42,7 @@ public class RoadInput : MonoBehaviour
         while (true)
         {
             // Espera un tiempo definido
-            yield return new WaitForSeconds(spawnRate);
+            yield return new WaitForSeconds(spawnRate / GameManager.Instance.velocityMultiplier);
             // Intenta generar dicha bolita
             if (GameManager.Instance.isPlaying)
                 TrySpawnBall();

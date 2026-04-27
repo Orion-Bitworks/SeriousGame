@@ -1,74 +1,142 @@
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class DrawerController : MonoBehaviour
 {
+    enum DrawerState { Closed, Opening, Open, AutoClosing, Closing }
+    DrawerState state = DrawerState.Closed;
+
     [SerializeField] GameObject drawer;
     [SerializeField] Collider drawerCollider;
     [SerializeField] Transform openPosition;
     [SerializeField] Transform closedPosition;
 
-    bool drawerOut = false;
-    bool isMoving = false;
-    Coroutine closeRoutine;
     Tween rumbleTween;
+    Coroutine autoCloseRoutine;
 
-    private void Update()
+    void Update()
     {
         if (GameManager.Instance.isPlaying) return;
 
-        if (IsMouseOverHandle() && !drawerOut)
-        {
-            // Si hacemos click encima del corazón del cajón, empezamos a arrastrar el corazón real
-            if (Input.GetMouseButtonDown(0))
-            {
-                StartMovingOut();
-                isMoving = true;
-            }
+        bool overHandle = IsMouseOverHandle();
+        bool overDrawer = IsMouseOverDrawer();
 
-            if (!isMoving)
-                StartRumble();
+        switch (state)
+        {
+            case DrawerState.Closed:
+                HandleClosed(overHandle);
+                break;
+
+            case DrawerState.Opening:
+                break;
+
+            case DrawerState.Open:
+                HandleOpen(overHandle, overDrawer);
+                break;
+
+            case DrawerState.AutoClosing:
+                break;
+
+            case DrawerState.Closing:
+                break;
+        }
+    }
+
+    // -------------------------
+    // STATE: CLOSED
+    // -------------------------
+    void HandleClosed(bool overHandle)
+    {
+        if (overHandle)
+        {
+            StartRumble();
+
+            if (Input.GetMouseButtonDown(0))
+                StartOpening();
         }
         else
         {
             StopRumble();
         }
-
-        if (!IsMouseOverDrawer() && drawerOut)
-        {
-            if (closeRoutine == null)
-            {
-                closeRoutine = StartCoroutine(DelayedStartMovingIn());
-            }
-        }
-        else
-        {
-            if (closeRoutine != null)
-            {
-                StopCoroutine(closeRoutine);
-                closeRoutine = null;
-            }
-        }
     }
 
-    void StartMovingOut()
+    // -------------------------
+    // STATE: OPEN
+    // -------------------------
+    void HandleOpen(bool overHandle, bool overDrawer)
     {
-        drawer.transform.DOMove(openPosition.position, 1f).SetEase(Ease.OutBack).OnComplete(() => drawerOut = true);
+        if (overHandle && Input.GetMouseButtonDown(0))
+        {
+            StartClosing();
+            return;
+        }
+
+        // Cerrar automáticamente si el ratón NO está sobre el cajón ni el handle
+        if (!overDrawer && !overHandle && autoCloseRoutine == null)
+            autoCloseRoutine = StartCoroutine(AutoClose());
+
+        // Si vuelve a entrar el ratón, cancelamos el autocierre
+        if ((overDrawer || overHandle) && autoCloseRoutine != null)
+        {
+            StopCoroutine(autoCloseRoutine);
+            autoCloseRoutine = null;
+        }
     }
 
-    IEnumerator DelayedStartMovingIn()
+    // -------------------------
+    // TRANSITIONS
+    // -------------------------
+    void StartOpening()
+    {
+        StopRumble();
+        state = DrawerState.Opening;
+
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.DrawerOpening);
+
+        drawer.transform.DOMove(openPosition.position, 1f)
+            .SetEase(Ease.OutBack)
+            .OnComplete(() =>
+            {
+                state = DrawerState.Open;
+            });
+    }
+
+    void StartClosing()
+    {
+        StopRumble();
+        state = DrawerState.Closing;
+
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.DrawerClosing);
+
+        drawer.transform.DOMove(closedPosition.position, 1f)
+            .SetEase(Ease.OutCubic)
+            .OnComplete(() =>
+            {
+                state = DrawerState.Closed;
+            });
+    }
+
+    IEnumerator AutoClose()
     {
         yield return new WaitForSecondsRealtime(3f);
-        StartMovingIn();
+        autoCloseRoutine = null;
+
+        state = DrawerState.AutoClosing;
+
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.DrawerClosing);
+
+        drawer.transform.DOMove(closedPosition.position, 1f)
+            .SetEase(Ease.OutCubic)
+            .OnComplete(() =>
+            {
+                state = DrawerState.Closed;
+            });
     }
 
-    void StartMovingIn()
-    {
-        drawer.transform.DOMove(closedPosition.position, 2f).SetEase(Ease.OutCubic).OnComplete(() => { drawerOut = false; isMoving = false; });
-    }
-
+    // -------------------------
+    // RUMBLE
+    // -------------------------
     void StartRumble()
     {
         if (rumbleTween != null && rumbleTween.IsActive()) return;
@@ -79,7 +147,10 @@ public class DrawerController : MonoBehaviour
         )
         .SetEase(Ease.InOutSine)
         .SetLoops(-1, LoopType.Yoyo)
-        .OnKill(() => drawer.transform.position = closedPosition.position);
+        .OnKill(() =>
+        {
+            drawer.transform.localPosition = closedPosition.localPosition;
+        });
     }
 
     void StopRumble()
@@ -91,6 +162,9 @@ public class DrawerController : MonoBehaviour
         }
     }
 
+    // -------------------------
+    // RAYCASTS
+    // -------------------------
     bool IsMouseOverHandle()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

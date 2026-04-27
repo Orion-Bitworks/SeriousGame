@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{e698633e-cc43-45d8-b8d3-b63035ada9fe}">
+		<property name="name">
+			<value>UIActions</value>
+		</property>
+		<relationship name="folder">
+			<destination>{f0e52e71-842d-4214-858c-9f773e3481d8}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{1dc0ca5d-45c9-4b96-8ba0-f7c0c91d0544}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{1dc0ca5d-45c9-4b96-8ba0-f7c0c91d0544}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>TableButtons</value>
+			<value>ScreenTouch</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

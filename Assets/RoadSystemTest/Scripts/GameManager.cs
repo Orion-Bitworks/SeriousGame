@@ -7,7 +7,7 @@ using static Cinemachine.DocumentationSortingAttribute;
 
 public static class TempLevelHolder
 {
-    public static LevelID nextLevel = LevelID.Pipe;
+    public static LevelID nextLevel = LevelID.Heart;
 	public static bool introShown = false;
 }
 
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     OrganLogic organLogic;                                      // Referencia al controlador de la lógica del órgano
 
-    LevelID currentLevel;
+    public LevelID currentLevel;
 
     public GameObject currentLevelGameObject;
 
@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] LevelOrganMap[] organMappings;
     [SerializeField] TutorialManager tutorialManager;
     LevelID thisLevel;
+    public bool failed = false;
+
+    public int velocityMultiplier = 1;
 
     private void Awake()
     {
@@ -170,6 +173,8 @@ public class GameManager : MonoBehaviour
         // Desactiva los inputs de dentro del sistema del corazón
         if (organLogic = FindAnyObjectByType<OrganLogic>())
             organLogic.ResetOrgan();
+
+        GameManager.Instance.failed = false;
     }
 
     public void LoadScene(string targetScene)
@@ -198,7 +203,6 @@ public class GameManager : MonoBehaviour
 		}
 
 		ActiveGameOverPanel();
-
     }
 
 	private void LoadHeartScene()
@@ -218,7 +222,7 @@ public class GameManager : MonoBehaviour
 		gameoverPanel.SetActive(true);
 	}
 
-	public OrganType[] GetOrgansForLevel(LevelID level)
+    public OrganType[] GetOrgansForLevel(LevelID level)
     {
         foreach (var map in organMappings)
             if (map.level == level)
@@ -226,5 +230,4 @@ public class GameManager : MonoBehaviour
 
         return new OrganType[0];
     }
-
 }

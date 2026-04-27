@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 4242342098643022772, guid: 9d3e485ffd9fe3e44808c983dddb126a, type: 3}
     - target: {fileID: 1689879450198599783, guid: 5fe1035ed7000b64989ac7b6488016b5, type: 3}
       propertyPath: acceptedBallType
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1689879450198599783, guid: 5fe1035ed7000b64989ac7b6488016b5, type: 3}
       propertyPath: acceptedBallType.color.b
@@ -302,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 4242342098643022772, guid: 9d3e485ffd9fe3e44808c983dddb126a, type: 3}
     - target: {fileID: 1689879450198599783, guid: 5fe1035ed7000b64989ac7b6488016b5, type: 3}
       propertyPath: acceptedBallType
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1689879450198599783, guid: 5fe1035ed7000b64989ac7b6488016b5, type: 3}
       propertyPath: acceptedBallType.color.b
@@ -403,7 +403,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3404043731347404591, guid: abcbc5e93b500d94eba28098f9ae5f0f, type: 3}
       propertyPath: ballTypeToSpawn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3404043731347404591, guid: abcbc5e93b500d94eba28098f9ae5f0f, type: 3}
       propertyPath: ballTypeToSpawn.color.r
@@ -493,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3404043731347404591, guid: abcbc5e93b500d94eba28098f9ae5f0f, type: 3}
       propertyPath: ballTypeToSpawn
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3404043731347404591, guid: abcbc5e93b500d94eba28098f9ae5f0f, type: 3}
       propertyPath: outputDirection
@@ -594,7 +594,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3404043731347404591, guid: abcbc5e93b500d94eba28098f9ae5f0f, type: 3}
       propertyPath: ballTypeToSpawn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3404043731347404591, guid: abcbc5e93b500d94eba28098f9ae5f0f, type: 3}
       propertyPath: outputDirection
@@ -833,7 +833,7 @@ PrefabInstance:
       objectReference: {fileID: 4242342098643022772, guid: 9d3e485ffd9fe3e44808c983dddb126a, type: 3}
     - target: {fileID: 1689879450198599783, guid: 5fe1035ed7000b64989ac7b6488016b5, type: 3}
       propertyPath: acceptedBallType
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1689879450198599783, guid: 5fe1035ed7000b64989ac7b6488016b5, type: 3}
       propertyPath: acceptedBallType.color.b
@@ -938,7 +938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3404043731347404591, guid: abcbc5e93b500d94eba28098f9ae5f0f, type: 3}
       propertyPath: ballTypeToSpawn
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3404043731347404591, guid: abcbc5e93b500d94eba28098f9ae5f0f, type: 3}
       propertyPath: outputDirection

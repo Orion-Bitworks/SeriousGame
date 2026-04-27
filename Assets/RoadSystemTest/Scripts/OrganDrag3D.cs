@@ -13,6 +13,9 @@ public class OrganDrag3D : MonoBehaviour
         // Si el órgano ya está colocado, no se puede volver a arrastrar
         if (organData.isPlaced) return;
 
+        // Si estamos en el nivel sin órganos, abortamos
+        if (GameManager.Instance.currentLevel == LevelID.Pipe) return;
+
         // Iniciar arrastre
         if (Input.GetMouseButtonDown(0) && IsMouseOverThis())
             StartDragging();
@@ -37,6 +40,9 @@ public class OrganDrag3D : MonoBehaviour
 
         // Crear ghost
         ghost = Instantiate(organData.prefab);
+
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.GrabOrgan);
+
         OrganPlacementController.Instance.BeginPlacingOrgan(organData, ghost);
     }
 
@@ -45,6 +51,8 @@ public class OrganDrag3D : MonoBehaviour
         dragging = false;
 
         bool placed = OrganPlacementController.Instance.EndPlacingOrgan();
+
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.DropOrgan);
 
         if (!placed)
             SpawnMiniOrgan(); // Si no se colocó, volver a mostrar el mini-órgano

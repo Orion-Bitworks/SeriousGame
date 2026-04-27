@@ -152,6 +152,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connections: 00000000010000000200000003000000
   nextOutputIndex: 0
+  requiredExits: 3
+  entryUsed: 
+  exitUsed: 
+  wasUsed: 0
 --- !u!1 &5706998133662522614
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,7 +217,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 97665d6214e35ae43baf3b10d6eaae7e, type: 2}
+  - {fileID: 2100000, guid: 94dea174da45dcb47984f2f59b2c7faf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

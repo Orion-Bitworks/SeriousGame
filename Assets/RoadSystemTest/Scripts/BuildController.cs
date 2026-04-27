@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,11 +13,16 @@ public class BuildController : MonoBehaviour
     public static BuildController Instance { get; private set; }    // Referencia Singleton
 
     [SerializeField] GameObject[] objectsToPlace;                   // Vector de prefabs disponibles
-    [SerializeField] WorldSpaceButton leftButton;                   // Referencia al botón de cambiar de pieza (hacia atrás)
-    [SerializeField] WorldSpaceButton rightButton;                  // Referencia al botón de cambiar de pieza (hacia delante)
-    [SerializeField] WorldSpaceButton rotateButton;                 // Referencia al botón de rotar pieza
     [SerializeField] Button undoButton;                             // Referencia al botón de deshacer pieza
     [SerializeField] Button redoButton;                             // Referencia al botón de rehacer pieza
+    [SerializeField] Button leftButton;                             // Referencia al botón de cambiar pieza hacia la izquierda
+    [SerializeField] Button rotateButton;                           // Referencia al botón de rotar
+    [SerializeField] Button rightButton;                            // Referencia al botón de cambiar pieza hacia la derecha
+    [SerializeField] Button playButton;                             // Referencia al botón de play del sistema
+    [SerializeField] Button stopButton;                             // Referencia al botón de stop del sistema
+    [SerializeField] Button x1Button;                               // Referencia al botón de x1 del sistema
+    [SerializeField] Button x2Button;                               // Referencia al botón de x2 del sistema
+    [SerializeField] Button x3Button;                               // Referencia al botón de x3 del sistema
     
     [HideInInspector] public bool isUndoing;                        // Controla si el usuario está deshaciendo acciones
     [HideInInspector] public bool isRedoing;                        // Controla si el usuario está rehaciendo acciones
@@ -30,7 +34,7 @@ public class BuildController : MonoBehaviour
     GridManager grid;                       // Referencia al sistema de la grid
     GhostController ghost;                  // Referencia al sistema del ghost
     PreviewController previewController;    // Referencia al controlador de previews
-    Controls controls;                      // Referencia al InputAction de juego
+    public Controls controls;               // Referencia al InputAction de juego
 
     bool isPlacing;                         // Controla si el usuario está colocando piezas
     bool isErasing;                         // Controla si el usuario está eliminando piezas
@@ -76,6 +80,8 @@ public class BuildController : MonoBehaviour
         controls.InRoadGame.Undo.canceled += OnUndoCanceled;
         controls.InRoadGame.Redo.started += OnRedoStarted;
         controls.InRoadGame.Redo.canceled += OnRedoCanceled;
+        controls.InRoadGame.Play.performed += OnPlay;
+        controls.InRoadGame.Multiplier.performed += OnMultiply;
     }
 
     private void OnDestroy()
@@ -94,6 +100,8 @@ public class BuildController : MonoBehaviour
         controls.InRoadGame.Undo.canceled -= OnUndoCanceled;
         controls.InRoadGame.Redo.started -= OnRedoStarted;
         controls.InRoadGame.Redo.canceled -= OnRedoCanceled;
+        controls.InRoadGame.Play.performed -= OnPlay;
+        controls.InRoadGame.Multiplier.performed -= OnMultiply;
 
         controls.Disable();
     }
@@ -103,21 +111,29 @@ public class BuildController : MonoBehaviour
     private void OnPlaceCanceled(InputAction.CallbackContext ctx) => isPlacing = false;
     private void OnEraseStarted(InputAction.CallbackContext ctx) => isErasing = true;
     private void OnEraseCanceled(InputAction.CallbackContext ctx) => isErasing = false;
-    private void OnRotate(InputAction.CallbackContext ctx) => RotateGhostAndPreview();
-    private void OnPrevPiece(InputAction.CallbackContext ctx) => ChangeObject(false);
-    private void OnNextPiece(InputAction.CallbackContext ctx) => ChangeObject(true);
-    private void OnUndoStarted(InputAction.CallbackContext ctx)
+    private void OnRotate(InputAction.CallbackContext ctx) => StartCoroutine(InstantFlashButton(rotateButton));
+    private void OnPrevPiece(InputAction.CallbackContext ctx) => StartCoroutine(InstantFlashButton(leftButton));
+    private void OnNextPiece(InputAction.CallbackContext ctx) => StartCoroutine(InstantFlashButton(rightButton));
+    private void OnUndoStarted(InputAction.CallbackContext ctx) => PressPointerDown(undoButton);
+    private void OnUndoCanceled(InputAction.CallbackContext ctx) => PressPointerUp(undoButton);
+    private void OnRedoStarted(InputAction.CallbackContext ctx) => PressPointerDown(redoButton);
+    private void OnRedoCanceled(InputAction.CallbackContext ctx) => PressPointerUp(redoButton);
+    private void OnPlay(InputAction.CallbackContext ctx)
     {
-        isUndoing = true;
-        undoHoldTimer = 0f;
+        if (!GameManager.Instance.isPlaying)
+            StartCoroutine(FlashButton(playButton));
+        else
+            StartCoroutine(FlashButton(stopButton));
     }
-    private void OnUndoCanceled(InputAction.CallbackContext ctx) => isUndoing = false;
-    private void OnRedoStarted(InputAction.CallbackContext ctx)
+    private void OnMultiply(InputAction.CallbackContext ctx)
     {
-        isRedoing = true;
-        redoHoldTimer = 0f;
+        if (GameManager.Instance.velocityMultiplier == 1)
+            StartCoroutine(FlashButton(x1Button));
+        else if (GameManager.Instance.velocityMultiplier == 2)
+            StartCoroutine(FlashButton(x2Button));
+        else if (GameManager.Instance.velocityMultiplier == 3)
+            StartCoroutine(FlashButton(x3Button));
     }
-    private void OnRedoCanceled(InputAction.CallbackContext ctx) => isRedoing = false;
 
     /// <summary>
     /// Rota tanto el ghost como la preview
@@ -127,10 +143,10 @@ public class BuildController : MonoBehaviour
         // Si el sistema está en marcha, abortamos
         if (GameManager.Instance.isPlaying) return;
 
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Rotate);
+
         ghost.RotateGhost();
         previewController.RotatePreview(ghost.currentRotation);
-        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Rotate);
-        StartCoroutine(PressUIButton(rotateButton));
     }
 
     private void Update()
@@ -160,8 +176,7 @@ public class BuildController : MonoBehaviour
 
         if (isUndoing)
         {
-            // Primer undo instantáneo, después del delay, repetir cada "repeatRate", activamos el botón visualmente
-            SetButtonPressed(undoButton);
+            // Primer undo instantáneo, después del delay, repetir cada "repeatRate"
             if (undoHoldTimer == 0f)
                 Undo();
             else if (undoHoldTimer > initialDelay)
@@ -174,8 +189,7 @@ public class BuildController : MonoBehaviour
 
         if (isRedoing)
         {
-            // Primer redo instantáneo, después del delay, repetir cada "repeatRate", activamos el botón visualmente
-            SetButtonPressed(redoButton);
+            // Primer redo instantáneo, después del delay, repetir cada "repeatRate"
             if (redoHoldTimer == 0f)
                 Redo();
             else if (redoHoldTimer > initialDelay)
@@ -188,16 +202,10 @@ public class BuildController : MonoBehaviour
 
         // Reseteamos los temporizadores al soltar la tecla y ponemos su botón en el estado normal
         if (!isUndoing)
-        {
             undoHoldTimer = 0f;
-            SetButtonNormal(undoButton);
-        }
 
         if (!isRedoing)
-        {
             redoHoldTimer = 0f;
-            SetButtonNormal(redoButton);
-        }
     }
 
     /// <summary>
@@ -279,8 +287,6 @@ public class BuildController : MonoBehaviour
             EraseObject();
         }
 
-        //if (grid.placedObjects.ContainsKey(cell)) EraseObject();
-
         // Bloquea colocación encima de órganos
         if (Physics.Raycast(cell + Vector3.up * 5f, Vector3.down, out RaycastHit h, 10f))
         {
@@ -360,6 +366,8 @@ public class BuildController : MonoBehaviour
         // La borramos, y eliminamos del diccionario
         Destroy(obj);
         grid.placedObjects.Remove(cell);
+
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Delete);
     }
 
     /// <summary>
@@ -375,6 +383,8 @@ public class BuildController : MonoBehaviour
         selectedIndex += next ? 1 : -1;
         if (selectedIndex >= objectsToPlace.Length) selectedIndex = 0;
         if (selectedIndex < 0) selectedIndex = objectsToPlace.Length - 1;
+
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Change);
 
         // Crea el nuevo ghost con el prefab seleccionado, con su rotación actual
         ghost.CreateGhost(objectsToPlace[selectedIndex]);
@@ -396,10 +406,6 @@ public class BuildController : MonoBehaviour
         }
         // Cambia también la preview a mostrar según la tecla utilizada
         previewController.ChangePreview(selectedIndex);
-        if (next)
-            StartCoroutine(PressUIButton(rightButton));
-        else
-            StartCoroutine(PressUIButton(leftButton));
     }
 
     /// <summary>
@@ -422,11 +428,15 @@ public class BuildController : MonoBehaviour
                 {
                     Destroy(grid.placedObjects[action.cell]);
                     grid.placedObjects.Remove(action.cell);
+
+                    AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Delete);
                 }
                 break;
             case BuildActionType.Erase:
                 // Volvemos a colocar la pieza borrada
                 GameObject obj = Instantiate(action.prefab, action.cell, action.rotation);
+
+                AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Place);
 
                 obj.AddComponent<PlacedPiece>().originalPrefab = objectsToPlace[selectedIndex];
 
@@ -443,6 +453,9 @@ public class BuildController : MonoBehaviour
                     var organObj = grid.placedObjects[action.cell];
                     Destroy(organObj);
                     grid.placedObjects.Remove(action.cell);
+
+                    AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.GrabOrgan);
+
                     FindAnyObjectByType<OrganDrag3D>().SpawnMiniOrgan();
                 }
 
@@ -476,6 +489,8 @@ public class BuildController : MonoBehaviour
                 // Volvemos a colocar la pieza
                 GameObject obj = Instantiate(action.prefab, action.cell, action.rotation);
 
+                AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Place);
+
                 obj.AddComponent<PlacedPiece>().originalPrefab = objectsToPlace[selectedIndex];
 
                 RoadPiece piece = obj.GetComponent<RoadPiece>();
@@ -490,11 +505,15 @@ public class BuildController : MonoBehaviour
                 {
                     Destroy(grid.placedObjects[action.cell]);
                     grid.placedObjects.Remove(action.cell);
+
+                    AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Delete);
                 }
                 break;
             case BuildActionType.OrganPlace:
                 // Volver a colocar el órgano, registrar tuberías y despawnear objeto del cajón
                 GameObject organ = Instantiate(action.prefab, action.cell, action.rotation);
+
+                AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.DropOrgan);
 
                 var reg = organ.GetComponent<InternalPipeRegister>();
                 reg.Register(grid);
@@ -511,24 +530,40 @@ public class BuildController : MonoBehaviour
         undoStack.Push(action);
     }
 
-    /// <summary>
-    /// Simula visualmente una pulsación de botón en UI
-    /// </summary>
-    /// <param name="button">El botón a modificar visualmente</param>
-    IEnumerator PressUIButton(WorldSpaceButton button)
+    private void PressPointerDown(Button button)
     {
-        // Simula pulsar el botón visualmente
-        ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerDownHandler);
+        var ped = new PointerEventData(EventSystem.current);
+        ExecuteEvents.Execute(button.gameObject, ped, ExecuteEvents.pointerDownHandler);
+    }
 
-        yield return new WaitForSeconds(0.15f);
+    private void PressPointerUp(Button button)
+    {
+        var ped = new PointerEventData(EventSystem.current);
+        ExecuteEvents.Execute(button.gameObject, ped, ExecuteEvents.pointerUpHandler);
+    }
 
-        // Simula soltar el botón visualmente
-        ExecuteEvents.Execute(button.gameObject, new PointerEventData(EventSystem.current), ExecuteEvents.pointerUpHandler);
+    private IEnumerator InstantFlashButton(Button button)
+    {
+        if (button == null) yield break;
+
+        SetButtonPressed(button);
+        button.onClick.Invoke();
+        yield return new WaitForSeconds(.1f);
+        SetButtonNormal(button);
+    }
+
+    private IEnumerator FlashButton(Button button)
+    {
+        if (button == null) yield break;
+
+        SetButtonPressed(button);
+        yield return new WaitForSeconds(.1f);
+        button.onClick.Invoke();
+        SetButtonNormal(button);
     }
 
     /// <summary>
     /// Le cambia el color al botón para que parezca que está siendo pulsado
-    /// ¡IMPORTANTE, SE UTILIZA PARA UNDO/REDO DEBIDO A QUE SE PUEDEN MANTENER!
     /// </summary>
     /// <param name="button">Botón a modificar visualmente</param>
     void SetButtonPressed(Button button)
@@ -541,7 +576,6 @@ public class BuildController : MonoBehaviour
 
     /// <summary>
     /// Le cambia el color al botón para que parezca que ya no se está pulsando
-    /// ¡IMPORTANTE, SE UTILIZA PARA UNDO/REDO DEBIDO A QUE SE PUEDEN MANTENER!
     /// </summary>
     /// <param name="button">Botón a modificar visualmente</param>
     void SetButtonNormal(Button button)

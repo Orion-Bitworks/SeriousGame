@@ -16,14 +16,17 @@
 			<value>2</value>
 		</property>
 		<property name="maximum">
-			<value>5</value>
+			<value>8</value>
 		</property>
 		<property name="enumerationLabels">
 			<value>Place</value>
 			<value>Rotate</value>
 			<value>Delete</value>
-			<value>Undo</value>
-			<value>Redo</value>
+			<value>GrabOrgan</value>
+			<value>DropOrgan</value>
+			<value>DrawerOpening</value>
+			<value>DrawerClosing</value>
+			<value>Change</value>
 		</property>
 		<property name="initialValue">
 			<value>0</value>

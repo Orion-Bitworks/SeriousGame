@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class ObjectSelector : MonoBehaviour
@@ -6,6 +9,7 @@ public class ObjectSelector : MonoBehaviour
     public static SelectObject currentlySelected = null;
 
     [SerializeField]private Button rotateButton; //Boton de rotar
+    [SerializeField]private Button checkButton; //Boton de rotar
 
     static RotateObjects rotateObjectsInstance; //Instancia del script RotateObjects
 
@@ -13,17 +17,52 @@ public class ObjectSelector : MonoBehaviour
 
     private DragAndDrop dragAndDropInstance;
 
+    Controls controls;
+
+    [SerializeField] Minigame1 minigame1;
+    [SerializeField] Minigame2 minigame2;
+
+    [SerializeField] ScreenButtonsController screenButtonsController;
+
     private void Awake()
     {
         rotateButton.onClick.AddListener(rotatePiece); //Listener
         dragAndDropInstance = GetComponent<DragAndDrop>();
     }
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        controls = new Controls();
+
+        controls.Enable();
+
+        controls.InMiniGame.Rotate.performed += OnRotate;
+        controls.InMiniGame.Check.performed += OnCheck;
+    }
+
+    private void OnRotate(InputAction.CallbackContext ctx)
+    {
+        StartCoroutine(InstantFlashButton(rotateButton));
+        screenButtonsController.RumbleButton(ButtonScreenType.rotate);
+        rotatePiece();
+    }
+
+    private void OnCheck(InputAction.CallbackContext ctx)
+    {
+        StartCoroutine(InstantFlashButton(checkButton));
+        screenButtonsController.RumbleButton(ButtonScreenType.check);
+        CheckMinigame();
+    }
+
+    private void CheckMinigame()
+    {
+        if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase1Root != null && minigamesPhasesInstance.fase1Root.activeSelf)
         {
-            rotatePiece();
+            minigame1.checkPlacementButton();
+        }
+        else if (minigamesPhasesInstance != null && minigamesPhasesInstance.fase2Root != null && minigamesPhasesInstance.fase2Root.activeSelf)
+        {
+            minigame2.checkPlacementButton();
         }
     }
 
@@ -63,4 +102,36 @@ public class ObjectSelector : MonoBehaviour
         }
     }
 
+    private IEnumerator InstantFlashButton(Button button)
+    {
+        if (button == null) yield break;
+
+        SetButtonPressed(button);
+        yield return new WaitForSeconds(.1f);
+        SetButtonNormal(button);
+    }
+
+    /// <summary>
+    /// Le cambia el color al botón para que parezca que está siendo pulsado
+    /// </summary>
+    /// <param name="button">Botón a modificar visualmente</param>
+    void SetButtonPressed(Button button)
+    {
+        if (button == null) return;
+
+        var colors = button.colors;
+        button.targetGraphic.color = colors.pressedColor;
+    }
+
+    /// <summary>
+    /// Le cambia el color al botón para que parezca que ya no se está pulsando
+    /// </summary>
+    /// <param name="button">Botón a modificar visualmente</param>
+    void SetButtonNormal(Button button)
+    {
+        if (button == null) return;
+
+        var colors = button.colors;
+        button.targetGraphic.color = colors.normalColor;
+    }
 }

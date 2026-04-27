@@ -5,7 +5,8 @@ public enum SFX
 {
     Menu = 0,
     Pipe = 1,
-    HeartMinigames = 2
+    HeartMinigames = 2,
+    UI = 3
 }
 
 public enum MenuSFX
@@ -22,8 +23,17 @@ public enum PipeSFX
     Place = 0,
     Rotate = 1,
     Delete = 2,
-    Undo = 3,
-    Redo = 4
+    GrabOrgan = 3,
+    DropOrgan = 4,
+    DrawerOpening = 5,
+    DrawerClosing = 6,
+    Change = 7
+}
+
+public enum UISFX
+{
+    TableButtons = 0,
+    ScreenTouch = 1
 }
 
 public class AudioController : MonoBehaviour
@@ -33,18 +43,19 @@ public class AudioController : MonoBehaviour
     // Apunta a los eventos del FMOD añadidos
     [Header("Eventos")]
     [SerializeField] FMODUnity.EventReference mainSong;
+    [SerializeField] FMODUnity.EventReference ambienceSong;
     [SerializeField] FMODUnity.EventReference menuSFX;
     [SerializeField] FMODUnity.EventReference pipeSFX;
+    [SerializeField] FMODUnity.EventReference uiSFX;
     [SerializeField] FMODUnity.EventReference heartMinigamesSFX;
 
     // Variables para las instancias de los eventos añadidos
     private FMOD.Studio.EventInstance mainSongInstance;
+    private FMOD.Studio.EventInstance ambienceSongInstance;
     private FMOD.Studio.EventInstance menuSFXInstance;
     private FMOD.Studio.EventInstance pipeSFXInstance;
+    private FMOD.Studio.EventInstance uiSFXInstance;
     private FMOD.Studio.EventInstance heartMinigamesSFXInstance;
-
-    // Variable para saber si el juego ha sido pausado o no
-    private bool wasPaused = false;
 
     private void Awake()
     {
@@ -62,11 +73,13 @@ public class AudioController : MonoBehaviour
     {
         // Creamos instancias de los eventos
         mainSongInstance = FMODUnity.RuntimeManager.CreateInstance(mainSong);
+        ambienceSongInstance = FMODUnity.RuntimeManager.CreateInstance(ambienceSong);
         menuSFXInstance = FMODUnity.RuntimeManager.CreateInstance(menuSFX);
         pipeSFXInstance = FMODUnity.RuntimeManager.CreateInstance(pipeSFX);
+        uiSFXInstance = FMODUnity.RuntimeManager.CreateInstance(uiSFX);
         heartMinigamesSFXInstance = FMODUnity.RuntimeManager.CreateInstance(heartMinigamesSFX);
 
-        mainSongInstance.start();
+        ambienceSongInstance.start();
     }
 
     // Se llama desde un botón, activa un sonido aleatorio del efecto MultiInstrument configurado en FMOD.
@@ -92,6 +105,11 @@ public class AudioController : MonoBehaviour
                 genericSFXInstance = pipeSFXInstance;
                 genericSFX = pipeSFX;
                 parameterName = "PipeActions";
+                break;
+            case SFX.UI:
+                genericSFXInstance = uiSFXInstance;
+                genericSFX = uiSFX;
+                parameterName = "UIActions";
                 break;
             case SFX.HeartMinigames:
                 genericSFXInstance = heartMinigamesSFXInstance;

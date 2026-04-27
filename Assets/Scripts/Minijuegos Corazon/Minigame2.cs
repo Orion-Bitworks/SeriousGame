@@ -18,9 +18,6 @@ public class Minigame2 : MonoBehaviour
 
     public FasesMinigames phasesManager; //Instancia del script fasesMinigames
 
-    [SerializeField]
-    private PopUp popUpManager;
-
     private bool popUpShown = false;
 
 	[SerializeField]
@@ -115,7 +112,6 @@ public class Minigame2 : MonoBehaviour
             if (!popUpShown)
             {
                 DialogManager.instance.Show("dialog_18_isgood");
-                popUpManager.ShowPopUp("Has acabat el segon minijoc!", 2f);
 				DialogManager.instance.Show("dialog_20");
 
 				StartCoroutine(EndMinigame());                
@@ -124,7 +120,6 @@ public class Minigame2 : MonoBehaviour
         else // Caso fallo
         {
 			DialogManager.instance.Show("dialog_19_isbad");
-			popUpManager.ShowPopUp($"Només has fet: {correct}, torna-ho a intentar", 2f);
         }
     }
 

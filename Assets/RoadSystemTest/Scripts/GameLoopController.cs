@@ -18,10 +18,11 @@ public class GameLoopController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera heartMinigamesCamera;
     [SerializeField] CinemachineVirtualCamera threeDMinigameCamera;
     [SerializeField] TutorialManager controller;
+    [SerializeField] ScreenController screen;
 
-    bool minigamesStarted = false;
+    bool minigamesStarted = true;
     bool minigamesFinished = false;
-    bool threeDStarted = false;
+    bool threeDStarted = true;
     bool threeDFinished = false;
 
     OrganLogic heartObject;
@@ -47,6 +48,7 @@ public class GameLoopController : MonoBehaviour
 
         minigamesStarted = true;
         GameManager.Instance.isPlaying = true;
+        BuildController.Instance.controls.Disable();
         GameManager.Instance.currentLevelGameObject.SetActive(false);
         heartMinigames.gameObject.SetActive(true);
         heartMinigames.transform.position = organPosition;
@@ -60,7 +62,6 @@ public class GameLoopController : MonoBehaviour
         heartMinigamesUI.gameObject.SetActive(true);
         heartMinigamesCamera.Priority = 2;
         DialogManager.instance.Show("dialog_14");
-		
 	}
 
     IEnumerator DelayedHandleGameCompleted()
@@ -68,6 +69,7 @@ public class GameLoopController : MonoBehaviour
         minigamesFinished = true;
         GameManager.Instance.currentLevelGameObject.SetActive(true);
         GameManager.Instance.isPlaying = false;
+        BuildController.Instance.controls.Enable();
         heartMinigamesObject.SetActive(false);
         heartObject.gameObject.SetActive(true);
         pipesUI.gameObject.SetActive(true);
@@ -76,7 +78,7 @@ public class GameLoopController : MonoBehaviour
         
         yield return new WaitForSecondsRealtime(1f);
 
-        FindAnyObjectByType<ScreenController>().StartMovingOut();
+        screen.StartMovingOut();
 
         yield return new WaitForSecondsRealtime(2f);
 
@@ -87,21 +89,11 @@ public class GameLoopController : MonoBehaviour
     {
         if (!completed || minigamesFinished) return;
 
-        minigamesFinished = true;
-        GameManager.Instance.currentLevelGameObject.SetActive(true);
-        GameManager.Instance.isPlaying = false;
-        heartMinigames.gameObject.SetActive(false);
-        pipesUI.gameObject.SetActive(true);
-        heartMinigamesUI.gameObject.SetActive(false);
-        heartMinigamesCamera.Priority = 0;
         DialogManager.instance.Show("dialog_25");
-		controller.ShowTutorial(5);
+        controller.ShowTutorial(5);
         controller.ReposicionarCarpeta();
         StartCoroutine(DelayedHandleGameCompleted());
     }
-
-
-	
 
 	private IEnumerator DelayedStart3DLevel()
     {
@@ -121,7 +113,6 @@ public class GameLoopController : MonoBehaviour
 		DialogManager.instance.Show("dialog_7");
         controller.ShowTutorial(1);
         controller.MoveCarpeta3D(18);
-
 	}
 
     public void Start3DLevel()
@@ -143,8 +134,5 @@ public class GameLoopController : MonoBehaviour
         threeDMinigameScreen.gameObject.SetActive(false);
         threeDMinigameCamera.Priority = 0;
         DialogManager.instance.ShowSequence(new string []{ "dialog_11", "dialog_12", "dialog_13" });
-
-
-
 	}
 }
