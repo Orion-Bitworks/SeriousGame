@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelInputActivator : MonoBehaviour
@@ -96,19 +97,58 @@ public class LevelInputActivator : MonoBehaviour
 
     bool AllPiecesFullyCovered()
     {
-        foreach (var kvp in GridManager.Instance.placedObjects)
+        HashSet<RoadPiece> relevantPieces = new HashSet<RoadPiece>();
+
+        // Recorremos desde TODOS los RoadInput del sistema
+        RoadInput[] allInputs = FindObjectsOfType<RoadInput>();
+
+        foreach (var input in allInputs)
         {
-            RoadPiece piece = kvp.Value.GetComponent<RoadPiece>();
-            if (piece == null) continue;
+            if (input == null) continue;
 
-            if (!piece.wasUsed)
-                continue;
+            Vector3Int inputCell = Vector3Int.RoundToInt(input.transform.position);
+            Vector3Int startCell = inputCell + DirectionUtils.ToVector(input.outputDirection);
 
+            ExploreFromInput(startCell, relevantPieces);
+        }
+
+        // Si no hay ninguna pieza relevante, no hay circuito y no hay victoria
+        if (relevantPieces.Count == 0)
+            return false;
+
+        // Comprobamos solo las piezas relevantes
+        foreach (var piece in relevantPieces)
+        {
             if (!PieceFullyCovered(piece))
                 return false;
         }
 
         return true;
+    }
+
+    void ExploreFromInput(Vector3Int cell, HashSet<RoadPiece> visited)
+    {
+        var grid = GridManager.Instance;
+
+        if (!grid.placedObjects.ContainsKey(cell))
+            return;
+
+        GameObject go = grid.placedObjects[cell];
+        RoadPiece piece = go.GetComponent<RoadPiece>();
+        if (piece == null)
+            return;
+
+        if (visited.Contains(piece))
+            return;
+
+        visited.Add(piece);
+
+        // Recorremos todas las conexiones de esta pieza
+        foreach (var dir in piece.connections)
+        {
+            Vector3Int nextCell = cell + DirectionUtils.ToVector(dir);
+            ExploreFromInput(nextCell, visited);
+        }
     }
 
     bool PieceFullyCovered(RoadPiece piece)

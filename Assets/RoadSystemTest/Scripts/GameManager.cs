@@ -41,14 +41,17 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] LevelOrganMap[] organMappings;
     [SerializeField] TutorialManager tutorialManager;
-    LevelID thisLevel;
-    public bool failed = false;
+    [HideInInspector] public bool failed = false;
 
-    public int velocityMultiplier = 1;
+    [HideInInspector] public int velocityMultiplier = 1;
+
+    [SerializeField] BallMaterialsConfig materialsConfig;
 
     private void Awake()
     {
         Instance = this;    // Inicializamos el Singleton
+
+        materialsConfig.RegisterAll();
     }
 
     private void Start()

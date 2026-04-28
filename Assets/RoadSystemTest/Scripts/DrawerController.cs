@@ -1,6 +1,7 @@
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DrawerController : MonoBehaviour
 {
@@ -11,9 +12,15 @@ public class DrawerController : MonoBehaviour
     [SerializeField] Collider drawerCollider;
     [SerializeField] Transform openPosition;
     [SerializeField] Transform closedPosition;
+    [SerializeField] Image arrow;
 
     Tween rumbleTween;
     Coroutine autoCloseRoutine;
+
+    Color normalColor = Color.white;
+    Color hoverColor = new Color(0.7f, 0.7f, 0.7f);
+    Color pressedColor = new Color(0.5f, 0.5f, 0.5f);
+    Color disabledColor = new Color(0.7843137f, 0.7843137f, 0.7843137f, 0.5019608f);
 
     void Update()
     {
@@ -21,6 +28,8 @@ public class DrawerController : MonoBehaviour
 
         bool overHandle = IsMouseOverHandle();
         bool overDrawer = IsMouseOverDrawer();
+
+        UpdateArrowColor(overHandle);
 
         switch (state)
         {
@@ -91,6 +100,7 @@ public class DrawerController : MonoBehaviour
     {
         StopRumble();
         state = DrawerState.Opening;
+        UpdateArrowRotation();
 
         AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.DrawerOpening);
 
@@ -106,6 +116,7 @@ public class DrawerController : MonoBehaviour
     {
         StopRumble();
         state = DrawerState.Closing;
+        UpdateArrowRotation();
 
         AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.DrawerClosing);
 
@@ -123,6 +134,7 @@ public class DrawerController : MonoBehaviour
         autoCloseRoutine = null;
 
         state = DrawerState.AutoClosing;
+        UpdateArrowRotation();
 
         AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.DrawerClosing);
 
@@ -175,5 +187,29 @@ public class DrawerController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         return Physics.Raycast(ray, out RaycastHit hit) && hit.transform == drawerCollider.transform;
+    }
+
+    void UpdateArrowRotation()
+    {
+        if (state == DrawerState.Closed || state == DrawerState.Closing)
+            arrow.rectTransform.localRotation = Quaternion.Euler(0, 0, 270);
+        else
+            arrow.rectTransform.localRotation = Quaternion.Euler(0, 0, 90);
+    }
+
+    void UpdateArrowColor(bool overHandle)
+    {
+        if (state == DrawerState.Opening || state == DrawerState.Closing || state == DrawerState.AutoClosing)
+        {
+            arrow.color = disabledColor;
+            return;
+        }
+
+        if (Input.GetMouseButton(0) && overHandle)
+            arrow.color = pressedColor;
+        else if (overHandle)
+            arrow.color = hoverColor;
+        else
+            arrow.color = normalColor;
     }
 }

@@ -6,49 +6,46 @@ using UnityEngine.UI;
 
 public class Minigame2 : MonoBehaviour
 {
-    public DragAndDrop[] draggagleVeins; //array de objetos que son arrastables
-    int totalVeins; 
-    int placedVeins; //venes colocades
+    public DragAndDropMinigame2[] draggagleVeins;
+    int totalVeins;
+    int placedVeins;
 
-    public int correct = 0; //Aciertos
+    public int correct = 0;
 
     public TextMeshProUGUI remainVeinstoDrag;
 
-    [SerializeField] Button CheckButton; //Boto per comprovar
+    [SerializeField] Button CheckButton;
 
-    public FasesMinigames phasesManager; //Instancia del script fasesMinigames
+    public FasesMinigames phasesManager;
 
     private bool popUpShown = false;
 
-	[SerializeField]
-	public TutorialManager tutorial;
+    [SerializeField]
+    public TutorialManager tutorial;
 
-
-	private void Awake()
+    private void Awake()
     {
         CheckButton.onClick.AddListener(checkPlacementButton);
     }
+
     void Start()
     {
-        totalVeins = draggagleVeins.Length; //el total de objetos son la cantidad de objetos que haya en el array
+        totalVeins = draggagleVeins.Length;
         showInfo();
         tutorial.ShowTutorial(3);
-		tutorial.MoveCarpetaMiniHeart();
-
-	}
+        tutorial.MoveCarpetaMiniHeart();
+    }
 
     public void objectsRemaining()
     {
         placedVeins = 0;
 
-        foreach (DragAndDrop obj in draggagleVeins) //per a cada objecte dragAndDrop que estigui dins del array
+        foreach (DragAndDropMinigame2 obj in draggagleVeins)
         {
             if (obj.placed)
-            {
-                placedVeins++; //suma 1 si el objecte esta posat
-
-            }
+                placedVeins++;
         }
+
         showInfo();
     }
 
@@ -61,49 +58,75 @@ public class Minigame2 : MonoBehaviour
     {
         correct = 0;
 
-        foreach (DragAndDrop obj in draggagleVeins)
+        Debug.Log("────────────── VALIDACIÓN MINIJUEGO 2 ──────────────");
+
+        foreach (DragAndDropMinigame2 obj in draggagleVeins)
         {
-            if (obj.placed && obj.CurrentDropArea != null)
+            // No está colocada
+            if (!obj.placed || obj.CurrentDropArea == null)
             {
-                DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
-                if (drop != null && drop.valveType == obj.valveType)
-                {
-                    //float angleDiff = Quaternion.Angle(obj.transform.rotation, drop.requiredRotation);
+                Debug.LogWarning($"❌ {obj.name} NO está colocada en ninguna DropArea.");
+                continue;
+            }
 
-                    // Rotación de la pieza relativa a la DropArea
-                    Quaternion relativeRotation = Quaternion.Inverse(drop.transform.rotation) * obj.transform.rotation;
+            DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
 
-                    // Comparamos esa rotación relativa con la rotación relativa requerida
-                    float angleDiff = Quaternion.Angle(relativeRotation, drop.requiredRotation);
+            if (drop == null)
+            {
+                Debug.LogError($"⚠ {obj.name} tiene una CurrentDropArea sin DropArea script.");
+                continue;
+            }
 
-                    if (angleDiff <= drop.rotationTolerance)
-                    {
-                        correct++;
-                    }
-                }
+            // Debug de DropArea asignada
+            Debug.Log($"{obj.name} está usando DropArea: {drop.name}");
+
+            // Comprobación de tipo
+            if (drop.valveType != obj.valveType)
+            {
+                Debug.LogWarning($"❌ {obj.name} está en la DropArea equivocada ({drop.name}). " +
+                                 $"Tipo requerido: {obj.valveType}, tipo DropArea: {drop.valveType}");
+                continue;
+            }
+
+            // Comprobación de rotación
+            Quaternion relativeRotation = Quaternion.Inverse(drop.transform.rotation) * obj.transform.rotation;
+            float angleDiff = Quaternion.Angle(relativeRotation, drop.requiredRotation);
+
+            Debug.Log($"{obj.name} → Rot actual: {obj.transform.rotation.eulerAngles} | " +
+                      $"Rot requerida: {drop.requiredEulerAngles} | " +
+                      $"Diff: {angleDiff}° (tol: {drop.rotationTolerance}°)");
+
+            if (angleDiff <= drop.rotationTolerance)
+            {
+                Debug.Log($"✔ {obj.name} está correctamente colocada.");
+                correct++;
+            }
+            else
+            {
+                Debug.LogWarning($"❌ {obj.name} está mal rotada. Diferencia: {angleDiff}°");
             }
         }
 
-        Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggagleVeins.Length);
+        Debug.Log($"RESULTADO FINAL → {correct} / {draggagleVeins.Length} correctas");
 
-        if (correct == draggagleVeins.Length) // Caso éxito
+        // Caso éxito
+        if (correct == draggagleVeins.Length)
         {
-            foreach (DragAndDrop obj in draggagleVeins)
+            foreach (DragAndDropMinigame2 obj in draggagleVeins)
             {
                 if (obj.CurrentDropArea != null)
                 {
                     DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
+
                     if (drop != null && drop.valveType == obj.valveType)
                     {
-                        //float angleDiff = Quaternion.Angle(obj.transform.rotation, drop.requiredRotation);
-
                         Quaternion relativeRotation = Quaternion.Inverse(drop.transform.rotation) * obj.transform.rotation;
                         float angleDiff = Quaternion.Angle(relativeRotation, drop.requiredRotation);
 
                         if (angleDiff <= drop.rotationTolerance)
                         {
                             obj.locked = true;
-                            obj.GetComponent<Collider>().enabled = false;
+                            obj.dragCollider.enabled = false;
                         }
                     }
                 }
@@ -112,14 +135,14 @@ public class Minigame2 : MonoBehaviour
             if (!popUpShown)
             {
                 DialogManager.instance.Show("dialog_18_isgood");
-				DialogManager.instance.Show("dialog_20");
+                DialogManager.instance.Show("dialog_20");
 
-				StartCoroutine(EndMinigame());                
+                StartCoroutine(EndMinigame());
             }
         }
-        else // Caso fallo
+        else
         {
-			DialogManager.instance.Show("dialog_19_isbad");
+            DialogManager.instance.Show("dialog_19_isbad");
         }
     }
 

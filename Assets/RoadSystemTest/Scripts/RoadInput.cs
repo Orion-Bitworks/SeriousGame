@@ -6,10 +6,10 @@ using UnityEngine;
 /// </summary>
 public class RoadInput : MonoBehaviour
 {
-    [SerializeField] GameObject ballPrefab;             // Apunta al prefab de la bolita que se va a instanciar
-    [SerializeField] float spawnRate = 1f;              // Tiempo entre cada bolita generada
-    [SerializeField] RoadDirection outputDirection;     // Dirección en la cual se envian las bolitas
-    [SerializeField] BallType ballTypeToSpawn;          // Tipo de bolita que queremos que aparezca
+    [SerializeField] GameObject ballPrefab;                     // Apunta al prefab de la bolita que se va a instanciar
+    [SerializeField] float spawnRate = 1f;                      // Tiempo entre cada bolita generada
+    [SerializeField] public RoadDirection outputDirection;      // Dirección en la cual se envian las bolitas
+    [SerializeField] BallType ballTypeToSpawn;                  // Tipo de bolita que queremos que aparezca
 
     private void OnEnable()
     {
@@ -59,7 +59,7 @@ public class RoadInput : MonoBehaviour
 
         // Instancia la bolita y le cambia el color al correcto
         GameObject ball = Instantiate(ballPrefab, transform.position, Quaternion.identity);
-        ball.GetComponent<Renderer>().material.color = BallTypeColors.GetColor(ballTypeToSpawn);
+        ball.GetComponentInChildren<Renderer>().material = BallTypeMaterials.GetMaterial(ballTypeToSpawn);
 
         // Inicializa el movimiento de la bolita, indicando tanto a que celda debe ir como la dirección que debe seguir
         ball.GetComponent<MovingBall>().Initialize(nextCell, outputDirection, ballTypeToSpawn);

@@ -21,7 +21,6 @@ public class RoadPiece : MonoBehaviour
     public int requiredExits = 1;
     public bool[] entryUsed;
     public bool[] exitUsed;
-    public bool wasUsed;
 
     void Awake()
     {

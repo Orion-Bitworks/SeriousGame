@@ -16,29 +16,19 @@ public enum BallType
     Yellow
 }
 
-public static class BallTypeColors
+public static class BallTypeMaterials
 {
-    /// <summary>
-    /// Diccionario de colores de bolitas (relación tipo -> color)
-    /// </summary>
-    private static readonly Dictionary<BallType, Color> colors = new()
-    {
-        { BallType.NotO2FromPipe, Color.blue },
-        { BallType.NotO2FromHeart, Color.blue },
-        { BallType.O2FromPipe, Color.red },
-        { BallType.O2FromHeart, Color.red },
-        { BallType.Red, Color.red },
-        { BallType.Blue, Color.blue },
-        { BallType.Green, Color.green },
-        { BallType.Yellow, Color.yellow }
-    };
+    private static readonly Dictionary<BallType, Material> materials = new();
 
-    /// <summary>
-    /// Getter para el color de la bolita
-    /// </summary>
-    /// <param name="type">Tipo de la bolita de la cual queremos saber el color</param>
-    /// <returns>Color que tiene que tener la bolita</returns>
-    public static Color GetColor(BallType type) => colors[type];
+    public static void RegisterMaterial(BallType type, Material mat)
+    {
+        materials[type] = mat;
+    }
+
+    public static Material GetMaterial(BallType type)
+    {
+        return materials[type];
+    }
 }
 
 /// <summary>
@@ -175,7 +165,6 @@ public class MovingBall : MonoBehaviour
         if (entryIndex >= 0)
         {
             piece.entryUsed[entryIndex] = true;
-            piece.wasUsed = true;
         }
 
         // Recorre las conexiones de la carretera, si alguna coincide con la dirección de entrada, la carretera acepta la bolita
