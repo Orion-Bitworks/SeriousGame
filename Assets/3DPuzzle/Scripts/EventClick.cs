@@ -192,7 +192,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         piece.transform.SetParent(originalParent);
         piece.transform.position = originalParent.position;
-        piece.transform.rotation = Quaternion.identity;
+        piece.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
         piece.transform.localScale = Vector3.zero;
 
         Sequence resetSequence = DOTween.Sequence();
