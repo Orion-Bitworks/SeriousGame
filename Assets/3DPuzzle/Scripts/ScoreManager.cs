@@ -221,12 +221,13 @@ public class ScoreManager : MonoBehaviour
             }
 
             resetting = false;
+
+            foreach (ConnectionPointController point in connections)
+            {
+                point.Enable();
+            }
         });
 
-        foreach (ConnectionPointController point in connections)
-        {
-            point.Enable();
-        }
 
         foreach (BloodAnimationController controller in FindObjectsOfType<BloodAnimationController>())
         {
