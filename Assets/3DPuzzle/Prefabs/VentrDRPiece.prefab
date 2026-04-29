@@ -282,7 +282,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextConnection: {fileID: 0}
-  animationPivots: []
+  animationPivots:
+  - {fileID: 0}
+  - {fileID: 0}
   requiredConnections: []
 --- !u!1001 &65286976941157163
 PrefabInstance:

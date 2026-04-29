@@ -623,7 +623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: A_01
-  partnerId: A_IZ_04
+  partnerId: A_DR_04
   layerToDetect:
     serializedVersion: 2
     m_Bits: 128

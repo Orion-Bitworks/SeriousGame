@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: A_DR_03
-  partnerId: VP_02
+  partnerId: VP_01
   layerToDetect:
     serializedVersion: 2
     m_Bits: 0
@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 7577920038963257040}
   - component: {fileID: 3729594840454140287}
   - component: {fileID: 9044755123207775011}
+  - component: {fileID: 8766933952126189347}
   m_Layer: 7
   m_Name: SphereAorta (1)
   m_TagString: ConnectionPoint
@@ -244,14 +245,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb780dcf2755de34a98a75b028eeff91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: A_DR_03
-  partnerId: VP_02
+  id: A_DR_04
+  partnerId: A_01
   layerToDetect:
     serializedVersion: 2
     m_Bits: 0
   canBeRegistered: 1
   paired: 0
   pairId: 
+--- !u!114 &8766933952126189347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2201301827006199746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextConnection: {fileID: 0}
+  animationPivots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  requiredConnections: []
 --- !u!1 &2921553097065207444
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,7 +390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ccbdb1ed5102b244bde514f4e936900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 3
+  priority: 4
   connection: {fileID: 0}
   pipePrefab: {fileID: 3590936521021323110, guid: e51809b6a5b9ece4d907b792c8db645a, type: 3}
   spawnDistanceX: 0

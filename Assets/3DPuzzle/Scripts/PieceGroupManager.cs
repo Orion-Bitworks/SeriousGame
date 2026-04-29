@@ -17,6 +17,11 @@ public class PieceGroupManager : MonoBehaviour
 
         foreach (PieceController piece in allPieces)
         {
+            piece.SetGroup(null);
+        }
+
+        foreach (PieceController piece in allPieces)
+        {
             if (!visitedPieces.Contains(piece))
             {
                 PieceGroup newGroup = new PieceGroup();

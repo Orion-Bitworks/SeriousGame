@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ConnectionPointController : MonoBehaviour
@@ -34,6 +35,7 @@ public class ConnectionPointController : MonoBehaviour
         if (other.gameObject.tag == "ConnectionPoint")
         {
             ConnectionPointController otherPoint = other.GetComponent<ConnectionPointController>();
+            PieceController otherPiece = otherPoint.GetComponentInParent<PieceController>();
 
             if (!paired && !otherPoint.Paired() && otherPoint.piece.IsPlaced() && otherPoint.IsEnabled()) 
             {
@@ -52,6 +54,9 @@ public class ConnectionPointController : MonoBehaviour
 
                 paired = true;
                 otherPoint.Paired(true);
+
+                piece.ConnectPieces(otherPiece);
+                otherPiece.ConnectPieces(piece);
             }
         }
     }

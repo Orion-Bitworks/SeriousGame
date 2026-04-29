@@ -107,7 +107,7 @@ public class PieceController : MonoBehaviour
             piece.transform.rotation = rotDelta * piece.transform.rotation;
         }
 
-        ConnectPieces(targetParent.GetComponent<PieceController>());
+        //ConnectPieces(targetParent.GetComponent<PieceController>());
 
         DisableControls();
     }

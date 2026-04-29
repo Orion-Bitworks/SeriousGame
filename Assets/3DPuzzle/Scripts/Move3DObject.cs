@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 
@@ -75,6 +76,14 @@ public class Move3DObject : MonoBehaviour
         if (distance > breakSnapDistance)
         {
             piece.DisconnectAll();
+
+            /*foreach (var connected in piece.ConnectedPieces().ToList())
+            {
+                piece.DisconnectPiece(connected);
+            }*/
+
+            PieceGroupManager.RebuildGroups();
+
             piece.IsPlaced(false);
             MovePiece(RaycastPoint());
         }

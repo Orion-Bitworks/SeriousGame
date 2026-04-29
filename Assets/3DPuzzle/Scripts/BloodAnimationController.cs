@@ -26,7 +26,7 @@ public class BloodAnimationController : MonoBehaviour
     {
         if (connection == null)
         {
-            Debug.LogError("No connection point assigned.");
+            Debug.LogError("No connection point assigned on " + gameObject.name);
             return;
         }
 
