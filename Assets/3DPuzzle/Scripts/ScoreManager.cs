@@ -59,7 +59,8 @@ public class ScoreManager : MonoBehaviour
 
         if (allRight)
         {
-            checkTV.ChangeState(CHECKING_STATE.CORRECT);
+            ChangeTVState(CHECKING_STATE.CORRECT);
+            //checkTV.ChangeState(CHECKING_STATE.CORRECT);
             DOVirtual.DelayedCall(1f, () =>
             {
                 ToggleWidget(true);
@@ -67,7 +68,8 @@ public class ScoreManager : MonoBehaviour
         }
         else
         {
-            checkTV.ChangeState(CHECKING_STATE.WRONG);
+            ChangeTVState(CHECKING_STATE.WRONG);
+            //checkTV.ChangeState(CHECKING_STATE.WRONG);
             ResetLevel();
         }
     }
@@ -111,9 +113,12 @@ public class ScoreManager : MonoBehaviour
 
         playing = true;
 
-        checkTV.ShowTV();
-        checkTV.ChangeState(CHECKING_STATE.LOADING);
+        //checkTV.ShowTV();
+        //checkTV.ChangeState(CHECKING_STATE.LOADING);
 
+        ShowTV(true);
+        ChangeTVState(CHECKING_STATE.LOADING);
+        
         foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
         {
             eventClick.CanInteract(false);
@@ -164,7 +169,8 @@ public class ScoreManager : MonoBehaviour
     {
         yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
 
-        checkTV.HideTV();
+        //checkTV.HideTV();
+        ShowTV(false);
 
         Sequence sequence = DOTween.Sequence().SetAutoKill(true);
 
@@ -202,7 +208,9 @@ public class ScoreManager : MonoBehaviour
 
         ParticleManager.instance.DeleteAllParticles();
 
-        checkTV.HideTV();
+        //checkTV.HideTV();
+
+        ShowTV(false);
 
         Sequence sequence = DOTween.Sequence().SetAutoKill(true);
 
@@ -257,5 +265,28 @@ public class ScoreManager : MonoBehaviour
 
         yield return new WaitForSeconds(timeDelay);
         CheckConnections();
+    }
+
+    public void ChangeTVState(CHECKING_STATE newState)
+    {
+        if (checkTV != null)
+        {
+            checkTV.ChangeState(newState);
+        }
+    }
+
+    public void ShowTV(bool b)
+    {
+        if (checkTV != null)
+        {
+            if (b)
+            {
+                checkTV.ShowTV();
+            }
+            else
+            {
+                checkTV.HideTV();
+            }
+        }
     }
 }
