@@ -508,6 +508,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!4 &74699823 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 795855338097172972, guid: 4da2aad4f6275904bbb3b3bb412c0c3b, type: 3}
@@ -1497,6 +1498,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!4 &209538431 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6164029671352341763, guid: 728a2c874e07d4e4ca92c94d6756d507, type: 3}
@@ -2718,9 +2720,10 @@ MonoBehaviour:
   x: 0
   y: 1
   z: 0
-  speed: 40
+  speed: 60
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!114 &314111905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4792,6 +4795,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!4 &494250436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1266595749870304377, guid: 4fe3778f7e2d6d14fbd9defa132ea7a3, type: 3}
@@ -4954,6 +4958,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!4 &514533259 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7786676225761762579, guid: f4d56f17fd5a1aa46a0cd6bd40ccae87, type: 3}
@@ -8381,9 +8386,10 @@ MonoBehaviour:
   x: 0
   y: 1
   z: 0
-  speed: 40
+  speed: 60
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!114 &876671712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11026,6 +11032,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!4 &1213514195 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2981249606261327050, guid: b0651abc95aae7148b56d2c90f772aef, type: 3}
@@ -11156,6 +11163,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!4 &1218672560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7084879024772138431, guid: 63a1fc23c2edd6644b7d1b8759ef4faa, type: 3}
@@ -12748,9 +12756,10 @@ MonoBehaviour:
   x: 0
   y: 1
   z: 0
-  speed: 40
+  speed: 60
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!114 &1282828727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13353,9 +13362,10 @@ MonoBehaviour:
   x: 0
   y: 1
   z: 0
-  speed: 40
+  speed: 60
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!114 &1370010399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17325,9 +17335,10 @@ MonoBehaviour:
   x: 0
   y: 1
   z: 0
-  speed: 40
+  speed: 60
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!114 &1807208531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20263,9 +20274,10 @@ MonoBehaviour:
   x: 0
   y: 1
   z: 0
-  speed: 40
+  speed: 60
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!114 &2132000000
 MonoBehaviour:
   m_ObjectHideFlags: 0
