@@ -60,7 +60,6 @@ public class ScoreManager : MonoBehaviour
         if (allRight)
         {
             ChangeTVState(CHECKING_STATE.CORRECT);
-            //checkTV.ChangeState(CHECKING_STATE.CORRECT);
             DOVirtual.DelayedCall(1f, () =>
             {
                 ToggleWidget(true);
@@ -69,7 +68,6 @@ public class ScoreManager : MonoBehaviour
         else
         {
             ChangeTVState(CHECKING_STATE.WRONG);
-            //checkTV.ChangeState(CHECKING_STATE.WRONG);
             ResetLevel();
         }
     }
@@ -106,15 +104,13 @@ public class ScoreManager : MonoBehaviour
             }
         }
 
-        if (!canPlay)
+        if (!canPlay || PieceGroupManager.GetGroupCount() > 1)
         {
+            Debug.Log("Can't play because there are " + PieceGroupManager.GetGroupCount() + " active groups on scene.");
             return;
         }
 
         playing = true;
-
-        //checkTV.ShowTV();
-        //checkTV.ChangeState(CHECKING_STATE.LOADING);
 
         ShowTV(true);
         ChangeTVState(CHECKING_STATE.LOADING);
@@ -169,7 +165,6 @@ public class ScoreManager : MonoBehaviour
     {
         yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
 
-        //checkTV.HideTV();
         ShowTV(false);
 
         Sequence sequence = DOTween.Sequence().SetAutoKill(true);
@@ -208,8 +203,6 @@ public class ScoreManager : MonoBehaviour
 
         ParticleManager.instance.DeleteAllParticles();
 
-        //checkTV.HideTV();
-
         ShowTV(false);
 
         Sequence sequence = DOTween.Sequence().SetAutoKill(true);
@@ -235,7 +228,6 @@ public class ScoreManager : MonoBehaviour
                 point.Enable();
             }
         });
-
 
         foreach (BloodAnimationController controller in FindObjectsOfType<BloodAnimationController>())
         {

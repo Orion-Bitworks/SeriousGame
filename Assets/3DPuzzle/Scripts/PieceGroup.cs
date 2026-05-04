@@ -15,7 +15,7 @@ public class PieceGroup
 
     public PieceGroup()
     {
-
+        
     }
 
     public void AddPiece(PieceController piece)
