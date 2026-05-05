@@ -39,6 +39,16 @@ public class InputManager : MonoBehaviour
         deletePiece_ia = map.FindActionMap("In3DGame").FindAction("Delete");
     }
 
+    private void OnEnable()
+    {
+        EnableInput();
+    }
+
+    private void OnDisable()
+    {
+        DisableInput();
+    }
+
     public void EnableInput()
     {
         map.Enable();

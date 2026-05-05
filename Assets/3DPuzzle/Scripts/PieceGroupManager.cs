@@ -6,9 +6,14 @@ public class PieceGroupManager : MonoBehaviour
 {
     private static HashSet<PieceController> allPieces = new HashSet<PieceController>();
 
+    public static HashSet<PieceGroup> allGroups = new HashSet<PieceGroup>();
+
+    private static int groupCount = 0;
     public static void RegisterPiece(PieceController newPiece)
     {
         allPieces.Add(newPiece);
+        //groupCount++;
+        Debug.Log("Current group count: " + groupCount);
     }
 
     public static void RebuildGroups()
@@ -52,5 +57,29 @@ public class PieceGroupManager : MonoBehaviour
                 }
             }
         }
+
+        SetGroupCount();
+    }
+
+    public static void SetGroupCount()
+    {
+        allGroups.Clear();
+        groupCount = 0;
+
+        foreach (PieceController piece in allPieces)
+        {
+            if (!allGroups.Contains(piece.GetGroup()) && !piece.GetComponent<EventClick>().OnUI())
+            {
+                allGroups.Add(piece.GetGroup());
+                groupCount++;
+            }
+        }
+    }
+
+    public static int GetGroupCount()
+    {
+        SetGroupCount();
+
+        return allGroups.Count; // groupCount
     }
 }

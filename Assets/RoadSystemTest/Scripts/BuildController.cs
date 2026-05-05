@@ -297,6 +297,8 @@ public class BuildController : MonoBehaviour
         // Instancia la pieza
         GameObject obj = Instantiate(objectsToPlace[selectedIndex], cell, ghost.currentRotation);
 
+        GameManager.Instance.tubCol++;
+
         AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Place);
 
         obj.AddComponent<PlacedPiece>().originalPrefab = objectsToPlace[selectedIndex];

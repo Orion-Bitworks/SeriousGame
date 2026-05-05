@@ -35,7 +35,7 @@ public class BloodAnimationController : MonoBehaviour
             if (!alreadyFlowing)
             {
                 alreadyFlowing = true;
-                ParticleManager.instance.SpawnParticles("BloodFlowingParticles", transform);
+                ParticleManager.instance.SpawnParticles("BloodParticles", transform);
             }
         }
         else if (connection.PairedWithPartner())

@@ -64,6 +64,8 @@ public class PieceController : MonoBehaviour
             return;
         }
 
+        ScoreManager.instance.movimientos++;
+
         //point.Paired(true);
         //target.GetComponent<ConnectionPointController>().Paired(true);
 
@@ -107,7 +109,7 @@ public class PieceController : MonoBehaviour
             piece.transform.rotation = rotDelta * piece.transform.rotation;
         }
 
-        ConnectPieces(targetParent.GetComponent<PieceController>());
+        //ConnectPieces(targetParent.GetComponent<PieceController>());
 
         DisableControls();
     }

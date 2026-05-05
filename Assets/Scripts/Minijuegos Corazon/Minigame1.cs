@@ -25,6 +25,11 @@ public class Minigame1 : MonoBehaviour
 
     Controls controls;
 
+    private SessionTimer timer;
+    private int intentos;
+    public int movimientos;
+    private int fallos;
+
     private void Awake()
     {
         CheckButton.onClick.AddListener(checkPlacementButton); //Listener
@@ -33,6 +38,11 @@ public class Minigame1 : MonoBehaviour
     void Start()
     {
         totalValves = draggableValves.Length; //el total de objetos son la cantidad de objetos que haya en el array
+        timer = new SessionTimer();
+        timer.Start();
+        intentos = 0;
+        movimientos = 0;
+        fallos = 0;
         showInfo();
 
         tutorial.ShowTutorial(2);
@@ -65,6 +75,7 @@ public class Minigame1 : MonoBehaviour
 
     public void checkPlacementButton()
     {
+        intentos++;
 
         correct = 0;
 
@@ -91,6 +102,8 @@ public class Minigame1 : MonoBehaviour
 
         Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggableValves.Length);
 
+        fallos += draggableValves.Length - correct;
+
         if (correct == draggableValves.Length) // Si el numero de aciertos es igual al numero de valvulas que hay en el array
         {
             foreach (DragAndDrop obj in draggableValves)
@@ -116,6 +129,7 @@ public class Minigame1 : MonoBehaviour
             {
                 DialogManager.instance.Show("dialog_15_isgood");
                 popUpShown = true;
+                TerminarMinijuego();
                 phasesManager.PasarAFase2(); //pasa a la siguiente fase
             }
             else
@@ -123,5 +137,12 @@ public class Minigame1 : MonoBehaviour
                 DialogManager.instance.Show("dialog_16_isbad");
             }
         }
+    }
+
+    private void TerminarMinijuego()
+    {
+        int tiempo = timer.Stop();
+
+        GameParametersMDB.Instance.SaveMinigameData("MinijuegoCorazon1", tiempo, intentos, movimientos, fallos);
     }
 }

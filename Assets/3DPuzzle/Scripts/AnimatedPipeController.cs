@@ -17,7 +17,7 @@ public class AnimatedPipeController : MonoBehaviour
 
     private Sequence spawnSequence;
 
-    public void StartAnimation(bool inverted = false)
+    public void StartAnimation(bool inverted = false, bool blue = false)
     {
         spawnSequence?.Kill();
 
@@ -30,14 +30,27 @@ public class AnimatedPipeController : MonoBehaviour
                 return;
             }
 
-            if (inverted)
+            if (inverted && blue)
             {
                 GameObject newMolecule = Instantiate(exitMolecule, exit.position, exit.rotation, entry);
                 newMolecule.GetComponent<MoleculeMovement>().SetPipe(this);
                 newMolecule.GetComponent<MoleculeMovement>().StartMovement(entry, targets);
             }
-            else{
+            else if (inverted && !blue)
+            {
+                GameObject newMolecule = Instantiate(entryMolecule, exit.position, exit.rotation, entry);
+                newMolecule.GetComponent<MoleculeMovement>().SetPipe(this);
+                newMolecule.GetComponent<MoleculeMovement>().StartMovement(entry, targets);
+            }
+            else if (!inverted && !blue)
+            {
                 GameObject newMolecule = Instantiate(entryMolecule, entry.position, entry.rotation, exit);
+                newMolecule.GetComponent<MoleculeMovement>().SetPipe(this);
+                newMolecule.GetComponent<MoleculeMovement>().StartMovement(exit, targets);
+            }
+            else if (!inverted && blue)
+            {
+                GameObject newMolecule = Instantiate(exitMolecule, entry.position, entry.rotation, exit);
                 newMolecule.GetComponent<MoleculeMovement>().SetPipe(this);
                 newMolecule.GetComponent<MoleculeMovement>().StartMovement(exit, targets);
             }

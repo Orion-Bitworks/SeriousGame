@@ -17,14 +17,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PostProcessing
   - Water
   - UI
   - Grid
   - ConnectionPoint
   - Raycast
-  - 
-  - 
+  - Background
+  - PauseUI
   - 
   - 
   - 

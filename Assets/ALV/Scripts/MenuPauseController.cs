@@ -1,4 +1,6 @@
+using Cinemachine.PostFX;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 
 public class MenuPauseController : MonoBehaviour
@@ -7,13 +9,31 @@ public class MenuPauseController : MonoBehaviour
 	[SerializeField] GameObject menuPausePanel;
 	[SerializeField] GameObject[] allOptionPanels;
 	GameObject currentPanel;
-	GameObject miniHeart;
+
+	[SerializeField] CinemachinePostProcessing pipeCamera;
+	[SerializeField] CinemachinePostProcessing threeDCamera;
+	[SerializeField] CinemachinePostProcessing minigamesCamera;
+
+	DepthOfField dofPipe;
+	DepthOfField dof3D;
+	DepthOfField dofMini;
+
+	[SerializeField] GridManager gridManager;
 
 	private void Start()
 	{
 		pause.SetActive(false);
 		menuPausePanel.SetActive(false);
-		foreach (GameObject panel in allOptionPanels)
+
+        pipeCamera.m_Profile.TryGetSettings(out dofPipe);
+        threeDCamera.m_Profile.TryGetSettings(out dof3D);
+        minigamesCamera.m_Profile.TryGetSettings(out dofMini);
+
+        dofPipe.active = false;
+        dof3D.active = false;
+        dofMini.active = false;
+
+        foreach (GameObject panel in allOptionPanels)
 		{
 
 			if (panel.name == "SoundPanel")
@@ -35,7 +55,7 @@ public class MenuPauseController : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (!pause.activeSelf)
+			if (!pause.activeSelf && !menuPausePanel.activeSelf)
 			{
 				StartPause();
 			}
@@ -50,31 +70,38 @@ public class MenuPauseController : MonoBehaviour
 	{
 		pause.SetActive(true);
 		Time.timeScale = 0f;
-		if (SceneManager.GetActiveScene().name == "RoadSystemTest")
-		{
-			GameManager.Instance.isPlaying = true;
-			miniHeart = FindAnyObjectByType<OrganDrag3D>().gameObject;
-			miniHeart.SetActive(false);
-		}
+
+        dofPipe.active = true;
+        dof3D.active = true;
+        dofMini.active = true;
+
+		if (SceneManager.GetActiveScene().name == "RoadSystemTest"!)
+			gridManager.gameObject.SetActive(false);
 	}
 
 	public void ClosePause()
 	{
 		pause.SetActive(false);
-		Time.timeScale = 1f;
+        if (menuPausePanel.activeSelf)
+		{
+			menuPausePanel.SetActive(false);
+		}
+
+        Time.timeScale = 1f;
+
+        dofPipe.active = false;
+        dof3D.active = false;
+        dofMini.active = false;
 
         if (SceneManager.GetActiveScene().name == "RoadSystemTest")
-		{
-            GameManager.Instance.isPlaying = false;
-            miniHeart.SetActive(true);
-        }
+            gridManager.gameObject.SetActive(true);
 	}
 
 	public void OpenOptionMenuPause()
 	{
+		pause.SetActive(false);
 		menuPausePanel.SetActive(true);
 	}
-
 
 	public void ChangeMenu(GameObject activePanel)
 	{
@@ -86,16 +113,18 @@ public class MenuPauseController : MonoBehaviour
 
 	}
 
-
 	public void CloseOptionMenuPause()
 	{
 		menuPausePanel.SetActive(false);
-
+        pause.SetActive(true);
     }
 
 	public void ReturnToMenu()
 	{
-        Time.timeScale = 1f;
+		Time.timeScale = 1f;
+
+        _ = GameParametersMDB.Instance.SendData();
+
         SceneManager.LoadScene("MainMenuGame");
 	}
 }

@@ -18,6 +18,7 @@ public class AnimationPivotController : MonoBehaviour
     [SerializeField] private float spawnDistanceY = 0;
     [SerializeField] private float spawnDistanceZ = 60;
     [SerializeField] bool invertedPipeDirection = false;
+    [SerializeField] bool blueOrNot = false;
     [SerializeField] private ANIMATION_TYPE animationType;
 
     private Vector3 originalPipePos;
@@ -55,7 +56,7 @@ public class AnimationPivotController : MonoBehaviour
         {
             if (pipeController != null && !invertedPipeDirection)
             {
-                pipeController.StartAnimation(invertedPipeDirection);
+                pipeController.StartAnimation(invertedPipeDirection, blueOrNot);
                 StartCoroutine(StartBloodFlow(pipeController));
             }
             else
@@ -89,7 +90,7 @@ public class AnimationPivotController : MonoBehaviour
             started = true;
 
             Sequence sequence = DOTween.Sequence().AppendInterval(1f);
-            sequence.OnComplete(() => { pipeController.StartAnimation(invertedPipeDirection); });
+            sequence.OnComplete(() => { pipeController.StartAnimation(invertedPipeDirection, blueOrNot); });
         }
     }
 

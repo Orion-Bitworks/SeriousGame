@@ -153,15 +153,22 @@ public class PieceGroup
         GameObject pivot = new GameObject("Group Pivot");
         pivot.transform.position = GetCentralPivot();
 
-        Vector3 sceneCenter = new Vector3(0f, 10.2f, 3.2f);
+        Vector3 sceneCenter = new Vector3(0f, 10.2f, 4f);
 
-        Vector3 combinedForward = Vector3.zero;
+        Vector3 combinedForward = Vector3.zero; // Combinacion de todos los ejes forward de las piezas
+        Vector3 combinedUp = Vector3.zero; // Combinacion de todos los ejes up de las piezas
         foreach (PieceController piece in pieces)
         {
-            combinedForward += piece.transform.forward;
+            combinedForward += piece.transform.up; // <======================== UP es el FORWARD real, porque la pieza esta rotada -90
+            combinedUp += piece.transform.forward; // <======================== FORWARD es el UP real, porque la pieza esta rotada -90
         }
         combinedForward.Normalize();
-        pivot.transform.rotation = Quaternion.LookRotation(combinedForward, Vector3.up);
+        combinedUp.Normalize();
+
+        Vector3 combinedRight = Vector3.Cross(combinedUp, combinedForward).normalized; // Right perpendicular a los otros dos
+        combinedUp = Vector3.Cross(combinedForward, combinedRight).normalized; // Up ajustado para que quede perpendicular a los otros dos
+
+        pivot.transform.rotation = Quaternion.LookRotation(-combinedForward, combinedUp);
 
         Dictionary<PieceController, Transform> originalHierarchy = new Dictionary<PieceController, Transform>();
 
@@ -178,15 +185,15 @@ public class PieceGroup
         upDownSequence.AppendInterval(0.1f);
         upDownSequence.Append(pivot.transform.DOMoveY(sceneCenter.y + -0.3f, 0.5f).SetEase(Ease.OutBack));
 
-        // Sequencia que tota el grupo 360º
+        // Sequencia que tota el grupo 360
         Sequence rotationSequence = DOTween.Sequence().SetAutoKill(false);
         rotationSequence.AppendInterval(0.97f);
-        rotationSequence.Append(pivot.transform.DOLocalRotate(new Vector3(0f, 360f, 0f), 1.5f, RotateMode.LocalAxisAdd).SetEase(Ease.OutCubic));
+        rotationSequence.Append(pivot.transform.DOLocalRotate(new Vector3(pivot.transform.localRotation.x, 360f, 0f), 1.5f, RotateMode.LocalAxisAdd).SetEase(Ease.OutCubic));
         rotationSequence.Join(upDownSequence);
 
         // Sequencia que rota el grupo y lo coloca en su sitio
         Sequence sequence = DOTween.Sequence().SetAutoKill(false);
-        sequence.Append(pivot.transform.DOMove(new Vector3(0f, 10.2f, 3.2f), 1f).SetEase(Ease.InQuad));
+        sequence.Append(pivot.transform.DOMove(sceneCenter, 1f).SetEase(Ease.InQuad));
 
         Vector3 direction = Camera.main.transform.position - pivot.transform.position;
         direction = direction.normalized;
@@ -195,9 +202,9 @@ public class PieceGroup
 
         // Rota el grupo para que mire a camara
         sequence.Join(pivot.transform.DORotateQuaternion(finalRotation, 1f).SetEase(Ease.InOutQuad));
-        sequence.Join(rotationSequence);        
+        sequence.Join(rotationSequence);
 
-        sequence.OnComplete(() => 
+        sequence.OnComplete(() =>
         {
             foreach (PieceController piece in pieces)
             {

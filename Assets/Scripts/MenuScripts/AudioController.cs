@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public enum SFX
@@ -69,6 +70,34 @@ public class AudioController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        string sceneName = scene.name;
+
+        // Paramos ambas por si acaso
+        mainSongInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        ambienceSongInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+
+        if (sceneName == "MainMenuGame")
+        {
+            mainSongInstance.start();
+        }
+        else if (sceneName == "RoadSystemTest")
+        {
+            ambienceSongInstance.start();
+        }
+    }
+
     private void Start()
     {
         // Creamos instancias de los eventos
@@ -79,7 +108,7 @@ public class AudioController : MonoBehaviour
         uiSFXInstance = FMODUnity.RuntimeManager.CreateInstance(uiSFX);
         heartMinigamesSFXInstance = FMODUnity.RuntimeManager.CreateInstance(heartMinigamesSFX);
 
-        ambienceSongInstance.start();
+        mainSongInstance.start();
     }
 
     // Se llama desde un botón, activa un sonido aleatorio del efecto MultiInstrument configurado en FMOD.

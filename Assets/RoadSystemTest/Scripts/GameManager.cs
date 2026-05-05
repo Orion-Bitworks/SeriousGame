@@ -7,7 +7,7 @@ using static Cinemachine.DocumentationSortingAttribute;
 
 public static class TempLevelHolder
 {
-    public static LevelID nextLevel = LevelID.Heart;
+    public static LevelID nextLevel = LevelID.Pipe;
 	public static bool introShown = false;
 }
 
@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }    // Referencia Singleton
 
-    [SerializeField] GameObject gameoverPanel;                  // Referencia al panel de GameOver
-    [SerializeField] Button continueButton;                     // Referencia al panel de GameOver
     [SerializeField] GameObject[] levels;
     [SerializeField] GameObject blackBackground;
 
@@ -47,6 +45,12 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] BallMaterialsConfig materialsConfig;
 
+    [SerializeField] MenuPauseController menuPauseController;
+
+    private SessionTimer timer;
+    public int tubCol;
+    private int intentos;
+
     private void Awake()
     {
         Instance = this;    // Inicializamos el Singleton
@@ -61,6 +65,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(LevelID level)
     {
+        timer = new SessionTimer();
+        timer.Start();
+        tubCol = 0;
+        intentos = 0;
+
         currentLevel = level;
 
         // Obtener los órganos requeridos por este nivel
@@ -152,6 +161,7 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         isPlaying = true;
+        intentos++;
     }
 
     /// <summary>
@@ -193,37 +203,33 @@ public class GameManager : MonoBehaviour
 			DialogManager.instance.Show("dialog_5_isgood");
 			DialogManager.instance.Show("dialog_6");
 
-			continueButton.onClick.RemoveAllListeners();
-			continueButton.onClick.AddListener(LoadNextLevel);
+            TerminarMinijuego("MinijuegoTuberiasTutorial");
+
+            if (DialogManager.IsDialogActive)
+            {
+                DialogManager.pendingEvents.Enqueue(() => LoadNextLevel());
+                return;
+            }
 		}
 
         if (currentLevel == LevelID.Heart)
         {
 			DialogManager.instance.Show("dialog_26_isgood");
 
-			continueButton.onClick.RemoveAllListeners();
-			continueButton.onClick.AddListener(LoadHeartScene);
-		}
+            LevelProgress.ResetProgress();
 
-		ActiveGameOverPanel();
+            TempLevelHolder.nextLevel = LevelID.Pipe;
+
+            TerminarMinijuego("MinijuegoTuberiasCorazon");
+
+            if (DialogManager.IsDialogActive)
+            {
+                // Cambiar por -> Llamar a Créditos
+                DialogManager.pendingEvents.Enqueue(() => menuPauseController.ReturnToMenu());
+                return;
+            }
+        }
     }
-
-	private void LoadHeartScene()
-	{
-		SceneManager.LoadScene("MainMenuGame");
-	}
-
-
-	private void ActiveGameOverPanel()
-	{
-		if (DialogManager.IsDialogActive)
-		{
-			DialogManager.pendingEvents.Enqueue(() => ActiveGameOverPanel());
-			return;
-		}
-
-		gameoverPanel.SetActive(true);
-	}
 
     public OrganType[] GetOrgansForLevel(LevelID level)
     {
@@ -232,5 +238,12 @@ public class GameManager : MonoBehaviour
                 return map.organs;
 
         return new OrganType[0];
+    }
+
+    private void TerminarMinijuego(string nivel)
+    {
+        int tiempo = timer.Stop();
+
+        GameParametersMDB.Instance.SaveMinigameData(nivel, tiempo, intentos, null, null, tubCol);
     }
 }

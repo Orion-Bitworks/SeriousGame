@@ -155,7 +155,6 @@ MonoBehaviour:
   requiredExits: 1
   entryUsed: 
   exitUsed: 
-  wasUsed: 0
 --- !u!1 &4120027852103410005
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,7 +216,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f2be5f9c648cd604db81255c5d0b2254, type: 2}
+  - {fileID: 2100000, guid: fa1cb521d4b13ca46ae86c690d983aeb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

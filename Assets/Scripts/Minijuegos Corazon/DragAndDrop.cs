@@ -40,6 +40,8 @@ public class DragAndDrop : MonoBehaviour
     {
         if (locked) return; // Bloqueja TOT el clic
 
+        minigame1Instance.movimientos++;
+
         //Liberar la DropArea actual si estaba colocado
         //Liberar la DropArea actual si estaba colocado
         if (placed && CurrentDropArea != null)

@@ -10,7 +10,6 @@ public class ScoreManager : MonoBehaviour
 {
 	public static ScoreManager instance;
 
-	[SerializeField] GameObject widget;
 	[SerializeField] CheckTVController checkTV;
 
 	[SerializeField] public HashSet<ConnectionPointController> connections = new HashSet<ConnectionPointController>();
@@ -19,12 +18,24 @@ public class ScoreManager : MonoBehaviour
 	private bool resetting = false;
 	private bool playing = false;
 
+	private SessionTimer timer;
+	public int movimientos;
+	private int intentos;
+
 	private void Awake()
 	{
 		instance = this;
 	}
 
-	public void RegisterConnectionPoint(ConnectionPointController point)
+    private void Start()
+    {
+        timer = new SessionTimer();
+		timer.Start();
+		movimientos = 0;
+		intentos = 0;
+    }
+
+    public void RegisterConnectionPoint(ConnectionPointController point)
 	{
 		connections.Add(point);
 	}
@@ -61,16 +72,16 @@ public class ScoreManager : MonoBehaviour
 		{
 			DialogManager.instance.Show("dialog_8_isgood");
 
-			checkTV.ChangeState(CHECKING_STATE.CORRECT);
-			DOVirtual.DelayedCall(1f, () =>
+            ChangeTVState(CHECKING_STATE.CORRECT);
+            DOVirtual.DelayedCall(1f, () =>
 			{
-				ToggleWidget(true);
+				End3DMinigame();
 			});
 		}
 		else
 		{
-			checkTV.ChangeState(CHECKING_STATE.WRONG);
-			ResetLevel();
+            ChangeTVState(CHECKING_STATE.WRONG);
+            ResetLevel();
 		}
 	}
 
@@ -81,20 +92,15 @@ public class ScoreManager : MonoBehaviour
 			DialogManager.pendingEvents.Enqueue(() => ToggleWidget(state));
 			return;
 		}
-
-		widget.SetActive(state);
 	}
 
 	public void End3DMinigame()
 	{
 		DialogManager.instance.Show("dialog_10");
 
-		ResetLevel(true);
-	}
+		TerminarMinijuego();
 
-	public void LoadScene(string targetScene)
-	{
-		SceneManager.LoadScene(targetScene);
+        ResetLevel(true);
 	}
 
 	public void PlayFinishAnimation()
@@ -114,17 +120,22 @@ public class ScoreManager : MonoBehaviour
 			}
 		}
 
-		if (!canPlay)
+		if (!canPlay || PieceGroupManager.GetGroupCount() > 1)
 		{
-			return;
+            Debug.Log("Can't play because there are " + PieceGroupManager.GetGroupCount() + " active groups on scene.");
+            return;
 		}
+
+		intentos++;
 
 		playing = true;
 
-		checkTV.ShowTV();
-		checkTV.ChangeState(CHECKING_STATE.LOADING);
+		//checkTV.ShowTV();
+		//checkTV.ChangeState(CHECKING_STATE.LOADING);
+        ShowTV(true);
+        ChangeTVState(CHECKING_STATE.LOADING);
 
-		foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
+        foreach (EventClick eventClick in FindObjectsOfType<EventClick>())
 		{
 			eventClick.CanInteract(false);
 		}
@@ -140,8 +151,6 @@ public class ScoreManager : MonoBehaviour
 	public void ResetLevel(bool continueToScene = false)
 	{
 		resetting = true;
-
-		ToggleWidget(false);
 
 		StartCoroutine(StopBloodFlow(continueToScene));
 	}
@@ -174,9 +183,10 @@ public class ScoreManager : MonoBehaviour
 	{
 		yield return new WaitUntil(() => FindObjectsOfType<AnimatedPipeController>().Length == 0);
 
-		checkTV.HideTV();
+        //checkTV.HideTV();
+        ShowTV(false);
 
-		Sequence sequence = DOTween.Sequence().SetAutoKill(true);
+        Sequence sequence = DOTween.Sequence().SetAutoKill(true);
 
 		foreach (ConnectionPointController point in connections)
 		{
@@ -212,9 +222,10 @@ public class ScoreManager : MonoBehaviour
 
 		ParticleManager.instance.DeleteAllParticles();
 
-		checkTV.HideTV();
+		//checkTV.HideTV();
+        ShowTV(false);
 
-		Sequence sequence = DOTween.Sequence().SetAutoKill(true);
+        Sequence sequence = DOTween.Sequence().SetAutoKill(true);
 
 		foreach (ConnectionPointController point in connections)
 		{
@@ -231,12 +242,12 @@ public class ScoreManager : MonoBehaviour
 			}
 
 			resetting = false;
-		});
 
-		foreach (ConnectionPointController point in connections)
-		{
-			point.Enable();
-		}
+			foreach (ConnectionPointController point in connections)
+			{
+				point.Enable();
+			}
+		});
 
 		foreach (BloodAnimationController controller in FindObjectsOfType<BloodAnimationController>())
 		{
@@ -267,4 +278,34 @@ public class ScoreManager : MonoBehaviour
 		yield return new WaitForSeconds(timeDelay);
 		CheckConnections();
 	}
+
+    public void ChangeTVState(CHECKING_STATE newState)
+    {
+        if (checkTV != null)
+        {
+            checkTV.ChangeState(newState);
+        }
+    }
+
+    public void ShowTV(bool b)
+    {
+        if (checkTV != null)
+        {
+            if (b)
+            {
+                checkTV.ShowTV();
+            }
+            else
+            {
+                checkTV.HideTV();
+            }
+        }
+    }
+
+    private void TerminarMinijuego()
+    {
+        int tiempo = timer.Stop();
+
+        GameParametersMDB.Instance.SaveMinigameData("Minijuego3DCorazon", tiempo, intentos, movimientos);
+    }
 }

@@ -28,16 +28,26 @@ public class ObjectSelector : MonoBehaviour
     {
         rotateButton.onClick.AddListener(rotatePiece); //Listener
         dragAndDropInstance = GetComponent<DragAndDrop>();
+        
+        controls = new Controls();
     }
 
     private void Start()
     {
-        controls = new Controls();
-
         controls.Enable();
 
         controls.InMiniGame.Rotate.performed += OnRotate;
         controls.InMiniGame.Check.performed += OnCheck;
+    }
+
+    private void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Disable();
     }
 
     private void OnRotate(InputAction.CallbackContext ctx)

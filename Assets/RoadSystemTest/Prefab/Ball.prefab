@@ -207,6 +207,7 @@ MonoBehaviour:
   x: 1
   y: 1
   z: 1
-  speed: 40
+  speed: 100
   inverted: 0
   rotateOnCreation: 1
+  random: 1

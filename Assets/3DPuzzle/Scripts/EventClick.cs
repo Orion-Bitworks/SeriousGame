@@ -87,11 +87,14 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         if (onUI)
         {
+            Vector3 prevRotation = new Vector3(270f, 0f, piece.transform.localRotation.z);
+
             piece.transform.SetParent(originalParent);
 
             Sequence positionSequence = DOTween.Sequence();
             positionSequence = DOTween.Sequence();
             positionSequence.Append(piece.transform.DOMove(originalParent.position, 0.5f).SetEase(Ease.InOutBack, 0.5f));
+            positionSequence.Join(piece.transform.DOLocalRotate(prevRotation, 0.5f).SetEase(Ease.Linear));
         }
     }
 
@@ -192,7 +195,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         piece.transform.SetParent(originalParent);
         piece.transform.position = originalParent.position;
-        piece.transform.rotation = Quaternion.identity;
+        piece.transform.rotation = Quaternion.Euler(new Vector3(-90, 0, 0));
         piece.transform.localScale = Vector3.zero;
 
         Sequence resetSequence = DOTween.Sequence();

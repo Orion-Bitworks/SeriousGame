@@ -10,7 +10,6 @@ public class GameLoopController : MonoBehaviour
     [SerializeField] GameObject heartMinigamesObject;
     [SerializeField] GameObject heartMinigamesUI;
     [SerializeField] GameObject threeDMinigame;
-    [SerializeField] GameObject threeDMinigameUI;
     [SerializeField] GameObject threeDMinigamePieces;
     [SerializeField] GameObject threeDMinigameScreen;
     [SerializeField] GameObject pipesUI;
@@ -20,9 +19,9 @@ public class GameLoopController : MonoBehaviour
     [SerializeField] TutorialManager controller;
     [SerializeField] ScreenController screen;
 
-    bool minigamesStarted = true;
+    bool minigamesStarted = false;
     bool minigamesFinished = false;
-    bool threeDStarted = true;
+    bool threeDStarted = false;
     bool threeDFinished = false;
 
     OrganLogic heartObject;
@@ -103,10 +102,10 @@ public class GameLoopController : MonoBehaviour
 
         threeDStarted = true;
         GameManager.Instance.isPlaying = true;
+        BuildController.Instance.controls.Disable();
         GameManager.Instance.currentLevelGameObject.SetActive(false);
         threeDMinigame.gameObject.SetActive(true);
         pipesUI.gameObject.SetActive(false);
-        threeDMinigameUI.gameObject.SetActive(true);
         threeDMinigamePieces.gameObject.SetActive(true);
         threeDMinigameScreen.gameObject.SetActive(true);
         threeDMinigameCamera.Priority = 2;
@@ -127,9 +126,9 @@ public class GameLoopController : MonoBehaviour
         threeDFinished = true;
         GameManager.Instance.currentLevelGameObject.SetActive(true);
         GameManager.Instance.isPlaying = false;
+        BuildController.Instance.controls.Enable();
         threeDMinigame.gameObject.SetActive(false);
         pipesUI.gameObject.SetActive(true);
-        threeDMinigameUI.gameObject.SetActive(false);
         threeDMinigamePieces.gameObject.SetActive(false);
         threeDMinigameScreen.gameObject.SetActive(false);
         threeDMinigameCamera.Priority = 0;

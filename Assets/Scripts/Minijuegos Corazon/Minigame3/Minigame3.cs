@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Minigame3 : MonoBehaviour
@@ -49,7 +50,12 @@ public class Minigame3 : MonoBehaviour
 	[SerializeField]
 	public TutorialManager tutorial;
 
-	private void Awake()
+    private SessionTimer timer;
+    [SerializeField] private int intentos;
+    private int fallos;
+
+    private bool alreadyEnded = false;
+    private void Awake()
     {
         foreach(GameObject obj in elementsToHide) //amagar tots els elements dins del array
         {
@@ -57,6 +63,14 @@ public class Minigame3 : MonoBehaviour
         }
 
         StartCoroutine(ShowInstructions()); //Corrutina per mostrar les instruccions del minijoc
+    }
+
+    private void Start()
+    {
+        timer = new SessionTimer();
+        timer.Start();
+        intentos = 1;
+        fallos = 0;
     }
 
     //Rutina perque fagin spawn les notes
@@ -111,14 +125,13 @@ public class Minigame3 : MonoBehaviour
 		gameActive = true;
 
 		//Despres de mostrar les instruccions, comença la corrutina de spawn de les notes
-		spawnInterval = 60f / bpm;
+		spawnInterval = 90f / bpm;
 		StartCoroutine(SpawnNotesRoutine());
 	}
 
 	//Mostrar seguent nota
 	void SpawnNextNote()
     {
-
         if(activateNotes.Count >= 2)
         {
             RythmNote oldest = activateNotes[0];
@@ -153,8 +166,6 @@ public class Minigame3 : MonoBehaviour
         TryActivateNext();
     }
 
-    
-
     //Activar la seguent nota (sense marcar)
     void TryActivateNext()
     {
@@ -177,6 +188,7 @@ public class Minigame3 : MonoBehaviour
 
         if (completedNotes >= maxNotes)
         {
+            StopAllCoroutines();
             EndMinigame(); //Al finalitzar el minijoc
             return;
         }
@@ -188,6 +200,8 @@ public class Minigame3 : MonoBehaviour
     {
         gameActive = false;
 
+        fallos += maxNotes - completedNotes;
+
         if(completedNotes < maxNotes)
         {
             rebootButton.SetActive(true);
@@ -196,7 +210,11 @@ public class Minigame3 : MonoBehaviour
         }
         else
         {
+            if (alreadyEnded) return;
+            alreadyEnded = true;
+
             DialogManager.instance.Show("dialog_22_isgood");
+            TerminarMinijuego();
             StartCoroutine(FinishGame());
         }
     }
@@ -216,8 +234,11 @@ public class Minigame3 : MonoBehaviour
 
     public void RestartMinigame()
     {
+        Debug.Log("Reiniciando minijuego");
 
         rebootButton.SetActive(false);
+
+        intentos++;
 
         StopAllCoroutines();
         gameActive = false;
@@ -243,5 +264,12 @@ public class Minigame3 : MonoBehaviour
         }
 
         StartCoroutine(ShowInstructions());
+    }
+
+    private void TerminarMinijuego()
+    {
+        int tiempo = timer.Stop();
+
+        GameParametersMDB.Instance.SaveMinigameData("MinijuegoCorazon3", tiempo, intentos, null, fallos);
     }
 }

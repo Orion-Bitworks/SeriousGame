@@ -71,8 +71,4 @@ public class RythmNote : MonoBehaviour
         yield return null;
         canBePressed = true;
     }
-
-
-
-    
 }

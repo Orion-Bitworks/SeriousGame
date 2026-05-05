@@ -16,7 +16,7 @@ public class Rotate3DObject : MonoBehaviour
     private ROTATION_STATE state = ROTATION_STATE.STATIC;
 
     Vector3 firstPos;
-    float minDistance = 100;
+    float minDistance = 20;
 
     private bool dragStarted = false;
 
@@ -24,8 +24,6 @@ public class Rotate3DObject : MonoBehaviour
 
     [Header("Rotation")]
     [SerializeField] private float rotationSpeed = 10f;
-    [SerializeField] private float threshold = 0.1f;
-
 
     private void Awake()
     {

@@ -23,6 +23,11 @@ public class Minigame2 : MonoBehaviour
     [SerializeField]
     public TutorialManager tutorial;
 
+    private SessionTimer timer;
+    private int intentos;
+    public int movimientos;
+    private int fallos;
+
     private void Awake()
     {
         CheckButton.onClick.AddListener(checkPlacementButton);
@@ -31,6 +36,11 @@ public class Minigame2 : MonoBehaviour
     void Start()
     {
         totalVeins = draggagleVeins.Length;
+        timer = new SessionTimer();
+        timer.Start();
+        intentos = 0;
+        movimientos = 0;
+        fallos = 0;
         showInfo();
         tutorial.ShowTutorial(3);
         tutorial.MoveCarpetaMiniHeart();
@@ -56,6 +66,8 @@ public class Minigame2 : MonoBehaviour
 
     public void checkPlacementButton()
     {
+        intentos++;
+
         correct = 0;
 
         Debug.Log("────────────── VALIDACIÓN MINIJUEGO 2 ──────────────");
@@ -109,6 +121,8 @@ public class Minigame2 : MonoBehaviour
 
         Debug.Log($"RESULTADO FINAL → {correct} / {draggagleVeins.Length} correctas");
 
+        fallos += draggagleVeins.Length - correct;
+
         // Caso éxito
         if (correct == draggagleVeins.Length)
         {
@@ -150,6 +164,14 @@ public class Minigame2 : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(2f);
         popUpShown = true;
+        TerminarMinijuego();
         phasesManager.PasarAFase3();
+    }
+
+    private void TerminarMinijuego()
+    {
+        int tiempo = timer.Stop();
+
+        GameParametersMDB.Instance.SaveMinigameData("MinijuegoCorazon2", tiempo, intentos, movimientos, fallos);
     }
 }

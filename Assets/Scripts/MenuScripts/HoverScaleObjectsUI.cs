@@ -14,15 +14,25 @@ public class HoverScaleObjectsUI : MonoBehaviour, IPointerEnterHandler, IPointer
 		gOHover = transform.localScale;
 	}
 
-	public void OnPointerEnter(PointerEventData eventData)
+    private void OnDisable()
     {
-        transform.DOScale(gOHover * 1.5f, 0.5f);
+        ScaleDown();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        transform.DOScale(gOHover * 1.5f, 0.5f).SetUpdate(true);
 
         AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Hover);
     }
 
+    private void ScaleDown()
+    {
+		transform.DOScale(gOHover, 0.5f).SetUpdate(true);
+    }
+
     public void OnPointerExit(PointerEventData eventData)
     {
-		transform.DOScale(gOHover, 0.5f);
+        ScaleDown();
 	}
 }

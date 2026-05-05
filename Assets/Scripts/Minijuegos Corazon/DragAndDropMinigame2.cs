@@ -40,7 +40,18 @@ public class DragAndDropMinigame2 : MonoBehaviour
     {
         if (locked) return;
 
-        hasDragged = false;   
+        minigame2Instance.movimientos++;
+
+        hasDragged = false;
+
+        if (placed && CurrentDropArea != null)
+        {
+            DropArea drop = CurrentDropArea.GetComponent<DropArea>();
+            if (drop != null) drop.occupied = false;
+
+            placed = false;
+            CurrentDropArea = null;
+        }
 
         if (currentlySelected != null && currentlySelected != this)
             currentlySelected.selectObj?.Deselect();
@@ -56,9 +67,9 @@ public class DragAndDropMinigame2 : MonoBehaviour
 
         offset = transform.position - MouseWorldPosition();
 
-        // 🔹 Solo desactivamos el collider de drag, NO el trigger
-        if (dragCollider != null)
-            dragCollider.enabled = false;
+        // Solo desactivamos el collider de drag, NO el trigger
+        //if (dragCollider != null)
+        //    dragCollider.enabled = false;
     }
 
     void OnMouseDrag()
@@ -88,12 +99,11 @@ public class DragAndDropMinigame2 : MonoBehaviour
         transform.position = newPos;
     }
 
-
     void OnMouseUp()
     {
         if (locked) return;
 
-        if (hasDragged && CurrentDropArea != null)
+        if ((!placed || hasDragged) && CurrentDropArea != null)
         {
             DropArea drop = CurrentDropArea.GetComponent<DropArea>();
             if (drop != null && !drop.occupied)
@@ -101,7 +111,6 @@ public class DragAndDropMinigame2 : MonoBehaviour
                 Debug.Log("Buscando SnapPivot en: " + CurrentDropArea.name);
                 Transform snapPivot = CurrentDropArea.Find("SnapPivot");
                 Debug.Log("SnapPivot encontrado: " + snapPivot);
-
 
                 if (snapPivot != null)
                 {
@@ -111,14 +120,10 @@ public class DragAndDropMinigame2 : MonoBehaviour
                     //transform.rotation = drop.requiredRotation;
 
                     drop.occupied = true;
+                    placed = true;
 
-                    if (!placed)
-                    {
-                        placed = true;
-
-                        if (minigame2Instance != null && minigame2Instance.gameObject.activeSelf)
-                            minigame2Instance.objectsRemaining();
-                    }
+                    if (minigame2Instance != null && minigame2Instance.gameObject.activeSelf)
+                        minigame2Instance.objectsRemaining();
                     
                 }
             }
@@ -126,16 +131,16 @@ public class DragAndDropMinigame2 : MonoBehaviour
         else
         {
             // Si no se arrastró pero estaba colocada, NO volver al inicio
-            if (!placed)
+            if (hasDragged && !placed)
             {
                 transform.position = initialPosition;
                 transform.rotation = initialRotation;
             }
         }
 
-        // 🔹 Volvemos a activar el collider de drag
-        if (dragCollider != null)
-            dragCollider.enabled = true;
+        // Volvemos a activar el collider de drag
+        //if (dragCollider != null)
+        //    dragCollider.enabled = true;
     }
 
     Vector3 MouseWorldPosition()
@@ -147,18 +152,28 @@ public class DragAndDropMinigame2 : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("DropArea"))
+        if (other.CompareTag("DropArea") && tipTrigger.bounds.Intersects(other.bounds))
         {
             Debug.Log("Detecté DropArea: " + other.name);
             CurrentDropArea = other.transform;
         }
     }
 
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("DropArea") && tipTrigger.bounds.Intersects(other.bounds) && !placed)
+        {
+            Debug.Log("Detecté DropArea: " + other.name);
+            CurrentDropArea = other.transform;
+        }
+    }
 
     void OnTriggerExit(Collider other)
     {
-        if (!hasDragged) return;
         if (other.CompareTag("DropArea") && CurrentDropArea == other.transform)
-            CurrentDropArea = null;
+        {
+            if (!tipTrigger.bounds.Intersects(other.bounds))
+                CurrentDropArea = null;
+        }
     }
 }
