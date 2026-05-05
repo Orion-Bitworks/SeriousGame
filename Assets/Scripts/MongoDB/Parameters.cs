@@ -12,12 +12,14 @@ public class Parameters
 	public ObjectId Id { get; set; }
 	public int sesionTime { get; set; }
 
-	public Dictionary<string, MinigameStats> Minigames {  get; set; }
-		= new Dictionary<string, MinigameStats>();
+	/*public Dictionary<string, MinigameStats> Minigames {  get; set; }
+		= new Dictionary<string, MinigameStats>();*/
+	public List<MinigameStats> Minigames { get; set; } = new List<MinigameStats>();
 }
 
 public class MinigameStats
 {
+	public string Nombre { get; set; }
 	public int? Tiempo { get; set; }
 	public int? Intentos { get; set; }
 	public int? Fallos { get; set; }

@@ -123,7 +123,7 @@ public class MenuPauseController : MonoBehaviour
 	{
 		Time.timeScale = 1f;
 
-        _ = GameParametersMDB.Instance.SendData();
+       // _ = GameParametersMDB.Instance.SendData();
 
         SceneManager.LoadScene("MainMenuGame");
 	}

@@ -350,4 +350,10 @@ public class PieceController : MonoBehaviour
     {
         return InputManager.instance.rotateMode_ia.inProgress || InputManager.instance.separateMode_ia.inProgress;
     }
+
+    //cambio
+	private void OnDestroy()
+	{
+        PieceGroupManager.UnRegisterPiece(this);
+	}
 }

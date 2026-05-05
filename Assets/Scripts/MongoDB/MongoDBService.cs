@@ -11,13 +11,9 @@ public class MongoDBService
     private IMongoDatabase database;
     private IMongoCollection<BsonDocument> userCollection;
 
-	//var users = App.DB.GetCollection<User>("users");
-
-
 
 	public MongoDBService(string connectionString, string dbName)
     {
-        //string connectionString = "mongodb+srv://a24vicmilsal_db_user:ELcSdHLfU9J2NnpH@cluster0.gfvtmme.mongodb.net/?appName=Cluster0";
         try
         {
             client = new MongoClient(connectionString);

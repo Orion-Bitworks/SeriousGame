@@ -82,4 +82,11 @@ public class PieceGroupManager : MonoBehaviour
 
         return allGroups.Count; // groupCount
     }
+
+
+    //cambio
+    public static void UnRegisterPiece(PieceController piece)
+    {
+        allPieces.Remove(piece);
+    }
 }

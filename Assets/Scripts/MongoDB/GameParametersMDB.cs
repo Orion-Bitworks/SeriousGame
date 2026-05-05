@@ -52,7 +52,7 @@ public class GameParametersMDB : MonoBehaviour
         repo = new PlayerSessionRepository();
     }
 
-	public void SaveMinigameData(string name, int tiempo, int? intentos = null, int? movimientos = null, int? fallos = null, int? colocaciones = null)
+	/*public void SaveMinigameData(string name, int tiempo, int? intentos = null, int? movimientos = null, int? fallos = null, int? colocaciones = null)
 	{
 		if (!session.Minigames.ContainsKey(name))
 			session.Minigames[name] = new MinigameStats();
@@ -72,7 +72,22 @@ public class GameParametersMDB : MonoBehaviour
 
         if (colocaciones.HasValue)
             stats.Colocaciones = (stats.Colocaciones ?? 0) + colocaciones.Value;
-    }
+    }*/
+
+	public void SaveMinigameData(string name, int tiempo, int? intentos = null, int? movimientos = null, int? fallos = null, int? colocaciones = null)
+	{
+		var stats = new MinigameStats
+		{
+			Nombre = name,
+			Tiempo = tiempo,
+			Intentos = intentos,
+			Movimientos = movimientos,
+			Fallos = fallos,
+			Colocaciones = colocaciones
+		};
+
+		session.Minigames.Add(stats);
+	}
 
 	public async Task SendData()
 	{
@@ -81,4 +96,9 @@ public class GameParametersMDB : MonoBehaviour
         await repo.InsertSession(session);
         timer.Resume();
     }
+
+	private void OnApplicationQuit()
+	{
+        SendData();
+	}
 }
