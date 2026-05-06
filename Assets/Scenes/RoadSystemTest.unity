@@ -2599,7 +2599,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8b87fdadddf3f3c4ab49ed976b5b8edc, type: 2}
     - target: {fileID: 919132149155446097, guid: 2eb0b6c94eb5c164aa4168d217d34102, type: 3}
       propertyPath: m_Name
-      value: Valvula Pulmonar
+      value: "Valvula Tric\xFAspide"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4127,7 +4127,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8b87fdadddf3f3c4ab49ed976b5b8edc, type: 2}
     - target: {fileID: 919132149155446097, guid: 2eb0b6c94eb5c164aa4168d217d34102, type: 3}
       propertyPath: m_Name
-      value: "Valvula A\xF3rtica"
+      value: Valvula Mitral
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9963,7 +9963,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8b87fdadddf3f3c4ab49ed976b5b8edc, type: 2}
     - target: {fileID: 919132149155446097, guid: 2eb0b6c94eb5c164aa4168d217d34102, type: 3}
       propertyPath: m_Name
-      value: Valvula Tricupidea
+      value: Valvula Pulmonar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15910,7 +15910,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 8b87fdadddf3f3c4ab49ed976b5b8edc, type: 2}
     - target: {fileID: 919132149155446097, guid: 2eb0b6c94eb5c164aa4168d217d34102, type: 3}
       propertyPath: m_Name
-      value: Valvula Mistral
+      value: "Valvula A\xF3rtica"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
