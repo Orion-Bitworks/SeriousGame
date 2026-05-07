@@ -295,6 +295,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!1001 &98987792
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,7 +307,7 @@ PrefabInstance:
     - target: {fileID: 873398220235421982, guid: 63a1fc23c2edd6644b7d1b8759ef4faa, type: 3}
       propertyPath: nextConnection
       value: 
-      objectReference: {fileID: 1653779753}
+      objectReference: {fileID: 0}
     - target: {fileID: 4099943218095758808, guid: 63a1fc23c2edd6644b7d1b8759ef4faa, type: 3}
       propertyPath: m_Name
       value: VentrDRPiece (1)
@@ -1164,10 +1165,10 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: 0.00000050958135
+    y: -0.82824475
+    width: 1.0729613
+    height: 1.908397
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1614,17 +1615,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &637977461 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4680409267243964693, guid: 4da2aad4f6275904bbb3b3bb412c0c3b, type: 3}
-  m_PrefabInstance: {fileID: 979714538}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ccbdb1ed5102b244bde514f4e936900, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &652735649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1967,6 +1957,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!1 &733099281
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,6 +2107,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!1001 &759107496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2862,6 +2854,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!1 &1106344515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3458,6 +3451,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!114 &1349608014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3704,6 +3698,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!1001 &1442172358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3968,7 +3963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03465af393d59d4392628a901f5c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  widget: {fileID: 2983917381718082348}
+  checkTV: {fileID: 0}
+  movimientos: 0
 --- !u!4 &1487366263
 Transform:
   m_ObjectHideFlags: 0
@@ -4035,7 +4031,7 @@ PrefabInstance:
     - target: {fileID: 2858685117185037525, guid: f4d56f17fd5a1aa46a0cd6bd40ccae87, type: 3}
       propertyPath: animationPivots.Array.data[1]
       value: 
-      objectReference: {fileID: 637977461}
+      objectReference: {fileID: 0}
     - target: {fileID: 2858685117185037525, guid: f4d56f17fd5a1aa46a0cd6bd40ccae87, type: 3}
       propertyPath: requiredConnections.Array.data[1]
       value: 
@@ -4179,6 +4175,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!114 &1499635489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4471,17 +4468,6 @@ Transform:
   - {fileID: 60195179}
   m_Father: {fileID: 1213133827}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1653779753 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2486793710616761387, guid: 4da2aad4f6275904bbb3b3bb412c0c3b, type: 3}
-  m_PrefabInstance: {fileID: 979714538}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f410a91c4890da4fb1cfe81a4e74b93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1792609009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4586,6 +4572,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!114 &1805020966 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2858685117185037525, guid: f4d56f17fd5a1aa46a0cd6bd40ccae87, type: 3}
@@ -4963,6 +4950,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!114 &1875572176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5058,6 +5046,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!114 &1884251181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5583,6 +5572,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!1 &2031731959
 GameObject:
   m_ObjectHideFlags: 0
@@ -5922,6 +5912,7 @@ MonoBehaviour:
   speed: 40
   inverted: 0
   rotateOnCreation: 1
+  random: 0
 --- !u!1 &2124009778
 GameObject:
   m_ObjectHideFlags: 0
@@ -6208,12 +6199,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagToDetect: Panel
+  localizationController: {fileID: 0}
+  carpeta: {fileID: 0}
   nextButton: {fileID: 9047625370970365249}
   priorButton: {fileID: 1074692176720433411}
   progressPanel: {fileID: 1132848683489009183}
   progressSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   unselected: {r: 0.56, g: 0.56, b: 0.56, a: 1}
   selected: {r: 1, g: 1, b: 1, a: 1}
+  tutorialID: 5
 --- !u!4 &373457809138723533
 Transform:
   m_ObjectHideFlags: 0

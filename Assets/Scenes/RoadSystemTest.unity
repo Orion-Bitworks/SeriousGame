@@ -1768,7 +1768,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1254541333}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &142551933
 MonoBehaviour:
@@ -1816,6 +1816,8 @@ MonoBehaviour:
   particles:
   - {fileID: 3082929688375421012, guid: 694d792edd88d3a4a87ef63ce7fe1319, type: 3}
   - {fileID: 2303551000471412480, guid: 52c919664941114418d4e1223e46e6cd, type: 3}
+  - {fileID: 464375523019712023, guid: 47aa8071ce2223b49bf40af48db70d32, type: 3}
+  - {fileID: 1890106729171171648, guid: b198211badd198840a335cb3c69148dd, type: 3}
 --- !u!1 &150380384
 GameObject:
   m_ObjectHideFlags: 0
@@ -13099,7 +13101,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 142551932}
   - {fileID: 646960279}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23912,3 +23913,4 @@ SceneRoots:
   - {fileID: 1439946959}
   - {fileID: 1958660309}
   - {fileID: 956007030}
+  - {fileID: 142551932}
