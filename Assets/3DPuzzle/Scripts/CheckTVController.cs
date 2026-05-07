@@ -36,6 +36,8 @@ public class CheckTVController : MonoBehaviour
 
     private Color startColor;
 
+    private FMOD.Studio.EventInstance loadInstance;
+
     private void Start()
     {
         startPosition = transform.position;
@@ -94,16 +96,21 @@ public class CheckTVController : MonoBehaviour
                 case CHECKING_STATE.LOADING:
                     //image.texture = loadingSprite.texture;
                     screenAnimator.SetTrigger("Loading");
+                    loadInstance = AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenCharging);
                     screenMaterial.DOColor(loadingColor, "_EmissionColor", 0.05f);
                     break;
                 case CHECKING_STATE.CORRECT:
                     //image.texture = correctSprite.texture;
                     screenAnimator.SetTrigger("Happy");
+                    loadInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                    AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenCorrect);
                     screenMaterial.DOColor(correctColor, "_EmissionColor", 0.05f);
                     break;
                 case CHECKING_STATE.WRONG:
                     //image.texture = wrongSprite.texture;
                     screenAnimator.SetTrigger("Angry");
+                    loadInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                    AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenError);
                     screenMaterial.DOColor(wrongColor, "_EmissionColor", 0.05f);
                     break;
             }

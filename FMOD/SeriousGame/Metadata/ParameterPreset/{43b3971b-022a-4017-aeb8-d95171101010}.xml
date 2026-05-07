@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{43b3971b-022a-4017-aeb8-d95171101010}">
+		<property name="name">
+			<value>HeartActions</value>
+		</property>
+		<relationship name="folder">
+			<destination>{f0e52e71-842d-4214-858c-9f773e3481d8}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{454d06ec-c5af-43f2-af5b-a6aabc07615c}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{454d06ec-c5af-43f2-af5b-a6aabc07615c}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>2</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>ParticleInOut</value>
+			<value>Heartbeat</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

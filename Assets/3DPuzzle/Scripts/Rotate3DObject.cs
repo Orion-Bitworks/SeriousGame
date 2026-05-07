@@ -100,6 +100,7 @@ public class Rotate3DObject : MonoBehaviour
         if (inputManager.leftClick_ia.triggered || inputManager.rightClick_ia.triggered)
         {
             firstPos = GetMousePosInScreen();
+            AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.Rotate);
         }
 
         dragPos = GetMousePosInScreen();

@@ -30,6 +30,8 @@ public class AnimatedPipeController : MonoBehaviour
                 return;
             }
 
+            AudioController.Instance.PlayTubeParticleOnce();
+
             if (inverted && blue)
             {
                 GameObject newMolecule = Instantiate(exitMolecule, exit.position, exit.rotation, entry);
@@ -86,6 +88,8 @@ public class AnimatedPipeController : MonoBehaviour
         {
             spawnSequence.Kill();
         }
+
+        AudioController.Instance.StopTubeParticle();
 
         DOTween.Kill(transform);
         DOTween.Kill(gameObject);

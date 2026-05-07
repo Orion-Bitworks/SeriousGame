@@ -5882,6 +5882,34 @@ MonoBehaviour:
       Data3: -1561143124
       Data4: -947388288
     Path: event:/PipeSFX
+  threeDSFX:
+    Guid:
+      Data1: 867218762
+      Data2: 1076702307
+      Data3: 62245025
+      Data4: 1906048411
+    Path: event:/3DSFX
+  heartbeatSFX:
+    Guid:
+      Data1: 58174244
+      Data2: 1140450282
+      Data3: 1211439783
+      Data4: 871159750
+    Path: event:/HeartbeatSFX
+  heartSFX:
+    Guid:
+      Data1: -72735206
+      Data2: 1286878953
+      Data3: -917949301
+      Data4: 1319167863
+    Path: event:/HeartSFX
+  tubeAnimationSFX:
+    Guid:
+      Data1: 1118861619
+      Data2: 1251285734
+      Data3: 65734294
+      Data4: 1873678186
+    Path: event:/TubeAnimationSFX
 --- !u!4 &1417410450
 Transform:
   m_ObjectHideFlags: 0

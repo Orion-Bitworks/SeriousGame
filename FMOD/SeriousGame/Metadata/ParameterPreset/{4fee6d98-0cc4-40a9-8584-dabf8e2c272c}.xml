@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{4fee6d98-0cc4-40a9-8584-dabf8e2c272c}">
+		<property name="name">
+			<value>3DActions</value>
+		</property>
+		<relationship name="folder">
+			<destination>{f0e52e71-842d-4214-858c-9f773e3481d8}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{5144afd5-5d52-4e3f-8290-f8bbe4686e50}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{5144afd5-5d52-4e3f-8290-f8bbe4686e50}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>10</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Select</value>
+			<value>Rotate</value>
+			<value>Place</value>
+			<value>Stretch</value>
+			<value>Pop</value>
+			<value>BloodFlow</value>
+			<value>ScreenCharging</value>
+			<value>ScreenCorrect</value>
+			<value>ScreenError</value>
+			<value>Explosion</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

@@ -40,6 +40,7 @@ public class AnimationPivotController : MonoBehaviour
         Vector3 spawnPosition = new Vector3(transform.localPosition.x + spawnDistanceX, transform.localPosition.y + spawnDistanceY, transform.localPosition.z + spawnDistanceZ);
 
         GameObject newPipe = Instantiate(pipePrefab, transform.position, transform.rotation);
+        AudioController.Instance.PlaySFX(SFX.TubeAnimation, (int)TubeAnimationSFX.TubeIn);
         newPipe.transform.SetParent(transform, true);
         newPipe.transform.localPosition = spawnPosition;
         originalPipePos = spawnPosition;
@@ -54,6 +55,7 @@ public class AnimationPivotController : MonoBehaviour
         entrySequence.AppendInterval(0.5f);
         entrySequence.OnComplete(() =>
         {
+            AudioController.Instance.PlaySFX(SFX.TubeAnimation, (int)TubeAnimationSFX.TubePlaced);
             if (pipeController != null && !invertedPipeDirection)
             {
                 pipeController.StartAnimation(invertedPipeDirection, blueOrNot);

@@ -44,6 +44,7 @@ public class MainMenuScene : MonoBehaviour
 
     public void StartCarreterasMiniGame()
     {
+        AudioController.Instance.StopHeartbeat();
         SceneManager.LoadScene("RoadSystemTest");
     }
 

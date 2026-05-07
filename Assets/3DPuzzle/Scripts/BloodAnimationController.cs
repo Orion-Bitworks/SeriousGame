@@ -36,6 +36,7 @@ public class BloodAnimationController : MonoBehaviour
             {
                 alreadyFlowing = true;
                 ParticleManager.instance.SpawnParticles("BloodParticles", transform);
+                AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.BloodFlow);
             }
         }
         else if (connection.PairedWithPartner())

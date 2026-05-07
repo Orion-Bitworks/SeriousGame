@@ -54,16 +54,16 @@ public class MoleculeMovement : MonoBehaviour
 
             if (pipe != null)
             {
-                pipe.SetCanStartBloodFlow(true);
+                AudioController.Instance.PlayHeartbeatOnce();
             }
 
             DOTween.Kill(transform);
+            AudioController.Instance.PlaySFX(SFX.Heart, (int)HeartSFX.ParticleInOut);
             Destroy(gameObject); 
         });
 
         sequence.OnKill(() =>
         {
-
         });
     }
 

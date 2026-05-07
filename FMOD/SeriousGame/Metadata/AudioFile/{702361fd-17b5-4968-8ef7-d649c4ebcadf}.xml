@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{702361fd-17b5-4968-8ef7-d649c4ebcadf}">
+		<property name="assetPath">
+			<value>MinigamesRotate.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.0640000000000001</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fc5bd990-8bd7-4647-8db4-e128b003fd2e}</destination>
+		</relationship>
+	</object>
+</objects>

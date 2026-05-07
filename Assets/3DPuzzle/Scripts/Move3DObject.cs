@@ -20,6 +20,9 @@ public class Move3DObject : MonoBehaviour
 
     private float targetPointDistance;
 
+    private FMOD.Studio.EventInstance stretchInstance;
+    private bool stretchPlaying = false;
+
     void Start()
     {
         inputManager = InputManager.instance;
@@ -72,12 +75,31 @@ public class Move3DObject : MonoBehaviour
 
         CursorController.instance.ChangeCursorState(CursorController.CURSOR_STATE.SEPARATING);
 
+        if (!stretchPlaying)
+        {
+            stretchInstance = AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.Stretch);
+            stretchInstance.start();
+            stretchPlaying = true;
+        }
+
         if (distance > breakSnapDistance)
         {
+            StopStretchLoop();
             piece.DisconnectAll();
             PieceGroupManager.RebuildGroups();
             piece.IsPlaced(false);
             MovePiece(RaycastPoint());
+            AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.Pop);
+        }
+    }
+
+    private void StopStretchLoop()
+    {
+        if (stretchPlaying)
+        {
+            stretchInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            stretchInstance.release();
+            stretchPlaying = false;
         }
     }
 
@@ -123,5 +145,6 @@ public class Move3DObject : MonoBehaviour
     public void DisableMovement()
     {
         selected = false;
+        StopStretchLoop();
     }
 }

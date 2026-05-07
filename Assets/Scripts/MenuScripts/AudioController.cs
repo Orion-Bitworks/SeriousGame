@@ -7,7 +7,10 @@ public enum SFX
     Menu = 0,
     Pipe = 1,
     HeartMinigames = 2,
-    UI = 3
+    UI = 3,
+    ThreeD = 4,
+    Heart = 5,
+    TubeAnimation = 6
 }
 
 public enum MenuSFX
@@ -31,6 +34,36 @@ public enum PipeSFX
     Change = 7
 }
 
+public enum ThreeDSFX
+{
+    Select = 0,
+    Rotate = 1,
+    Place = 2,
+    Stretch = 3,
+    Pop = 4,
+    
+    
+    
+    BloodFlow = 5,
+    ScreenCharging = 6,
+    ScreenCorrect = 7,
+    ScreenError = 8,
+    Explosion = 9
+}
+
+public enum HeartSFX
+{
+    ParticleInOut = 0,
+    Heartbeat = 1
+}
+
+public enum TubeAnimationSFX
+{
+    TubeIn = 0,
+    TubePlaced = 1,
+    ParticleMoving = 2
+}
+
 public enum UISFX
 {
     TableButtons = 0,
@@ -49,14 +82,19 @@ public class AudioController : MonoBehaviour
     [SerializeField] FMODUnity.EventReference pipeSFX;
     [SerializeField] FMODUnity.EventReference uiSFX;
     [SerializeField] FMODUnity.EventReference heartMinigamesSFX;
+    [SerializeField] FMODUnity.EventReference threeDSFX;
+    [SerializeField] FMODUnity.EventReference heartSFX;
+    [SerializeField] FMODUnity.EventReference tubeAnimationSFX;
 
     // Variables para las instancias de los eventos añadidos
     private FMOD.Studio.EventInstance mainSongInstance;
     private FMOD.Studio.EventInstance ambienceSongInstance;
     private FMOD.Studio.EventInstance menuSFXInstance;
-    private FMOD.Studio.EventInstance pipeSFXInstance;
-    private FMOD.Studio.EventInstance uiSFXInstance;
-    private FMOD.Studio.EventInstance heartMinigamesSFXInstance;
+
+    private bool tubeParticleSoundPlaying = false;
+    private bool heartbeatPlaying = false;
+    private FMOD.Studio.EventInstance tubeParticleInstance;
+    private FMOD.Studio.EventInstance heartbeatInstance;
 
     private void Awake()
     {
@@ -104,11 +142,9 @@ public class AudioController : MonoBehaviour
         mainSongInstance = FMODUnity.RuntimeManager.CreateInstance(mainSong);
         ambienceSongInstance = FMODUnity.RuntimeManager.CreateInstance(ambienceSong);
         menuSFXInstance = FMODUnity.RuntimeManager.CreateInstance(menuSFX);
-        pipeSFXInstance = FMODUnity.RuntimeManager.CreateInstance(pipeSFX);
-        uiSFXInstance = FMODUnity.RuntimeManager.CreateInstance(uiSFX);
-        heartMinigamesSFXInstance = FMODUnity.RuntimeManager.CreateInstance(heartMinigamesSFX);
 
         mainSongInstance.start();
+        PlayHeartbeatOnce();
     }
 
     // Se llama desde un botón, activa un sonido aleatorio del efecto MultiInstrument configurado en FMOD.
@@ -117,43 +153,53 @@ public class AudioController : MonoBehaviour
         menuSFXInstance.start();
     }
 
-    public void PlaySFX(SFX sfx, int action)
+    public FMOD.Studio.EventInstance PlaySFX(SFX sfx, int action)
     {
-        FMOD.Studio.EventInstance genericSFXInstance;
         FMODUnity.EventReference genericSFX;
         string parameterName = "";
 
         switch (sfx)
         {
             case SFX.Menu:
-                genericSFXInstance = menuSFXInstance;
                 genericSFX = menuSFX;
                 parameterName = "Action";
                 break;
             case SFX.Pipe:
-                genericSFXInstance = pipeSFXInstance;
                 genericSFX = pipeSFX;
                 parameterName = "PipeActions";
                 break;
             case SFX.UI:
-                genericSFXInstance = uiSFXInstance;
                 genericSFX = uiSFX;
                 parameterName = "UIActions";
                 break;
             case SFX.HeartMinigames:
-                genericSFXInstance = heartMinigamesSFXInstance;
                 genericSFX = heartMinigamesSFX;
                 parameterName = "HeartMinigameActions";
                 break;
+            case SFX.ThreeD:
+                genericSFX = threeDSFX;
+                parameterName = "3DActions";
+                break;
+            case SFX.Heart:
+                genericSFX = heartSFX;
+                parameterName = "HeartActions";
+                break;
+            case SFX.TubeAnimation:
+                genericSFX = tubeAnimationSFX;
+                parameterName = "TubeAnimationActions";
+                break;
             default:
-                return;
+                return default;
         }
 
-        if (!genericSFXInstance.isValid())
-            genericSFXInstance = FMODUnity.RuntimeManager.CreateInstance(genericSFX);
+        var instance = FMODUnity.RuntimeManager.CreateInstance(genericSFX);
 
-        genericSFXInstance.setParameterByName(parameterName, action);
-        genericSFXInstance.start();
+        if (!string.IsNullOrEmpty(parameterName))
+            instance.setParameterByName(parameterName, action);
+
+        instance.start();
+
+        return instance;
     }
 
     // Se llama desde un botón, pausa o reanuda la reproducción de la música de fondo.
@@ -163,5 +209,49 @@ public class AudioController : MonoBehaviour
         {
             mainSongInstance.setPaused(!paused);
         }
+    }
+
+    public void PlayTubeParticleOnce()
+    {
+        if (tubeParticleSoundPlaying)
+            return;
+
+        tubeParticleInstance = FMODUnity.RuntimeManager.CreateInstance(tubeAnimationSFX);
+        tubeParticleInstance.setParameterByName("TubeAnimationActions", (int)TubeAnimationSFX.ParticleMoving);
+        tubeParticleInstance.start();
+
+        tubeParticleSoundPlaying = true;
+    }
+
+    public void StopTubeParticle()
+    {
+        if (!tubeParticleSoundPlaying)
+            return;
+
+        tubeParticleInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        tubeParticleInstance.release();
+        tubeParticleSoundPlaying = false;
+    }
+
+    public void PlayHeartbeatOnce()
+    {
+        if (heartbeatPlaying)
+            return;
+
+        heartbeatInstance = FMODUnity.RuntimeManager.CreateInstance(heartSFX);
+        heartbeatInstance.setParameterByName("HeartActions", (int)HeartSFX.Heartbeat);
+        heartbeatInstance.start();
+
+        heartbeatPlaying = true;
+    }
+
+    public void StopHeartbeat()
+    {
+        if (!heartbeatPlaying)
+            return;
+
+        heartbeatInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        heartbeatInstance.release();
+        heartbeatPlaying = false;
     }
 }

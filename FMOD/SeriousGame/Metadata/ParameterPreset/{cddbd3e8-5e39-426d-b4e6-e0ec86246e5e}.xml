@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{cddbd3e8-5e39-426d-b4e6-e0ec86246e5e}">
+		<property name="name">
+			<value>TubeAnimationActions</value>
+		</property>
+		<relationship name="folder">
+			<destination>{f0e52e71-842d-4214-858c-9f773e3481d8}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{8fac3ae8-19e3-46a3-a923-6b5864f31335}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{8fac3ae8-19e3-46a3-a923-6b5864f31335}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>TubeIn</value>
+			<value>TubePlaced</value>
+			<value>ParticleMoving</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

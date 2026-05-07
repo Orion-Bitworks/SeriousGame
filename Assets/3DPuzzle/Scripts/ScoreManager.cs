@@ -98,6 +98,8 @@ public class ScoreManager : MonoBehaviour
 	{
 		DialogManager.instance.Show("dialog_10");
 
+		AudioController.Instance.StopHeartbeat();
+
 		TerminarMinijuego();
 
         ResetLevel(true);
@@ -235,7 +237,9 @@ public class ScoreManager : MonoBehaviour
 
 		sequence.OnComplete(() =>
 		{
-			while (connections.Count > 0)
+			AudioController.Instance.StopHeartbeat();
+            AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.Explosion);
+            while (connections.Count > 0)
 			{
 				ConnectionPointController point = connections.First();
 				point.GetPiece().DeletePiece();

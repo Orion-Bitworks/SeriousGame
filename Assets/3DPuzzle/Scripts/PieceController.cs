@@ -65,6 +65,7 @@ public class PieceController : MonoBehaviour
         }
 
         ScoreManager.instance.movimientos++;
+        AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.Place);
 
         //point.Paired(true);
         //target.GetComponent<ConnectionPointController>().Paired(true);

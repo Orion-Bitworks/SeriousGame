@@ -65,7 +65,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
 
         beingDragged = true;
-
+        AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.Select);
         MoveOutUI();
         piece.EnableControls();
     }
