@@ -22,6 +22,7 @@ public class RoadOutput : MonoBehaviour
             Debug.Log("Bolita recibida en el output!");
             // Aceptada, instanciamos un efecto visual en su posición
             //Instantiate(enterParticle, transform.position, Quaternion.identity);
+            ParticleManager.instance.SpawnParticles("SteamConeBurst", ball.transform.position, Quaternion.LookRotation(-transform.right, transform.up));
             ballReceived = true;
 
             // Notificamos a la lógica del corazón que hemos recibido una bolita si somos parte de él
