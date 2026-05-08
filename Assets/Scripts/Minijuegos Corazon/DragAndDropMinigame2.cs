@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class DragAndDropMinigame2 : MonoBehaviour
@@ -117,6 +118,7 @@ public class DragAndDropMinigame2 : MonoBehaviour
                     // Snap EXACTO al pivote central
                     Debug.Log("Snap pivot detectado");
                     transform.position = snapPivot.position;
+                    ParticleManager.instance.SpawnParticles("PlacementDust", transform.position, Quaternion.identity);
                     //transform.rotation = drop.requiredRotation;
 
                     drop.occupied = true;
