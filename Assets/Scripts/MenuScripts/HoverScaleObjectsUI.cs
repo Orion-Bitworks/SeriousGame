@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class HoverScaleObjectsUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class HoverScaleObjectsUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     Vector3 gOHover;
 
@@ -24,6 +24,11 @@ public class HoverScaleObjectsUI : MonoBehaviour, IPointerEnterHandler, IPointer
         transform.DOScale(gOHover * 1.5f, 0.5f).SetUpdate(true);
 
         AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Hover);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Click);
     }
 
     private void ScaleDown()

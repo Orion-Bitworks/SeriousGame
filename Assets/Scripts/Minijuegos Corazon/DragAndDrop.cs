@@ -40,6 +40,8 @@ public class DragAndDrop : MonoBehaviour
     {
         if (locked) return; // Bloqueja TOT el clic
 
+        AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.Select);
+
         minigame1Instance.movimientos++;
 
         //Liberar la DropArea actual si estaba colocado
@@ -101,6 +103,8 @@ public class DragAndDrop : MonoBehaviour
     void OnMouseUp()
     {
         if (locked) return;
+
+        AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.Place);
 
         var rayOrigin = Camera.main.transform.position;
         var rayDirection = MouseWorldPosition() - Camera.main.transform.position;

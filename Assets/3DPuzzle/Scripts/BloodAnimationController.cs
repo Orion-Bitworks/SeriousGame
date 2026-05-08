@@ -34,6 +34,7 @@ public class BloodAnimationController : MonoBehaviour
         {
             if (!alreadyFlowing)
             {
+                Debug.Log("Entrando en particulas");
                 alreadyFlowing = true;
                 ParticleManager.instance.SpawnParticles("BloodParticles", transform);
                 AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.BloodFlow);

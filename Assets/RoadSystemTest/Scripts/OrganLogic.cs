@@ -16,8 +16,11 @@ public class OrganLogic : MonoBehaviour
         if (!animationStarted)
         {
             animationStarted = true;
+            AudioController.Instance.PlayHeartbeatOnce();
             heartAnimation.StartAnimation();
         }
+
+        AudioController.Instance.PlaySFX(SFX.ThreeD, (int)HeartSFX.ParticleInOut);
 
         // Ejecutar reglas del órgano
         foreach (var rule in rules)
@@ -32,6 +35,7 @@ public class OrganLogic : MonoBehaviour
     public void ResetOrgan()
     {
         animationStarted = false;
+        AudioController.Instance.StopHeartbeat();
         heartAnimation.StopAnimation();
 
         foreach (var rule in rules)

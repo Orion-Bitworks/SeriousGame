@@ -17,9 +17,7 @@ public enum MenuSFX
 {
     Hover = 0,
     Click = 1,
-    Back = 2,
-    Confirm = 3,
-    Error = 4
+    Tick = 2
 }
 
 public enum PipeSFX
@@ -34,6 +32,19 @@ public enum PipeSFX
     Change = 7
 }
 
+public enum HeartMinigamesSFX
+{
+    Select = 0,
+    Rotate = 1,
+    Place = 2
+}
+
+public enum UISFX
+{
+    TableButtons = 0,
+    ScreenTouch = 1
+}
+
 public enum ThreeDSFX
 {
     Select = 0,
@@ -41,9 +52,6 @@ public enum ThreeDSFX
     Place = 2,
     Stretch = 3,
     Pop = 4,
-    
-    
-    
     BloodFlow = 5,
     ScreenCharging = 6,
     ScreenCorrect = 7,
@@ -62,12 +70,6 @@ public enum TubeAnimationSFX
     TubeIn = 0,
     TubePlaced = 1,
     ParticleMoving = 2
-}
-
-public enum UISFX
-{
-    TableButtons = 0,
-    ScreenTouch = 1
 }
 
 public class AudioController : MonoBehaviour
@@ -174,7 +176,7 @@ public class AudioController : MonoBehaviour
                 break;
             case SFX.HeartMinigames:
                 genericSFX = heartMinigamesSFX;
-                parameterName = "HeartMinigameActions";
+                parameterName = "HeartMinigamesActions";
                 break;
             case SFX.ThreeD:
                 genericSFX = threeDSFX;

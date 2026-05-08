@@ -18,6 +18,8 @@ public class ResetDeviceBindings : MonoBehaviour
 
     public void ResetControlSchemeBinding()
     {
+        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Click);
+
         foreach (InputActionMap map in _inputActions.actionMaps)
         {
             foreach (InputAction action in map.actions)

@@ -162,6 +162,7 @@ public class GameManager : MonoBehaviour
     {
         isPlaying = true;
         intentos++;
+        AudioController.Instance.PlayTubeParticleOnce();
     }
 
     /// <summary>
@@ -170,6 +171,7 @@ public class GameManager : MonoBehaviour
     public void Stop()
     {
         isPlaying = false;
+        AudioController.Instance.StopTubeParticle();
 
         // Busca y elimina todas las bolitas activas
         foreach (var ball in FindObjectsOfType<MovingBall>())

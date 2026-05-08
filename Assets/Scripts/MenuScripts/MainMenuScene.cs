@@ -28,8 +28,6 @@ public class MainMenuScene : MonoBehaviour
         menuCanvas.gameObject.SetActive(false);
 
         pauseCam.Priority = 2;
-
-        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Click);
     }
 
     public void setCanvasNotActive(GameObject canva)
@@ -38,8 +36,6 @@ public class MainMenuScene : MonoBehaviour
         canva.SetActive(false);
 
         pauseCam.Priority = 0;
-
-        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Click);
     }
 
     public void StartCarreterasMiniGame()

@@ -133,6 +133,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4920314180351755630}
+        m_TargetAssemblyTypeName: RebindSFX, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4319027918184872775
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,6 +291,7 @@ GameObject:
   - component: {fileID: 6680292650503350827}
   - component: {fileID: 6680292650503350824}
   - component: {fileID: 6680292650503350826}
+  - component: {fileID: 4920314180351755630}
   m_Layer: 5
   m_Name: RebindUIPrefab
   m_TagString: Untagged
@@ -376,6 +389,18 @@ MonoBehaviour:
   m_RebindStopEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4920314180351755630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6680292650503350822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4dde8ae216aab5c47b12d61b08f13c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7444285640520137202
 GameObject:
   m_ObjectHideFlags: 0
@@ -769,6 +794,18 @@ MonoBehaviour:
       - m_Target: {fileID: 6680292650503350826}
         m_TargetAssemblyTypeName: 
         m_MethodName: StartInteractiveRebind
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4920314180351755630}
+        m_TargetAssemblyTypeName: RebindSFX, Assembly-CSharp
+        m_MethodName: PlaySFX
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -12,8 +12,6 @@ public class Minigame1 : MonoBehaviour
 
     public int correct = 0; //Aciertos
 
-    public TextMeshProUGUI remainObjectsToDrag; //Texto de objetos que hay que arrastrar
-
     public FasesMinigames phasesManager; //Instancia del script fasesMinigames
 
     [SerializeField] Button CheckButton;
@@ -30,6 +28,8 @@ public class Minigame1 : MonoBehaviour
     public int movimientos;
     private int fallos;
 
+    [SerializeField] ScreenButtonsController screenButtonsController;
+
     private void Awake()
     {
         CheckButton.onClick.AddListener(checkPlacementButton); //Listener
@@ -43,7 +43,6 @@ public class Minigame1 : MonoBehaviour
         intentos = 0;
         movimientos = 0;
         fallos = 0;
-        showInfo();
 
         tutorial.ShowTutorial(2);
         tutorial.MoveCarpetaMiniHeart();
@@ -62,20 +61,14 @@ public class Minigame1 : MonoBehaviour
             }
 
         }
-
-        showInfo();
-    }
-
-
-    //Metodo para mostrar la informacion de las valvulas
-    void showInfo() 
-    {
-        remainObjectsToDrag.text = placedValves.ToString() + " / " + totalValves.ToString(); 
     }
 
     public void checkPlacementButton()
     {
         intentos++;
+
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.TableButtons);
+        screenButtonsController.RumbleButton(ButtonScreenType.check);
 
         correct = 0;
 

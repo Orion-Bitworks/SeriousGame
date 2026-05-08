@@ -5,7 +5,8 @@ public class LanguageSwitcher : MonoBehaviour
 {
 	public void SetLanguage(int index)
 	{
-		LocalizationSettings.SelectedLocale =
+        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Tick);
+        LocalizationSettings.SelectedLocale =
 			LocalizationSettings.AvailableLocales.Locales[index];
 	}
 }

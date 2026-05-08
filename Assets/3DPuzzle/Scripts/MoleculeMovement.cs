@@ -54,6 +54,7 @@ public class MoleculeMovement : MonoBehaviour
 
             if (pipe != null)
             {
+                pipe.SetCanStartBloodFlow(true);
                 AudioController.Instance.PlayHeartbeatOnce();
             }
 

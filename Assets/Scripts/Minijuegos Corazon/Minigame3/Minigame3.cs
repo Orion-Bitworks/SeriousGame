@@ -28,9 +28,6 @@ public class Minigame3 : MonoBehaviour
 
     [SerializeField] public GameObject rebootButton; //boto per reiniciar el minijoc en cas de haver-ho fet malament
 
-    //ELEMENTOS A ESCONDER
-    [SerializeField] private GameObject[] elementsToHide;
-
     public event System.Action<bool> OnGameCompleted;
 
     private bool _gameCompleted = false;
@@ -57,11 +54,6 @@ public class Minigame3 : MonoBehaviour
     private bool alreadyEnded = false;
     private void Awake()
     {
-        foreach(GameObject obj in elementsToHide) //amagar tots els elements dins del array
-        {
-            obj.SetActive(false);
-        }
-
         StartCoroutine(ShowInstructions()); //Corrutina per mostrar les instruccions del minijoc
     }
 
@@ -257,11 +249,6 @@ public class Minigame3 : MonoBehaviour
             
         }
         activateNotes.Clear();
-
-        foreach(GameObject obj in elementsToHide)
-        {
-            obj.SetActive(false);
-        }
 
         StartCoroutine(ShowInstructions());
     }

@@ -41,7 +41,9 @@ public class ButtonsUIManagerController : MonoBehaviour
 	{
 		Image img = button.GetComponent<Image>();
 
-		if (currentActiveButton != null)
+        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Click);
+
+        if (currentActiveButton != null)
 		{
 			Color color = currentActiveButton.color;
 			color.a = alphaInactive;
@@ -59,7 +61,9 @@ public class ButtonsUIManagerController : MonoBehaviour
 	{
 		Image img = button.GetComponent<Image>();
 
-		if (currentSecondaryButton != null)
+        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Click);
+
+        if (currentSecondaryButton != null)
 		{
 			Color c = currentSecondaryButton.color;
 			c.a = alphaInactive;

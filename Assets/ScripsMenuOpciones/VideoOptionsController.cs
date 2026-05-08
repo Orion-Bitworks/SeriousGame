@@ -41,35 +41,31 @@ public class VideoOptionsController : MonoBehaviour
 
             }
         }
-            //limpiamos el dropdown y luego guardamos las resoluciones
-            resolutionDropdown.ClearOptions();
-            resolutionDropdown.AddOptions(options);
+        //limpiamos el dropdown y luego guardamos las resoluciones
+        resolutionDropdown.ClearOptions();
+        resolutionDropdown.AddOptions(options);
 
-            //cargamos la resolucion guardada uy actualizamos el dropdown
-            int savedIndex = PlayerPrefs.GetInt(ResolutionKey, filteredResolutions.Count - 1);
-            if (savedIndex < 0 || savedIndex >= filteredResolutions.Count)
+        //cargamos la resolucion guardada uy actualizamos el dropdown
+        int savedIndex = PlayerPrefs.GetInt(ResolutionKey, filteredResolutions.Count - 1);
+        if (savedIndex < 0 || savedIndex >= filteredResolutions.Count)
         {
             savedIndex = filteredResolutions.Count-1;
         }
         
         
-            resolutionDropdown.value = savedIndex;
-            resolutionDropdown.RefreshShownValue();
-            //con esto nos aseguramos que siempre tengamos la lista actualizada
+        resolutionDropdown.value = savedIndex;
+        resolutionDropdown.RefreshShownValue();
+        //con esto nos aseguramos que siempre tengamos la lista actualizada
             
-            //Cargamos la pantalla completa guardada y usamos true por defecto
-            bool isFullscreen = PlayerPrefs.GetInt(FullscreenKey, 1) == 1;
-            fullscreenToggle.isOn = isFullscreen;
-            ApplyResoluton(savedIndex, isFullscreen);
+        //Cargamos la pantalla completa guardada y usamos true por defecto
+        bool isFullscreen = PlayerPrefs.GetInt(FullscreenKey, 1) == 1;
+        fullscreenToggle.isOn = isFullscreen;
+        ApplyResoluton(savedIndex, isFullscreen);
 
-            // añadimos listeners para hacer los cambios cuadno el usuario haga el cambio,
-            // tanto de resoluciones como de pantalla completa
-            resolutionDropdown.onValueChanged.AddListener(OnResolutionChanged);
-            fullscreenToggle.onValueChanged.AddListener(OnFullscreenChanged);
-
-
-        
-
+        // añadimos listeners para hacer los cambios cuadno el usuario haga el cambio,
+        // tanto de resoluciones como de pantalla completa
+        resolutionDropdown.onValueChanged.AddListener(OnResolutionChanged);
+        fullscreenToggle.onValueChanged.AddListener(OnFullscreenChanged);
     }
     /// <summary>
     /// Con este metodo aplicamos los cambios en pantalla completa y
@@ -78,12 +74,14 @@ public class VideoOptionsController : MonoBehaviour
     /// <param name="isFullscreen"></param>
     private void OnFullscreenChanged(bool isFullscreen)
     {
+        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Tick);
         ApplyResoluton(resolutionDropdown.value, isFullscreen);
         PlayerPrefs.SetInt(FullscreenKey, isFullscreen ? 1:0);
     }
 
     private void OnResolutionChanged(int index)
     {
+        AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Click);
         ApplyResoluton(index, fullscreenToggle.isOn);
         PlayerPrefs.SetInt(ResolutionKey, index);
     }

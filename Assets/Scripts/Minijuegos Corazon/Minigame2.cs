@@ -12,8 +12,6 @@ public class Minigame2 : MonoBehaviour
 
     public int correct = 0;
 
-    public TextMeshProUGUI remainVeinstoDrag;
-
     [SerializeField] Button CheckButton;
 
     public FasesMinigames phasesManager;
@@ -28,6 +26,8 @@ public class Minigame2 : MonoBehaviour
     public int movimientos;
     private int fallos;
 
+    [SerializeField] ScreenButtonsController screenButtonsController;
+
     private void Awake()
     {
         CheckButton.onClick.AddListener(checkPlacementButton);
@@ -41,7 +41,6 @@ public class Minigame2 : MonoBehaviour
         intentos = 0;
         movimientos = 0;
         fallos = 0;
-        showInfo();
         tutorial.ShowTutorial(3);
         tutorial.MoveCarpetaMiniHeart();
     }
@@ -55,18 +54,14 @@ public class Minigame2 : MonoBehaviour
             if (obj.placed)
                 placedVeins++;
         }
-
-        showInfo();
-    }
-
-    void showInfo()
-    {
-        remainVeinstoDrag.text = placedVeins + " / " + totalVeins;
     }
 
     public void checkPlacementButton()
     {
         intentos++;
+
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.TableButtons);
+        screenButtonsController.RumbleButton(ButtonScreenType.check);
 
         correct = 0;
 

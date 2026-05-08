@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{4934c321-f306-4af8-9302-dea3f6211d19}">
+		<property name="name">
+			<value>HeartMinigamesActions</value>
+		</property>
+		<relationship name="folder">
+			<destination>{f0e52e71-842d-4214-858c-9f773e3481d8}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{ab24767e-607b-4101-bfa2-4116165bb2d5}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{ab24767e-607b-4101-bfa2-4116165bb2d5}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>Select</value>
+			<value>Rotate</value>
+			<value>Place</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

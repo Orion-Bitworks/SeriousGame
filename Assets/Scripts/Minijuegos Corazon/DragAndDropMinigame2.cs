@@ -40,6 +40,7 @@ public class DragAndDropMinigame2 : MonoBehaviour
     {
         if (locked) return;
 
+        AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.Select);
         minigame2Instance.movimientos++;
 
         hasDragged = false;
@@ -102,6 +103,8 @@ public class DragAndDropMinigame2 : MonoBehaviour
     void OnMouseUp()
     {
         if (locked) return;
+
+        AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.Place);
 
         if ((!placed || hasDragged) && CurrentDropArea != null)
         {

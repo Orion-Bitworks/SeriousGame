@@ -53,14 +53,12 @@ public class ObjectSelector : MonoBehaviour
     private void OnRotate(InputAction.CallbackContext ctx)
     {
         StartCoroutine(InstantFlashButton(rotateButton));
-        screenButtonsController.RumbleButton(ButtonScreenType.rotate);
         rotatePiece();
     }
 
     private void OnCheck(InputAction.CallbackContext ctx)
     {
         StartCoroutine(InstantFlashButton(checkButton));
-        screenButtonsController.RumbleButton(ButtonScreenType.check);
         CheckMinigame();
     }
 
@@ -78,6 +76,8 @@ public class ObjectSelector : MonoBehaviour
 
     private void rotatePiece()
     {
+        AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.TableButtons);
+        screenButtonsController.RumbleButton(ButtonScreenType.rotate);
 
         if (currentlySelected == null)
         {
