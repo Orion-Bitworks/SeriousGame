@@ -1,50 +1,92 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RandomDeactivation : MonoBehaviour
 {
     [SerializeField] private List<GameObject> objectsToDisable = new List<GameObject>();
-    private bool active = true;
 
-    private void Update()
+    [Header("Timing")]
+    [SerializeField] private float minTimeBetweenFlickers = 2f;
+    [SerializeField] private float maxTimeBetweenFlickers = 10f;
+
+    [Header("Flicker")]
+    [SerializeField] private int minFlickers = 2;
+    [SerializeField] private int maxFlickers = 8;
+
+    [SerializeField] private float minInactiveTime = 0.03f;
+    [SerializeField] private float maxInactiveTime = 0.15f;
+
+    [SerializeField] private float minActiveTime = 0.02f;
+    [SerializeField] private float maxActiveTime = 0.08f;
+
+    [Header("Stop Working")]
+    [SerializeField] private bool canStopWorking = false;
+    [SerializeField] private bool working = true;
+    [SerializeField] private Transform particlePivot;
+
+    private Vector3 particlePos;
+
+    private void Start()
     {
-        float randomNum = Random.Range(0, 500f);
-
-        if (randomNum < 1f)
+        if (particlePivot != null)
         {
-            ChangeState();
+            particlePos = particlePivot.position;
         }
+        else
+        {
+            particlePos = transform.position;
+        }
+
+        StartCoroutine(FlickerLoop());
     }
 
-    private void ChangeState()
+    private IEnumerator FlickerLoop()
     {
-        if (active)
+        while (working)
         {
-            active = false;
+            float timer = Random.Range(minTimeBetweenFlickers, maxTimeBetweenFlickers);
+            yield return new WaitForSeconds(timer);
 
-            foreach (GameObject go in objectsToDisable)
+            int flickerCount = Random.Range(minFlickers, maxFlickers + 1);
+
+            for (int i = 0; i < flickerCount; i++)
             {
-                go.SetActive(false);
+                SetState(false);
+
+                //ParticleManager.instance.SpawnParticles("Flash", transform.position, Quaternion.identity);
+
+                yield return new WaitForSeconds(Random.Range(minInactiveTime, maxInactiveTime));
+
+                SetState(true);
+
+                yield return new WaitForSeconds(Random.Range(minActiveTime, maxActiveTime));
             }
 
-            StartCoroutine(SetInactive());
+            if (Random.value < 0.25f)
+            {
+                SetState(false);
+
+                yield return new WaitForSeconds(Random.Range(0.5f, 2f));
+
+                SetState(true);
+            }
+
+            if (canStopWorking && Random.value < 0.4f)
+            {
+                ParticleManager.instance.SpawnParticles("Flash", particlePos, Quaternion.identity);
+                working = false;
+                SetState(false);
+            }
         }
     }
 
-    private IEnumerator SetInactive()
+    private void SetState(bool state)
     {
-        // SONIDO DE LUCES APAGANDOSE
-        ParticleManager.instance.SpawnParticles("Flash", transform.position, Quaternion.identity);
-        float timer = Random.Range(0.05f, 0.6f);
-
-        yield return new WaitForSeconds(timer);
-
         foreach (GameObject go in objectsToDisable)
         {
-            go.SetActive(true);
+            go.SetActive(state);
         }
-
-        active = true;
     }
 }
