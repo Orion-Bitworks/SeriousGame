@@ -299,6 +299,9 @@ public class BuildController : MonoBehaviour
 
         GameManager.Instance.tubCol++;
 
+        Vector3 particlePos = new Vector3(cell.x, cell.y - 0.5f, cell.z);
+
+        ParticleManager.instance.SpawnParticles("PlacementDust", particlePos, Quaternion.identity);
         AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.Place);
 
         obj.AddComponent<PlacedPiece>().originalPrefab = objectsToPlace[selectedIndex];

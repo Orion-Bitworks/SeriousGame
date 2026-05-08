@@ -39,7 +39,7 @@ public class ConnectionPointController : MonoBehaviour
 
             if (!paired && !otherPoint.Paired() && otherPoint.piece.IsPlaced() && otherPoint.IsEnabled())
             {
-                ParticleManager.instance.SpawnParticles("SnappingParticles", transform);
+                ParticleManager.instance.SpawnParticles("SnapParticles", transform);
 
                 piece.SnapToPoint(this, other.transform, other.transform.parent);
 

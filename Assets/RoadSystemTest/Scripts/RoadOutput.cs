@@ -5,9 +5,9 @@ using UnityEngine;
 /// </summary>
 public class RoadOutput : MonoBehaviour
 {
-    [SerializeField] RoadDirection inputDirection;                  // Dirección desde la cual pueden llegar las bolitas
+    [SerializeField] RoadDirection inputDirection;                  // Direcciï¿½n desde la cual pueden llegar las bolitas
     [SerializeField] BallType acceptedBallType;                     // Tipo de bolita que acepta esta salida
-    [SerializeField] GameObject enterParticle, destroyParticle;     // Prefabs de particulas de destrucción de la bolita
+    [SerializeField] GameObject enterParticle, destroyParticle;     // Prefabs de particulas de destrucciï¿½n de la bolita
 
     [HideInInspector] public bool ballReceived = false;             // Indica si el output ya ha recibido bolitas
 
@@ -16,21 +16,22 @@ public class RoadOutput : MonoBehaviour
     /// </summary>
     public void ReceiveBall(MovingBall ball)
     {
-        // Añadir suma de puntos?
+        // Aï¿½adir suma de puntos?
         if (ball.ballType == acceptedBallType)
         {
             Debug.Log("Bolita recibida en el output!");
-            // Aceptada, instanciamos un efecto visual en su posición
-            // Instantiate(enterParticle, transform.position, Quaternion.identity);
+            // Aceptada, instanciamos un efecto visual en su posiciï¿½n
+            //Instantiate(enterParticle, transform.position, Quaternion.identity);
+            ParticleManager.instance.SpawnParticles("SteamConeBurst", ball.transform.position, Quaternion.LookRotation(-transform.right, transform.up));
             ballReceived = true;
 
-            // Notificamos a la lógica del corazón que hemos recibido una bolita si somos parte de él
+            // Notificamos a la lï¿½gica del corazï¿½n que hemos recibido una bolita si somos parte de ï¿½l
             var heart = GetComponentInParent<OrganLogic>();
             if (heart != null)
                 heart.NotifyOutputReceivedBall();
         }
         else {
-            // Rechazada, instanciamos un efecto visual en su posición
+            // Rechazada, instanciamos un efecto visual en su posiciï¿½n
             Debug.Log("Bolita Rechazada");
             Instantiate(destroyParticle, transform.position, Quaternion.identity);
         }

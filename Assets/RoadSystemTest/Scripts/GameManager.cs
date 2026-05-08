@@ -7,7 +7,7 @@ using static Cinemachine.DocumentationSortingAttribute;
 
 public static class TempLevelHolder
 {
-    public static LevelID nextLevel = LevelID.Heart;
+    public static LevelID nextLevel = LevelID.Pipe;
 	public static bool introShown = false;
 }
 
@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
         if (level > 0 && !LevelProgress.IsLevelCompleted(index - 1))
         {
             Debug.Log("Nivel bloqueado");
+            LoadLevel(LevelID.Pipe);
             return;
         }
 

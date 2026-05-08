@@ -21,11 +21,23 @@ public class ParticleManager : MonoBehaviour
         }
     }
 
-    public void SpawnParticles(string name, Transform position)
+    public void SpawnParticles(string name, Transform transform)
     {
         if (particleDictionary.ContainsKey(name))
         {
-            Instantiate(particleDictionary[name], position);
+            Instantiate(particleDictionary[name], transform);
+        }
+        else
+        {
+            Debug.LogError("No existen particulas con el identificador " + name);
+        }
+    }
+
+    public void SpawnParticles(string name, Vector3 position, Quaternion rotation)
+    {
+        if (particleDictionary.ContainsKey(name))
+        {
+            Instantiate(particleDictionary[name], position, rotation);
         }
         else
         {

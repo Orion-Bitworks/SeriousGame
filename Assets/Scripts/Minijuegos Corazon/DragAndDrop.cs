@@ -120,6 +120,7 @@ public class DragAndDrop : MonoBehaviour
                 {
                     transform.position = hitInfo.transform.position;
                     CurrentDropArea = hitInfo.transform;
+                    ParticleManager.instance.SpawnParticles("PlacementDust", hitInfo.transform.position, Quaternion.identity);
                     drop.occupied = true;
 
                     if (!placed)

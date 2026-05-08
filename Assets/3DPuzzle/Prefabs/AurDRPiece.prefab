@@ -397,6 +397,7 @@ MonoBehaviour:
   spawnDistanceY: 0
   spawnDistanceZ: 60
   invertedPipeDirection: 1
+  blueOrNot: 0
   animationType: 0
 --- !u!1 &3806969998867654840
 GameObject:
@@ -649,6 +650,7 @@ MonoBehaviour:
   spawnDistanceY: 0
   spawnDistanceZ: 60
   invertedPipeDirection: 1
+  blueOrNot: 0
   animationType: 0
 --- !u!1 &8444354742685134444
 GameObject:
@@ -965,4 +967,4 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -5787067229422757734, guid: 545d4722358f0c747acb1a96345a7e51, type: 3}
+  m_Mesh: {fileID: -5787067229422757734, guid: fb76aa4204f7cc548949150e9bae2bac, type: 3}
