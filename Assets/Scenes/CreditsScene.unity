@@ -201,19 +201,21 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "CR\xC8DITS\r\n\r\nUNA PRODUCCI\xD3 INTERCENTRES\r\n\r\nInstitut Pedralbes\r\nInstitut
+  m_text: "CR\xC8DITS\r\n\r\nUNA PRODUCCI\xD3 INTERCENTRES\r\nInstitut Pedralbes\r\nInstitut
     FP Sanit\xE0ria Vall d'Hebron\r\n\r\n\r\nIDEA ORIGINAL\r\nEila Gomis\r\nAlba
-    Leiva\r\n\r\n\r\nEQUIP DE DESENVOLUPAMENT DEL VIDEOJOC\r\nPROGRAMACI\xD3\r\n\r\nIris
-    Frades\r\n\r\nJoel D\xEDez\r\n\r\nGerard Blasco\r\n\r\nV\xEDctor Mill\xE1n\r\n\r\n\r\nART
-    I DISSENY\r\n\r\nDirecci\xF3 art\xEDstica \r\nMarta V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena
-    Charro\r\n\r\nConcept art\r\nMarta V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena
-    Charro\r\n\r\nIdentitat visual\r\nMarta V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena
-    Charro\r\n\r\nModelatge\r\nMarta V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro
-    \r\n\r\nTexturitzat \r\nMarta V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nCreaci\xF3
-    d\u2019assets\r\nMarta V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\n\rIl\xB7lustraci\xF3
-    \xB7 Disseny de personatges \xB7 Elements visuals\r\nHelena Charro\r\n\n\n\n\r\n\r\nCOL\xB7LABORACI\xD3
-    EDUCATIVA\r\n\r\nAlumnat i professorat\r\nCFGM Emerg\xE8ncies Sanit\xE0ries\r\nInstitut
-    FP Sanit\xE0ria Vall d'Hebron\r\n"
+    Leiva\r\n\r\n\r\nEQUIP DE DESENVOLUPAMENT DEL VIDEOJOC\r\nPROGRAMACI\xD3\r\n\r\nINTEGRACI\xD3
+    DE SISTEMES\nIris Frades\nJoel D\xEDez\nGerard Blasco\nV\xEDctor Mill\xE1n\n\nDESENVOLUPAMENT
+    DE UI/UX\nJoel D\xEDez\nIris Frades\nGerard Blasco\nV\xEDctor Mill\xE1n\n\r\nPROGRAMACI\xD3
+    DE GAMEPLAY\nJoel D\xEDez\nV\xEDctor Mill\xE1n\nIris Frades\nGerard Blasco\n\n\r\n\r\nART
+    I DISSENY\r\n\r\nDIRECCI\xD3 ART\xCDSTICA\nMarta V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena
+    Charro\r\n\r\nCONCEPT ART\nMarta V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nIDENTITAT
+    VISUAL\nMarta V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nMODELATGE\r\nMarta
+    V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro \r\n\r\nTEXTURITZAT \r\nMarta
+    V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nCREACI\xD3 D'ASSETS\nMarta
+    V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\n\rIL\xB7LUSTRACI\xD3 
+    \xB7 DISSENY DE PERSONATGE\r\nHelena Charro\r\n\r\n\r\nCOL\xB7LABORACI\xD3 EDUCATIVA\r\n\r\nAlumnat
+    i professorat\r\nCFGM Emerg\xE8ncies Sanit\xE0ries\r\nInstitut FP Sanit\xE0ria
+    Vall d'Hebron\r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: acc7ac10f71cd22469be253acb3aa2b1, type: 2}
   m_sharedMaterial: {fileID: -6075389608169980360, guid: acc7ac10f71cd22469be253acb3aa2b1, type: 2}
@@ -633,8 +635,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e2b5342e151a27140be5388adbc1bf3b, type: 3}
   - {fileID: 21300000, guid: dcca9ae710b309547be77bb17344b93a, type: 3}
   - {fileID: 21300000, guid: 508492e00c33ae84b9739ba0b15d9f69, type: 3}
+  - {fileID: 21300000, guid: e678630523fe84144954620d4f7a41c4, type: 3}
   fadeTime: 1
-  stayTime: 2
+  stayTime: 3
 --- !u!114 &1272505232
 MonoBehaviour:
   m_ObjectHideFlags: 0
