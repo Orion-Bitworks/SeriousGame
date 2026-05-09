@@ -11,6 +11,8 @@ public class TutorialKeyDisplay : MonoBehaviour
     [SerializeField] private int compositePartIndex = 0;
     [SerializeField] private TextMeshProUGUI textField;
 
+
+
     private void OnEnable()
     {
         UpdateKey();
@@ -51,8 +53,19 @@ public class TutorialKeyDisplay : MonoBehaviour
                         string key = action.action.GetBindingDisplayString(part);
 
                         // Normalizar nombres
+                        // Normalizar nombres
                         key = key.Replace("Control", "Ctrl");
-                        key = key.Replace("Retroceso | Supr", "Supr");
+                        key = key.Replace("Left Ctrl", "Ctrl");
+                        key = key.Replace("Right Ctrl", "Ctrl");
+
+                        // Variantes de espacio
+                        key = key.Replace("Space", "Espacio");
+                        key = key.Replace("space", "Espacio");
+                        key = key.Replace("Spacebar", "Espacio");
+                        key = key.Replace("Barra espaciadora", "Espacio");
+                        key = key.Replace("Espaciadora", "Espacio");
+                        key = key.Replace("Espacio (teclado)", "Espacio");
+
                         textField.text = key;
                         return;
                     }
