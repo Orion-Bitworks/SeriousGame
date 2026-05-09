@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +27,8 @@ public class NewMinigame3 : MonoBehaviour
 	private SessionTimer timer;
 	private int intentos = 1;
 
+	[SerializeField] private TutorialManager tutorial;
+
 	public event System.Action<bool> OnGameCompleted;
 
 	private bool _gameCompleted = false;
@@ -42,7 +45,12 @@ public class NewMinigame3 : MonoBehaviour
 		}
 	}
 
-	private void Start()
+    private void Awake()
+    {
+        StartCoroutine(ShowInstructions()); //Corrutina per mostrar les instruccions del minijoc
+    }
+
+    private void Start()
 	{
 		rebootButton.SetActive(false);
 
@@ -51,7 +59,10 @@ public class NewMinigame3 : MonoBehaviour
 
 		spawnInterval = 60f / bpm;
 		nextSpawnTime = Time.time + spawnInterval;
+	}
 
+	void StartMiniGame3()
+	{
 		gameActive = true;
 	}
 
@@ -195,4 +206,31 @@ public class NewMinigame3 : MonoBehaviour
 		KeyCode[] keys = { KeyCode.A, KeyCode.S, KeyCode.D };
 		return keys[Random.Range(0, keys.Length)];
 	}
+
+    IEnumerator ShowInstructions()
+    {
+        gameActive = false;
+        Time.timeScale = 0f;
+
+        bool tutorialClosed = false;
+
+        void Handler()
+        {
+            tutorialClosed = true;
+        }
+
+        tutorial.OnTutorialClosed += Handler;
+
+        tutorial.ShowTutorial(4);
+
+        // Esperar hasta que el tutorial se cierre
+        yield return new WaitUntil(() => tutorialClosed);
+
+        tutorial.OnTutorialClosed -= Handler;
+
+        Time.timeScale = 1f;
+        gameActive = true;
+
+        StartMiniGame3();
+    }
 }

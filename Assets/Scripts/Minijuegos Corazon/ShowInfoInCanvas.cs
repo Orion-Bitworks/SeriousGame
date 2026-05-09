@@ -1,27 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Components;
+
 
 public class ShowInfoInCanvas : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI namePiecesText;
+    [SerializeField] LocalizeStringEvent localizedText;
 
     private void Update()
     {
-        ShowInfoNames();
-    }
-
-    void ShowInfoNames()
-    {
         if (ObjectSelector.currentlySelected != null)
         {
-            namePiecesText.text = ObjectSelector.currentlySelected.name;
+            localizedText.StringReference.TableEntryReference = ObjectSelector.currentlySelected.name;
+            localizedText.RefreshString();
         }
         else
         {
-            namePiecesText.text = " ";
+            localizedText.StringReference.TableEntryReference = "";
+            localizedText.RefreshString();
         }
     }
-
 }

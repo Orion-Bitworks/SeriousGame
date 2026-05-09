@@ -48,6 +48,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-es-ES
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83399a0fd2c688540851450811199d12
+    m_Address: ValvulasYVenas_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9a7894a6a6ede5740b597c5fad6dd545
     m_Address: MenuPauseTable_es-ES
     m_ReadOnly: 1

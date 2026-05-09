@@ -43,7 +43,6 @@ public class Minigame1 : MonoBehaviour
         fallos = 0;
 
         tutorial.ShowTutorial(2);
-        tutorial.MoveCarpetaMiniHeart();
 	}
 
 	public void objectsRemaining()

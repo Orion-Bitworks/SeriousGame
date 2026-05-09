@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: ValvulasYVenas Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: ValvulasYVenas
+  m_TableCollectionNameGuidString: 1e1a7f5f0e823524dadb4d12da364cf4
+  m_Entries:
+  - m_Id: 165232349184
+    m_Key: Valvula Mitral
+    m_Metadata:
+      m_Items: []
+  - m_Id: 485928833024
+    m_Key: "Valvula A\xF3rtica"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 488667713536
+    m_Key: Valvula Pulmonar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 491297542144
+    m_Key: "Valvula Tric\xFAspide"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 494271303680
+    m_Key: Vena pulmonar superior derecha
+    m_Metadata:
+      m_Items: []
+  - m_Id: 911646494720
+    m_Key: Vena pulmonar inferior derecha
+    m_Metadata:
+      m_Items: []
+  - m_Id: 988171571200
+    m_Key: Vena pulmonar superior izquierda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1031356125184
+    m_Key: Vena pulmonar inferior izquierda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1116290781184
+    m_Key: Vena superior
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1148024885248
+    m_Key: Vena inferior
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1150528884736
+    m_Key: Arteria pulmonar derecha
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1243361415168
+    m_Key: Arteria pulmonar izquierda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1287242223616
+    m_Key: Vena aorta izquierda
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1322470182912
+    m_Key: Vena aorta del medio
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1348055437312
+    m_Key: Vena aorta derecha
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 548521280851935234
+  references:
+    version: 2
+    RefIds:
+    - rid: 548521280851935234
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1778350444007

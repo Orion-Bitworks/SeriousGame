@@ -53,6 +53,7 @@ public class TutorialKeyDisplay : MonoBehaviour
                         // Normalizar nombres
                         key = key.Replace("Control", "Ctrl");
                         key = key.Replace("Retroceso | Supr", "Supr");
+                        key = key.Replace("Barra Espaciadora", "Espacio");
                         textField.text = key;
                         return;
                     }

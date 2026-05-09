@@ -95,7 +95,6 @@ public class GameLoopController : MonoBehaviour
 
         DialogManager.instance.Show("dialog_25");
         controller.ShowTutorial(5);
-        controller.ReposicionarCarpeta();
         StartCoroutine(DelayedHandleGameCompleted());
     }
 
@@ -115,7 +114,6 @@ public class GameLoopController : MonoBehaviour
         threeDMinigameCamera.Priority = 2;
 		DialogManager.instance.Show("dialog_7");
         controller.ShowTutorial(1);
-        controller.MoveCarpeta3D(18);
 	}
 
     public void Start3DLevel()
