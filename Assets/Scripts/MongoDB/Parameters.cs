@@ -12,8 +12,6 @@ public class Parameters
 	public ObjectId Id { get; set; }
 	public int sesionTime { get; set; }
 
-	/*public Dictionary<string, MinigameStats> Minigames {  get; set; }
-		= new Dictionary<string, MinigameStats>();*/
 	public List<MinigameStats> Minigames { get; set; } = new List<MinigameStats>();
 }
 

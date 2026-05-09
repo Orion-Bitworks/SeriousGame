@@ -52,28 +52,6 @@ public class GameParametersMDB : MonoBehaviour
         repo = new PlayerSessionRepository();
     }
 
-	/*public void SaveMinigameData(string name, int tiempo, int? intentos = null, int? movimientos = null, int? fallos = null, int? colocaciones = null)
-	{
-		if (!session.Minigames.ContainsKey(name))
-			session.Minigames[name] = new MinigameStats();
-
-		var stats = session.Minigames[name];
-
-		stats.Tiempo = (stats.Tiempo ?? 0) + tiempo;
-
-		if (intentos.HasValue)
-			stats.Intentos = (stats.Intentos ?? 0) + intentos.Value;
-
-		if (movimientos.HasValue)
-			stats.Movimientos = (stats.Movimientos ?? 0) + movimientos.Value;
-
-        if (fallos.HasValue)
-            stats.Fallos = (stats.Fallos ?? 0) + fallos.Value;
-
-        if (colocaciones.HasValue)
-            stats.Colocaciones = (stats.Colocaciones ?? 0) + colocaciones.Value;
-    }*/
-
 	public void SaveMinigameData(string name, int tiempo, int? intentos = null, int? movimientos = null, int? fallos = null, int? colocaciones = null)
 	{
 		var stats = new MinigameStats
