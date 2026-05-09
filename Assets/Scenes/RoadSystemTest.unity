@@ -1799,6 +1799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03465af393d59d4392628a901f5c012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  placeHolderHeart: {fileID: 6194106912761426249, guid: af15aa138f513e540834531a15793159, type: 3}
   checkTV: {fileID: 1439946964}
   movimientos: 0
 --- !u!114 &142551935

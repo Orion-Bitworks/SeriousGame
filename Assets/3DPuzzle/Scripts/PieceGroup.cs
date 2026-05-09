@@ -180,8 +180,19 @@ public class PieceGroup
 
         // Squencia que mueve el grupo arriba y abajo
         Sequence upDownSequence = DOTween.Sequence().SetAutoKill(false);
+
+        float rotationStartDelay = 0.97f;
+        float rotationDuration = 1.5f;
+
         upDownSequence.AppendInterval(0.2f);
         upDownSequence.Append(pivot.transform.DOMoveY(sceneCenter.y + 0.3f, 0.5f).SetEase(Ease.InBack));
+
+        // APLICAR SUBSTITUCIÓN DE MODELO DEL CORAZON
+        /*upDownSequence.AppendCallback(() =>
+        {
+            ScoreManager.instance.SwapHeartModel(pivot);
+        });*/
+
         upDownSequence.AppendInterval(0.1f);
         upDownSequence.Append(pivot.transform.DOMoveY(sceneCenter.y + -0.3f, 0.5f).SetEase(Ease.OutBack));
 
@@ -189,6 +200,25 @@ public class PieceGroup
         Sequence rotationSequence = DOTween.Sequence().SetAutoKill(false);
         rotationSequence.AppendInterval(0.97f);
         rotationSequence.Append(pivot.transform.DOLocalRotate(new Vector3(pivot.transform.localRotation.x, 360f, 0f), 1.5f, RotateMode.LocalAxisAdd).SetEase(Ease.OutCubic));
+
+        rotationSequence.InsertCallback(rotationStartDelay, () =>
+        {
+            if (ScoreManager.instance.AllRight())
+            {
+                ScoreManager.instance.SwapHeartModel(pivot);
+
+                foreach (PieceController piece in pieces)
+                {
+                    piece.GetComponent<MeshRenderer>().enabled = false;
+
+                    foreach (MeshRenderer mesh in piece.GetComponentsInChildren<MeshRenderer>())
+                    {
+                        mesh.enabled = false;
+                    }
+                }
+            }
+        });
+
         rotationSequence.Join(upDownSequence);
 
         // Sequencia que rota el grupo y lo coloca en su sitio
@@ -210,6 +240,15 @@ public class PieceGroup
             {
                 piece.transform.SetParent(originalHierarchy[piece]);
             }
+
+            HeartPlaceholder placeholder = pivot.GetComponentInChildren<HeartPlaceholder>();
+
+            if (placeholder != null)
+            {
+                placeholder.ConnectPlates();
+                placeholder.transform.SetParent(null);
+            }
+
             GameObject.Destroy(pivot);
             canPlay = true;
 
@@ -233,11 +272,6 @@ public class PieceGroup
 
         animationPivots.Sort((obj1, obj2) => obj1.GetPriority().CompareTo(obj2.GetPriority()));
 
-        /*foreach (AnimationPivotController pivot in animationPivots)
-        {
-            pivot.StartAnimation();
-        }*/
-
         for (int i = 0; i < animationPivots.Count; i++)
         {
             float animationDelay = (i + 1) * 0.2f;
@@ -260,11 +294,6 @@ public class PieceGroup
         }
 
         animationPivots.Sort((obj1, obj2) => obj2.GetPriority().CompareTo(obj1.GetPriority()));
-
-        /*foreach (AnimationPivotController pivot in animationPivots)
-        {
-            pivot.StartAnimation();
-        }*/
 
         for (int i = 0; i < animationPivots.Count; i++)
         {
