@@ -11,6 +11,11 @@ public class TutorialKeyDisplay : MonoBehaviour
     [SerializeField] private int compositePartIndex = 0;
     [SerializeField] private TextMeshProUGUI textField;
 
+    private void Start()
+    {
+        UpdateKey();
+    }
+
     private void OnEnable()
     {
         UpdateKey();
@@ -28,7 +33,6 @@ public class TutorialKeyDisplay : MonoBehaviour
         {
             UpdateKey();
         }
-
     }
 
     private void UpdateKey()
