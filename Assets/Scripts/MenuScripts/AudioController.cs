@@ -30,7 +30,8 @@ public enum PipeSFX
     DropOrgan = 4,
     DrawerOpening = 5,
     DrawerClosing = 6,
-    Change = 7
+    Change = 7,
+    ParticleInOut = 8
 }
 
 public enum HeartMinigamesSFX
@@ -39,7 +40,11 @@ public enum HeartMinigamesSFX
     Rotate = 1,
     Place = 2,
     MonitorStart = 3,
-    MonitorShutdown = 4
+    MonitorShutdown = 4,
+    RythmSpawn = 5,
+    RythmPerfect = 6,
+    RythmCorrect = 7,
+    RythmError = 8
 }
 
 public enum UISFX

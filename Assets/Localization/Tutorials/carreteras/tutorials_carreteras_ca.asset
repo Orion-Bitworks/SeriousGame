@@ -19,79 +19,35 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 256386101248
-    m_Localized: Objectiu
+    m_Localized: "Col\xB7locar canonada"
     m_Metadata:
       m_Items: []
   - m_Id: 307787296768
-    m_Localized: 'Connecta les canonades correctament per fer funcionar el sistema.
-
-'
+    m_Localized: Esborrar canonada
     m_Metadata:
       m_Items: []
   - m_Id: 694908973056
-    m_Localized: "Moure i col\xB7locar canonades\r"
+    m_Localized: Canviar canonada
     m_Metadata:
       m_Items: []
   - m_Id: 607734558720
-    m_Localized: "Mou les canonades lliurement a la taula de treball. Col\xB7loca-les
-      a la posici\xF3 desitjada prement clic esquerre.\r"
+    m_Localized: Rotar canonada
     m_Metadata:
       m_Items: []
   - m_Id: 58139602685952
-    m_Localized: "Clic esquerre\r"
+    m_Localized: "Desfer acci\xF3"
     m_Metadata:
       m_Items: []
   - m_Id: 58173744320512
-    m_Localized: "Canviar el tipus de canonada\r"
+    m_Localized: "Acci\xF3 anterior"
     m_Metadata:
       m_Items: []
   - m_Id: 58176130879488
-    m_Localized: "Pots canviar el tipus de canonada polsant Q i E o fent clic a les
-      fletxes de la pantalla inferior dreta per avan\xE7ar cap endavant i cap enrere
-      respectivament al llistat de canonades.\r"
+    m_Localized: Comprovar
     m_Metadata:
       m_Items: []
   - m_Id: 58178244808704
-    m_Localized: Q / E
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58548664766464
-    m_Localized: "Rotar canonades\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58551844048896
-    m_Localized: "Per cambiar la rotaci\xF3 de la canonada, pots polsar R o fer clic
-      a la fletxa de la pantalla inferior dreta.\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58563437105152
-    m_Localized: R
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58881356959744
-    m_Localized: Desfer / refer
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58882824966144
-    m_Localized: "Per desfer o refer la col\xB7locaci\xF3 d\u2019una canonada, prem
-      Ctrl + Z o Ctrl + Y respectivament.\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58884066480128
-    m_Localized: "Ctrl + Z / Ctrl + Y\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 59434002649088
-    m_Localized: "Esborrar canonades\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 59435093168128
-    m_Localized: "Per \xFAltim, per esborrar una canonada, simplement fes clic dret
-      sobre ella.\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 59436141744128
-    m_Localized: "Clic dret\r"
+    m_Localized: 'Velocitat: x1, x2, x3'
     m_Metadata:
       m_Items: []
   references:

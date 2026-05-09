@@ -70,15 +70,18 @@ public class RythmNoteUI : MonoBehaviour
 		switch (result)
 		{
 			case HitResult.Perfect:
-				innerCircle.color = Color.green;
+				AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.RythmPerfect);
+                innerCircle.color = Color.green;
 				break;
 
 			case HitResult.Good:
-				innerCircle.color = Color.yellow;
+				AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.RythmCorrect);
+                innerCircle.color = Color.yellow;
 				break;
 
 			case HitResult.Miss:
-				innerCircle.color = Color.red;
+				AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.RythmError);
+                innerCircle.color = Color.red;
 				break;
 		}
 	}

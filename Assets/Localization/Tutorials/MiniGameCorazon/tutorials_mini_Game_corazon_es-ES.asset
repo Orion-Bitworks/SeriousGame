@@ -18,43 +18,26 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 4468871168
-    m_Localized: "Colocaci\xF3n de v\xE1lvulas\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8214384640
-    m_Localized: "Arrastra y suelta correctamente las v\xE1lvulas a su sitio correspondiente\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 556430888960
-    m_Localized: "Colocaci\xF3n de venas\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 675226161152
-    m_Localized: "Arrastra y suelta correctamente las venas a su sitio correspondiente\r"
-    m_Metadata:
-      m_Items: []
   - m_Id: 934480285696
-    m_Localized: "Juego ritmico\r"
+    m_Localized: Mover pieza
     m_Metadata:
       m_Items: []
   - m_Id: 1208917790720
-    m_Localized: "Te aparecer\xE1 una serie de bolas con una letra encima (A, S,
-      D). Deber\xE1s pulsar la tecla correspondiente a la bola que est\xE9 marcada
-      en verde. El ritmo que sigue es el de la Macarena, as\xED que f\xEDjate bien
-      porque aparecen y desaparecen r\xE1pido. "
-    m_Metadata:
-      m_Items: []
-  - m_Id: 10248622080
-    m_Localized: Clic derecho
-    m_Metadata:
-      m_Items: []
-  - m_Id: 692540248064
-    m_Localized: Clic derecho
+    m_Localized: Rotar
     m_Metadata:
       m_Items: []
   - m_Id: 1450694286348288
-    m_Localized: A, S, D
+    m_Localized: 'Comprobar
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13830950846566400
+    m_Localized: CONTROLES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13875972418260992
+    m_Localized: Ritmo
     m_Metadata:
       m_Items: []
   references:

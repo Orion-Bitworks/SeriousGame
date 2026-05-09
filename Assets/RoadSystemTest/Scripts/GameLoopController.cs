@@ -19,9 +19,9 @@ public class GameLoopController : MonoBehaviour
     [SerializeField] ScreenController screen;
     [SerializeField] GameObject stopPanel;
 
-    bool minigamesStarted = false;
+    bool minigamesStarted = true;
     bool minigamesFinished = false;
-    bool threeDStarted = false;
+    bool threeDStarted = true;
     bool threeDFinished = false;
 
     OrganLogic heartObject;

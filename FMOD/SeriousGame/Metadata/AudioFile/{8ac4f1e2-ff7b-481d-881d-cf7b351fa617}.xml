@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{8ac4f1e2-ff7b-481d-881d-cf7b351fa617}">
+		<property name="assetPath">
+			<value>MinigameRythmError.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.52800000000000002</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fc5bd990-8bd7-4647-8db4-e128b003fd2e}</destination>
+		</relationship>
+	</object>
+</objects>

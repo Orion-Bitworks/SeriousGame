@@ -28,7 +28,14 @@ public class RoadOutput : MonoBehaviour
             // Notificamos a la l�gica del coraz�n que hemos recibido una bolita si somos parte de �l
             var heart = GetComponentInParent<OrganLogic>();
             if (heart != null)
+            {
+
                 heart.NotifyOutputReceivedBall();
+            }
+            else
+            {
+                AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.ParticleInOut);
+            }
         }
         else {
             // Rechazada, instanciamos un efecto visual en su posici�n

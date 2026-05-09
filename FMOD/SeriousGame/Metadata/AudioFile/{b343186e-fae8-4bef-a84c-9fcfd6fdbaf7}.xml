@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{b343186e-fae8-4bef-a84c-9fcfd6fdbaf7}">
+		<property name="assetPath">
+			<value>MinigameRythmCorrect.mp3.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.056</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fc5bd990-8bd7-4647-8db4-e128b003fd2e}</destination>
+		</relationship>
+	</object>
+</objects>

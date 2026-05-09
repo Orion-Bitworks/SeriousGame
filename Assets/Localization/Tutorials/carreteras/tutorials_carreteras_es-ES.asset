@@ -19,77 +19,35 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 256386101248
-    m_Localized: Objetivo
+    m_Localized: "Colocar tuber\xEDa"
     m_Metadata:
       m_Items: []
   - m_Id: 307787296768
-    m_Localized: "Conecta las tuber\xEDas correctamente para hacer funcionar el sistema.\r\n"
+    m_Localized: "Borrar tuber\xEDa"
     m_Metadata:
       m_Items: []
   - m_Id: 694908973056
-    m_Localized: "Mover y colocar tuber\xEDas\r"
+    m_Localized: "Cambiar tuber\xEDa"
     m_Metadata:
       m_Items: []
   - m_Id: 607734558720
-    m_Localized: "Mueve las tuber\xEDas libremente por la mesa de trabajo. Col\xF3calas
-      en la posici\xF3n deseada pulsando clic izquierdo.\r"
+    m_Localized: "Rotar tuber\xEDa"
     m_Metadata:
       m_Items: []
   - m_Id: 58139602685952
-    m_Localized: "Clic izquierdo\r"
+    m_Localized: "Deshacer acci\xF3n"
     m_Metadata:
       m_Items: []
   - m_Id: 58173744320512
-    m_Localized: "Cambiar el tipo de tuber\xEDa\r"
+    m_Localized: "Acci\xF3n anterior"
     m_Metadata:
       m_Items: []
   - m_Id: 58176130879488
-    m_Localized: "Puedes cambiar el tipo de tuber\xEDa pulsando Q i E o haciendo
-      clic en las flechas de la pantalla inferior derecha para avanzar hacia delante
-      y hacia atr\xE1s respectivamente en el listado de tuber\xEDas.\r"
+    m_Localized: Comprobar
     m_Metadata:
       m_Items: []
   - m_Id: 58178244808704
-    m_Localized: Q / E
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58548664766464
-    m_Localized: "Rotar tuber\xEDas\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58551844048896
-    m_Localized: "Para cambiar la rotaci\xF3n de la tuber\xEDa seleccionada, puedes
-      pulsar R o hacer click en la flecha de la pantalla inferior derecha.\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58563437105152
-    m_Localized: R
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58881356959744
-    m_Localized: "Deshacer / rehacer\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58882824966144
-    m_Localized: "Para deshacer o rehacer la colocaci\xF3n de una tuber\xEDa, pulsa
-      Ctrl + Z o Ctrl + Y respectivamente.\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58884066480128
-    m_Localized: "Ctrl + Z / Ctrl + Y\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 59434002649088
-    m_Localized: "Eliminar tuber\xEDas\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 59435093168128
-    m_Localized: "Por \xFAltimo, para borrar una tuber\xEDa, simplemente haz clic
-      derecho sobre ella.\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 59436141744128
-    m_Localized: "Clic derecho\r"
+    m_Localized: 'Velocidad: x1, x2, x3'
     m_Metadata:
       m_Items: []
   references:

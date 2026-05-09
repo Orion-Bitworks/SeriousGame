@@ -40,7 +40,6 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en-GB
-    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 884a5872f6d26954b8e01d8ffbffe604
     m_Address: UI_Menu_Texts_en-GB

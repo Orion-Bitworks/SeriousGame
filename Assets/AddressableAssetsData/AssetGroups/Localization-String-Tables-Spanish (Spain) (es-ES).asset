@@ -34,7 +34,6 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-es-ES
-    - Preload
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 519900d96a3d2cb4398d6ec45f860127
     m_Address: tutorials_mini_Game_corazon_es-ES

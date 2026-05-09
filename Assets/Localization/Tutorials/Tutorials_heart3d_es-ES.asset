@@ -18,71 +18,28 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 5396400795648
-    m_Localized: Click + SUPR
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5110579949568
-    m_Localized: ESPACIO +  Mantener Click
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4417118892032
-    m_Localized: R + Mantener Click Derecho/ Izquierdo
-    m_Metadata:
-      m_Items: []
   - m_Id: 4414803636224
-    m_Localized: 'R + Click Izquierdo para rotar la pieza
-
-      R + Click Derecho
-      para rotar la pieza'
+    m_Localized: Rotar ejes Z/Y
     m_Metadata:
       m_Items: []
   - m_Id: 4412270276608
-    m_Localized: "Rataci\xF3n de piezas"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5391757701120
-    m_Localized: Eliminar piezas
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3443709014016
-    m_Localized: Objetivo
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3186048724992
-    m_Localized: Conecta las peizas correctamente para que el corazon pueda empezar
-      a funcioanr
+    m_Localized: Rotar ejes X/Y
     m_Metadata:
       m_Items: []
   - m_Id: 4036821348352
     m_Localized: Mover piezas
     m_Metadata:
       m_Items: []
-  - m_Id: 4039316959232
-    m_Localized: "Hacer click y arrastrar las peizas para poder moverlas. Utiliza
-      la rueda del rat\xF3n para hacerlas o alejarlas"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4040797548544
-    m_Localized: "Mantenir Click - Rueda rat\xF3n"
-    m_Metadata:
-      m_Items: []
   - m_Id: 5106805075968
     m_Localized: Separar piezas
     m_Metadata:
       m_Items: []
-  - m_Id: 5109225189376
-    m_Localized: ESPACIO + Click en una pieza para arrastrarla a una cierta distancia
-      para poder separarla del grupo
+  - m_Id: 16088549977591808
+    m_Localized: Borrar
     m_Metadata:
       m_Items: []
-  - m_Id: 5394886651904
-    m_Localized: "Click + SUPR para eliminar una pieza. Pero ves con cuidado, si
-      haces click en un grupo, \xA1se borran todas las piezas!"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2255117736579072
-    m_Localized: "C\xF3mo jugar\r"
+  - m_Id: 16088637223309312
+    m_Localized: Alejar / acercar pieza
     m_Metadata:
       m_Items: []
   references:

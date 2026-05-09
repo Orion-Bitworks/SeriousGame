@@ -370,7 +370,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "NextPiece",
+                    "name": "Next Piece",
                     "type": "Button",
                     "id": "040dcf0b-49fd-4af3-b7cc-8a329d24d78c",
                     "expectedControlType": "Button",
@@ -467,7 +467,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouseControls",
-                    "action": "NextPiece",
+                    "action": "Next Piece",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

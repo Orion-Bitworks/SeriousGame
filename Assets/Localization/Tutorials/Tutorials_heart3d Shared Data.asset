@@ -15,64 +15,28 @@ MonoBehaviour:
   m_TableCollectionName: Tutorials_heart3d
   m_TableCollectionNameGuidString: e23fccfe23303004e886cc27f2755c2e
   m_Entries:
-  - m_Id: 3443709014016
-    m_Key: t0_heart_3D_subtitle
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3186048724992
-    m_Key: t0_heart_3d_explanation
-    m_Metadata:
-      m_Items: []
   - m_Id: 4036821348352
-    m_Key: t1_heart_3D_subtitle
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4039316959232
-    m_Key: t1_heart_3d_explanation
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4040797548544
-    m_Key: t1_heart_3D_keys_text
+    m_Key: MoverPiezas
     m_Metadata:
       m_Items: []
   - m_Id: 4412270276608
-    m_Key: t2_heart_3D_subtitle
+    m_Key: Rotar en ejes X/Y
     m_Metadata:
       m_Items: []
   - m_Id: 4414803636224
-    m_Key: t2_heart_3d_explanation
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4417118892032
-    m_Key: t2_heart_3D_keys_text
+    m_Key: Rotar en ejes Z/Y
     m_Metadata:
       m_Items: []
   - m_Id: 5106805075968
-    m_Key: t3_heart_3D_subtitle
+    m_Key: Separar piezas
     m_Metadata:
       m_Items: []
-  - m_Id: 5109225189376
-    m_Key: t3_heart_3d_explanation
+  - m_Id: 16088549977591808
+    m_Key: Borrar
     m_Metadata:
       m_Items: []
-  - m_Id: 5110579949568
-    m_Key: t3_heart_3D_keys_text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5391757701120
-    m_Key: t4_heart_3D_subtitle
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5394886651904
-    m_Key: t4_heart_3d_explanation
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5396400795648
-    m_Key: t4_heart_3D_keys_text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2255117736579072
-    m_Key: how_to_play_text
+  - m_Id: 16088637223309312
+    m_Key: Alejar / acercar pieza
     m_Metadata:
       m_Items: []
   m_Metadata:

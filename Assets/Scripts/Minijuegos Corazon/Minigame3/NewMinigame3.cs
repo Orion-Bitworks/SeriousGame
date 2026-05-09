@@ -87,7 +87,8 @@ public class NewMinigame3 : MonoBehaviour
 		spawnedNotes++;
 
 		GameObject obj = Instantiate(notePrefab, notesPanel);
-		KeyCode key = GetRandomKey();
+        AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.RythmSpawn);
+        KeyCode key = GetRandomKey();
 
 		activeNote = obj.GetComponent<RythmNoteUI>();
 		activeNote.Init(key, this);

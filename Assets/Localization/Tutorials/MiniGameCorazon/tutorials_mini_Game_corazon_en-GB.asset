@@ -18,43 +18,24 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 4468871168
-    m_Localized: "Valve placement\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8214384640
-    m_Localized: "Drag and drop correctly the valves on their corresponding place\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 556430888960
-    m_Localized: "Veins placement\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 675226161152
-    m_Localized: "Drag and drop correctly the veins on their corresponding place\r"
-    m_Metadata:
-      m_Items: []
   - m_Id: 934480285696
-    m_Localized: "Rhythmic game\r"
+    m_Localized: Move pieces
     m_Metadata:
       m_Items: []
   - m_Id: 1208917790720
-    m_Localized: "A series of spheres with a letter on top (A, S, D) will appear.
-      You must press the key that matches the sphere marked in green. The rhythm
-      follows the Macarena, so pay close attention\u2014they appear and disappear
-      quickly."
-    m_Metadata:
-      m_Items: []
-  - m_Id: 10248622080
-    m_Localized: Rigth click
-    m_Metadata:
-      m_Items: []
-  - m_Id: 692540248064
-    m_Localized: Rigth click
+    m_Localized: Rotate
     m_Metadata:
       m_Items: []
   - m_Id: 1450694286348288
-    m_Localized: A, S, D
+    m_Localized: Check
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13830950846566400
+    m_Localized: CONTROLS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13875972418260992
+    m_Localized: Rythm
     m_Metadata:
       m_Items: []
   references:

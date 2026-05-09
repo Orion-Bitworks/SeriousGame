@@ -18,70 +18,28 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 3186048724992
-    m_Localized: Attach all pieces correctly so the heart can start functioning.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 3443709014016
-    m_Localized: Objective
-    m_Metadata:
-      m_Items: []
   - m_Id: 4036821348352
-    m_Localized: Moving Pieces
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4039316959232
-    m_Localized: Click and drag pieces to move them around. Use the mouse wheel to
-      move them closer or further.
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4040797548544
-    m_Localized: Hold Click - Mouse Wheel
+    m_Localized: Move pieces
     m_Metadata:
       m_Items: []
   - m_Id: 4412270276608
-    m_Localized: Rotating Pieces
+    m_Localized: Rotate X/Y axes
     m_Metadata:
       m_Items: []
   - m_Id: 4414803636224
-    m_Localized: 'R + Left Click to rotate a piece around X / Y axis.
-
-      R +
-      Right Click to rotate a piece around Z / Y axis.'
-    m_Metadata:
-      m_Items: []
-  - m_Id: 4417118892032
-    m_Localized: R + Hold Right / Left Click
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5110579949568
-    m_Localized: SPACE + Hold Click
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5109225189376
-    m_Localized: SPACE + Click a piece and drag it a certain distance to unattach
-      it from a group.
+    m_Localized: Rotate Z/Y axes
     m_Metadata:
       m_Items: []
   - m_Id: 5106805075968
-    m_Localized: Unattaching Pieces
+    m_Localized: Separate pieces
     m_Metadata:
       m_Items: []
-  - m_Id: 5391757701120
-    m_Localized: Deleting Pieces
+  - m_Id: 16088549977591808
+    m_Localized: Delete
     m_Metadata:
       m_Items: []
-  - m_Id: 5394886651904
-    m_Localized: Click + SUPR to delete a piece. But be careful, if you click a group,
-      all its pieces will be deleted!
-    m_Metadata:
-      m_Items: []
-  - m_Id: 5396400795648
-    m_Localized: Click + SUPR
-    m_Metadata:
-      m_Items: []
-  - m_Id: 2255117736579072
-    m_Localized: "How to play\r"
+  - m_Id: 16088637223309312
+    m_Localized: Zoom out / zoom in piece
     m_Metadata:
       m_Items: []
   references:

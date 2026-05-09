@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -52,13 +53,12 @@ public class TutorialKeyDisplay : MonoBehaviour
                 {
                     if (partCount == compositePartIndex)
                     {
-                        string key = action.action.GetBindingDisplayString(part);
+                        string keyComposite = action.action.GetBindingDisplayString(part);
 
-                        // Normalizar nombres
-                        key = key.Replace("Control", "Ctrl");
-                        key = key.Replace("Retroceso | Supr", "Supr");
-                        key = key.Replace("Barra Espaciadora", "Espacio");
-                        textField.text = key;
+                        // Normalizar nombres compuestos
+                        keyComposite = keyComposite.Replace("Control", "Ctrl");
+
+                        textField.text = keyComposite;
                         return;
                     }
 
@@ -68,7 +68,12 @@ public class TutorialKeyDisplay : MonoBehaviour
             }
         }
 
-        // Si no hay composite, fallback
-        textField.text = action.action.GetBindingDisplayString();
+        string fallback = action.action.GetBindingDisplayString();
+
+        // Normalizar nombres
+        fallback = fallback.Replace("Retroceso | Supr", "Supr");
+        fallback = fallback.Replace("Barra Espaciadora", "Espacio");
+
+        textField.text = fallback;
     }
 }

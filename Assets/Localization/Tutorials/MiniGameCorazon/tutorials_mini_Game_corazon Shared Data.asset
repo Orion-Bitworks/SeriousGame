@@ -15,40 +15,26 @@ MonoBehaviour:
   m_TableCollectionName: tutorials_mini_Game_corazon
   m_TableCollectionNameGuidString: 3903e673891e4c6458eea7dedf29fd36
   m_Entries:
-  - m_Id: 4468871168
-    m_Key: t0_miniGameHart_subtitle
-    m_Metadata:
-      m_Items: []
-  - m_Id: 8214384640
-    m_Key: t0_miniGameHart_explanation
-    m_Metadata:
-      m_Items: []
-  - m_Id: 10248622080
-    m_Key: t0_miniGameHart_keys_text
-    m_Metadata:
-      m_Items: []
-  - m_Id: 556430888960
-    m_Key: t1_miniGameHart_subtitle
-    m_Metadata:
-      m_Items: []
-  - m_Id: 675226161152
-    m_Key: t1_miniGameHart_explanation
-    m_Metadata:
-      m_Items: []
-  - m_Id: 692540248064
-    m_Key: t1_miniGameHart_keys_text
-    m_Metadata:
-      m_Items: []
   - m_Id: 934480285696
-    m_Key: t2_miniGameHart_subtitle
+    m_Key: Mover pieza
     m_Metadata:
       m_Items: []
   - m_Id: 1208917790720
-    m_Key: t2_miniGameHart_explanation
+    m_Key: Rotar
     m_Metadata:
       m_Items: []
   - m_Id: 1450694286348288
-    m_Key: t2_miniGameHart_keys_text
+    m_Key: 'Comprobar
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13830950846566400
+    m_Key: CONTROLES
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13875972418260992
+    m_Key: Ritmo
     m_Metadata:
       m_Items: []
   m_Metadata:

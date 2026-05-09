@@ -19,78 +19,35 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 256386101248
-    m_Localized: Objective
+    m_Localized: Place pipe
     m_Metadata:
       m_Items: []
   - m_Id: 307787296768
-    m_Localized: 'Connect the pipes correctly to make the system work.
-
-'
+    m_Localized: Delete pipe
     m_Metadata:
       m_Items: []
   - m_Id: 694908973056
-    m_Localized: "Move and place pipes\r"
+    m_Localized: Change pipe
     m_Metadata:
       m_Items: []
   - m_Id: 607734558720
-    m_Localized: "Move the pipes freely across the workbench. Place them in the desired
-      position by left-clicking.\r"
+    m_Localized: Rotate pipe
     m_Metadata:
       m_Items: []
   - m_Id: 58139602685952
-    m_Localized: "Left click\r"
+    m_Localized: Undo action
     m_Metadata:
       m_Items: []
   - m_Id: 58173744320512
-    m_Localized: "Change the pipe type\r"
+    m_Localized: Previous action
     m_Metadata:
       m_Items: []
   - m_Id: 58176130879488
-    m_Localized: "You can change the pipe type by pressing Q and E or by clicking
-      the arrows on the bottom right screen to move forward and backward respectively
-      in the pipe list.\r"
+    m_Localized: Check
     m_Metadata:
       m_Items: []
   - m_Id: 58178244808704
-    m_Localized: Q / E
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58548664766464
-    m_Localized: "Rotate pipes\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58551844048896
-    m_Localized: "To change the pipe's rotation, you can press R or click the arrow
-      on the bottom right screen.\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58563437105152
-    m_Localized: R
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58881356959744
-    m_Localized: Undo / redo
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58882824966144
-    m_Localized: "To undo or redo a pipe\u2019s placement, press Ctrl + Z or Ctrl
-      + Y respectively.\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 58884066480128
-    m_Localized: "Ctrl + Z / Ctrl + Y\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 59434002649088
-    m_Localized: "Erase pipes\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 59435093168128
-    m_Localized: "Finally, to delete a pipe, simply right-click on it.\r"
-    m_Metadata:
-      m_Items: []
-  - m_Id: 59436141744128
-    m_Localized: "Right click\r"
+    m_Localized: 'Speed: x1, x2, x3'
     m_Metadata:
       m_Items: []
   references:
