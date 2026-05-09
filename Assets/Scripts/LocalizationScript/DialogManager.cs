@@ -41,6 +41,7 @@ public class DialogManager : MonoBehaviour
 		bubbleController.gameObject.SetActive(false);
 
 		IsDialogActive = false;
+
 		grid.SetActive(true);
 
 		// Ejecutar eventos pendientes
@@ -69,7 +70,8 @@ public class DialogManager : MonoBehaviour
 
 	IEnumerator SequenceRoutine(string[] keys)
 	{
-		IsDialogActive = true;
+        grid.SetActive(false);
+        IsDialogActive = true;
 
 		bubbleController.gameObject.SetActive(true);
 
@@ -84,8 +86,9 @@ public class DialogManager : MonoBehaviour
 		bubbleController.gameObject.SetActive(false);
 
 		IsDialogActive = false;
+        grid.SetActive(true);
 
-		if (pendingEvents.Count > 0)
+        if (pendingEvents.Count > 0)
 		{
 			var nextEvent = pendingEvents.Dequeue();
 			nextEvent.Invoke();

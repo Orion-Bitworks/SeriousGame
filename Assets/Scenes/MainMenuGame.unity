@@ -74733,6 +74733,13 @@ MonoBehaviour:
       Data3: 65734294
       Data4: 1873678186
     Path: event:/TubeAnimationSFX
+  menuAmbientSFX:
+    Guid:
+      Data1: 1940660064
+      Data2: 1079426230
+      Data3: 96692146
+      Data4: 373053821
+    Path: event:/MenuAmbientSFX
 --- !u!4 &1417410450
 Transform:
   m_ObjectHideFlags: 0

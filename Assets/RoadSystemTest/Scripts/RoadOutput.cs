@@ -33,7 +33,9 @@ public class RoadOutput : MonoBehaviour
         else {
             // Rechazada, instanciamos un efecto visual en su posici�n
             Debug.Log("Bolita Rechazada");
-            Instantiate(destroyParticle, transform.position, Quaternion.identity);
+            //Instantiate(destroyParticle, transform.position, Quaternion.identity);
+            ParticleManager.instance.SpawnParticles("BloodExplosion", transform.position, Quaternion.identity);
+            AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.Explosion);
         }
     }
 }

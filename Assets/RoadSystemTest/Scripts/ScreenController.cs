@@ -22,11 +22,13 @@ public class ScreenController : MonoBehaviour
 
     void DisappearScreenOff()
     {
+        AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.MonitorStart);
         screenOff.transform.DOScale(0f, 0.5f).SetEase(Ease.OutBack);
     }
 
     public void AppearScreenOff()
     {
+        AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.MonitorShutdown);
         screenOff.transform.DOScale(1f, 0.5f).SetEase(Ease.OutCubic);
     }
 

@@ -7,7 +7,7 @@ using static Cinemachine.DocumentationSortingAttribute;
 
 public static class TempLevelHolder
 {
-    public static LevelID nextLevel = LevelID.Pipe;
+    public static LevelID nextLevel = LevelID.Heart;
 	public static bool introShown = false;
 }
 
@@ -121,11 +121,11 @@ public class GameManager : MonoBehaviour
                     // Instanciar el nivel
                     currentLevelGameObject = Instantiate(levels[index]);
 
-                        DialogManager.instance.Show("dialog_3");
-                        DialogManager.instance.Show("dialog_4");
-                        DialogManager.instance.Show("dialog_5");
+                    DialogManager.instance.Show("dialog_3");
+                    DialogManager.instance.Show("dialog_4");
+                    DialogManager.instance.Show("dialog_5");
 
-                        tutorialManager.ShowTutorial(0);
+                    tutorialManager.ShowTutorial(0);
                 });
                 return;
             }

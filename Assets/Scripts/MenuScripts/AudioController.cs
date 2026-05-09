@@ -10,7 +10,8 @@ public enum SFX
     UI = 3,
     ThreeD = 4,
     Heart = 5,
-    TubeAnimation = 6
+    TubeAnimation = 6,
+    MenuAmbient = 7
 }
 
 public enum MenuSFX
@@ -36,7 +37,9 @@ public enum HeartMinigamesSFX
 {
     Select = 0,
     Rotate = 1,
-    Place = 2
+    Place = 2,
+    MonitorStart = 3,
+    MonitorShutdown = 4
 }
 
 public enum UISFX
@@ -72,6 +75,13 @@ public enum TubeAnimationSFX
     ParticleMoving = 2
 }
 
+public enum MenuAmbientSFX
+{
+    LightFlicker = 0,
+    AirLeak = 1,
+    Spark = 2
+}
+
 public class AudioController : MonoBehaviour
 {
     public static AudioController Instance { get; private set; }
@@ -87,6 +97,7 @@ public class AudioController : MonoBehaviour
     [SerializeField] FMODUnity.EventReference threeDSFX;
     [SerializeField] FMODUnity.EventReference heartSFX;
     [SerializeField] FMODUnity.EventReference tubeAnimationSFX;
+    [SerializeField] FMODUnity.EventReference menuAmbientSFX;
 
     // Variables para las instancias de los eventos añadidos
     private FMOD.Studio.EventInstance mainSongInstance;
@@ -189,6 +200,10 @@ public class AudioController : MonoBehaviour
             case SFX.TubeAnimation:
                 genericSFX = tubeAnimationSFX;
                 parameterName = "TubeAnimationActions";
+                break;
+            case SFX.MenuAmbient:
+                genericSFX = menuAmbientSFX;
+                parameterName = "MenuAmbientActions";
                 break;
             default:
                 return default;

@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class ScoreManager : MonoBehaviour
 	private SessionTimer timer;
 	public int movimientos;
 	private int intentos;
+
+	public bool heartbeatCalled = false;
+	[SerializeField] public Image bloodPanel;
+	bool bloodPanelAlreadyCalled = false;
 
 	private void Awake()
 	{
@@ -304,6 +309,35 @@ public class ScoreManager : MonoBehaviour
                 checkTV.HideTV();
             }
         }
+    }
+
+    public IEnumerator FadeOutBloodPanel()
+    {
+        if (bloodPanel == null && bloodPanelAlreadyCalled)
+            yield break;
+
+		bloodPanelAlreadyCalled = true;
+
+        // Asegurar que aparece de golpe
+        UnityEngine.Color c = bloodPanel.color;
+        c.a = 1f;
+        bloodPanel.color = c;
+
+        yield return new WaitForSeconds(5f);
+
+        // Fade OUT (1 a 0)
+        float t = 0f;
+        float duration = 0.6f; // Ajusta la duración del fade-out
+
+        while (t < duration)
+        {
+            t += Time.deltaTime;
+            c.a = Mathf.Lerp(1f, 0f, t / duration);
+            bloodPanel.color = c;
+            yield return null;
+        }
+
+		bloodPanelAlreadyCalled = false;
     }
 
     private void TerminarMinijuego()

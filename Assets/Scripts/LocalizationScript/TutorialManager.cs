@@ -33,9 +33,6 @@ public class TutorialManager : MonoBehaviour
 		activeTutorial.gameObject.SetActive(true);
 
 		activeTutorial.ResetTutorial();
-
-
-
 	}
 
 	public void MoveCarpeta3D(int move)

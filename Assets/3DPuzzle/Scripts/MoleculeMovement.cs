@@ -55,7 +55,11 @@ public class MoleculeMovement : MonoBehaviour
             if (pipe != null)
             {
                 pipe.SetCanStartBloodFlow(true);
-                AudioController.Instance.PlayHeartbeatOnce();
+                if (!ScoreManager.instance.heartbeatCalled)
+                {
+                    AudioController.Instance.PlayHeartbeatOnce();
+                    ScoreManager.instance.heartbeatCalled = true;
+                }
             }
 
             DOTween.Kill(transform);

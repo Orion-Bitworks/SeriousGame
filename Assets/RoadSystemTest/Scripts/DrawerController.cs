@@ -25,6 +25,7 @@ public class DrawerController : MonoBehaviour
     void Update()
     {
         if (GameManager.Instance.isPlaying) return;
+        if (DialogManager.IsDialogActive) return;
 
         bool overHandle = IsMouseOverHandle();
         bool overDrawer = IsMouseOverDrawer();

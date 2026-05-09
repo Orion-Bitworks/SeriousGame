@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BloodAnimationController : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class BloodAnimationController : MonoBehaviour
                 alreadyFlowing = true;
                 ParticleManager.instance.SpawnParticles("BloodParticles", transform);
                 AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.BloodFlow);
+
+                StartCoroutine(ScoreManager.instance.FadeOutBloodPanel());
             }
         }
         else if (connection.PairedWithPartner())

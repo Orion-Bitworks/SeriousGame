@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="ParameterPreset" id="{69b13c59-ce32-45f0-be96-ba00925df127}">
+		<property name="name">
+			<value>MenuAmbientActions</value>
+		</property>
+		<relationship name="folder">
+			<destination>{f0e52e71-842d-4214-858c-9f773e3481d8}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{d6f6cb66-758b-46e2-9aed-70e0b61b6c24}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{d6f6cb66-758b-46e2-9aed-70e0b61b6c24}">
+		<property name="parameterType">
+			<value>2</value>
+		</property>
+		<property name="maximum">
+			<value>3</value>
+		</property>
+		<property name="enumerationLabels">
+			<value>LightFlicker</value>
+			<value>AirLeak</value>
+			<value>Spark</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>

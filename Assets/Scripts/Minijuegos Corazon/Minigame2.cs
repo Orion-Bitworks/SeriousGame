@@ -16,8 +16,6 @@ public class Minigame2 : MonoBehaviour
 
     public FasesMinigames phasesManager;
 
-    private bool popUpShown = false;
-
     [SerializeField]
     public TutorialManager tutorial;
 
@@ -140,17 +138,15 @@ public class Minigame2 : MonoBehaviour
                     }
                 }
             }
+            AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenCorrect);
+            DialogManager.instance.Show("dialog_18_isgood");
+            DialogManager.instance.Show("dialog_20");
 
-            if (!popUpShown)
-            {
-                DialogManager.instance.Show("dialog_18_isgood");
-                DialogManager.instance.Show("dialog_20");
-
-                StartCoroutine(EndMinigame());
-            }
+            StartCoroutine(EndMinigame());
         }
         else
         {
+            AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenError);
             DialogManager.instance.Show("dialog_19_isbad");
         }
     }
@@ -158,7 +154,6 @@ public class Minigame2 : MonoBehaviour
     IEnumerator EndMinigame()
     {
         yield return new WaitForSecondsRealtime(2f);
-        popUpShown = true;
         TerminarMinijuego();
         phasesManager.PasarAFase3();
     }

@@ -24,6 +24,8 @@ public class ObjectSelector : MonoBehaviour
 
     [SerializeField] ScreenButtonsController screenButtonsController;
 
+    bool wasDialogActive = false;
+
     private void Awake()
     {
         rotateButton.onClick.AddListener(rotatePiece); //Listener
@@ -38,6 +40,20 @@ public class ObjectSelector : MonoBehaviour
 
         controls.InMiniGame.Rotate.performed += OnRotate;
         controls.InMiniGame.Check.performed += OnCheck;
+    }
+
+    private void Update()
+    {
+        if (DialogManager.IsDialogActive && !wasDialogActive)
+        {
+            controls.Disable();
+            wasDialogActive = true;
+        }
+        else if (!DialogManager.IsDialogActive && wasDialogActive)
+        {
+            controls.Enable();
+            wasDialogActive = false;
+        }
     }
 
     private void OnEnable()

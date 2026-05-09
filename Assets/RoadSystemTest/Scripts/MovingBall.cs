@@ -255,6 +255,7 @@ public class MovingBall : MonoBehaviour
         // Cuando la bolita se destruye, instancia un efecto visual en su posición
         //Instantiate(deathParticle, transform.position, Quaternion.identity);
         ParticleManager.instance.SpawnParticles("BloodExplosion", transform.position, Quaternion.identity);
+        AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.Explosion);
         Debug.Log("La bolita no ha llegado a ninguna parte");
         GameManager.Instance.failed = true;
         Destroy(gameObject);

@@ -24,21 +24,19 @@ public class DragAndDrop : MonoBehaviour
     public Minigame2 minigame2Instance;
     public string valveType; //Indicativo de las valvulas
 
-
     public bool locked = false;
 
     private void Start()
     {
         initialPosition = transform.position; //Al iniciar, guarda la posición inicial del objeto.
         selectObj = GetComponent<SelectObject>();
-
-
     }
 
     //inicio del drag
     void OnMouseDown() 
     {
         if (locked) return; // Bloqueja TOT el clic
+        if (DialogManager.IsDialogActive) return;
 
         AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.Select);
 
@@ -94,6 +92,7 @@ public class DragAndDrop : MonoBehaviour
     void OnMouseDrag()
     {
         if (locked) return; // No permet moure
+        if (DialogManager.IsDialogActive) return;
 
         transform.position = MouseWorldPosition() + offset; //El objeto sigue la posición del ratón en el mundo respetando el offset inicial
     }
@@ -103,6 +102,7 @@ public class DragAndDrop : MonoBehaviour
     void OnMouseUp()
     {
         if (locked) return;
+        if (DialogManager.IsDialogActive) return;
 
         AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.Place);
 

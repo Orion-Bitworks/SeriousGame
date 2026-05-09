@@ -39,6 +39,7 @@ public class DragAndDropMinigame2 : MonoBehaviour
     void OnMouseDown()
     {
         if (locked) return;
+        if (DialogManager.IsDialogActive) return;
 
         AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.Select);
         minigame2Instance.movimientos++;
@@ -76,6 +77,7 @@ public class DragAndDropMinigame2 : MonoBehaviour
     void OnMouseDrag()
     {
         if (locked) return;
+        if (DialogManager.IsDialogActive) return;
 
         Vector3 newPos = MouseWorldPosition() + offset;
 
@@ -103,6 +105,7 @@ public class DragAndDropMinigame2 : MonoBehaviour
     void OnMouseUp()
     {
         if (locked) return;
+        if (DialogManager.IsDialogActive) return;
 
         AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.Place);
 

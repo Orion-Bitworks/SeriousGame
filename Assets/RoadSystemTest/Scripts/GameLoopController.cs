@@ -12,12 +12,12 @@ public class GameLoopController : MonoBehaviour
     [SerializeField] GameObject threeDMinigame;
     [SerializeField] GameObject threeDMinigamePieces;
     [SerializeField] GameObject threeDMinigameScreen;
-    [SerializeField] GameObject pipesUI;
     [SerializeField] CinemachineVirtualCamera pipesCamera;
     [SerializeField] CinemachineVirtualCamera heartMinigamesCamera;
     [SerializeField] CinemachineVirtualCamera threeDMinigameCamera;
     [SerializeField] TutorialManager controller;
     [SerializeField] ScreenController screen;
+    [SerializeField] GameObject stopPanel;
 
     bool minigamesStarted = false;
     bool minigamesFinished = false;
@@ -38,6 +38,8 @@ public class GameLoopController : MonoBehaviour
 
         if (minigamesStarted) return;
 
+        stopPanel.SetActive(false);
+
         StartCoroutine(DelayedHandleHeartPlaced(organPosition));
     }
 
@@ -57,7 +59,6 @@ public class GameLoopController : MonoBehaviour
         heartObject = FindAnyObjectByType<OrganLogic>();
         heartObject.gameObject.SetActive(false);
         heartMinigamesObject.SetActive(true);
-        pipesUI.gameObject.SetActive(false);
         heartMinigamesUI.gameObject.SetActive(true);
         heartMinigamesCamera.Priority = 2;
         DialogManager.instance.Show("dialog_14");
@@ -76,7 +77,6 @@ public class GameLoopController : MonoBehaviour
 
         heartMinigamesObject.SetActive(false);
         heartObject.gameObject.SetActive(true);
-        pipesUI.gameObject.SetActive(true);
         heartMinigamesUI.gameObject.SetActive(false);
         heartMinigamesCamera.Priority = 0;
         
@@ -110,7 +110,6 @@ public class GameLoopController : MonoBehaviour
         BuildController.Instance.controls.Disable();
         GameManager.Instance.currentLevelGameObject.SetActive(false);
         threeDMinigame.gameObject.SetActive(true);
-        pipesUI.gameObject.SetActive(false);
         threeDMinigamePieces.gameObject.SetActive(true);
         threeDMinigameScreen.gameObject.SetActive(true);
         threeDMinigameCamera.Priority = 2;
@@ -133,10 +132,11 @@ public class GameLoopController : MonoBehaviour
         GameManager.Instance.isPlaying = false;
         BuildController.Instance.controls.Enable();
         threeDMinigame.gameObject.SetActive(false);
-        pipesUI.gameObject.SetActive(true);
         threeDMinigamePieces.gameObject.SetActive(false);
         threeDMinigameScreen.gameObject.SetActive(false);
         threeDMinigameCamera.Priority = 0;
         DialogManager.instance.ShowSequence(new string []{ "dialog_11", "dialog_12", "dialog_13" });
-	}
+        DialogManager.pendingEvents.Enqueue(() => BuildController.Instance.controls.Disable());
+        stopPanel.SetActive(true);
+    }
 }

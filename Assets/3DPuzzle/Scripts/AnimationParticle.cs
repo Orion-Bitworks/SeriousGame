@@ -11,5 +11,6 @@ public class AnimationParticle : MonoBehaviour
         if (particles.Count - 1 < index || particles[index] == null) return;
 
         particles[index].Play();
+        AudioController.Instance.PlaySFX(SFX.MenuAmbient, (int)MenuAmbientSFX.AirLeak);
     }
 }

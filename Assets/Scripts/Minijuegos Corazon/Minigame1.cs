@@ -16,8 +16,6 @@ public class Minigame1 : MonoBehaviour
 
     [SerializeField] Button CheckButton;
 
-    private bool popUpShown = false;
-
     [SerializeField]
     public TutorialManager tutorial;
 
@@ -118,17 +116,15 @@ public class Minigame1 : MonoBehaviour
                 }
             }
 
-            if (!popUpShown)
-            {
-                DialogManager.instance.Show("dialog_15_isgood");
-                popUpShown = true;
-                TerminarMinijuego();
-                phasesManager.PasarAFase2(); //pasa a la siguiente fase
-            }
-            else
-            {
-                DialogManager.instance.Show("dialog_16_isbad");
-            }
+            AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenCorrect);
+            DialogManager.instance.Show("dialog_15_isgood");
+            TerminarMinijuego();
+            phasesManager.PasarAFase2(); //pasa a la siguiente fase
+        }
+        else
+        {
+            AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenError);
+            DialogManager.instance.Show("dialog_16_isbad");
         }
     }
 

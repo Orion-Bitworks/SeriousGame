@@ -76,6 +76,7 @@ public class RandomDeactivation : MonoBehaviour
             if (canStopWorking && Random.value < 0.4f)
             {
                 ParticleManager.instance.SpawnParticles("Flash", particlePos, Quaternion.identity);
+                AudioController.Instance.PlaySFX(SFX.MenuAmbient, (int)MenuAmbientSFX.Spark);
                 working = false;
                 SetState(false);
             }
@@ -87,6 +88,8 @@ public class RandomDeactivation : MonoBehaviour
         foreach (GameObject go in objectsToDisable)
         {
             go.SetActive(state);
+            if (!state)
+                AudioController.Instance.PlaySFX(SFX.MenuAmbient, (int)MenuAmbientSFX.LightFlicker);
         }
     }
 }
