@@ -69,6 +69,11 @@ public class GameLoopController : MonoBehaviour
         GameManager.Instance.currentLevelGameObject.SetActive(true);
         GameManager.Instance.isPlaying = false;
         BuildController.Instance.controls.Enable();
+
+        screen.AppearScreenOff();
+
+        yield return new WaitForSecondsRealtime(1f);
+
         heartMinigamesObject.SetActive(false);
         heartObject.gameObject.SetActive(true);
         pipesUI.gameObject.SetActive(true);

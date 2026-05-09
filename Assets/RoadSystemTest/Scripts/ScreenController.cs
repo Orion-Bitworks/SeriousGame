@@ -6,6 +6,7 @@ using UnityEngine;
 public class ScreenController : MonoBehaviour
 {
     [SerializeField] GameObject screen;
+    [SerializeField] GameObject screenOff;
     [SerializeField] Transform startingPosition;
     [SerializeField] Transform finalPosition;
 
@@ -16,7 +17,17 @@ public class ScreenController : MonoBehaviour
 
     void StartMovingIn()
     {
-        screen.transform.DOMove(finalPosition.position, 1f).SetEase(Ease.OutBack);
+        screen.transform.DOMove(finalPosition.position, 1f).SetEase(Ease.OutBack).OnComplete(() => { DisappearScreenOff(); });
+    }
+
+    void DisappearScreenOff()
+    {
+        screenOff.transform.DOScale(0f, 0.5f).SetEase(Ease.OutBack);
+    }
+
+    public void AppearScreenOff()
+    {
+        screenOff.transform.DOScale(1f, 0.5f).SetEase(Ease.OutCubic);
     }
 
     public void StartMovingOut ()

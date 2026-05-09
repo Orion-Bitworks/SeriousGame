@@ -143,6 +143,8 @@ public class GameManager : MonoBehaviour
     {
         int nextIndex = (int)currentLevel + 1;
 
+        AudioController.Instance.StopTubeParticle();
+
         if (nextIndex >= levels.Length)
         {
             Debug.Log("No hay más niveles");
