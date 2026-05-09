@@ -74,7 +74,15 @@ public class Minigame2 : MonoBehaviour
             if (!obj.placed || obj.CurrentDropArea == null)
             {
                 Debug.LogWarning($"❌ {obj.name} NO está colocada en ninguna DropArea.");
+
+                if (ObjectSelector.currentlySelected == obj.selectObj)
+                {
+                    ObjectSelector.currentlySelected.Deselect();
+                    ObjectSelector.currentlySelected = null;
+                }
+
                 StartCoroutine(obj.FlashRed());
+
                 continue;
             }
 
@@ -95,7 +103,14 @@ public class Minigame2 : MonoBehaviour
                 Debug.LogWarning($"❌ {obj.name} está en la DropArea equivocada ({drop.name}). " +
                                  $"Tipo requerido: {obj.valveType}, tipo DropArea: {drop.valveType}");
 
+                if (ObjectSelector.currentlySelected == obj.selectObj)
+                {
+                    ObjectSelector.currentlySelected.Deselect();
+                    ObjectSelector.currentlySelected = null;
+                }
+
                 StartCoroutine(obj.FlashRed());
+
                 continue;
             }
 
@@ -115,6 +130,13 @@ public class Minigame2 : MonoBehaviour
             else
             {
                 Debug.LogWarning($"❌ {obj.name} está mal rotada. Diferencia: {angleDiff}°");
+                
+                if (ObjectSelector.currentlySelected == obj.selectObj)
+                {
+                    ObjectSelector.currentlySelected.Deselect();
+                    ObjectSelector.currentlySelected = null;
+                }
+
                 StartCoroutine(obj.FlashRed());
             }
         }

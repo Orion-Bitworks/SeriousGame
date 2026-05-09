@@ -72,30 +72,65 @@ public class Minigame1 : MonoBehaviour
 
         foreach (DragAndDrop obj in draggableValves)
         {
-            if (obj.placed && obj.CurrentDropArea != null)
+            // Caso 1 — No está colocada
+            if (!obj.placed || obj.CurrentDropArea == null)
             {
-                DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
-
-                if (drop != null)
+                if (ObjectSelector.currentlySelected == obj.selectObj)
                 {
-                    if (drop.valveType == obj.valveType)
-                    {
-                        Quaternion currentRot = obj.transform.localRotation; //comprobamos la rotacion local del transform
-                        float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
-                        if (angleDiff <= drop.rotationTolerance)
-                        {
-                            correct++;
-                        }
-                    }
+                    ObjectSelector.currentlySelected.Deselect();
+                    ObjectSelector.currentlySelected = null;
                 }
+
+                StartCoroutine(obj.FlashRed());
+                continue;
             }
+
+            DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
+            if (drop == null)
+                continue;
+
+            // Caso 2 — DropArea incorrecta
+            if (drop.valveType != obj.valveType)
+            {
+                if (ObjectSelector.currentlySelected == obj.selectObj)
+                {
+                    ObjectSelector.currentlySelected.Deselect();
+                    ObjectSelector.currentlySelected = null;
+                }
+
+                StartCoroutine(obj.FlashRed());
+
+                continue;
+            }
+
+            // Comprobación de rotación
+            Quaternion currentRot = obj.transform.localRotation;
+            float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
+
+            // Caso 3 — Rotación incorrecta
+            if (angleDiff > drop.rotationTolerance)
+            {
+                if (ObjectSelector.currentlySelected == obj.selectObj)
+                {
+                    ObjectSelector.currentlySelected.Deselect();
+                    ObjectSelector.currentlySelected = null;
+                }
+
+                StartCoroutine(obj.FlashRed());
+
+                continue;
+            }
+
+            // ✔ Caso correcto
+            correct++;
         }
 
         Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggableValves.Length);
 
         fallos += draggableValves.Length - correct;
 
-        if (correct == draggableValves.Length) // Si el numero de aciertos es igual al numero de valvulas que hay en el array
+        // ✔ Caso éxito
+        if (correct == draggableValves.Length)
         {
             foreach (DragAndDrop obj in draggableValves)
             {
@@ -106,11 +141,11 @@ public class Minigame1 : MonoBehaviour
                     {
                         Quaternion currentRot = obj.transform.rotation;
                         float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
+
                         if (angleDiff <= drop.rotationTolerance)
                         {
-                            obj.locked = true; //bloqueja el objecte
-                            obj.GetComponent<Collider>().enabled = false; //desactiva el collider
-
+                            obj.locked = true;
+                            obj.GetComponent<Collider>().enabled = false;
                         }
                     }
                 }
@@ -119,7 +154,7 @@ public class Minigame1 : MonoBehaviour
             AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenCorrect);
             DialogManager.instance.Show("dialog_15_isgood");
             TerminarMinijuego();
-            phasesManager.PasarAFase2(); //pasa a la siguiente fase
+            phasesManager.PasarAFase2();
         }
         else
         {
