@@ -157,6 +157,29 @@ public class DragAndDropMinigame2 : MonoBehaviour
         return Camera.main.ScreenToWorldPoint(mouseScreenPos);
     }
 
+    public IEnumerator FlashRed()
+    {
+        MeshRenderer mr = GetComponent<MeshRenderer>();
+        if (mr == null) yield break;
+
+        Material mat = mr.material; // instancia del material
+        Color originalColor = mat.color;
+
+        Color flashColor = Color.red;
+
+        int flashes = 3;
+        float speed = 0.15f;
+
+        for (int i = 0; i < flashes; i++)
+        {
+            mat.color = flashColor;
+            yield return new WaitForSeconds(speed);
+
+            mat.color = originalColor;
+            yield return new WaitForSeconds(speed);
+        }
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("DropArea") && tipTrigger.bounds.Intersects(other.bounds))

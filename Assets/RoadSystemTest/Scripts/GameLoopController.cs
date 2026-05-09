@@ -21,7 +21,7 @@ public class GameLoopController : MonoBehaviour
 
     bool minigamesStarted = false;
     bool minigamesFinished = false;
-    bool threeDStarted = false;
+    bool threeDStarted = true;
     bool threeDFinished = false;
 
     OrganLogic heartObject;
@@ -29,7 +29,7 @@ public class GameLoopController : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnOrganPlaced += HandleHeartPlaced;
-        FindObjectOfType<Minigame3>(true).OnGameCompleted += HandleGameCompleted;
+        FindObjectOfType<NewMinigame3>(true).OnGameCompleted += HandleGameCompleted;
     }
 
     private void HandleHeartPlaced(OrganData organ, Vector3 organPosition)

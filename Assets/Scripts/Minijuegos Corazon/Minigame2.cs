@@ -1,8 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using MongoDB.Driver;
+using System.Drawing;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Color = UnityEngine.Color;
 
 public class Minigame2 : MonoBehaviour
 {
@@ -71,6 +74,7 @@ public class Minigame2 : MonoBehaviour
             if (!obj.placed || obj.CurrentDropArea == null)
             {
                 Debug.LogWarning($"❌ {obj.name} NO está colocada en ninguna DropArea.");
+                StartCoroutine(obj.FlashRed());
                 continue;
             }
 
@@ -90,6 +94,8 @@ public class Minigame2 : MonoBehaviour
             {
                 Debug.LogWarning($"❌ {obj.name} está en la DropArea equivocada ({drop.name}). " +
                                  $"Tipo requerido: {obj.valveType}, tipo DropArea: {drop.valveType}");
+
+                StartCoroutine(obj.FlashRed());
                 continue;
             }
 
@@ -109,6 +115,7 @@ public class Minigame2 : MonoBehaviour
             else
             {
                 Debug.LogWarning($"❌ {obj.name} está mal rotada. Diferencia: {angleDiff}°");
+                StartCoroutine(obj.FlashRed());
             }
         }
 
