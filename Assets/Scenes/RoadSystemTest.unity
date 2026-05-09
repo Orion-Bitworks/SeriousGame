@@ -1758,6 +1758,7 @@ GameObject:
   - component: {fileID: 142551934}
   - component: {fileID: 142551933}
   - component: {fileID: 142551935}
+  - component: {fileID: 142551936}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1831,6 +1832,20 @@ MonoBehaviour:
   - {fileID: 1890106729171171648, guid: b198211badd198840a335cb3c69148dd, type: 3}
   - {fileID: 7447406072672779132, guid: 04eba503517afd64983f96af25eaf234, type: 3}
   - {fileID: 7447406072672779132, guid: 6962d0117c0e0e042900e4e554be646d, type: 3}
+--- !u!114 &142551936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142551931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 301aec3c68876f74c9c90d034582472a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamepadSpeed: 800
+  virtualCursor: {fileID: 1211731135}
 --- !u!1 &150380384
 GameObject:
   m_ObjectHideFlags: 0
@@ -13356,15 +13371,7 @@ MonoBehaviour:
       m_Id: e73fe64c-f0a5-4f3f-b7a7-3caf31744bcb
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings:
-      - m_Name: 
-        m_Id: bf889328-74c4-46f5-82e8-86b1ae5186f1
-        m_Path: <Gamepad>/rightStick/y
-        m_Interactions: 
-        m_Processors: 
-        m_Groups: 
-        m_Action: Scroll Wheel
-        m_Flags: 0
+      m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
 --- !u!1001 &1244428209

@@ -735,6 +735,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""168427ce-fcbc-4e2e-9dd1-43b1f5603fd3"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""Rotate Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""3c687c56-8628-47c9-9827-7e9d1de9f75d"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",

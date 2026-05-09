@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 
 public class Move3DObject : MonoBehaviour
@@ -51,7 +52,7 @@ public class Move3DObject : MonoBehaviour
     {
         Vector3 raycastCollision;
 
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = cam.ScreenPointToRay(CursorManager.Position);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, pointDistance, mask))
@@ -93,7 +94,7 @@ public class Move3DObject : MonoBehaviour
 
     public void AdjustPointDistance()
     {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = cam.ScreenPointToRay(CursorManager.Position);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, pointDistance, mask))

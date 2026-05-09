@@ -72,13 +72,12 @@ public class Rotate3DObject : MonoBehaviour
             {
                 dragStarted = false;
             }
-
         }
     }
 
     public Vector3 GetMousePosInScreen()
     {
-        return Input.mousePosition;
+        return CursorManager.Position;
     }
 
     public void RotateObject()
@@ -151,7 +150,7 @@ public class Rotate3DObject : MonoBehaviour
         switch (state)
         {
             case ROTATION_STATE.STATIC:
-                if (posX > posY)
+                if (Mathf.Abs(mouseDelta.x) > Mathf.Abs(mouseDelta.y))
                 {
                     state = ROTATION_STATE.ROTATING_X;
                 }
