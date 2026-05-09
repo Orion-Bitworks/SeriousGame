@@ -11,6 +11,7 @@ public class ScoreManager : MonoBehaviour
 {
 	public static ScoreManager instance;
 
+	[SerializeField] GameObject placeHolderHeart;
 	[SerializeField] CheckTVController checkTV;
 
 	[SerializeField] public HashSet<ConnectionPointController> connections = new HashSet<ConnectionPointController>();
@@ -26,6 +27,7 @@ public class ScoreManager : MonoBehaviour
 	public bool heartbeatCalled = false;
 	[SerializeField] public Image bloodPanel;
 	bool bloodPanelAlreadyCalled = false;
+	private GameObject heartPlaceholder;
 
 	private void Awake()
 	{
@@ -164,6 +166,13 @@ public class ScoreManager : MonoBehaviour
 
 	public IEnumerator StopBloodFlow(bool continueToScene = false)
 	{
+		if (heartPlaceholder != null)
+		{
+			Animator animator = heartPlaceholder.GetComponent<Animator>();
+
+            DOTween.To(() => animator.speed, x => animator.speed = x, 0f, 1.5f);
+		}
+
 		foreach (AnimatedPipeController pipe in FindObjectsOfType<AnimatedPipeController>())
 		{
 			pipe.StopSpawning();
@@ -201,6 +210,11 @@ public class ScoreManager : MonoBehaviour
 			sequence.Join(point.GetPiece().transform.DOMoveY(-5f, 0.5f).SetEase(Ease.InBack, 0.5f));
 		}
 
+		if (heartPlaceholder != null)
+		{
+            sequence.Join(heartPlaceholder.transform.DOMoveY(-5f, 0.5f).SetEase(Ease.InBack, 0.5f));
+        }
+
 		sequence.OnComplete(() =>
 		{
 			while (connections.Count > 0)
@@ -208,6 +222,9 @@ public class ScoreManager : MonoBehaviour
 				ConnectionPointController point = connections.First();
 				point.GetPiece().DeletePiece();
 			}
+
+			Destroy(heartPlaceholder);
+			heartPlaceholder = null;
 
 			resetting = false;
 		});
@@ -327,7 +344,7 @@ public class ScoreManager : MonoBehaviour
 
         // Fade OUT (1 a 0)
         float t = 0f;
-        float duration = 0.6f; // Ajusta la duración del fade-out
+        float duration = 0.6f; // Ajusta la duraciï¿½n del fade-out
 
         while (t < duration)
         {
@@ -346,4 +363,39 @@ public class ScoreManager : MonoBehaviour
 
         GameParametersMDB.Instance.SaveMinigameData("Minijuego3DCorazon", tiempo, intentos, movimientos);
     }
+
+	public bool AllRight()
+	{
+        bool allRight = true;
+
+        foreach (ConnectionPointController point in connections)
+        {
+            if (!point.PairedWithPartner())
+            {
+                allRight = false;
+            }
+        }
+
+        if (connections.Count == 0)
+        {
+            allRight = false;
+        }
+
+		return allRight;
+    }
+
+    public void SwapHeartModel(GameObject pivot)
+    {
+        GameObject newHeart = Instantiate(placeHolderHeart);
+        newHeart.transform.SetParent(pivot.transform, false);
+
+		Vector3 offsetPos = new Vector3(0.064f, -1.198f, -1.594f); // Posicion para que quede en la posicion correcta teniendo en cuenta el pivote del modelo
+
+		newHeart.transform.localPosition = offsetPos;
+    }
+
+	public void RegisterHeartPlaceholder(GameObject placeholder)
+	{
+		heartPlaceholder = placeholder;
+	}
 }
