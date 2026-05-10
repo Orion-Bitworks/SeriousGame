@@ -548,6 +548,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9a0e3cdc-8c8e-4216-b2f8-24cab1ba847a"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next Piece"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""a0202f1c-7f13-4f66-b071-f16350a35a09"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",

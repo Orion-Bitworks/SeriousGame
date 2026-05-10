@@ -20,9 +20,9 @@ public class GameLoopController : MonoBehaviour
     [SerializeField] GameObject stopPanel;
     [SerializeField] GameObject virtualMouseCanvas;
 
-    bool minigamesStarted = false;
+    bool minigamesStarted = true;
     bool minigamesFinished = false;
-    bool threeDStarted = false;
+    bool threeDStarted = true;
     bool threeDFinished = false;
 
     OrganLogic heartObject;
