@@ -13335,7 +13335,15 @@ MonoBehaviour:
       m_Id: 63251833-b43a-41ef-b372-a68b095a2227
       m_Processors: 
       m_Interactions: 
-      m_SingletonActionBindings: []
+      m_SingletonActionBindings:
+      - m_Name: 
+        m_Id: eccdf119-9ac2-403b-a88b-d4e0db976062
+        m_Path: <Gamepad>/buttonWest
+        m_Interactions: 
+        m_Processors: 
+        m_Groups: 
+        m_Action: Right Button
+        m_Flags: 0
       m_Flags: 0
     m_Reference: {fileID: 0}
   m_ForwardButtonAction:
