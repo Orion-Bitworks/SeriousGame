@@ -17,6 +17,8 @@ public class Move3DObject : MonoBehaviour
     private float minPointDistance = 2f;
     private float maxPointDistance = 6f;
 
+    private float scrollSpeed = 6f;
+
     private bool selected = false;
 
     private float targetPointDistance;
@@ -102,7 +104,24 @@ public class Move3DObject : MonoBehaviour
             pointDistance = Mathf.Clamp(hit.distance + (transform.position - hit.point).magnitude, minPointDistance, maxPointDistance);
         }
 
-        float scroll = inputManager.mouseWheel_ia.ReadValue<Vector2>().y;
+        float scroll = 0f;
+
+        if (!CursorManager.UsingGamepad)
+        {
+            scroll = inputManager.mouseWheel_ia.ReadValue<Vector2>().y;
+        }
+        else
+        {
+            if (Gamepad.current.rightShoulder.isPressed)
+            {
+                scroll += 1f * scrollSpeed;
+            }
+
+            if (Gamepad.current.leftShoulder.isPressed)
+            {
+                scroll -= 1f * scrollSpeed;
+            }
+        }
 
         if (scroll != 0)
         {
