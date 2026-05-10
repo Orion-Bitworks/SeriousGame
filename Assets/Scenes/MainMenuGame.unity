@@ -63998,6 +63998,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b889e6f6d6b1a3245b86f76ebdee7b02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggles:
+  - {fileID: 1333917959}
+  - {fileID: 519585149}
+  - {fileID: 1790644621}
 --- !u!1 &1192733447 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6312317082509322393, guid: a2dda0175b4286245813d27c66158113, type: 3}
@@ -69604,7 +69608,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &1344260334 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3235508214072927811, guid: a0253dcee5591e245b487f4216c62366, type: 3}
@@ -102906,7 +102910,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 5453fc4322b5afd47aa7908e7c445494, type: 2}
     - target: {fileID: 7333903175968998954, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7429206159365773956, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_AnchorMax.y
