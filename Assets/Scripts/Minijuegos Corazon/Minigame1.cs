@@ -76,7 +76,6 @@ public class Minigame1 : MonoBehaviour
     public void checkPlacementButton()
     {
         intentos++;
-
         correct = 0;
 
         foreach (DragAndDrop obj in draggableValves)
@@ -85,17 +84,13 @@ public class Minigame1 : MonoBehaviour
             {
                 DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
 
-                if (drop != null)
+                if (drop != null && drop.valveType == obj.valveType)
                 {
-                    if (drop.valveType == obj.valveType)
-                    {
-                        Quaternion currentRot = obj.transform.localRotation; //comprobamos la rotacion local del transform
-                        float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
-                        if (angleDiff <= drop.rotationTolerance)
-                        {
-                            correct++;
-                        }
-                    }
+                    Quaternion currentRot = obj.transform.localRotation;
+                    float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
+
+                    if (angleDiff <= drop.rotationTolerance)
+                        correct++;
                 }
             }
         }
@@ -104,25 +99,13 @@ public class Minigame1 : MonoBehaviour
 
         fallos += draggableValves.Length - correct;
 
-        if (correct == draggableValves.Length) // Si el numero de aciertos es igual al numero de valvulas que hay en el array
+        if (correct == draggableValves.Length)
         {
+            // 🔒🔒🔒 BLOQUEAR TODAS LAS VÁLVULAS 🔒🔒🔒
             foreach (DragAndDrop obj in draggableValves)
             {
-                if (obj.CurrentDropArea != null)
-                {
-                    DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
-                    if (drop != null && drop.valveType == obj.valveType)
-                    {
-                        Quaternion currentRot = obj.transform.rotation;
-                        float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
-                        if (angleDiff <= drop.rotationTolerance)
-                        {
-                            obj.locked = true; //bloqueja el objecte
-                            obj.GetComponent<Collider>().enabled = false; //desactiva el collider
-
-                        }
-                    }
-                }
+                obj.locked = true;
+                obj.GetComponent<Collider>().enabled = false;
             }
 
             if (!popUpShown)
@@ -130,7 +113,9 @@ public class Minigame1 : MonoBehaviour
                 DialogManager.instance.Show("dialog_15_isgood");
                 popUpShown = true;
                 TerminarMinijuego();
-                phasesManager.PasarAFase2(); //pasa a la siguiente fase
+
+                // Pasar al minijuego 2 con válvulas ya bloqueadas
+                phasesManager.PasarAFase2();
             }
             else
             {
