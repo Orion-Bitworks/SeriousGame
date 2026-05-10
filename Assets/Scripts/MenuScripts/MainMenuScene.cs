@@ -19,7 +19,8 @@ public class MainMenuScene : MonoBehaviour
 		TempLevelHolder.introShown = false;
 
         DialogManager.pendingEvents.Clear();
-        DialogManager.instance.Hide();
+        Debug.Log("Cola liompia");
+        //DialogManager.instance.Hide();
 
 
         postProCamera.m_Profile.TryGetSettings(out dof);

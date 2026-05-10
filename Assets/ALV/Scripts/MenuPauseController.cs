@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuPauseController : MonoBehaviour
 {
-	[SerializeField] GameObject pause;
+	[SerializeField] public GameObject pause;
 	[SerializeField] GameObject menuPausePanel;
 	[SerializeField] GameObject[] allOptionPanels;
 	GameObject currentPanel;
@@ -122,9 +122,12 @@ public class MenuPauseController : MonoBehaviour
 	public void ReturnToMenu()
 	{
 		Time.timeScale = 1f;
+		DialogManager.pendingEvents.Clear();
+		DialogManager.IsDialogActive = false;
 
-       // _ = GameParametersMDB.Instance.SendData();
 
-        SceneManager.LoadScene("MainMenuGame");
+		// _ = GameParametersMDB.Instance.SendData();
+
+		SceneManager.LoadScene("MainMenuGame");
 	}
 }
