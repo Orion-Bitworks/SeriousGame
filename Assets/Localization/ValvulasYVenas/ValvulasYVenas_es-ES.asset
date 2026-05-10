@@ -19,19 +19,19 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 165232349184
-    m_Localized: Valvula Mitral
+    m_Localized: Valvula mitral
     m_Metadata:
       m_Items: []
   - m_Id: 485928833024
-    m_Localized: "Valvula A\xF3rtica"
+    m_Localized: "Valvula a\xF3rtica"
     m_Metadata:
       m_Items: []
   - m_Id: 488667713536
-    m_Localized: Valvula Pulmonar
+    m_Localized: Valvula pulmonar
     m_Metadata:
       m_Items: []
   - m_Id: 491297542144
-    m_Localized: "Valvula Tric\xFAspide"
+    m_Localized: "Valvula tric\xFAspide"
     m_Metadata:
       m_Items: []
   - m_Id: 494271303680
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1148024885248
-    m_Localized: Vena Inferior
+    m_Localized: Vena inferior
     m_Metadata:
       m_Items: []
   - m_Id: 1150528884736
@@ -67,15 +67,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1287242223616
-    m_Localized: Vena aorta izquierda
+    m_Localized: "Vena a\xF3rtica izquierda"
     m_Metadata:
       m_Items: []
   - m_Id: 1322470182912
-    m_Localized: Vena aorta del medio
+    m_Localized: "Vena a\xF3rtica media"
     m_Metadata:
       m_Items: []
   - m_Id: 1348055437312
-    m_Localized: Vena aorta derecha
+    m_Localized: "Vena a\xF3rtica derecha"
     m_Metadata:
       m_Items: []
   references:

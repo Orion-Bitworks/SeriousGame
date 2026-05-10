@@ -56,6 +56,7 @@ public class DialogManager : MonoBehaviour
 	{
 
 		bubbleController.gameObject.SetActive(false);
+		IsDialogActive = false;
 	}
 
 	public void ShowSequence(string[] keys)

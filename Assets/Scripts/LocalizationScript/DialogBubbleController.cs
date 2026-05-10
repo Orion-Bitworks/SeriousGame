@@ -9,6 +9,18 @@ public class DialogBubbleController : MonoBehaviour
 	public LocalizeStringEvent dialogText;
 	private bool continuePressed = false;
 
+
+	private void Update()
+	{
+		// Avanza con cualquier tecla excepto ESC
+		if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape))
+		{
+			continuePressed = true;
+		}
+	}
+
+	 
+	 
 	public void SetKey(string key)
 	{
 		dialogText.StringReference.TableEntryReference = key;

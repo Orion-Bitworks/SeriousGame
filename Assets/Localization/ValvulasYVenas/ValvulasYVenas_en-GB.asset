@@ -19,19 +19,19 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 165232349184
-    m_Localized: Mitral Valve
+    m_Localized: Mitral valve
     m_Metadata:
       m_Items: []
   - m_Id: 485928833024
-    m_Localized: Aortic Valve
+    m_Localized: Aortic valve
     m_Metadata:
       m_Items: []
   - m_Id: 488667713536
-    m_Localized: Pulmonary Valve
+    m_Localized: Pulmonary valve
     m_Metadata:
       m_Items: []
   - m_Id: 491297542144
-    m_Localized: Tricuspid Valve
+    m_Localized: Tricuspid valve
     m_Metadata:
       m_Items: []
   - m_Id: 494271303680
@@ -55,7 +55,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1148024885248
-    m_Localized: Inferior Vein
+    m_Localized: Inferior vein
     m_Metadata:
       m_Items: []
   - m_Id: 1150528884736

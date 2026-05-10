@@ -23,33 +23,33 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 41881006080
-    m_Localized: "Hi there! Feeling ready to start your first day at work? I\u2019ll
-      show you around your workspace and today\u2019s tasks."
+    m_Localized: "Hi there! Ready to take on your first day at work? I\u2019ll show
+      you around your workspace and today\u2019s tasks."
     m_Metadata:
       m_Items: []
   - m_Id: 1626078015488
     m_Localized: We take this job very seriously, so I need you to be careful and
-      think through your actions before doing anything. They can have consequences,
-      and not very pleasant ones.
+      think things through before acting. Actions have consequences and not pleasant
+      ones.
     m_Metadata:
       m_Items: []
   - m_Id: 1651101233152
-    m_Localized: "Great! Now the fun begins\u2026 or maybe not so fun for you."
+    m_Localized: "Alright! Now the fun part begins\u2026 though maybe not for you."
     m_Metadata:
       m_Items: []
   - m_Id: 1690984869888
-    m_Localized: "Focus, and let\u2019s get started with the job. Well, not me\u2026
-      you."
+    m_Localized: "Focus, and let\u2019s get to work. Well\u2026 you, not me."
     m_Metadata:
       m_Items: []
   - m_Id: 1692792614912
-    m_Localized: 'You only have one mission: make everything work. I trust you.'
+    m_Localized: "You\u2019ve got one mission: make everything work. I\u2019m counting
+      on you."
     m_Metadata:
       m_Items: []
   - m_Id: 1695720239104
     m_Localized: "As you can see, there\u2019s not much you can do without a heart,
       right? Do me a favor and read carefully how it works; otherwise, things won\u2019t
-      go too well for you."
+      go well for you."
     m_Metadata:
       m_Items: []
   - m_Id: 1697972580352
@@ -71,7 +71,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1767811936256
-    m_Localized: "You\u2019ll have to make the heart work properly, and you\u2019d
+    m_Localized: "You\u2019ll have to make the heart work properly and you\u2019d
       better do it right. That\u2019s a threat."
     m_Metadata:
       m_Items: []
@@ -127,7 +127,7 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 3367402041344
     m_Localized: "If you can\u2019t get the last step right, you won\u2019t get anywhere.
-      Get it together and try again."
+      Pull yourself together and try again."
     m_Metadata:
       m_Items: []
   - m_Id: 3441859325952
@@ -150,7 +150,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1593359212580864
-    m_Localized: "Try again, don\u2019t start disappointing me so soon..."
+    m_Localized: "Try again \u2014 don\u2019t start disappointing me this early\u2026"
     m_Metadata:
       m_Items: []
   references:

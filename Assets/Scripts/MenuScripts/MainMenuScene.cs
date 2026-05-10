@@ -18,9 +18,14 @@ public class MainMenuScene : MonoBehaviour
 	{
 		TempLevelHolder.introShown = false;
 
+        DialogManager.pendingEvents.Clear();
+        DialogManager.instance.Hide();
+
+
         postProCamera.m_Profile.TryGetSettings(out dof);
 
         dof.active = true;
+
     }
 	public void setCanvasActive(GameObject canva) 
     {

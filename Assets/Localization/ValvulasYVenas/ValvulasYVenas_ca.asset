@@ -23,7 +23,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 485928833024
-    m_Localized: "V\xE0lvula A\xF2rtica"
+    m_Localized: "V\xE0lvula a\xF2rtica"
     m_Metadata:
       m_Items: []
   - m_Id: 488667713536
@@ -67,15 +67,15 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1287242223616
-    m_Localized: Vena aorta esquerra
+    m_Localized: "Vena a\xF2rtica esquerra"
     m_Metadata:
       m_Items: []
   - m_Id: 1322470182912
-    m_Localized: Vena aorta del mig
+    m_Localized: "Vena a\xF2rtica mitjana"
     m_Metadata:
       m_Items: []
   - m_Id: 1348055437312
-    m_Localized: Vena aorta dreta
+    m_Localized: "Vena a\xF2rtica dreta"
     m_Metadata:
       m_Items: []
   references:

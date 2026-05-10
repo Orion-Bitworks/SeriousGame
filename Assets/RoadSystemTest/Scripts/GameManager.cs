@@ -7,7 +7,7 @@ using static Cinemachine.DocumentationSortingAttribute;
 
 public static class TempLevelHolder
 {
-    public static LevelID nextLevel = LevelID.Heart;
+    public static LevelID nextLevel = LevelID.Pipe;
 	public static bool introShown = false;
 }
 
@@ -107,16 +107,18 @@ public class GameManager : MonoBehaviour
         {
             if (!TempLevelHolder.introShown)
             {
+                
                 TempLevelHolder.introShown = true;
+				LightController.instance.TurnOnAllLights(false);
 
-                blackBackground.SetActive(true);
+				//blackBackground.SetActive(true);
 
-                DialogManager.instance.Show("dialog_1");
+				DialogManager.instance.Show("dialog_1");
                 DialogManager.instance.Show("dialog_2");
 
                 DialogManager.pendingEvents.Enqueue(() =>
                 {
-                    blackBackground.SetActive(false);
+                    //blackBackground.SetActive(false);
 
                     // Instanciar el nivel
                     currentLevelGameObject = Instantiate(levels[index]);
@@ -125,7 +127,9 @@ public class GameManager : MonoBehaviour
                     DialogManager.instance.Show("dialog_4");
                     DialogManager.instance.Show("dialog_5");
 
-                    tutorialManager.ShowTutorial(0);
+				    LightController.instance.TurnOnAllLights(true);
+
+					tutorialManager.ShowTutorial(0);
                 });
                 return;
             }
@@ -207,6 +211,7 @@ public class GameManager : MonoBehaviour
 		{
 			DialogManager.instance.Show("dialog_5_isgood");
 			DialogManager.instance.Show("dialog_6");
+
 
             TerminarMinijuego("MinijuegoTuberiasTutorial");
 
