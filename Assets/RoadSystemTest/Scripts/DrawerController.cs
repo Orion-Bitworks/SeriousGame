@@ -14,6 +14,8 @@ public class DrawerController : MonoBehaviour
     [SerializeField] Transform closedPosition;
     [SerializeField] Image arrow;
 
+    public Controls controls;
+
     Tween rumbleTween;
     Coroutine autoCloseRoutine;
 
@@ -21,6 +23,12 @@ public class DrawerController : MonoBehaviour
     Color hoverColor = new Color(0.7f, 0.7f, 0.7f);
     Color pressedColor = new Color(0.5f, 0.5f, 0.5f);
     Color disabledColor = new Color(0.7843137f, 0.7843137f, 0.7843137f, 0.5019608f);
+
+    private void Start()
+    {
+        controls = new Controls();
+        controls.Enable();
+    }
 
     void Update()
     {
@@ -61,12 +69,17 @@ public class DrawerController : MonoBehaviour
         {
             StartRumble();
 
-            if (Input.GetMouseButtonDown(0))
+            if (controls.InRoadGame.Place.triggered)
                 StartOpening();
         }
         else
         {
             StopRumble();
+        }
+
+        if (controls.InRoadGame.Drawer.triggered)
+        {
+            StartOpening();
         }
     }
 
@@ -75,7 +88,7 @@ public class DrawerController : MonoBehaviour
     // -------------------------
     void HandleOpen(bool overHandle, bool overDrawer)
     {
-        if (overHandle && Input.GetMouseButtonDown(0))
+        if ((overHandle && controls.InRoadGame.Place.triggered) || controls.InRoadGame.Drawer.triggered)
         {
             StartClosing();
             return;
@@ -131,19 +144,23 @@ public class DrawerController : MonoBehaviour
     IEnumerator AutoClose()
     {
         yield return new WaitForSecondsRealtime(3f);
-        autoCloseRoutine = null;
 
-        state = DrawerState.AutoClosing;
-        UpdateArrowRotation();
+        if (state != DrawerState.Closed && state != DrawerState.Closing)
+        {
+            autoCloseRoutine = null;
 
-        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.DrawerClosing);
+            state = DrawerState.AutoClosing;
+            UpdateArrowRotation();
 
-        drawer.transform.DOMove(closedPosition.position, 1f)
-            .SetEase(Ease.OutCubic)
-            .OnComplete(() =>
-            {
-                state = DrawerState.Closed;
-            });
+            AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.DrawerClosing);
+
+            drawer.transform.DOMove(closedPosition.position, 1f)
+                .SetEase(Ease.OutCubic)
+                .OnComplete(() =>
+                {
+                    state = DrawerState.Closed;
+                });
+        }
     }
 
     // -------------------------
@@ -179,13 +196,13 @@ public class DrawerController : MonoBehaviour
     // -------------------------
     bool IsMouseOverHandle()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(CursorManager.Position);
         return Physics.Raycast(ray, out RaycastHit hit) && hit.transform == transform;
     }
 
     bool IsMouseOverDrawer()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(CursorManager.Position);
         return Physics.Raycast(ray, out RaycastHit hit) && hit.transform == drawerCollider.transform;
     }
 
@@ -205,7 +222,7 @@ public class DrawerController : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButton(0) && overHandle)
+        if ((controls.InRoadGame.Place.triggered || controls.InRoadGame.Drawer.triggered) && overHandle)
             arrow.color = pressedColor;
         else if (overHandle)
             arrow.color = hoverColor;

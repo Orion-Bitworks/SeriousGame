@@ -106,7 +106,7 @@ public class Move3DObject : MonoBehaviour
 
         float scroll = 0f;
 
-        if (!CursorManager.UsingGamepad)
+        if (!CursorManager.IsGamepadMode)
         {
             scroll = inputManager.mouseWheel_ia.ReadValue<Vector2>().y;
         }

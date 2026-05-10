@@ -135,11 +135,7 @@ public class Rotate3DObject : MonoBehaviour
 
         float posX = Mathf.Abs(checkAxis.x);
         float posY = Mathf.Abs(checkAxis.y);
-        // DEcide estado dependiendo de en que eje se ha movido mas el mouse
 
-        //Debug.Log("MouseDelta" + mouseDelta);
-        //Debug.Log("MouseDelta" + mouseDelta.magnitude);
-        //Debug.Log("checkAxis" + checkAxis);
         Vector3 direction = dragPos.normalized;
 
         if (state != ROTATION_STATE.STATIC && directionMultiplier != basicDirection)
