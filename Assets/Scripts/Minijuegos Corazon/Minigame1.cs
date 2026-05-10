@@ -120,7 +120,7 @@ public class Minigame1 : MonoBehaviour
                 continue;
             }
 
-            // ✔ Caso correcto
+            // Caso correcto
             correct++;
         }
 
@@ -131,7 +131,7 @@ public class Minigame1 : MonoBehaviour
 		// Caso éxito
 		if (correct == draggableValves.Length)
 		{
-			//BLOQUEAR TODAS LAS PIEZAS (LO QUE TÚ QUIERES)
+			//BLOQUEAR TODAS LAS PIEZAS
 			foreach (DragAndDrop obj in draggableValves)
 			{
 				obj.locked = true;

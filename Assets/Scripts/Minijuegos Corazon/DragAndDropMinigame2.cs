@@ -40,6 +40,9 @@ public class DragAndDropMinigame2 : MonoBehaviour, IPointerDownHandler, IPointer
     public void OnPointerDown(PointerEventData eventData)
     {
         if (locked) return;
+        if (DialogManager.IsDialogActive) return;
+
+        AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.Select);
 
         minigame2Instance.movimientos++;
 
@@ -165,6 +168,9 @@ public class DragAndDropMinigame2 : MonoBehaviour, IPointerDownHandler, IPointer
     public void OnPointerUp(PointerEventData eventData)
     {
         if (locked) return;
+        if (DialogManager.IsDialogActive) return;
+
+        AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.Place);
 
         if ((!placed || hasDragged) && CurrentDropArea != null)
         {

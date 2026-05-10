@@ -383,7 +383,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PrevPiece"",
+                    ""name"": ""Prev Piece"",
                     ""type"": ""Button"",
                     ""id"": ""d93e0422-331d-4e5b-9c65-64832283a3ef"",
                     ""expectedControlType"": ""Button"",
@@ -520,7 +520,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
-                    ""action"": ""PrevPiece"",
+                    ""action"": ""Prev Piece"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -531,7 +531,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""GamepadControls"",
-                    ""action"": ""PrevPiece"",
+                    ""action"": ""Prev Piece"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -686,6 +686,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""GamepadControls"",
                     ""action"": ""Multiplier"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63fe246b-dad7-4627-824b-46e63310b5ea"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drawer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1018,7 +1029,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_InRoadGame_Place = m_InRoadGame.FindAction("Place", throwIfNotFound: true);
         m_InRoadGame_Erase = m_InRoadGame.FindAction("Erase", throwIfNotFound: true);
         m_InRoadGame_Rotate = m_InRoadGame.FindAction("Rotate", throwIfNotFound: true);
-        m_InRoadGame_PrevPiece = m_InRoadGame.FindAction("PrevPiece", throwIfNotFound: true);
+        m_InRoadGame_PrevPiece = m_InRoadGame.FindAction("Prev Piece", throwIfNotFound: true);
         m_InRoadGame_NextPiece = m_InRoadGame.FindAction("Next Piece", throwIfNotFound: true);
         m_InRoadGame_Undo = m_InRoadGame.FindAction("Undo", throwIfNotFound: true);
         m_InRoadGame_Redo = m_InRoadGame.FindAction("Redo", throwIfNotFound: true);

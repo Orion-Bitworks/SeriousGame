@@ -234,8 +234,7 @@ public class GameManager : MonoBehaviour
 
             if (DialogManager.IsDialogActive)
             {
-                // Cambiar por -> Llamar a Créditos
-                DialogManager.pendingEvents.Enqueue(() => menuPauseController.ReturnToMenu());
+                DialogManager.pendingEvents.Enqueue(() => menuPauseController.GoToCredits());
                 return;
             }
         }

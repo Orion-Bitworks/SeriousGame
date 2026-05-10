@@ -1,6 +1,7 @@
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class DrawerController : MonoBehaviour
@@ -28,6 +29,11 @@ public class DrawerController : MonoBehaviour
     {
         controls = new Controls();
         controls.Enable();
+
+        // Cargar rebinding guardado
+        string rebinds = PlayerPrefs.GetString("rebinds", "");
+        if (!string.IsNullOrEmpty(rebinds))
+            controls.LoadBindingOverridesFromJson(rebinds);
     }
 
     void Update()

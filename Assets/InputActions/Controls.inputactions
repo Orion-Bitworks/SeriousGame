@@ -361,7 +361,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PrevPiece",
+                    "name": "Prev Piece",
                     "type": "Button",
                     "id": "d93e0422-331d-4e5b-9c65-64832283a3ef",
                     "expectedControlType": "Button",
@@ -498,7 +498,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouseControls",
-                    "action": "PrevPiece",
+                    "action": "Prev Piece",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -509,7 +509,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "GamepadControls",
-                    "action": "PrevPiece",
+                    "action": "Prev Piece",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -664,6 +664,17 @@
                     "processors": "",
                     "groups": "GamepadControls",
                     "action": "Multiplier",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63fe246b-dad7-4627-824b-46e63310b5ea",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drawer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
