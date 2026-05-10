@@ -28,21 +28,26 @@ public class VideoOptionsController : MonoBehaviour
         HashSet<string> seen = new HashSet<string> ();
         List<string> options = new List<string> ();
 
-        //Recorremos y añadimos todas las resoluciones
-        foreach (Resolution resolution in allResolutions)
-        {
+		//Recorremos y añadimos todas las resoluciones
+		foreach (Resolution resolution in allResolutions)
+		{
+			float aspect = (float)resolution.width / resolution.height;
 
-            string key = resolution.width + "x" + resolution.height;
-            if (!seen.Contains(key))
-            {
-                seen.Add(key);
-                filteredResolutions.Add(resolution);
-                options.Add(key);
+			// Solo aceptamos resoluciones 16:9
+			if (Mathf.Abs(aspect - (16f / 9f)) > 0.01f)
+				continue;
 
-            }
-        }
-        //limpiamos el dropdown y luego guardamos las resoluciones
-        resolutionDropdown.ClearOptions();
+			string key = resolution.width + "x" + resolution.height;
+
+			if (!seen.Contains(key))
+			{
+				seen.Add(key);
+				filteredResolutions.Add(resolution);
+				options.Add(key);
+			}
+		}
+		//limpiamos el dropdown y luego guardamos las resoluciones
+		resolutionDropdown.ClearOptions();
         resolutionDropdown.AddOptions(options);
 
         //cargamos la resolucion guardada uy actualizamos el dropdown

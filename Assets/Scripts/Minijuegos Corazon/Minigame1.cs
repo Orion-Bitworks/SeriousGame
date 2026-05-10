@@ -124,43 +124,34 @@ public class Minigame1 : MonoBehaviour
             correct++;
         }
 
-        Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggableValves.Length);
+		Debug.Log("Objetos correctamente colocados: " + correct + " / " + draggableValves.Length);
 
-        fallos += draggableValves.Length - correct;
+		fallos += draggableValves.Length - correct;
 
-        // ✔ Caso éxito
-        if (correct == draggableValves.Length)
-        {
-            foreach (DragAndDrop obj in draggableValves)
-            {
-                if (obj.CurrentDropArea != null)
-                {
-                    DropArea drop = obj.CurrentDropArea.GetComponent<DropArea>();
-                    if (drop != null && drop.valveType == obj.valveType)
-                    {
-                        Quaternion currentRot = obj.transform.rotation;
-                        float angleDiff = Quaternion.Angle(currentRot, drop.requiredRotation);
+		// Caso éxito
+		if (correct == draggableValves.Length)
+		{
+			//BLOQUEAR TODAS LAS PIEZAS (LO QUE TÚ QUIERES)
+			foreach (DragAndDrop obj in draggableValves)
+			{
+				obj.locked = true;
+				obj.GetComponent<Collider>().enabled = false;
+			}
 
-                        if (angleDiff <= drop.rotationTolerance)
-                        {
-                            obj.locked = true;
-                            obj.GetComponent<Collider>().enabled = false;
-                        }
-                    }
-                }
-            }
+			AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenCorrect);
+			DialogManager.instance.Show("dialog_15_isgood");
 
-            AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenCorrect);
-            DialogManager.instance.Show("dialog_15_isgood");
-            TerminarMinijuego();
-            phasesManager.PasarAFase2();
-        }
-        else
-        {
-            AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenError);
-            DialogManager.instance.Show("dialog_16_isbad");
-        }
-    }
+			TerminarMinijuego();
+
+			// Pasar a la siguiente fase con TODO bloqueado
+			phasesManager.PasarAFase2();
+		}
+		else
+		{
+			AudioController.Instance.PlaySFX(SFX.ThreeD, (int)ThreeDSFX.ScreenError);
+			DialogManager.instance.Show("dialog_16_isbad");
+		}
+	}
 
     private void TerminarMinijuego()
     {
