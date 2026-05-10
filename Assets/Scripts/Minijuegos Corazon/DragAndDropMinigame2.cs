@@ -197,6 +197,13 @@ public class DragAndDropMinigame2 : MonoBehaviour, IPointerDownHandler, IPointer
 
                 }
             }
+            else
+            {
+                transform.position = initialPosition;
+                transform.rotation = initialRotation;
+                placed = false;
+                CurrentDropArea = null;
+            }
         }
         else
         {

@@ -44,13 +44,15 @@ public enum HeartMinigamesSFX
     RythmSpawn = 5,
     RythmPerfect = 6,
     RythmCorrect = 7,
-    RythmError = 8
+    RythmError = 8,
+    ScreenInOut = 9
 }
 
 public enum UISFX
 {
     TableButtons = 0,
-    ScreenTouch = 1
+    ScreenTouch = 1,
+    TutorialClose = 2
 }
 
 public enum ThreeDSFX
@@ -84,7 +86,8 @@ public enum MenuAmbientSFX
 {
     LightFlicker = 0,
     AirLeak = 1,
-    Spark = 2
+    Spark = 2,
+    SpotlightOn = 3
 }
 
 public class AudioController : MonoBehaviour
@@ -95,6 +98,7 @@ public class AudioController : MonoBehaviour
     [Header("Eventos")]
     [SerializeField] FMODUnity.EventReference mainSong;
     [SerializeField] FMODUnity.EventReference ambienceSong;
+    [SerializeField] FMODUnity.EventReference creditsSong;
     [SerializeField] FMODUnity.EventReference menuSFX;
     [SerializeField] FMODUnity.EventReference pipeSFX;
     [SerializeField] FMODUnity.EventReference uiSFX;
@@ -107,7 +111,7 @@ public class AudioController : MonoBehaviour
     // Variables para las instancias de los eventos añadidos
     private FMOD.Studio.EventInstance mainSongInstance;
     private FMOD.Studio.EventInstance ambienceSongInstance;
-    private FMOD.Studio.EventInstance menuSFXInstance;
+    private FMOD.Studio.EventInstance creditsSongInstance;
 
     private bool tubeParticleSoundPlaying = false;
     private bool heartbeatPlaying = false;
@@ -143,6 +147,7 @@ public class AudioController : MonoBehaviour
         // Paramos ambas por si acaso
         mainSongInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         ambienceSongInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        creditsSongInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 
         if (sceneName == "MainMenuGame")
         {
@@ -152,6 +157,10 @@ public class AudioController : MonoBehaviour
         {
             ambienceSongInstance.start();
         }
+        else if (sceneName == "CreditsScene")
+        {
+            creditsSongInstance.start();
+        }
     }
 
     private void Start()
@@ -159,16 +168,10 @@ public class AudioController : MonoBehaviour
         // Creamos instancias de los eventos
         mainSongInstance = FMODUnity.RuntimeManager.CreateInstance(mainSong);
         ambienceSongInstance = FMODUnity.RuntimeManager.CreateInstance(ambienceSong);
-        menuSFXInstance = FMODUnity.RuntimeManager.CreateInstance(menuSFX);
+        creditsSongInstance = FMODUnity.RuntimeManager.CreateInstance(creditsSong);
 
         mainSongInstance.start();
         PlayHeartbeatOnce();
-    }
-
-    // Se llama desde un botón, activa un sonido aleatorio del efecto MultiInstrument configurado en FMOD.
-    public void PlayRandomSound()
-    {
-        menuSFXInstance.start();
     }
 
     public FMOD.Studio.EventInstance PlaySFX(SFX sfx, int action)

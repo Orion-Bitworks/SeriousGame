@@ -22,7 +22,7 @@ public class GameLoopController : MonoBehaviour
 
     bool minigamesStarted = false;
     bool minigamesFinished = false;
-    bool threeDStarted = false;
+    bool threeDStarted = true;
     bool threeDFinished = false;
 
     OrganLogic heartObject;

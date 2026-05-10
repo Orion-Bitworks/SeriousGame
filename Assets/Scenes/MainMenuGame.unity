@@ -77770,6 +77770,13 @@ MonoBehaviour:
       Data3: -1899014257
       Data4: -863414127
     Path: event:/Ambience Song
+  creditsSong:
+    Guid:
+      Data1: 2014252487
+      Data2: 1108744537
+      Data3: -1711206519
+      Data4: 1968725093
+    Path: event:/Credits Song
   menuSFX:
     Guid:
       Data1: 1545491632
