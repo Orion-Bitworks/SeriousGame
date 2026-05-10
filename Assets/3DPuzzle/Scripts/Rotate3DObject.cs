@@ -72,13 +72,12 @@ public class Rotate3DObject : MonoBehaviour
             {
                 dragStarted = false;
             }
-
         }
     }
 
     public Vector3 GetMousePosInScreen()
     {
-        return Input.mousePosition;
+        return CursorManager.Position;
     }
 
     public void RotateObject()
@@ -137,11 +136,7 @@ public class Rotate3DObject : MonoBehaviour
 
         float posX = Mathf.Abs(checkAxis.x);
         float posY = Mathf.Abs(checkAxis.y);
-        // DEcide estado dependiendo de en que eje se ha movido mas el mouse
 
-        //Debug.Log("MouseDelta" + mouseDelta);
-        //Debug.Log("MouseDelta" + mouseDelta.magnitude);
-        //Debug.Log("checkAxis" + checkAxis);
         Vector3 direction = dragPos.normalized;
 
         if (state != ROTATION_STATE.STATIC && directionMultiplier != basicDirection)
@@ -152,7 +147,7 @@ public class Rotate3DObject : MonoBehaviour
         switch (state)
         {
             case ROTATION_STATE.STATIC:
-                if (posX > posY)
+                if (Mathf.Abs(mouseDelta.x) > Mathf.Abs(mouseDelta.y))
                 {
                     state = ROTATION_STATE.ROTATING_X;
                 }

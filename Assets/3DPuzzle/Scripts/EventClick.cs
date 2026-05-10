@@ -43,7 +43,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         }
 
         PointerEventData eventData = new PointerEventData(EventSystem.current);
-        eventData.position = Input.mousePosition;
+        eventData.position = CursorManager.Position;
 
         bool isOverUI = IsPointerOverWorldUI(eventData);
 
@@ -126,7 +126,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
         Plane canvasPlane = new Plane(targetParent.forward, targetParent.position);
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(CursorManager.Position);
 
         float point;
         Vector3 targetWorldPos = piece.transform.position;

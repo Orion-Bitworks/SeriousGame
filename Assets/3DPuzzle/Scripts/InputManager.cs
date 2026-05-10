@@ -14,7 +14,7 @@ public class InputManager : MonoBehaviour
     public InputAction rotateMode_ia;
     public InputAction separateMode_ia;
     public InputAction deletePiece_ia;
-        
+
     private void Awake()
     {
         if (instance == null)

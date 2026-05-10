@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 
 public class Move3DObject : MonoBehaviour
@@ -15,6 +16,8 @@ public class Move3DObject : MonoBehaviour
 
     private float minPointDistance = 2f;
     private float maxPointDistance = 6f;
+
+    private float scrollSpeed = 6f;
 
     private bool selected = false;
 
@@ -54,7 +57,7 @@ public class Move3DObject : MonoBehaviour
     {
         Vector3 raycastCollision;
 
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = cam.ScreenPointToRay(CursorManager.Position);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, pointDistance, mask))
@@ -115,7 +118,7 @@ public class Move3DObject : MonoBehaviour
 
     public void AdjustPointDistance()
     {
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+        Ray ray = cam.ScreenPointToRay(CursorManager.Position);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, pointDistance, mask))
@@ -123,7 +126,24 @@ public class Move3DObject : MonoBehaviour
             pointDistance = Mathf.Clamp(hit.distance + (transform.position - hit.point).magnitude, minPointDistance, maxPointDistance);
         }
 
-        float scroll = inputManager.mouseWheel_ia.ReadValue<Vector2>().y;
+        float scroll = 0f;
+
+        if (!CursorManager.IsGamepadMode)
+        {
+            scroll = inputManager.mouseWheel_ia.ReadValue<Vector2>().y;
+        }
+        else
+        {
+            if (Gamepad.current.rightShoulder.isPressed)
+            {
+                scroll += 1f * scrollSpeed;
+            }
+
+            if (Gamepad.current.leftShoulder.isPressed)
+            {
+                scroll -= 1f * scrollSpeed;
+            }
+        }
 
         if (scroll != 0)
         {

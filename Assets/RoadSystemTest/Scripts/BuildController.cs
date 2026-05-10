@@ -47,6 +47,20 @@ public class BuildController : MonoBehaviour
     Stack<BuildAction> undoStack = new Stack<BuildAction>();    // Pila con las posibles acciones a deshacer
     Stack<BuildAction> redoStack = new Stack<BuildAction>();    // Pila con las posibles acciones a rehacer
 
+
+    // GAMEPAD
+    private Vector3Int gamepadCell;
+    private bool gamepadInitialized = false;
+    private float dpadHoldTimer = 0f;
+    private bool dpadHeld = false;
+    private const float dpadInitialDelay = 0.25f;
+    private const float dpadRepeatRate = 0.12f;
+
+    private enum StickDir { None, Left, Right, Up, Down }
+    private StickDir lockedDir = StickDir.None;
+
+    private Vector2 previousStick = Vector2.zero;
+
     private void Awake()
     {
         Instance = this;    // Inicializamos el Singleton
@@ -220,36 +234,117 @@ public class BuildController : MonoBehaviour
             return;
         }
 
-        // Crea un rayo desde la cámara hacia el ratón
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        int mask = LayerMask.GetMask("Grid");
-
-        // Si el rayo golpea algo
-        if (Physics.Raycast(ray, out RaycastHit hit, 1000f, mask))
+        if (!CursorManager.IsGamepadMode)
         {
-            // Obtiene el punto de impacto, lo ajusta al grid y le manda al ghost la información relevante
-            Vector3Int snapped = grid.Snap(hit.point);
-            snapped = grid.ClampToBounds(snapped);
+            // Crea un rayo desde la cámara hacia el ratón
+            Ray ray = Camera.main.ScreenPointToRay(CursorManager.Position);
 
-            bool inside = grid.IsInsideBounds(snapped);
-            bool occupied = grid.placedObjects.ContainsKey(snapped);
+            int mask = LayerMask.GetMask("Grid");
 
-            if (hit.collider.GetComponentInParent<MultiCellPiece>() != null)
-                occupied = true;
+            // Si el rayo golpea algo
+            if (Physics.Raycast(ray, out RaycastHit hit, 1000f, mask))
+            {
+                // Obtiene el punto de impacto, lo ajusta al grid y le manda al ghost la información relevante
+                Vector3Int snapped = grid.Snap(hit.point);
+                snapped = grid.ClampToBounds(snapped);
 
-            // Guardamos si el ratón está dentro de la grid
-            isMouseInsideGrid = inside;
+                bool inside = grid.IsInsideBounds(snapped);
+                bool occupied = grid.placedObjects.ContainsKey(snapped);
 
-            ghost.UpdateGhostPosition(snapped, occupied, inside);
+                if (hit.collider.GetComponentInParent<MultiCellPiece>() != null)
+                    occupied = true;
+
+                // Guardamos si el ratón está dentro de la grid
+                isMouseInsideGrid = inside;
+
+                ghost.UpdateGhostPosition(snapped, occupied, inside);
+            }
+            else
+            {
+                // Si no golpea nada, el ratón está fuera de la grid
+                isMouseInsideGrid = false;
+            }
+            // Mostramos o no el ghost dependiendo de si estamos con el ratón dentro de la grid o no
+            ghost.ghostObject.SetActive(isMouseInsideGrid);
+            return;
+        }
+
+        if (!gamepadInitialized)
+        {
+            gamepadCell = grid.ClampToBounds(Vector3Int.zero);
+            gamepadInitialized = true;
+        }
+
+        Vector2 move = Gamepad.current.leftStick.ReadValue();
+        float absX = Mathf.Abs(move.x);
+        float absY = Mathf.Abs(move.y);
+
+        float threshold = 0.5f;
+
+        // Detectar flanco de subida (primer frame en el que se supera el umbral)
+        bool justPressed =
+            (absX > threshold && Mathf.Abs(previousStick.x) <= threshold) ||
+            (absY > threshold && Mathf.Abs(previousStick.y) <= threshold);
+
+        // Detectar si sigue presionado
+        bool held = absX > threshold || absY > threshold;
+
+        if (justPressed)
+        {
+            // Elegir dirección dominante
+            if (absX > absY)
+            {
+                if (move.x > 0) gamepadCell.x++;
+                else gamepadCell.x--;
+            }
+            else
+            {
+                if (move.y > 0) gamepadCell.z++;
+                else gamepadCell.z--;
+            }
+
+            dpadHeld = true;
+            dpadHoldTimer = 0f;
+        }
+        else if (held)
+        {
+            // Repetición tras delay
+            dpadHoldTimer += Time.deltaTime;
+
+            if (dpadHoldTimer > dpadInitialDelay)
+            {
+                if ((dpadHoldTimer - dpadInitialDelay) % dpadRepeatRate < Time.deltaTime)
+                {
+                    if (absX > absY)
+                    {
+                        if (move.x > 0) gamepadCell.x++;
+                        else gamepadCell.x--;
+                    }
+                    else
+                    {
+                        if (move.y > 0) gamepadCell.z++;
+                        else gamepadCell.z--;
+                    }
+                }
+            }
         }
         else
         {
-            // Si no golpea nada, el ratón está fuera de la grid
-            isMouseInsideGrid = false;
+            dpadHeld = false;
+            dpadHoldTimer = 0f;
         }
-        // Mostramos o no el ghost dependiendo de si estamos con el ratón dentro de la grid o no
-        ghost.ghostObject.SetActive(isMouseInsideGrid);
+
+        previousStick = move;
+
+        gamepadCell = grid.ClampToBounds(gamepadCell);
+
+        bool inside2 = grid.IsInsideBounds(gamepadCell);
+        bool occupied2 = grid.placedObjects.ContainsKey(gamepadCell);
+
+        ghost.UpdateGhostPosition(gamepadCell, occupied2, inside2);
+        ghost.ghostObject.SetActive(true);
+
+        isMouseInsideGrid = inside2;
     }
 
     /// <summary>

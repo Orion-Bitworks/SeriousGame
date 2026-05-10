@@ -392,7 +392,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""NextPiece"",
+                    ""name"": ""Next Piece"",
                     ""type"": ""Button"",
                     ""id"": ""040dcf0b-49fd-4af3-b7cc-8a329d24d78c"",
                     ""expectedControlType"": ""Button"",
@@ -435,6 +435,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drawer"",
+                    ""type"": ""Button"",
+                    ""id"": ""6c2fe81e-31fb-45c6-b7ed-328dfb1757dd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -445,6 +454,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
+                    ""action"": ""Place"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a92c8124-1142-405c-8e98-b98df54fc548"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
                     ""action"": ""Place"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -462,11 +482,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""24318bb3-b785-4e78-904f-b2a62e13612c"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""Erase"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c2fb9310-5871-4858-ae88-4a0ac4914388"",
                     ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bc5dad11-829a-4605-9d70-b93b1e760fa5"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -484,11 +526,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""977594fc-c5c7-4b85-8c1b-355b5802032b"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""PrevPiece"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2f7167da-883b-4eb7-9c50-c026f2bb73bf"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
+                    ""action"": ""Next Piece"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0202f1c-7f13-4f66-b071-f16350a35a09"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""NextPiece"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -527,6 +591,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
+                    ""name"": """",
+                    ""id"": ""7bc8c89b-bd56-40e2-a194-005e58282bb3"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""Undo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
                     ""name"": ""One Modifier"",
                     ""id"": ""eebb6144-2aed-4a92-bbaf-5ddcd8a6bd5c"",
                     ""path"": ""OneModifier"",
@@ -561,11 +636,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""2f516f57-5638-47c1-87a8-f351336ae14e"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""Redo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""014bdcd4-038e-4da5-8381-79e687fc65bf"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
+                    ""action"": ""Play"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6e6b330-b667-47bd-bdb9-e0872e232984"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
                     ""action"": ""Play"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -578,6 +675,28 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
                     ""action"": ""Multiplier"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9f05dd52-946e-42ea-8b2c-538277fc6cad"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""Multiplier"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1acb1fb6-d08f-4c26-bcef-95c0603ea245"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""Drawer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -620,11 +739,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""2056ba79-2946-4559-9f09-d28e73d34215"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""fa00bfcf-11bf-4af1-938f-30f9297899f8"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
+                    ""action"": ""Check"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7c8475ba-82da-4171-a423-fa18eb55d35f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Check"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -713,11 +854,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""168427ce-fcbc-4e2e-9dd1-43b1f5603fd3"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""Rotate Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""3c687c56-8628-47c9-9827-7e9d1de9f75d"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
+                    ""action"": ""Separate Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ced1757b-3006-4e2c-8323-b35436771e76"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Separate Mode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -746,11 +909,33 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""77363e8e-5088-4d25-bef8-984849671b2d"",
+                    ""path"": ""<Gamepad>/leftStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Delete"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""520eb9fd-021a-4642-bfd4-4561c4961299"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
+                    ""action"": ""Left Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a66666ca-adb7-41e0-a707-a829383810da"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Left Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -834,11 +1019,12 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_InRoadGame_Erase = m_InRoadGame.FindAction("Erase", throwIfNotFound: true);
         m_InRoadGame_Rotate = m_InRoadGame.FindAction("Rotate", throwIfNotFound: true);
         m_InRoadGame_PrevPiece = m_InRoadGame.FindAction("PrevPiece", throwIfNotFound: true);
-        m_InRoadGame_NextPiece = m_InRoadGame.FindAction("NextPiece", throwIfNotFound: true);
+        m_InRoadGame_NextPiece = m_InRoadGame.FindAction("Next Piece", throwIfNotFound: true);
         m_InRoadGame_Undo = m_InRoadGame.FindAction("Undo", throwIfNotFound: true);
         m_InRoadGame_Redo = m_InRoadGame.FindAction("Redo", throwIfNotFound: true);
         m_InRoadGame_Play = m_InRoadGame.FindAction("Play", throwIfNotFound: true);
         m_InRoadGame_Multiplier = m_InRoadGame.FindAction("Multiplier", throwIfNotFound: true);
+        m_InRoadGame_Drawer = m_InRoadGame.FindAction("Drawer", throwIfNotFound: true);
         // InMiniGame
         m_InMiniGame = asset.FindActionMap("InMiniGame", throwIfNotFound: true);
         m_InMiniGame_Rotate = m_InMiniGame.FindAction("Rotate", throwIfNotFound: true);
@@ -1000,6 +1186,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_InRoadGame_Redo;
     private readonly InputAction m_InRoadGame_Play;
     private readonly InputAction m_InRoadGame_Multiplier;
+    private readonly InputAction m_InRoadGame_Drawer;
     public struct InRoadGameActions
     {
         private @Controls m_Wrapper;
@@ -1013,6 +1200,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         public InputAction @Redo => m_Wrapper.m_InRoadGame_Redo;
         public InputAction @Play => m_Wrapper.m_InRoadGame_Play;
         public InputAction @Multiplier => m_Wrapper.m_InRoadGame_Multiplier;
+        public InputAction @Drawer => m_Wrapper.m_InRoadGame_Drawer;
         public InputActionMap Get() { return m_Wrapper.m_InRoadGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1049,6 +1237,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Multiplier.started += instance.OnMultiplier;
             @Multiplier.performed += instance.OnMultiplier;
             @Multiplier.canceled += instance.OnMultiplier;
+            @Drawer.started += instance.OnDrawer;
+            @Drawer.performed += instance.OnDrawer;
+            @Drawer.canceled += instance.OnDrawer;
         }
 
         private void UnregisterCallbacks(IInRoadGameActions instance)
@@ -1080,6 +1271,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Multiplier.started -= instance.OnMultiplier;
             @Multiplier.performed -= instance.OnMultiplier;
             @Multiplier.canceled -= instance.OnMultiplier;
+            @Drawer.started -= instance.OnDrawer;
+            @Drawer.performed -= instance.OnDrawer;
+            @Drawer.canceled -= instance.OnDrawer;
         }
 
         public void RemoveCallbacks(IInRoadGameActions instance)
@@ -1282,6 +1476,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         void OnRedo(InputAction.CallbackContext context);
         void OnPlay(InputAction.CallbackContext context);
         void OnMultiplier(InputAction.CallbackContext context);
+        void OnDrawer(InputAction.CallbackContext context);
     }
     public interface IInMiniGameActions
     {

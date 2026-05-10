@@ -18,6 +18,7 @@ public class GameLoopController : MonoBehaviour
     [SerializeField] TutorialManager controller;
     [SerializeField] ScreenController screen;
     [SerializeField] GameObject stopPanel;
+    [SerializeField] GameObject virtualMouseCanvas;
 
     bool minigamesStarted = false;
     bool minigamesFinished = false;
@@ -60,6 +61,7 @@ public class GameLoopController : MonoBehaviour
         heartObject.gameObject.SetActive(false);
         heartMinigamesObject.SetActive(true);
         heartMinigamesUI.gameObject.SetActive(true);
+        virtualMouseCanvas.gameObject.SetActive(true);
         heartMinigamesCamera.Priority = 2;
         DialogManager.instance.Show("dialog_14");
 	}
@@ -78,6 +80,7 @@ public class GameLoopController : MonoBehaviour
         heartMinigamesObject.SetActive(false);
         heartObject.gameObject.SetActive(true);
         heartMinigamesUI.gameObject.SetActive(false);
+        virtualMouseCanvas.gameObject.SetActive(false);
         heartMinigamesCamera.Priority = 0;
         
         yield return new WaitForSecondsRealtime(1f);
@@ -111,6 +114,7 @@ public class GameLoopController : MonoBehaviour
         threeDMinigame.gameObject.SetActive(true);
         threeDMinigamePieces.gameObject.SetActive(true);
         threeDMinigameScreen.gameObject.SetActive(true);
+        virtualMouseCanvas.gameObject.SetActive(true);
         threeDMinigameCamera.Priority = 2;
 		DialogManager.instance.Show("dialog_7");
         controller.ShowTutorial(1);
@@ -132,6 +136,7 @@ public class GameLoopController : MonoBehaviour
         threeDMinigame.gameObject.SetActive(false);
         threeDMinigamePieces.gameObject.SetActive(false);
         threeDMinigameScreen.gameObject.SetActive(false);
+        virtualMouseCanvas.gameObject.SetActive(false);
         threeDMinigameCamera.Priority = 0;
         DialogManager.instance.ShowSequence(new string []{ "dialog_11", "dialog_12", "dialog_13" });
         DialogManager.pendingEvents.Enqueue(() => BuildController.Instance.controls.Disable());

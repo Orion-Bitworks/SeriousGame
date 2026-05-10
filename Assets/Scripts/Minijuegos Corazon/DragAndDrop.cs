@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class DragAndDrop : MonoBehaviour
+public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
-    
     public static DragAndDrop currentlySelected = null;
 
     Vector3 offset; //Diferencia entre la posición del objeto y la del ratón
@@ -33,7 +33,7 @@ public class DragAndDrop : MonoBehaviour
     }
 
     //inicio del drag
-    void OnMouseDown() 
+    public void OnPointerDown(PointerEventData eventData)
     {
         if (locked) return; // Bloqueja TOT el clic
         if (DialogManager.IsDialogActive) return;
@@ -84,12 +84,11 @@ public class DragAndDrop : MonoBehaviour
         offset = transform.position - MouseWorldPosition();
         GetComponent<Collider>().enabled = false;
 
-
+        //transform.position = MouseWorldPosition() + offset;
     }
 
-
     //Mover el objeto
-    void OnMouseDrag()
+    public void OnDrag(PointerEventData eventData)
     {
         if (locked) return; // No permet moure
         if (DialogManager.IsDialogActive) return;
@@ -97,9 +96,8 @@ public class DragAndDrop : MonoBehaviour
         transform.position = MouseWorldPosition() + offset; //El objeto sigue la posición del ratón en el mundo respetando el offset inicial
     }
 
-
     //Soltar el objeto
-    void OnMouseUp()
+    public void OnPointerUp(PointerEventData eventData)
     {
         if (locked) return;
         if (DialogManager.IsDialogActive) return;
@@ -177,7 +175,7 @@ public class DragAndDrop : MonoBehaviour
 
     Vector3 MouseWorldPosition()
     {
-        var mouseScreenPos = Input.mousePosition; //Coge la posición del ratón en pantalla
+        var mouseScreenPos = (Vector3) CursorManager.Position; //Coge la posición del ratón en pantalla
         mouseScreenPos.z = Camera.main.WorldToScreenPoint(transform.position).z; //Ajusta z usando la distancia del objeto a la cámara
         return Camera.main.ScreenToWorldPoint(mouseScreenPos); //Convierte esa posición de pantalla a coordenadas del mundo
     }
