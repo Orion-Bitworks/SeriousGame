@@ -615,8 +615,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 450, y: 0}
-  m_SizeDelta: {x: 600, y: 350}
+  m_AnchoredPosition: {x: 545, y: 0}
+  m_SizeDelta: {x: 800, y: 450}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1272505231
 MonoBehaviour:
@@ -632,12 +632,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   photoImage: {fileID: 1272505232}
   photos:
-  - {fileID: 21300000, guid: e2b5342e151a27140be5388adbc1bf3b, type: 3}
   - {fileID: 21300000, guid: dcca9ae710b309547be77bb17344b93a, type: 3}
-  - {fileID: 21300000, guid: 508492e00c33ae84b9739ba0b15d9f69, type: 3}
   - {fileID: 21300000, guid: e678630523fe84144954620d4f7a41c4, type: 3}
+  - {fileID: 21300000, guid: 037bc0b163d23d94d99d3fd81df2e1eb, type: 3}
+  - {fileID: 21300000, guid: 40174aed4666609479f2a7cdc4b69d41, type: 3}
+  - {fileID: 21300000, guid: 508492e00c33ae84b9739ba0b15d9f69, type: 3}
+  - {fileID: 21300000, guid: e2b5342e151a27140be5388adbc1bf3b, type: 3}
+  - {fileID: 21300000, guid: 63151ab12accf574b89ed138c454e142, type: 3}
+  - {fileID: 21300000, guid: 54220b7ec9c1bc34695d3a80b36f1359, type: 3}
   fadeTime: 1
-  stayTime: 3
+  stayTime: 2
 --- !u!114 &1272505232
 MonoBehaviour:
   m_ObjectHideFlags: 0
