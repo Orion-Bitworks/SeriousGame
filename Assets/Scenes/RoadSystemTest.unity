@@ -2447,7 +2447,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &189435920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2524,7 +2524,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1211731134}
-  m_Father: {fileID: 1254541333}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12933,6 +12933,7 @@ MonoBehaviour:
   threeDMinigameCamera: {fileID: 1810190381}
   controller: {fileID: 657133543}
   screen: {fileID: 1060459904}
+  virtualMouseCanvas: {fileID: 189435919}
 --- !u!4 &1163622415
 Transform:
   m_ObjectHideFlags: 0
@@ -13469,7 +13470,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 646960279}
-  - {fileID: 189435923}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1258224548
@@ -29190,3 +29190,4 @@ SceneRoots:
   - {fileID: 956007030}
   - {fileID: 142551932}
   - {fileID: 1433837064}
+  - {fileID: 189435923}

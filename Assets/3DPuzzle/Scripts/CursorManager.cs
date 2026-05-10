@@ -42,7 +42,6 @@ public class CursorManager : MonoBehaviour
 
         if (!VirtualCursorActive)
         {
-            IsGamepadMode = false;
             MoveWithMouse();
             return;
         }
