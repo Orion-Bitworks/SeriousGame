@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Creditos_en-GB
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en-GB
+  m_SharedData: {fileID: 11400000, guid: befef6c7da8234a4d8bca6bed3dee5e9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 7030534144
+    m_Localized: "CREDITS\r\n\r\nAN INTER-CENTER PRODUCTION\r\nInstitut Pedralbes\r\nInstitut
+      FP Sanit\xE0ria Vall d'Hebron\r\n\r\n\r\nORIGINAL IDEA\r\nEila Gomis\r\nAlba
+      Leiva\r\n\r\n\r\nGAME DEPELOPMENT TEAM\r\nPROGRAMACI\xD3\r\n\r\nSISTEM INTEGRATION\r\nIris
+      Frades\r\nJoel D\xEDez\r\nGerard Blasco\r\nV\xEDctor Mill\xE1n\r\n\r\nUI/UX
+      DEVELOPMENT\r\nJoel D\xEDez\r\nIris Frades\r\nGerard Blasco\r\nV\xEDctor Mill\xE1n\r\n\r\nGAMEPLAY
+      PROGRAMMING\r\nJoel D\xEDez\r\nV\xEDctor Mill\xE1n\r\nIris Frades\r\nGerard
+      Blasco\r\n\r\n\r\n\r\nART AND DESIGN\r\n\r\nARTISTIC DIRECTION\r\nMarta V\xE1zquez\r\nGuillem
+      Gim\xE9nez\r\nHelena Charro\r\n\r\nCONCEPT ART\r\nMarta V\xE1zquez\r\nGuillem
+      Gim\xE9nez\r\nHelena Charro\r\n\r\nVISUAL IDENTITY\r\nMarta V\xE1zquez\r\nGuillem
+      Gim\xE9nez\r\nHelena Charro\r\n\r\nMODELING\r\nMarta V\xE1zquez\r\nGuillem
+      Gim\xE9nez\r\nHelena Charro \r\n\r\nTEXTURED \r\nMarta V\xE1zquez\r\nGuillem
+      Gim\xE9nez\r\nHelena Charro\r\n\r\nASSETS CREATORS\r\nMarta V\xE1zquez\r\nGuillem
+      Gim\xE9nez\r\nHelena Charro\r\n\r\nILUSTRATION  \xB7 CHARACTER DESIGNER\r\nHelena
+      Charro\r\n\r\n\r\nEDUCATIVE COLABORATION\r\n\r\nStudents and faculty\r\nCFGM
+      Emerg\xE8ncies Sanit\xE0ries\r\nInstitut FP Sanit\xE0ria Vall d'Hebron\r\n"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

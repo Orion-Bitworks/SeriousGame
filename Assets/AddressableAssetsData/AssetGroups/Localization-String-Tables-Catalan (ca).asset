@@ -59,6 +59,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ca
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf23df27a50ab294c8d97f07999e5484
+    m_Address: Creditos_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c22a293456e27d64d8767344e6b02be1
     m_Address: tutorials_mini_Game_corazon_ca
     m_ReadOnly: 1

@@ -77,6 +77,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-es-ES
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4ccc2929ba8da94199ed2833f9d3442
+    m_Address: Creditos_es-ES
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-es-ES
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 46e5d326f8c7ce14791dbb7f1f628e06, type: 2}
   m_SchemaSet:

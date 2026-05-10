@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Creditos_ca
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ca
+  m_SharedData: {fileID: 11400000, guid: befef6c7da8234a4d8bca6bed3dee5e9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 7030534144
+    m_Localized: "CR\xC8DITS\r\n\r\nUNA PRODUCCI\xD3 INTERCENTRES\r\nInstitut Pedralbes\r\nInstitut
+      FP Sanit\xE0ria Vall d'Hebron\r\n\r\n\r\nIDEA ORIGINAL\r\nEila Gomis\r\nAlba
+      Leiva\r\n\r\n\r\nEQUIP DE DESENVOLUPAMENT DEL VIDEOJOC\r\nPROGRAMACI\xD3\r\n\r\nINTEGRACI\xD3
+      DE SISTEMES\r\nIris Frades\r\nJoel D\xEDez\r\nGerard Blasco\r\nV\xEDctor Mill\xE1n\r\n\r\nDESENVOLUPAMENT
+      DE UI/UX\r\nJoel D\xEDez\r\nIris Frades\r\nGerard Blasco\r\nV\xEDctor Mill\xE1n\r\n\r\nPROGRAMACI\xD3
+      DE GAMEPLAY\r\nJoel D\xEDez\r\nV\xEDctor Mill\xE1n\r\nIris Frades\r\nGerard
+      Blasco\r\n\r\n\r\n\r\nART I DISSENY\r\n\r\nDIRECCI\xD3 ART\xCDSTICA\r\nMarta
+      V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nCONCEPT ART\r\nMarta
+      V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nIDENTITAT VISUAL\r\nMarta
+      V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nMODELATGE\r\nMarta
+      V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro \r\n\r\nTEXTURITZAT \r\nMarta
+      V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nCREACI\xD3 D\u2019ASSETS\r\nMarta
+      V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nIL\xB7LUSTRACI\xD3 
+      \xB7 DISSENY DE PERSONATGE\r\nHelena Charro\r\n\r\n\r\nCOL\xB7LABORACI\xD3
+      EDUCATIVA\r\n\r\nAlumnat i professorat\r\nCFGM Emerg\xE8ncies Sanit\xE0ries\r\nInstitut
+      FP Sanit\xE0ria Vall d'Hebron\r\n"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

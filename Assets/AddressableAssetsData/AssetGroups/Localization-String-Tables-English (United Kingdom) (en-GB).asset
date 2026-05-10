@@ -71,6 +71,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en-GB
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ec99b0d07f6818f40acbbf76c270ef2d
+    m_Address: Creditos_en-GB
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-GB
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ee0e5494d8ea3c148afbb3346d924de9
     m_Address: Heart3dTexts_en-GB
     m_ReadOnly: 1
