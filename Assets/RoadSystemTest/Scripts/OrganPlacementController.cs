@@ -41,6 +41,12 @@ public class OrganPlacementController : MonoBehaviour
 
     private void Update()
     {
+        if (Mouse.current.delta.ReadValue().sqrMagnitude > 0.01f)
+            CursorManager.IsGamepadMode = false;
+
+        if (Gamepad.current != null && Gamepad.current.leftStick.ReadValue().sqrMagnitude > 0.01f)
+            CursorManager.IsGamepadMode = true;
+
         UpdateGhostPosition();
     }
 

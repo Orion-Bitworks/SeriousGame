@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OrganDrag3D : MonoBehaviour
 {
@@ -24,6 +25,17 @@ public class OrganDrag3D : MonoBehaviour
         // Si estamos en el nivel sin órganos, abortamos
         if (GameManager.Instance.currentLevel == LevelID.Pipe) return;
 
+        if (!CursorManager.IsGamepadMode)
+        {
+            if (!dragging && Mouse.current.leftButton.wasPressedThisFrame && IsMouseOverThis())
+                StartDragging();
+
+            if (dragging && Mouse.current.leftButton.wasReleasedThisFrame)
+                StopDragging();
+
+            return;
+        }
+
         // Iniciar arrastre
         if (controls.InRoadGame.Place.triggered && IsMouseOverThis())
             StartDragging();
@@ -42,6 +54,8 @@ public class OrganDrag3D : MonoBehaviour
     void StartDragging()
     {
         dragging = true;
+
+        CursorManager.IsGamepadMode = false;
 
         // Ocultar mini-órgano del cajón
         DespawnMiniOrgan();

@@ -18,7 +18,7 @@ public class CursorManager : MonoBehaviour
 
     private bool initialized = false;
 
-    public static bool IsGamepadMode { get; private set; } = false;
+    public static bool IsGamepadMode { get; set; } = false;
 
     private float mouseThreshold = 0.1f;
 
