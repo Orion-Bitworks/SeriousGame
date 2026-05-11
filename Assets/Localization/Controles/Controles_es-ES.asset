@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: Controles_es-ES
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: es-ES
+  m_SharedData: {fileID: 11400000, guid: 47ec49a3c3b08f2468d5e4d161725286, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 35975426048
+    m_Localized: Reiniciar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 127260258304
+    m_Localized: Reiniciar todo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 349721948160
+    m_Localized: "MINIJUEGO TUBER\xCDAS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 644531187712
+    m_Localized: Minijuego 3d
+    m_Metadata:
+      m_Items: []
+  - m_Id: 791356993536
+    m_Localized: "Minijuegos Coraz\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1015257329664
+    m_Localized: Anterior Pieza
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1181095915520
+    m_Localized: Siguente Pieza
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1831124955136
+    m_Localized: Rotar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1888230404096
+    m_Localized: Jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1958879260672
+    m_Localized: Multiplicador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2144112308224
+    m_Localized: "Caj\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2361054294016
+    m_Localized: "Modo de Rotaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2473302257664
+    m_Localized: "Modo de Separaci\xF3n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2624523694080
+    m_Localized: Comprobar
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

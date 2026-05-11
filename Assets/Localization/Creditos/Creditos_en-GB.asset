@@ -21,7 +21,7 @@ MonoBehaviour:
   - m_Id: 7030534144
     m_Localized: "CREDITS\r\n\r\nAN INTER-CENTER PRODUCTION\r\nInstitut Pedralbes\r\nInstitut
       FP Sanit\xE0ria Vall d'Hebron\r\n\r\n\r\nORIGINAL IDEA\r\nEila Gomis\r\nAlba
-      Leiva\r\n\r\n\r\nGAME DEPELOPMENT TEAM\r\nPROGRAMACI\xD3\r\n\r\nSISTEM INTEGRATION\r\nIris
+      Leiva\r\n\r\n\r\nGAME DEPELOPMENT TEAM\r\n\nPROGRAMMING\n\r\nSISTEM INTEGRATION\r\nIris
       Frades\r\nJoel D\xEDez\r\nGerard Blasco\r\nV\xEDctor Mill\xE1n\r\n\r\nUI/UX
       DEVELOPMENT\r\nJoel D\xEDez\r\nIris Frades\r\nGerard Blasco\r\nV\xEDctor Mill\xE1n\r\n\r\nGAMEPLAY
       PROGRAMMING\r\nJoel D\xEDez\r\nV\xEDctor Mill\xE1n\r\nIris Frades\r\nGerard
@@ -32,8 +32,10 @@ MonoBehaviour:
       Gim\xE9nez\r\nHelena Charro \r\n\r\nTEXTURED \r\nMarta V\xE1zquez\r\nGuillem
       Gim\xE9nez\r\nHelena Charro\r\n\r\nASSETS CREATORS\r\nMarta V\xE1zquez\r\nGuillem
       Gim\xE9nez\r\nHelena Charro\r\n\r\nILUSTRATION  \xB7 CHARACTER DESIGNER\r\nHelena
-      Charro\r\n\r\n\r\nEDUCATIVE COLABORATION\r\n\r\nStudents and faculty\r\nCFGM
-      Emerg\xE8ncies Sanit\xE0ries\r\nInstitut FP Sanit\xE0ria Vall d'Hebron\r\n"
+      Charro\r\n\r\n\r\nAUDIO & SFX\nSuno AI\nElevenLabs\n\n\nEDUCATIVE COLABORATION\r\n\r\nStudents
+      and faculty\r\nCFGM Emerg\xE8ncies Sanit\xE0ries\r\nInstitut FP Sanit\xE0ria
+      Vall d'Hebron\r\n\n\nCOORDINATION\nOriol Pelino\n\n\nSPECIAL THANKS\nFran Arias\nDavid
+      Sierra\nPol Bellolio\nSergio L\xF3pez\nHelena G\xE1mez"
     m_Metadata:
       m_Items: []
   references:

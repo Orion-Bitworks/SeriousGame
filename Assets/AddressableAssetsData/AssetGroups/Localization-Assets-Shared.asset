@@ -38,6 +38,11 @@ MonoBehaviour:
     m_ReadOnly: 1
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 47ec49a3c3b08f2468d5e4d161725286
+    m_Address: Assets/Localization/Controles/Controles Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4d95848f13f22154896e7687e9bb7e06
     m_Address: Assets/Localization/Tutorials/carreteras/tutorials_carreteras Shared
       Data.asset

@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: Controles Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: Controles
+  m_TableCollectionNameGuidString: 47ec49a3c3b08f2468d5e4d161725286
+  m_Entries:
+  - m_Id: 35975426048
+    m_Key: ReiniciarButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 127260258304
+    m_Key: ReiniciarTodoButton
+    m_Metadata:
+      m_Items: []
+  - m_Id: 349721948160
+    m_Key: MinijuegoTuberiasTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 644531187712
+    m_Key: minijuegos3dtitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 791356993536
+    m_Key: MinijuegoCorazonTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1015257329664
+    m_Key: PrevPiece
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1181095915520
+    m_Key: NextPiece
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1831124955136
+    m_Key: Rotate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1888230404096
+    m_Key: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1958879260672
+    m_Key: Multiplier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2144112308224
+    m_Key: Drawer
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2361054294016
+    m_Key: RotateMode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2473302257664
+    m_Key: SeparateMode
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2624523694080
+    m_Key: Check
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4206909852787933193
+  references:
+    version: 2
+    RefIds:
+    - rid: 4206909852787933193
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1778456096995

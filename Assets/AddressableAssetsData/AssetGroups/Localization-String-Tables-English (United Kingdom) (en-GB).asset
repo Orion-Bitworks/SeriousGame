@@ -29,6 +29,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-en-GB
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 47daaae9456f3df4793a900a8341e507
+    m_Address: Controles_en-GB
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en-GB
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4b299d9dac943a445b92e09abdbd2a03
     m_Address: tutorials_mini_Game_corazon_en-GB
     m_ReadOnly: 1

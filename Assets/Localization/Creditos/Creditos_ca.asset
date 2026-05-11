@@ -21,7 +21,7 @@ MonoBehaviour:
   - m_Id: 7030534144
     m_Localized: "CR\xC8DITS\r\n\r\nUNA PRODUCCI\xD3 INTERCENTRES\r\nInstitut Pedralbes\r\nInstitut
       FP Sanit\xE0ria Vall d'Hebron\r\n\r\n\r\nIDEA ORIGINAL\r\nEila Gomis\r\nAlba
-      Leiva\r\n\r\n\r\nEQUIP DE DESENVOLUPAMENT DEL VIDEOJOC\r\nPROGRAMACI\xD3\r\n\r\nINTEGRACI\xD3
+      Leiva\r\n\r\n\r\nEQUIP DE DESENVOLUPAMENT DEL VIDEOJOC\r\n\nPROGRAMACI\xD3\r\n\r\nINTEGRACI\xD3
       DE SISTEMES\r\nIris Frades\r\nJoel D\xEDez\r\nGerard Blasco\r\nV\xEDctor Mill\xE1n\r\n\r\nDESENVOLUPAMENT
       DE UI/UX\r\nJoel D\xEDez\r\nIris Frades\r\nGerard Blasco\r\nV\xEDctor Mill\xE1n\r\n\r\nPROGRAMACI\xD3
       DE GAMEPLAY\r\nJoel D\xEDez\r\nV\xEDctor Mill\xE1n\r\nIris Frades\r\nGerard
@@ -32,9 +32,11 @@ MonoBehaviour:
       V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro \r\n\r\nTEXTURITZAT \r\nMarta
       V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nCREACI\xD3 D\u2019ASSETS\r\nMarta
       V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nIL\xB7LUSTRACI\xD3 
-      \xB7 DISSENY DE PERSONATGE\r\nHelena Charro\r\n\r\n\r\nCOL\xB7LABORACI\xD3
-      EDUCATIVA\r\n\r\nAlumnat i professorat\r\nCFGM Emerg\xE8ncies Sanit\xE0ries\r\nInstitut
-      FP Sanit\xE0ria Vall d'Hebron\r\n"
+      \xB7 DISSENY DE PERSONATGE\r\nHelena Charro\r\n\n\nAUDIO I EFECTES DE SO\nSuno
+      AI\nElevenLabs\n\r\n\r\nCOL\xB7LABORACI\xD3 EDUCATIVA\r\n\r\nAlumnat i professorat\r\nCFGM
+      Emerg\xE8ncies Sanit\xE0ries\r\nInstitut FP Sanit\xE0ria Vall d'Hebron\r\n\n\nCOORDINACI\xD3\nOriol
+      Pelino\n\n\nAGRA\xCFMENTS\nFran Arias\nDavid Sierra\nPol Bellolio\nSergio L\xF3pez\nHelena
+      G\xE1mez\n"
     m_Metadata:
       m_Items: []
   references:

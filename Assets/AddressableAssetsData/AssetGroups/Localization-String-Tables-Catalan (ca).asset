@@ -41,6 +41,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ca
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f0cb6cb1dafb084f9c21a3526a08154
+    m_Address: Controles_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 348411b4126520f4593948ca0162301c
     m_Address: UI_Menu_Texts_ca
     m_ReadOnly: 1

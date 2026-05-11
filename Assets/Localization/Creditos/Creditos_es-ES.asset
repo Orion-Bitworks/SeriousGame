@@ -19,9 +19,9 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 7030534144
-    m_Localized: "CREDITOS\r\n\r\nUNA PRODUCCI\xD3N INTERCENTROS\r\nInstitut Pedralbes\r\nInstitut
+    m_Localized: "CR\xC9DITOS\r\n\r\nUNA PRODUCCI\xD3N INTERCENTROS\r\nInstitut Pedralbes\r\nInstitut
       FP Sanit\xE0ria Vall d'Hebron\r\n\r\n\r\nIDEA ORIGINAL\r\nEila Gomis\r\nAlba
-      Leiva\r\n\r\n\r\nEQUIPO DE DESARROLLO DEL VIDEOJUEGO\r\nPROGRAMACI\xD3\r\n\r\nINTEGRACI\xD3N
+      Leiva\r\n\r\n\r\nEQUIPO DE DESARROLLO DEL VIDEOJUEGO\r\n\nPROGRAMACI\xD3N\n\r\nINTEGRACI\xD3N
       DE SISTEMES\r\nIris Frades\r\nJoel D\xEDez\r\nGerard Blasco\r\nV\xEDctor Mill\xE1n\r\n\r\nDESARROLLO
       DE UI/UX\r\nJoel D\xEDez\r\nIris Frades\r\nGerard Blasco\r\nV\xEDctor Mill\xE1n\r\n\r\nPROGRAMACI\xD3N
       DE GAMEPLAY\r\nJoel D\xEDez\r\nV\xEDctor Mill\xE1n\r\nIris Frades\r\nGerard
@@ -32,9 +32,11 @@ MonoBehaviour:
       V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro \r\n\r\nTEXTURIZADO \r\nMarta
       V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nCREACI\xD3N DE ASSETS\r\nMarta
       V\xE1zquez\r\nGuillem Gim\xE9nez\r\nHelena Charro\r\n\r\nILUSTRACI\xD3N  \xB7
-      DESE\xD1O DE PERSONAJE\r\nHelena Charro\r\n\r\n\r\nCOLABORACI\xD3N EDUCATIVA\r\n\r\nAlumnado
-      y profesorado\r\nCFGM Emerg\xE8ncies Sanit\xE0ries\r\nInstitut FP Sanit\xE0ria
-      Vall d'Hebron\r\n"
+      DESE\xD1O DE PERSONAJE\r\nHelena Charro\r\n\r\n\n\rAUDIO Y EFECTOS DE SONIDO\nSuno
+      AI\nElevenLabs\n\n\nCOLABORACI\xD3N EDUCATIVA\r\n\r\nAlumnado y profesorado\r\nCFGM
+      Emerg\xE8ncies Sanit\xE0ries\r\nInstitut FP Sanit\xE0ria Vall d'Hebron\r\n\n\nCOORDINACI\xD3N\nOriol
+      Pelino\n\n\nAGRADECIMIENTOS\nFran Arias\nDavid Sierra\nPol Bellolio\nSergio
+      L\xF3pez\nHelena G\xE1mez"
     m_Metadata:
       m_Items: []
   references:

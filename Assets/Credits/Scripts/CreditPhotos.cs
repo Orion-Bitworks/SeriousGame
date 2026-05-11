@@ -34,6 +34,7 @@ public class CreditPhotos : MonoBehaviour
             // Fade out
             yield return StartCoroutine(Fade(1f, 0f));
         }
+
     }
 
     private IEnumerator Fade(float start, float end)
