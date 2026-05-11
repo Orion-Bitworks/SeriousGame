@@ -211,7 +211,7 @@ public struct GamepadIcons
     {
         public Sprite leftButton;
         public Sprite rightButton;
-        public Sprite middleButton;
+        public Sprite scroll;
 
         public Sprite GetSprite(string controlPath)
         {
@@ -219,7 +219,7 @@ public struct GamepadIcons
             {
                 case "leftButton": return leftButton;
                 case "rightButton": return rightButton;
-                case "middleButton": return middleButton;
+                case "scroll": return scroll;
             }
             return null;
         }

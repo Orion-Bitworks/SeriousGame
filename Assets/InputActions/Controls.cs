@@ -909,8 +909,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4171202c-7760-4fc1-9fc2-4a232ea719e8"",
-                    ""path"": ""<Keyboard>/backspace"",
+                    ""id"": ""078d28b6-239f-47ee-876d-92e88b2e8887"",
+                    ""path"": ""<Keyboard>/delete"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
@@ -920,8 +920,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""078d28b6-239f-47ee-876d-92e88b2e8887"",
-                    ""path"": ""<Keyboard>/delete"",
+                    ""id"": ""4171202c-7760-4fc1-9fc2-4a232ea719e8"",
+                    ""path"": ""<Keyboard>/backspace"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
