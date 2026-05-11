@@ -57,7 +57,7 @@ public class PieceController : MonoBehaviour
         }
     }
 
-    public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent)
+    public void SnapToPoint(ConnectionPointController point, Transform target, Transform targetParent, bool absoluteRotation = false)
     {
         if (isPlaced)
         {
@@ -78,13 +78,24 @@ public class PieceController : MonoBehaviour
         Quaternion oldRot = transform.rotation;    
 
         // Guarda la rotacion original de la pieza
-        Quaternion previousRotation = transform.rotation;
+        //Quaternion previousRotation = transform.rotation;
 
         // Conecta los ejes forward del punto de conexión de target y de la pieza
         Quaternion baseRotation = Quaternion.LookRotation(-target.forward, target.up) * Quaternion.Inverse(point.transform.localRotation);
 
         // Define la rotacion final de la pieza teniendo en cuenta la anterior a la colision
-        Quaternion finalRotation = GetBestAxialSnap(baseRotation, -target.forward, previousRotation);
+        Quaternion finalRotation;
+
+        if (absoluteRotation)
+        {
+            finalRotation = baseRotation;
+        }
+        else
+        {
+            Quaternion previousRotation = transform.rotation;
+            finalRotation = GetBestAxialSnap(baseRotation, -target.forward, previousRotation);
+        }
+
         transform.rotation = finalRotation;
 
         // Coloca la pieza para que coincidan los dos puntos de conexion

@@ -125,6 +125,7 @@ MonoBehaviour:
   spawnDistanceY: 0
   spawnDistanceZ: 2
   invertedPipeDirection: 1
+  blueOrNot: 0
   animationType: 1
 --- !u!1 &2007208161732708675
 GameObject:
@@ -251,6 +252,7 @@ MonoBehaviour:
   spawnDistanceY: 0
   spawnDistanceZ: 2
   invertedPipeDirection: 1
+  blueOrNot: 0
   animationType: 1
 --- !u!1 &2723656351910043032
 GameObject:
@@ -377,6 +379,7 @@ MonoBehaviour:
   spawnDistanceY: 0
   spawnDistanceZ: 60
   invertedPipeDirection: 1
+  blueOrNot: 0
   animationType: 0
 --- !u!1 &2838655469271724117
 GameObject:
@@ -503,6 +506,7 @@ MonoBehaviour:
   spawnDistanceY: 0
   spawnDistanceZ: 2
   invertedPipeDirection: 1
+  blueOrNot: 0
   animationType: 1
 --- !u!1 &4757448531598076156
 GameObject:
@@ -628,6 +632,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   canBeRegistered: 1
+  absoluteRotation: 1
   paired: 0
   pairId: 
 --- !u!1001 &8297499515345720045

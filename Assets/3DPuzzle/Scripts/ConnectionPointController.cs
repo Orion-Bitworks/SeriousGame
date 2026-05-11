@@ -10,6 +10,7 @@ public class ConnectionPointController : MonoBehaviour
     [SerializeField] private string partnerId = "Undefined";
     [SerializeField] private LayerMask layerToDetect;
     [SerializeField] private bool canBeRegistered = false;
+    [SerializeField] bool absoluteRotation = false;
 
     private bool pairedWithPartner = false;
     private bool isEnabled = false;
@@ -41,7 +42,14 @@ public class ConnectionPointController : MonoBehaviour
             {
                 ParticleManager.instance.SpawnParticles("SnapParticles", transform);
 
-                piece.SnapToPoint(this, other.transform, other.transform.parent);
+                if (otherPoint.GetId() == partnerId && absoluteRotation)
+                {
+                    piece.SnapToPoint(this, other.transform, other.transform.parent, true);
+                }
+                else
+                {
+                    piece.SnapToPoint(this, other.transform, other.transform.parent);
+                }
 
                 pairId = otherPoint.GetId();
                 otherPoint.SetPairId(id);

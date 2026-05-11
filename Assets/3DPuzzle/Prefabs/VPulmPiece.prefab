@@ -506,6 +506,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   canBeRegistered: 1
+  absoluteRotation: 1
   paired: 0
   pairId: 
 --- !u!114 &6853515102545150118
