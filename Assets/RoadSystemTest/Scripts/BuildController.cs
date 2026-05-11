@@ -47,8 +47,8 @@ public class BuildController : MonoBehaviour
     Stack<BuildAction> undoStack = new Stack<BuildAction>();    // Pila con las posibles acciones a deshacer
     Stack<BuildAction> redoStack = new Stack<BuildAction>();    // Pila con las posibles acciones a rehacer
 
+    public bool isPlacingOrgan = false;
 
-    // GAMEPAD
     private Vector3Int gamepadCell;
     private bool gamepadInitialized = false;
     private float dpadHoldTimer = 0f;
@@ -228,7 +228,7 @@ public class BuildController : MonoBehaviour
     void UpdateGhostMovement()
     {
         // Si el sistema está en marcha, abortamos y dejamos de mostrar el fantasma
-        if (GameManager.Instance.isPlaying || OrganPlacementController.Instance.isPlacingOrgan)
+        if (GameManager.Instance.isPlaying || OrganPlacementController.Instance.isPlacingOrgan || isPlacingOrgan)
         {
             ghost.ghostObject.SetActive(false);
             return;

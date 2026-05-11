@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.UI;
+using UnityEngine.UI;
 
 public class CursorManager : MonoBehaviour
 {
@@ -13,13 +14,15 @@ public class CursorManager : MonoBehaviour
 
     [SerializeField] private float gamepadSpeed = 800f;
 
-    [SerializeField] VirtualMouseInput virtualCursor;
+    [SerializeField] public VirtualMouseInput virtualCursor;
 
     private bool initialized = false;
 
     public static bool IsGamepadMode { get; private set; } = false;
 
     private float mouseThreshold = 0.1f;
+
+    public static bool canUseGamepad {  get; set; }
 
 
     private IEnumerator Start()
@@ -36,6 +39,8 @@ public class CursorManager : MonoBehaviour
     {
         if (!initialized) return;
 
+        virtualCursor.enabled = canUseGamepad;
+
         VirtualCursorActive = virtualCursor.virtualMouse != null;
 
         DetectControlMode();
@@ -46,7 +51,16 @@ public class CursorManager : MonoBehaviour
             return;
         }
 
-        if (IsGamepadMode)
+        if (!canUseGamepad)
+        {
+            virtualCursor.GetComponentInChildren<Image>().enabled = false;
+        }
+        else
+        {
+            virtualCursor.GetComponentInChildren<Image>().enabled = true;
+        }
+
+        if (IsGamepadMode && canUseGamepad)
         {
             MoveWithGamepad();
         }
@@ -93,7 +107,12 @@ public class CursorManager : MonoBehaviour
     {
         if (!initialized) return;
         if (virtualCursor == null) return;
-        if (virtualCursor.virtualMouse == null) return;
+        if (virtualCursor.virtualMouse == null)
+        {
+            ResetVirtualMouse();
+            if (virtualCursor.virtualMouse == null)
+                return;
+        }
 
         Vector2 move = Gamepad.current.leftStick.ReadValue();
 
@@ -112,5 +131,15 @@ public class CursorManager : MonoBehaviour
         pos.x = Mathf.Clamp(pos.x, 0, Screen.width);
         pos.y = Mathf.Clamp(pos.y, 0, Screen.height);
         return pos;
+    }
+
+    public void ResetVirtualMouse()
+    {
+        if (virtualCursor == null)
+            return;
+
+        // Forzar recreación del dispositivo
+        virtualCursor.enabled = false;
+        virtualCursor.enabled = true;
     }
 }

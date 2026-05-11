@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class OrganPlacementController : MonoBehaviour
 {
@@ -13,6 +14,14 @@ public class OrganPlacementController : MonoBehaviour
     GameObject ghost;
     GridManager grid;
     Camera cam;
+
+    private Vector3Int organCell;
+    private bool organInitialized = false;
+    private float stickHoldTimer = 0f;
+    private Vector2 previousStick = Vector2.zero;
+
+    private const float stickInitialDelay = 0.25f;
+    private const float stickRepeatRate = 0.12f;
 
     private void Awake()
     {
@@ -67,16 +76,88 @@ public class OrganPlacementController : MonoBehaviour
     {
         if (!isPlacingOrgan) return;
 
-        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (!CursorManager.IsGamepadMode)
         {
-            Vector3Int cell = grid.Snap(hit.point);
-            ghost.transform.position = cell + new Vector3Int(0, 3, 0);
+            Ray ray = cam.ScreenPointToRay(CursorManager.Position);
 
-            bool valid = CanPlaceOrganAt(cell);
-            SetGhostColor(valid);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                Vector3Int cell = grid.Snap(hit.point);
+                ghost.transform.position = cell + new Vector3Int(0, 3, 0);
+
+                bool valid = CanPlaceOrganAt(cell);
+                SetGhostColor(valid);
+            }
+
+            return;
         }
+
+        if (!organInitialized)
+        {
+            organCell = grid.ClampToBounds(Vector3Int.zero);
+            organInitialized = true;
+        }
+
+        Vector2 move = Gamepad.current.leftStick.ReadValue();
+        float absX = Mathf.Abs(move.x);
+        float absY = Mathf.Abs(move.y);
+        float threshold = 0.5f;
+
+        bool justPressed =
+            (absX > threshold && Mathf.Abs(previousStick.x) <= threshold) ||
+            (absY > threshold && Mathf.Abs(previousStick.y) <= threshold);
+
+        bool held = absX > threshold || absY > threshold;
+
+        if (justPressed)
+        {
+            if (absX > absY)
+            {
+                if (move.x > 0) organCell.x++;
+                else organCell.x--;
+            }
+            else
+            {
+                if (move.y > 0) organCell.z++;
+                else organCell.z--;
+            }
+
+            stickHoldTimer = 0f;
+        }
+        else if (held)
+        {
+            stickHoldTimer += Time.deltaTime;
+
+            if (stickHoldTimer > stickInitialDelay)
+            {
+                if ((stickHoldTimer - stickInitialDelay) % stickRepeatRate < Time.deltaTime)
+                {
+                    if (absX > absY)
+                    {
+                        if (move.x > 0) organCell.x++;
+                        else organCell.x--;
+                    }
+                    else
+                    {
+                        if (move.y > 0) organCell.z++;
+                        else organCell.z--;
+                    }
+                }
+            }
+        }
+        else
+        {
+            stickHoldTimer = 0f;
+        }
+
+        previousStick = move;
+
+        organCell = grid.ClampToBounds(organCell);
+
+        ghost.transform.position = organCell + new Vector3Int(0, 3, 0);
+
+        bool valid2 = CanPlaceOrganAt(organCell);
+        SetGhostColor(valid2);
     }
 
     bool CanPlaceOrganAt(Vector3Int cell)

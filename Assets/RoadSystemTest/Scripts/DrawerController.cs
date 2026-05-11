@@ -14,6 +14,8 @@ public class DrawerController : MonoBehaviour
     [SerializeField] Transform closedPosition;
     [SerializeField] Image arrow;
 
+    [SerializeField] OrganDrag3D[] organs;
+
     public Controls controls;
 
     Tween rumbleTween;
@@ -23,6 +25,8 @@ public class DrawerController : MonoBehaviour
     Color hoverColor = new Color(0.7f, 0.7f, 0.7f);
     Color pressedColor = new Color(0.5f, 0.5f, 0.5f);
     Color disabledColor = new Color(0.7843137f, 0.7843137f, 0.7843137f, 0.5019608f);
+
+    public bool IsOpen => state == DrawerState.Open;
 
     private void Start()
     {
@@ -58,6 +62,24 @@ public class DrawerController : MonoBehaviour
 
             case DrawerState.Closing:
                 break;
+        }
+
+        if (IsOpen && CursorManager.IsGamepadMode)
+        {
+            // Obtener el órgano centrado
+            OrganDrag3D organ = GetCenteredOrgan();
+            if (organ != null)
+            {
+                // Resaltar órgano
+                var selector = organ.GetComponent<SelectObject>();
+                selector?.Select();
+
+                // Pulsar botón SOUTH para cogerlo
+                if (controls.InRoadGame.Place.triggered)
+                {
+                    organ.StartDraggingFromGamepad();
+                }
+            }
         }
     }
 
@@ -229,5 +251,23 @@ public class DrawerController : MonoBehaviour
             arrow.color = hoverColor;
         else
             arrow.color = normalColor;
+    }
+
+    OrganDrag3D GetCenteredOrgan()
+    {
+        float minDist = float.MaxValue;
+        OrganDrag3D best = null;
+
+        foreach (var organ in organs)
+        {
+            float dist = Mathf.Abs(Camera.main.WorldToScreenPoint(organ.transform.position).x - Screen.width / 2f);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                best = organ;
+            }
+        }
+
+        return best;
     }
 }

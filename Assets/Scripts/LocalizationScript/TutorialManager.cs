@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 using System;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -36,6 +37,14 @@ public class TutorialManager : MonoBehaviour
         activeTutorial = carpetas[id];
         activeTutorial.gameObject.SetActive(true);
 
+		Button button = activeTutorial.GetComponentInChildren<Button>();
+
+		if (button != null)
+		{
+            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(button.gameObject);
+		}
+
         DialogManager.instance.grid.SetActive(false);
         DialogManager.IsDialogActive = true;
 
@@ -46,7 +55,6 @@ public class TutorialManager : MonoBehaviour
         DialogManager.IsDialogActive = false;
 
         DialogManager.instance.grid.SetActive(true);
-
     }
 
 	public void HideActiveTutotrial()

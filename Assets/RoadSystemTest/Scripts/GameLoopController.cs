@@ -61,7 +61,10 @@ public class GameLoopController : MonoBehaviour
         heartObject.gameObject.SetActive(false);
         heartMinigamesObject.SetActive(true);
         heartMinigamesUI.gameObject.SetActive(true);
-        virtualMouseCanvas.gameObject.SetActive(true);
+        //virtualMouseCanvas.gameObject.SetActive(true);
+        //CursorManager cm = FindObjectOfType<CursorManager>();
+        //cm.ResetVirtualMouse();
+        CursorManager.canUseGamepad = true;
         heartMinigamesCamera.Priority = 2;
         DialogManager.instance.Show("dialog_14");
 	}
@@ -71,6 +74,7 @@ public class GameLoopController : MonoBehaviour
         minigamesFinished = true;
         GameManager.Instance.currentLevelGameObject.SetActive(true);
         GameManager.Instance.isPlaying = false;
+        BuildController.Instance.isPlacingOrgan = false;
         BuildController.Instance.controls.Enable();
 
         screen.AppearScreenOff();
@@ -80,7 +84,8 @@ public class GameLoopController : MonoBehaviour
         heartMinigamesObject.SetActive(false);
         heartObject.gameObject.SetActive(true);
         heartMinigamesUI.gameObject.SetActive(false);
-        virtualMouseCanvas.gameObject.SetActive(false);
+        //virtualMouseCanvas.gameObject.SetActive(false);
+        CursorManager.canUseGamepad = false;
         heartMinigamesCamera.Priority = 0;
         
         yield return new WaitForSecondsRealtime(1f);
@@ -114,7 +119,9 @@ public class GameLoopController : MonoBehaviour
         threeDMinigame.gameObject.SetActive(true);
         threeDMinigamePieces.gameObject.SetActive(true);
         threeDMinigameScreen.gameObject.SetActive(true);
-        virtualMouseCanvas.gameObject.SetActive(true);
+        //virtualMouseCanvas.gameObject.SetActive(true);
+        CursorManager.canUseGamepad = true;
+        //cm.ResetVirtualMouse();
         threeDMinigameCamera.Priority = 2;
 		DialogManager.instance.Show("dialog_7");
         controller.ShowTutorial(1);
@@ -136,10 +143,14 @@ public class GameLoopController : MonoBehaviour
         threeDMinigame.gameObject.SetActive(false);
         threeDMinigamePieces.gameObject.SetActive(false);
         threeDMinigameScreen.gameObject.SetActive(false);
-        virtualMouseCanvas.gameObject.SetActive(false);
+        //virtualMouseCanvas.gameObject.SetActive(false);
+        CursorManager.canUseGamepad = false;
         threeDMinigameCamera.Priority = 0;
+        BuildController.Instance.isPlacingOrgan = true;
+        Debug.Log("isPlacingOrgan ahora es: " + BuildController.Instance.isPlacingOrgan);
         DialogManager.instance.ShowSequence(new string []{ "dialog_11", "dialog_12", "dialog_13" });
         DialogManager.pendingEvents.Enqueue(() => BuildController.Instance.controls.Disable());
+
         stopPanel.SetActive(true);
     }
 }

@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.InputSystem.LowLevel;
 
 public class RythmNoteUI : MonoBehaviour
 {
-	public KeyCode expectedKey;
-	public Image outerCircle;
+    public ExpectedInput expectedInput;
+    public Image outerCircle;
 	public Image innerCircle;
 	public TextMeshProUGUI keyText;
 
@@ -19,18 +20,42 @@ public class RythmNoteUI : MonoBehaviour
 	public float perfectWindow = 10f;
 	public float goodWindow = 25f;
 
-	public void Init(KeyCode key, NewMinigame3 m)
-	{
-		expectedKey = key;
-		keyText.text = key.ToString();
-		spawnTime = Time.time;
-		manager = m;
+    [SerializeField] Image gamepadIcon;
+    [SerializeField] Sprite iconA;
+    [SerializeField] Sprite iconB;
+    [SerializeField] Sprite iconX;
+    [SerializeField] Sprite iconY;
 
-		// Escala inicial del círculo grande
-		outerCircle.rectTransform.localScale = Vector3.one;
-	}
+    public void Init(ExpectedInput input, NewMinigame3 m)
+    {
+        expectedInput = input;
+        manager = m;
+        spawnTime = Time.time;
 
-	void Update()
+		keyText.gameObject.SetActive(false);
+		gamepadIcon.gameObject.SetActive(false);
+
+        if (input.type == InputType.Keyboard)
+        {
+            // Mostrar texto
+            keyText.gameObject.SetActive(true);
+            gamepadIcon.gameObject.SetActive(false);
+
+            keyText.text = input.key.ToString();
+        }
+        else if (input.type == InputType.GamepadButton)
+        {
+            // Mostrar icono
+            keyText.gameObject.SetActive(false);
+            gamepadIcon.gameObject.SetActive(true);
+
+            gamepadIcon.sprite = GetGamepadSprite(input.button);
+        }
+
+        outerCircle.rectTransform.localScale = Vector3.one;
+    }
+
+    void Update()
 	{
 		if (expired) return;
 
@@ -85,6 +110,18 @@ public class RythmNoteUI : MonoBehaviour
 				break;
 		}
 	}
+
+    private Sprite GetGamepadSprite(GamepadButton button)
+    {
+        switch (button)
+        {
+            case GamepadButton.South: return iconA;   // A
+            case GamepadButton.East: return iconB;   // B
+            case GamepadButton.West: return iconX;   // X
+            case GamepadButton.North: return iconY;   // Y
+            default: return null;
+        }
+    }
 }
 
 public enum HitResult

@@ -1,6 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.UI;
+
+public enum InputType { Keyboard, GamepadButton }
+
+[System.Serializable]
+public struct ExpectedInput
+{
+    public InputType type;
+    public KeyCode key;
+    public GamepadButton button;
+}
 
 public class NewMinigame3 : MonoBehaviour
 {
@@ -29,7 +41,9 @@ public class NewMinigame3 : MonoBehaviour
 
 	[SerializeField] private TutorialManager tutorial;
 
-	public event System.Action<bool> OnGameCompleted;
+    private bool lastInputWasGamepad = false;
+
+    public event System.Action<bool> OnGameCompleted;
 
 	private bool _gameCompleted = false;
 	public bool gameCompleted
@@ -70,7 +84,9 @@ public class NewMinigame3 : MonoBehaviour
 	{
 		if (!gameActive) return;
 
-		if (activeNote == null && Time.time >= nextSpawnTime && spawnedNotes < maxNotes)
+        DetectLastInput();
+
+        if (activeNote == null && Time.time >= nextSpawnTime && spawnedNotes < maxNotes)
 		{
 			SpawnNote();
 			nextSpawnTime = Time.time + spawnInterval;
@@ -88,13 +104,13 @@ public class NewMinigame3 : MonoBehaviour
 
 		GameObject obj = Instantiate(notePrefab, notesPanel);
         AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.RythmSpawn);
-        KeyCode key = GetRandomKey();
+        ExpectedInput input = GetRandomInput();
+        
+        activeNote = obj.GetComponent<RythmNoteUI>();
+        activeNote.Init(input, this);
 
-		activeNote = obj.GetComponent<RythmNoteUI>();
-		activeNote.Init(key, this);
-
-		// POSICIÓN ALEATORIA CONTROLADA
-		RectTransform rt = obj.GetComponent<RectTransform>();
+        // POSICIÓN ALEATORIA CONTROLADA
+        RectTransform rt = obj.GetComponent<RectTransform>();
 		RectTransform panelRT = notesPanel.GetComponent<RectTransform>();
 
 		float maxX = panelRT.rect.width / 2f - rt.rect.width / 2f;
@@ -106,7 +122,7 @@ public class NewMinigame3 : MonoBehaviour
 		);
 	}
 
-	private void CheckInput()
+    /*private void CheckInput()
 	{
 		if (activeNote == null) return;
 
@@ -142,9 +158,50 @@ public class NewMinigame3 : MonoBehaviour
 		{
 			EndMinigame();
 		}
-	}
+	}*/
 
-	public void RegisterMiss(RythmNoteUI note)
+    private void CheckInput()
+    {
+        if (activeNote == null) return;
+
+        if (CheckKeyboardInput() || CheckGamepadButton())
+        {
+            HitResult result = activeNote.GetHitResult();
+
+            if (result == HitResult.Perfect || result == HitResult.Good)
+                completedNotes++;
+            else
+                fallos++;
+
+            activeNote.ShowFeedback(result);
+            Destroy(activeNote.gameObject, 0.3f);
+            activeNote = null;
+        }
+
+        if (completedNotes + fallos >= maxNotes)
+            EndMinigame();
+    }
+
+    bool CheckKeyboardInput()
+    {
+        if (activeNote.expectedInput.type != InputType.Keyboard)
+            return false;
+
+        return Input.GetKeyDown(activeNote.expectedInput.key);
+    }
+
+    bool CheckGamepadButton()
+    {
+        if (activeNote.expectedInput.type != InputType.GamepadButton)
+            return false;
+
+        if (Gamepad.current == null)
+            return false;
+
+        return Gamepad.current[activeNote.expectedInput.button].wasPressedThisFrame;
+    }
+
+    public void RegisterMiss(RythmNoteUI note)
 	{
 		if (note != activeNote) return;
 
@@ -204,9 +261,35 @@ public class NewMinigame3 : MonoBehaviour
 
 	private KeyCode GetRandomKey()
 	{
-		KeyCode[] keys = { KeyCode.A, KeyCode.S, KeyCode.D };
+		KeyCode[] keys = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
 		return keys[Random.Range(0, keys.Length)];
 	}
+
+    private ExpectedInput GetRandomInput()
+    {
+        ExpectedInput input = new ExpectedInput();
+
+        if (lastInputWasGamepad && Gamepad.current != null)
+        {
+            input.type = InputType.GamepadButton;
+            GamepadButton[] buttons =
+            {
+            GamepadButton.South,
+            GamepadButton.East,
+            GamepadButton.West,
+            GamepadButton.North
+        };
+            input.button = buttons[Random.Range(0, buttons.Length)];
+        }
+        else
+        {
+            input.type = InputType.Keyboard;
+            KeyCode[] keys = { KeyCode.W, KeyCode.A, KeyCode.S, KeyCode.D };
+            input.key = keys[Random.Range(0, keys.Length)];
+        }
+
+        return input;
+    }
 
     IEnumerator ShowInstructions()
     {
@@ -233,5 +316,29 @@ public class NewMinigame3 : MonoBehaviour
         gameActive = true;
 
         StartMiniGame3();
+    }
+
+    private void DetectLastInput()
+    {
+        // Si hay mando conectado
+        if (Gamepad.current != null)
+        {
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame ||
+                Gamepad.current.buttonNorth.wasPressedThisFrame ||
+                Gamepad.current.buttonEast.wasPressedThisFrame ||
+                Gamepad.current.buttonWest.wasPressedThisFrame ||
+                Gamepad.current.dpad.ReadValue().sqrMagnitude > 0.1f ||
+                Gamepad.current.leftStick.ReadValue().sqrMagnitude > 0.1f)
+            {
+                lastInputWasGamepad = true;
+                return;
+            }
+        }
+
+        // Si se pulsa una tecla
+        if (Keyboard.current.anyKey.wasPressedThisFrame)
+        {
+            lastInputWasGamepad = false;
+        }
     }
 }

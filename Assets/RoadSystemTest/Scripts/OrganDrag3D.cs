@@ -8,6 +8,14 @@ public class OrganDrag3D : MonoBehaviour
     bool dragging = false;
     GameObject ghost;
 
+    public Controls controls;
+
+    private void Start()
+    {
+        controls = new Controls();
+        controls.Enable();
+    }
+
     void Update()
     {
         // Si el órgano ya está colocado, no se puede volver a arrastrar
@@ -17,11 +25,11 @@ public class OrganDrag3D : MonoBehaviour
         if (GameManager.Instance.currentLevel == LevelID.Pipe) return;
 
         // Iniciar arrastre
-        if (Input.GetMouseButtonDown(0) && IsMouseOverThis())
+        if (controls.InRoadGame.Place.triggered && IsMouseOverThis())
             StartDragging();
 
         // Soltar órgano
-        if (dragging && Input.GetMouseButtonUp(0))
+        if (dragging && controls.InRoadGame.Place.triggered)
             StopDragging();
     }
 
@@ -66,5 +74,20 @@ public class OrganDrag3D : MonoBehaviour
     public void SpawnMiniOrgan()
     {
         transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    public void StartDraggingFromGamepad()
+    {
+        if (organData.isPlaced) return;
+
+        dragging = true;
+
+        DespawnMiniOrgan();
+
+        ghost = Instantiate(organData.prefab);
+
+        AudioController.Instance.PlaySFX(SFX.Pipe, (int)PipeSFX.GrabOrgan);
+
+        OrganPlacementController.Instance.BeginPlacingOrgan(organData, ghost);
     }
 }

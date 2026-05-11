@@ -1,5 +1,6 @@
 using Cinemachine.PostFX;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
 
@@ -53,7 +54,7 @@ public class MenuPauseController : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape))
+		if (Input.GetKeyDown(KeyCode.Escape) || (Gamepad.current != null && Gamepad.current.startButton.wasPressedThisFrame))
 		{
 			if (!pause.activeSelf && !menuPausePanel.activeSelf)
 			{
