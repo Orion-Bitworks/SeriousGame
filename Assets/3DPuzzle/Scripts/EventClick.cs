@@ -59,7 +59,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (!canInteract)
+        if (!canInteract || piece.IsInteracting())
         {
             return;
         }
