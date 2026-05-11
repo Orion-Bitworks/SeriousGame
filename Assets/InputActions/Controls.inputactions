@@ -723,6 +723,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Rythm1",
+                    "type": "Button",
+                    "id": "c3b4e98f-0e63-4c8f-b5a4-f039d0a5bb51",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rythm2",
+                    "type": "Button",
+                    "id": "9e8d7684-efe0-40b5-9ee2-e935551e878f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rythm3",
+                    "type": "Button",
+                    "id": "4f475905-cff7-4382-bba0-5b757d7fc221",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rythm4",
+                    "type": "Button",
+                    "id": "ab1a3877-da3d-4b86-8a1b-c8eb19134331",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -767,6 +803,94 @@
                     "processors": "",
                     "groups": "",
                     "action": "Check",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "806ff12b-20d7-40e7-bf98-e165d40d818d",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouseControls",
+                    "action": "Rythm1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "267b7dfd-83f4-4b03-a8f1-8fdcad8c6e14",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamepadControls",
+                    "action": "Rythm1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f82da034-dd66-40d4-bc26-006f82a39b0b",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouseControls",
+                    "action": "Rythm2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "953859c3-343c-45c4-950d-f796be4b78b4",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamepadControls",
+                    "action": "Rythm2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "583889a4-52d4-4268-8041-f7f4a1b2520f",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouseControls",
+                    "action": "Rythm3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ef22ba3-f7c9-47a3-91d3-6fb0f2d02e22",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamepadControls",
+                    "action": "Rythm3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "766ff40f-3702-49c7-8d4c-9a496f8edeca",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouseControls",
+                    "action": "Rythm4",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b6b321c-d631-48d5-b139-c5bf354f737b",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "GamepadControls",
+                    "action": "Rythm4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
