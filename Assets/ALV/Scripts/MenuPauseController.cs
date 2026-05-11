@@ -1,8 +1,10 @@
 using Cinemachine.PostFX;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuPauseController : MonoBehaviour
 {
@@ -47,10 +49,8 @@ public class MenuPauseController : MonoBehaviour
 			{
 				panel.SetActive(false);
 			}
-
 		}
-
-	}
+    }
 
 	private void Update()
 	{
@@ -65,7 +65,7 @@ public class MenuPauseController : MonoBehaviour
 				ClosePause();
 			}
 		}
-	}
+    }
 
 	private void StartPause()
 	{
@@ -77,7 +77,10 @@ public class MenuPauseController : MonoBehaviour
         dofMini.active = true;
 
 		if (SceneManager.GetActiveScene().name == "RoadSystemTest"!)
-			gridManager.gameObject.SetActive(false);
+		{
+			BuildController.Instance.controls.Disable();
+            gridManager.gameObject.SetActive(false);
+        }
 	}
 
 	public void ClosePause()
@@ -95,7 +98,10 @@ public class MenuPauseController : MonoBehaviour
         dofMini.active = false;
 
         if (SceneManager.GetActiveScene().name == "RoadSystemTest")
+		{
+			BuildController.Instance.controls.Enable();
             gridManager.gameObject.SetActive(true);
+        }
 	}
 
 	public void OpenOptionMenuPause()
