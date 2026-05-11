@@ -706,7 +706,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouseControls"",
                     ""action"": ""Drawer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

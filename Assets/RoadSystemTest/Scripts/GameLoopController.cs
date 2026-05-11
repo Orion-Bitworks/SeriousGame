@@ -8,7 +8,6 @@ public class GameLoopController : MonoBehaviour
 {
     [SerializeField] GameObject heartMinigames;
     [SerializeField] GameObject heartMinigamesObject;
-    [SerializeField] GameObject heartMinigamesUI;
     [SerializeField] GameObject threeDMinigame;
     [SerializeField] GameObject threeDMinigamePieces;
     [SerializeField] GameObject threeDMinigameScreen;
@@ -22,7 +21,7 @@ public class GameLoopController : MonoBehaviour
 
     bool minigamesStarted = false;
     bool minigamesFinished = false;
-    bool threeDStarted = false;
+    bool threeDStarted = true;
     bool threeDFinished = false;
 
     OrganLogic heartObject;
@@ -60,7 +59,6 @@ public class GameLoopController : MonoBehaviour
         heartObject = FindAnyObjectByType<OrganLogic>();
         heartObject.gameObject.SetActive(false);
         heartMinigamesObject.SetActive(true);
-        heartMinigamesUI.gameObject.SetActive(true);
         //virtualMouseCanvas.gameObject.SetActive(true);
         //CursorManager cm = FindObjectOfType<CursorManager>();
         //cm.ResetVirtualMouse();
@@ -83,7 +81,6 @@ public class GameLoopController : MonoBehaviour
 
         heartMinigamesObject.SetActive(false);
         heartObject.gameObject.SetActive(true);
-        heartMinigamesUI.gameObject.SetActive(false);
         //virtualMouseCanvas.gameObject.SetActive(false);
         CursorManager.canUseGamepad = false;
         heartMinigamesCamera.Priority = 0;

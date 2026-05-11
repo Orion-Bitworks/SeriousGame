@@ -33,9 +33,6 @@ public class NewMinigame3 : MonoBehaviour
 	private int fallos = 0;
 	private bool gameActive = false;
 
-	[Header("UI")]
-	[SerializeField] private GameObject rebootButton;
-
 	private SessionTimer timer;
 	private int intentos = 1;
 
@@ -66,8 +63,6 @@ public class NewMinigame3 : MonoBehaviour
 
     private void Start()
 	{
-		rebootButton.SetActive(false);
-
 		timer = new SessionTimer();
 		timer.Start();
 
@@ -221,15 +216,18 @@ public class NewMinigame3 : MonoBehaviour
 
 		if (fallos > 0)
 		{
-			rebootButton.SetActive(true);
+			DialogManager.instance.Show("dialog_23_isbad_1");
+			DialogManager.instance.Show("dialog_24_isbad_2");
+            DialogManager.pendingEvents.Enqueue(() => RestartMinigame());
 			gameCompleted = false;
 		}
 		else
 		{
 			gameCompleted = true;
+			DialogManager.instance.Show("dialog_22_isgood");
 		}
 
-		GameParametersMDB.Instance.SaveMinigameData(
+        GameParametersMDB.Instance.SaveMinigameData(
 			"MinijuegoCorazon3",
 			tiempo,
 			intentos,
@@ -240,8 +238,6 @@ public class NewMinigame3 : MonoBehaviour
 
 	public void RestartMinigame()
 	{
-		rebootButton.SetActive(false);
-
 		intentos++;
 		spawnedNotes = 0;
 		completedNotes = 0;

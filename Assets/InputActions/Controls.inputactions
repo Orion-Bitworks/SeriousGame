@@ -684,7 +684,7 @@
                     "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "KeyboardMouseControls",
                     "action": "Drawer",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Samples.RebindUI;
 
 public class RebindSaveLoad : MonoBehaviour
 {
@@ -9,7 +10,12 @@ public class RebindSaveLoad : MonoBehaviour
     {
         var rebinds = PlayerPrefs.GetString("rebinds");
         if (!string.IsNullOrEmpty(rebinds))
+        {
             actions.LoadBindingOverridesFromJson(rebinds);
+
+            foreach (var ui in FindObjectsOfType<RebindActionUI>())
+                ui.UpdateBindingDisplay();
+        }
     }
 
     public void OnDisable()
