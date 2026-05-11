@@ -37,6 +37,10 @@ public class ObjectSelector : MonoBehaviour
     private void Start()
     {
         controls.Enable();
+        // Cargar rebinding guardado
+        string rebinds = PlayerPrefs.GetString("rebinds", "");
+        if (!string.IsNullOrEmpty(rebinds))
+            controls.LoadBindingOverridesFromJson(rebinds);
 
         controls.InMiniGame.Rotate.performed += OnRotate;
         controls.InMiniGame.Check.performed += OnCheck;

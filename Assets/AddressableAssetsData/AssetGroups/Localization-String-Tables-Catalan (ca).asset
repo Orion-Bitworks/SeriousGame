@@ -41,6 +41,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ca
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f0cb6cb1dafb084f9c21a3526a08154
+    m_Address: Controles_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 348411b4126520f4593948ca0162301c
     m_Address: UI_Menu_Texts_ca
     m_ReadOnly: 1
@@ -55,6 +61,12 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b7e89b625ba3d774da087a00c8f9311f
     m_Address: tutorials_carreteras_ca
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ca
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf23df27a50ab294c8d97f07999e5484
+    m_Address: Creditos_ca
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ca

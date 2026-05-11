@@ -61,6 +61,7 @@ public class TutorialManager : MonoBehaviour
 	{
 		if (activeTutorial != null)
 		{
+			AudioController.Instance.PlaySFX(SFX.UI, (int)UISFX.TutorialClose);
 			activeTutorial.gameObject.SetActive(false);
 		}
 

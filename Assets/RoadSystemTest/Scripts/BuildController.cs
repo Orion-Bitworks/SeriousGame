@@ -82,6 +82,11 @@ public class BuildController : MonoBehaviour
         controls = new Controls();
         controls.Enable();
 
+        // Cargar rebinding guardados
+        string rebinds = PlayerPrefs.GetString("rebinds", "");
+        if (!string.IsNullOrEmpty(rebinds))
+            controls.LoadBindingOverridesFromJson(rebinds);
+
         // Suscribimos todos los inputActions a sus funciones correspondientes
         controls.InRoadGame.Place.started += OnPlaceStarted;
         controls.InRoadGame.Place.canceled += OnPlaceCanceled;

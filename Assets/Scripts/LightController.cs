@@ -33,6 +33,9 @@ public class LightController : MonoBehaviour
 
     public void TurnOnAllLights(bool active)
     {
+        if (active)
+            AudioController.Instance.PlaySFX(SFX.MenuAmbient, (int)MenuAmbientSFX.SpotlightOn);
+
         light1.SetActive(active);
         light2.SetActive(active);
         light3.SetActive(active);

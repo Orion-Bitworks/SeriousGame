@@ -17,6 +17,7 @@ public class ScreenController : MonoBehaviour
 
     void StartMovingIn()
     {
+        AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.ScreenInOut);
         screen.transform.DOMove(finalPosition.position, 1f).SetEase(Ease.OutBack).OnComplete(() => { DisappearScreenOff(); });
     }
 
@@ -34,6 +35,7 @@ public class ScreenController : MonoBehaviour
 
     public void StartMovingOut ()
     {
+        AudioController.Instance.PlaySFX(SFX.HeartMinigames, (int)HeartMinigamesSFX.ScreenInOut);
         screen.transform.DOMove(startingPosition.position, 2f).SetEase(Ease.OutCubic);
     }
 }

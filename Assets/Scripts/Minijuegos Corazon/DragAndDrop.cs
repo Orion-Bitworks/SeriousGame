@@ -43,13 +43,12 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         minigame1Instance.movimientos++;
 
         //Liberar la DropArea actual si estaba colocado
-        //Liberar la DropArea actual si estaba colocado
         if (placed && CurrentDropArea != null)
         {
             DropArea drop = CurrentDropArea.GetComponent<DropArea>();
             if (drop != null) drop.occupied = false;
 
-            placed = false; // 👈 IMPORTANTE
+            placed = false; // IMPORTANTE
             CurrentDropArea = null;
 
             //Actualizar contador

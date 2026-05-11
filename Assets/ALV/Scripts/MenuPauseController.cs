@@ -120,14 +120,20 @@ public class MenuPauseController : MonoBehaviour
         pause.SetActive(true);
     }
 
-	public void ReturnToMenu()
+    public void GoToCredits()
+    {
+        Time.timeScale = 1f;
+        DialogManager.pendingEvents.Clear();
+        DialogManager.IsDialogActive = false;
+
+        SceneManager.LoadScene("CreditsScene");
+    }
+
+    public void ReturnToMenu()
 	{
 		Time.timeScale = 1f;
 		DialogManager.pendingEvents.Clear();
 		DialogManager.IsDialogActive = false;
-
-
-		// _ = GameParametersMDB.Instance.SendData();
 
 		SceneManager.LoadScene("MainMenuGame");
 	}

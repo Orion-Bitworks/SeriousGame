@@ -16,7 +16,7 @@
 			<value>2</value>
 		</property>
 		<property name="maximum">
-			<value>9</value>
+			<value>10</value>
 		</property>
 		<property name="enumerationLabels">
 			<value>Select</value>
@@ -28,6 +28,7 @@
 			<value>RythmPerfect</value>
 			<value>RythmCorrect</value>
 			<value>RythmError</value>
+			<value>ScreenInOut</value>
 		</property>
 		<property name="initialValue">
 			<value>0</value>

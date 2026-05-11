@@ -24,6 +24,7 @@ public class DialogBubbleController : MonoBehaviour
 		// Avanza con cualquier tecla excepto ESC
 		if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape))
 		{
+			AudioController.Instance.PlaySFX(SFX.Menu, (int)MenuSFX.Click);
 			continuePressed = true;
 		}
 	}
