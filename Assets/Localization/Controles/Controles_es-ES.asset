@@ -39,11 +39,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1015257329664
-    m_Localized: Anterior Pieza
+    m_Localized: Pieza Anterior
     m_Metadata:
       m_Items: []
   - m_Id: 1181095915520
-    m_Localized: Siguente Pieza
+    m_Localized: Pieza Siguiente
     m_Metadata:
       m_Items: []
   - m_Id: 1831124955136
