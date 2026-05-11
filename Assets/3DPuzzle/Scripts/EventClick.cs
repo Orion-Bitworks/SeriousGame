@@ -59,7 +59,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (!canInteract || piece.IsInteracting())
+        if (!canInteract || InputManager.instance.rotateMode_ia.inProgress)
         {
             return;
         }
