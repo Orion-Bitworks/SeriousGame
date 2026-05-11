@@ -23,10 +23,15 @@ public class AudioUIController : MonoBehaviour
         musicVCA = FMODUnity.RuntimeManager.GetVCA("vca:/Music");
         sfxVCA = FMODUnity.RuntimeManager.GetVCA("vca:/SFX");
 
-        // Ponemos los sliders en la posición que tiene en el FMOD
-        if (generalVCA.getVolume(out float generalVolume) == FMOD.RESULT.OK) generalSlider.value = generalVolume;
-        if (musicVCA.getVolume(out float musicVolume) == FMOD.RESULT.OK) musicSlider.value = musicVolume;
-        if (sfxVCA.getVolume(out float sfxVolume) == FMOD.RESULT.OK) sfxSlider.value = sfxVolume;
+        // Cargar valores guardados o usar los actuales de FMOD
+        generalSlider.value = PlayerPrefs.GetFloat("GeneralVolume", GetVCAValue(generalVCA));
+        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume", GetVCAValue(musicVCA));
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", GetVCAValue(sfxVCA));
+
+        // Aplicar a FMOD
+        generalVCA.setVolume(generalSlider.value);
+        musicVCA.setVolume(musicSlider.value);
+        sfxVCA.setVolume(sfxSlider.value);
 
         // Definimos los sliders para que ejecuten las funciones cuando cambian de valor
         generalSlider.onValueChanged.AddListener(OnGeneralAudioChanged);
@@ -34,21 +39,30 @@ public class AudioUIController : MonoBehaviour
         sfxSlider.onValueChanged.AddListener(OnSFXAudioChanged);
     }
 
+    private float GetVCAValue(FMOD.Studio.VCA vca)
+    {
+        vca.getVolume(out float volume);
+        return volume;
+    }
+
     // Se llama desde un slider, cambia el volumen de la VCA general según el valor introducido en el slider.
     public void OnGeneralAudioChanged(float value)
     {
         generalVCA.setVolume(value);
+        PlayerPrefs.SetFloat("GeneralVolume", value);
     }
 
     // Se llama desde un slider, cambia el volumen de la VCA de música según el valor introducido en el slider.
     public void OnMusicAudioChanged(float value)
     {
         musicVCA.setVolume(value);
+        PlayerPrefs.SetFloat("MusicVolume", value);
     }
 
     // Se llama desde un slider, cambia el volumen de la VCA de SFX según el valor introducido en el slider.
     public void OnSFXAudioChanged(float value)
     {
         sfxVCA.setVolume(value);
+        PlayerPrefs.SetFloat("SFXVolume", value);
     }
 }

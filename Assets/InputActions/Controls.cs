@@ -706,7 +706,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""KeyboardMouseControls"",
                     ""action"": ""Drawer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -741,6 +741,42 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""Check"",
                     ""type"": ""Button"",
                     ""id"": ""94a412bb-b09c-40e4-9756-584a4652e5af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rythm1"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3b4e98f-0e63-4c8f-b5a4-f039d0a5bb51"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rythm2"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e8d7684-efe0-40b5-9ee2-e935551e878f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rythm3"",
+                    ""type"": ""Button"",
+                    ""id"": ""4f475905-cff7-4382-bba0-5b757d7fc221"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rythm4"",
+                    ""type"": ""Button"",
+                    ""id"": ""ab1a3877-da3d-4b86-8a1b-c8eb19134331"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -789,6 +825,94 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Check"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""806ff12b-20d7-40e7-bf98-e165d40d818d"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouseControls"",
+                    ""action"": ""Rythm1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""267b7dfd-83f4-4b03-a8f1-8fdcad8c6e14"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""Rythm1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f82da034-dd66-40d4-bc26-006f82a39b0b"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouseControls"",
+                    ""action"": ""Rythm2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""953859c3-343c-45c4-950d-f796be4b78b4"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""Rythm2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""583889a4-52d4-4268-8041-f7f4a1b2520f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouseControls"",
+                    ""action"": ""Rythm3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4ef22ba3-f7c9-47a3-91d3-6fb0f2d02e22"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""Rythm3"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""766ff40f-3702-49c7-8d4c-9a496f8edeca"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardMouseControls"",
+                    ""action"": ""Rythm4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b6b321c-d631-48d5-b139-c5bf354f737b"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""GamepadControls"",
+                    ""action"": ""Rythm4"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -909,8 +1033,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4171202c-7760-4fc1-9fc2-4a232ea719e8"",
-                    ""path"": ""<Keyboard>/backspace"",
+                    ""id"": ""078d28b6-239f-47ee-876d-92e88b2e8887"",
+                    ""path"": ""<Keyboard>/delete"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
@@ -920,8 +1044,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""078d28b6-239f-47ee-876d-92e88b2e8887"",
-                    ""path"": ""<Keyboard>/delete"",
+                    ""id"": ""4171202c-7760-4fc1-9fc2-4a232ea719e8"",
+                    ""path"": ""<Keyboard>/backspace"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardMouseControls"",
@@ -1051,6 +1175,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_InMiniGame = asset.FindActionMap("InMiniGame", throwIfNotFound: true);
         m_InMiniGame_Rotate = m_InMiniGame.FindAction("Rotate", throwIfNotFound: true);
         m_InMiniGame_Check = m_InMiniGame.FindAction("Check", throwIfNotFound: true);
+        m_InMiniGame_Rythm1 = m_InMiniGame.FindAction("Rythm1", throwIfNotFound: true);
+        m_InMiniGame_Rythm2 = m_InMiniGame.FindAction("Rythm2", throwIfNotFound: true);
+        m_InMiniGame_Rythm3 = m_InMiniGame.FindAction("Rythm3", throwIfNotFound: true);
+        m_InMiniGame_Rythm4 = m_InMiniGame.FindAction("Rythm4", throwIfNotFound: true);
         // In3DGame
         m_In3DGame = asset.FindActionMap("In3DGame", throwIfNotFound: true);
         m_In3DGame_RotateMode = m_In3DGame.FindAction("Rotate Mode", throwIfNotFound: true);
@@ -1319,12 +1447,20 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IInMiniGameActions> m_InMiniGameActionsCallbackInterfaces = new List<IInMiniGameActions>();
     private readonly InputAction m_InMiniGame_Rotate;
     private readonly InputAction m_InMiniGame_Check;
+    private readonly InputAction m_InMiniGame_Rythm1;
+    private readonly InputAction m_InMiniGame_Rythm2;
+    private readonly InputAction m_InMiniGame_Rythm3;
+    private readonly InputAction m_InMiniGame_Rythm4;
     public struct InMiniGameActions
     {
         private @Controls m_Wrapper;
         public InMiniGameActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Rotate => m_Wrapper.m_InMiniGame_Rotate;
         public InputAction @Check => m_Wrapper.m_InMiniGame_Check;
+        public InputAction @Rythm1 => m_Wrapper.m_InMiniGame_Rythm1;
+        public InputAction @Rythm2 => m_Wrapper.m_InMiniGame_Rythm2;
+        public InputAction @Rythm3 => m_Wrapper.m_InMiniGame_Rythm3;
+        public InputAction @Rythm4 => m_Wrapper.m_InMiniGame_Rythm4;
         public InputActionMap Get() { return m_Wrapper.m_InMiniGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1340,6 +1476,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Check.started += instance.OnCheck;
             @Check.performed += instance.OnCheck;
             @Check.canceled += instance.OnCheck;
+            @Rythm1.started += instance.OnRythm1;
+            @Rythm1.performed += instance.OnRythm1;
+            @Rythm1.canceled += instance.OnRythm1;
+            @Rythm2.started += instance.OnRythm2;
+            @Rythm2.performed += instance.OnRythm2;
+            @Rythm2.canceled += instance.OnRythm2;
+            @Rythm3.started += instance.OnRythm3;
+            @Rythm3.performed += instance.OnRythm3;
+            @Rythm3.canceled += instance.OnRythm3;
+            @Rythm4.started += instance.OnRythm4;
+            @Rythm4.performed += instance.OnRythm4;
+            @Rythm4.canceled += instance.OnRythm4;
         }
 
         private void UnregisterCallbacks(IInMiniGameActions instance)
@@ -1350,6 +1498,18 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Check.started -= instance.OnCheck;
             @Check.performed -= instance.OnCheck;
             @Check.canceled -= instance.OnCheck;
+            @Rythm1.started -= instance.OnRythm1;
+            @Rythm1.performed -= instance.OnRythm1;
+            @Rythm1.canceled -= instance.OnRythm1;
+            @Rythm2.started -= instance.OnRythm2;
+            @Rythm2.performed -= instance.OnRythm2;
+            @Rythm2.canceled -= instance.OnRythm2;
+            @Rythm3.started -= instance.OnRythm3;
+            @Rythm3.performed -= instance.OnRythm3;
+            @Rythm3.canceled -= instance.OnRythm3;
+            @Rythm4.started -= instance.OnRythm4;
+            @Rythm4.performed -= instance.OnRythm4;
+            @Rythm4.canceled -= instance.OnRythm4;
         }
 
         public void RemoveCallbacks(IInMiniGameActions instance)
@@ -1504,6 +1664,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     {
         void OnRotate(InputAction.CallbackContext context);
         void OnCheck(InputAction.CallbackContext context);
+        void OnRythm1(InputAction.CallbackContext context);
+        void OnRythm2(InputAction.CallbackContext context);
+        void OnRythm3(InputAction.CallbackContext context);
+        void OnRythm4(InputAction.CallbackContext context);
     }
     public interface IIn3DGameActions
     {

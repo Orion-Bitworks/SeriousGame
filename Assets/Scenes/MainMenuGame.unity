@@ -7606,7 +7606,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 812780044}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -34676,39 +34676,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4159150135800563840, guid: a2dda0175b4286245813d27c66158113, type: 3}
   m_PrefabInstance: {fileID: 1164653827}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &812780043
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 812780044}
-  m_Layer: 0
-  m_Name: Rebind
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &812780044
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 812780043}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 419336976}
-  - {fileID: 1885498845}
-  m_Father: {fileID: 1883930740}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &816869796
 GameObject:
   m_ObjectHideFlags: 0
@@ -68104,7 +68071,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1885498847}
+      - m_Target: {fileID: 1681853296}
         m_TargetAssemblyTypeName: ResetDeviceBindings, Assembly-CSharp
         m_MethodName: ResetControlSchemeBinding
         m_Mode: 1
@@ -74204,6 +74171,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7793164991564619909, guid: a0253dcee5591e245b487f4216c62366, type: 3}
   m_PrefabInstance: {fileID: 4521870783585527268}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1386404206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7308792209819411756, guid: a0253dcee5591e245b487f4216c62366, type: 3}
+  m_PrefabInstance: {fileID: 4521870783585527268}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386404204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5995ef890aa3af4a853e860fb1e6114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1387648607
 GameObject:
   m_ObjectHideFlags: 0
@@ -106455,73 +106433,8 @@ Transform:
   m_Children:
   - {fileID: 1826617290}
   - {fileID: 1180033027}
-  - {fileID: 812780044}
   m_Father: {fileID: 1563614717}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1885498844
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1885498845}
-  - component: {fileID: 1885498847}
-  - component: {fileID: 1885498846}
-  m_Layer: 5
-  m_Name: KeyboardCanvas
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1885498845
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885498844}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1123.3286}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 812780044}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 13, y: 7}
-  m_SizeDelta: {x: 2560, y: 1440}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1885498846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885498844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b6c2da2db9374dada6761b5e35121c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actions: {fileID: -944628639613478452, guid: c4369f547b202db458cc531176a6d45e, type: 3}
---- !u!114 &1885498847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885498844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5995ef890aa3af4a853e860fb1e6114, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inputActions: {fileID: -944628639613478452, guid: c4369f547b202db458cc531176a6d45e, type: 3}
-  _targetControlScheme: KeyboardMouseControls
 --- !u!1001 &1890726493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -109289,7 +109202,11 @@ PrefabInstance:
     - target: {fileID: 240562562169851380, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1885498847}
+      objectReference: {fileID: 1386404206}
+    - target: {fileID: 240562562169851380, guid: a0253dcee5591e245b487f4216c62366, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ResetControlSchemeBinding
+      objectReference: {fileID: 0}
     - target: {fileID: 400102747889612707, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -110473,7 +110390,7 @@ PrefabInstance:
     - target: {fileID: 5358399405054331621, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 419336978}
+      objectReference: {fileID: 0}
     - target: {fileID: 5399943101974684045, guid: a0253dcee5591e245b487f4216c62366, type: 3}
       propertyPath: m_fontAsset
       value: 
@@ -111709,3 +111626,4 @@ SceneRoots:
   - {fileID: 959543741}
   - {fileID: 425951377}
   - {fileID: 1559716562}
+  - {fileID: 419336976}
