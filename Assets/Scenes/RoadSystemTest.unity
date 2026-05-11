@@ -1734,7 +1734,7 @@ PrefabInstance:
     - target: {fileID: 7781729296360747677, guid: 963fc6e4aee46ef4ca2c517f3c51a65a, type: 3}
       propertyPath: textField
       value: 
-      objectReference: {fileID: 1363912998}
+      objectReference: {fileID: 0}
     - target: {fileID: 7891219835637357150, guid: 963fc6e4aee46ef4ca2c517f3c51a65a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -5569,7 +5569,7 @@ RectTransform:
   m_LocalScale: {x: 1.4987086, y: 1.49871, z: 1.4987102}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 821659320}
+  m_Father: {fileID: 825966674}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7456,6 +7456,34 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4262185755471756238, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262185755471756238, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262185755471756238, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 657133543}
+    - target: {fileID: 4262185755471756238, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262185755471756238, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: HideActiveTutotrial
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262185755471756238, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TutorialManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4262185755471756238, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4394326035789465487, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -7576,16 +7604,11 @@ PrefabInstance:
     - {fileID: 5908781844008488281, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6490644199937374968, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
-      insertIndex: 1
+    - targetCorrespondingSourceObject: {fileID: 4948962454288870155, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 579245722}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
---- !u!224 &821659320 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6490644199937374968, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
-  m_PrefabInstance: {fileID: 821659319}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &825966671 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5757271088540316081, guid: 4d88191780f9b0541b3637e7ac130720, type: 3}
@@ -14350,17 +14373,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 543450652470527392}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1363912998 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5945115821777668094, guid: 963fc6e4aee46ef4ca2c517f3c51a65a, type: 3}
-  m_PrefabInstance: {fileID: 138925264}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1399431319
 PrefabInstance:
   m_ObjectHideFlags: 0
